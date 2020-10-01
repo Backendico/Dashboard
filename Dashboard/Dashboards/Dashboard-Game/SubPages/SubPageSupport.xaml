@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageSupport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages"
+        mc:Ignorable="d"
+             Background=" #33000000" d:DesignWidth="945"
+        >
+
+    <Border Margin="200,100" Background="White"   MaxHeight="500" MaxWidth="700" CornerRadius="5" BorderBrush="Transparent" BorderThickness="2">
+        <Border.Effect>
+            <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+        </Border.Effect>
+
+
+        <Grid  Background="Transparent" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Header-->
+            <Border CornerRadius="5,5,0,0" Background="Black" >
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock  Margin="10" VerticalAlignment="Center" Foreground="White" >
+                    <Run FontWeight="Bold" Text="Support"/>
+                    </TextBlock>
+                    <Button Cursor="Hand" Click="Close" FontSize="15"  Content="&#xEF2C;" Foreground="Gray" Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right" Margin="10,0" Width="20" Height="20" Grid.Column="1" FontFamily="Segoe MDL2 Assets" />
+                </Grid>
+            </Border>
+
+            <!--Bodys-->
+            <!--BodyPage1-->
+            <StackPanel Visibility="Collapsed" Margin="20" Grid.Row="1">
+                <TextBlock FontWeight="Bold" FontSize="15" TextAlignment="Center" Text="Choice A Part"/>
+
+                <!--Part-->
+                <StackPanel Margin="0,10" >
+                    <TextBlock Text="Section :"/>
+                    <ComboBox x:Name="ComboBoxPart1" >
+                        <ComboBoxItem Content="Other"/>
+                        <ComboBoxItem  IsSelected="True" Content="Authentication"/>
+                        <ComboBoxItem Content="Dashboard"/>
+                        <ComboBoxItem Content="Payments"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--Dashboard -->
+                <StackPanel Visibility="Collapsed" Margin="0,10" >
+                    <TextBlock Text="Dashbord Part"/>
+                    <ComboBox x:Name="ComboBoxPart2">
+                        <ComboBoxItem  Content="Other"/>
+                        <ComboBoxItem Content="Players"/>
+                        <ComboBoxItem Content="Leaderboards"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--Priority -->
+                <StackPanel Margin="0,10" >
+                    <TextBlock Text="Priority"/>
+                    <ComboBox>
+                        <ComboBoxItem Content="High"/>
+                        <ComboBoxItem Content="Normal"/>
+                        <ComboBoxItem IsSelected="True" Content="Low"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <Button  Margin="0,20" Height="40" Foreground="White" BorderBrush="Transparent" Background="CornflowerBlue" Content="Start"/>
+                <Button   Margin="0,10" Height="40" Foreground="Tomato" BorderBrush="Tomato" Background="Transparent" Content="Close"/>
+
+            </StackPanel>
+
+            <!--BodyPage2-->
+            <Grid Visibility="Visible" Grid.Row="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+               
+                <!--Path-->
+                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="0,0,0,1">
+
+                    <TextBlock >
+                <Run Text="{Binding Text, ElementName=ComboBoxPart1}"/>
+                <Run Text="/"/>
+                <Run Text="{Binding Text,ElementName=ComboBoxPart2 }"/>
+                    </TextBlock>
+                </Border>
+
+                <!--Body-->
+                <ScrollViewer Grid.Row="1">
+
+                </ScrollViewer>
+
+                <!--Footer-->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="&#xE724;" FontSize="20" Background="Transparent" BorderBrush="Gray" Grid.Column="1" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBox BorderBrush="Gray"/>
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+
+
+</UserControl>

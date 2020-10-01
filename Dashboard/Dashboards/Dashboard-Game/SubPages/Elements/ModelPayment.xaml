@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.SubPages.Elements.ModelPayment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.Elements"
+             mc:Ignorable="d" 
+             x:Name="Root"
+              Background="Transparent"
+             d:DesignHeight="45" d:DesignWidth="800">
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    
+    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Row="0">
+        <Grid  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
+            <Border Grid.Column="3" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
+            <Border Grid.Column="4" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
+            <Border Grid.Column="5" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
+
+            <TextBlock x:Name="TextID" Grid.Column="0" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="ID"/>
+            <TextBlock x:Name="TextCreated" Grid.Column="1" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Created"/>
+            <TextBlock x:Name="TextCash" Grid.Column="2" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Cash"/>
+            <TextBlock x:Name="TextCreator" Grid.Column="3" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Creator"/>
+            <Border x:Name="BTNShowDetail"  CornerRadius="5"  Cursor="Hand" BorderBrush="Transparent"  Margin="0,5" MinHeight="30" MinWidth="70" Background="Orange" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center"  >
+                <TextBlock FontSize="15" VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xEF40;"/>
+               
+            </Border>
+        </Grid>
+    </Border>
+
+</UserControl>

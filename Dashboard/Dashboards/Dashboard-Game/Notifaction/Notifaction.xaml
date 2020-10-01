@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Notifaction.Notifaction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Notifaction"
+             mc:Ignorable="d"  
+             d:DesignHeight="330" d:DesignWidth="795">
+    <Border Margin="0,0,20,-100" x:Name="BorderColor" MinWidth="200" Background="White"   CornerRadius="0,5,5,0" BorderThickness="5,0,0,0" BorderBrush="Tomato" MinHeight="50"  HorizontalAlignment="Right" VerticalAlignment="Bottom"  >
+        <!--Animation-->
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard >
+                        <ThicknessAnimation  Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Margin" From="0,0,20,-100" To="0,0,20,10" Duration="0:0:0.5"/>
+                        <ThicknessAnimation Completed="Close" BeginTime="0:0:0:3"  Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Margin" From="0,0,20,10" To="0,0,20,-100" Duration="0:0:0.5"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="MouseDown"  >
+
+                <BeginStoryboard>
+
+                    <Storyboard >
+                        <ThicknessAnimation  Completed="Close" Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Margin" From="0,0,20,10" To="0,0,20,-100" Duration="0:0:0.5"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+        </Border.Triggers>
+
+
+        <Border.Effect>
+            <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="20"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0,0,1,0" BorderBrush="Gainsboro" Margin="0,5" />
+
+            <TextBlock Cursor="Hand" x:Name="BTNClose" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" Foreground="Gray" HorizontalAlignment="Center" Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets"/>
+            <TextBlock Margin="20,10" x:Name="TextMessage" Text="Message Here" VerticalAlignment="Center" TextAlignment="Center"/>
+        </Grid>
+
+    </Border>
+
+</UserControl>

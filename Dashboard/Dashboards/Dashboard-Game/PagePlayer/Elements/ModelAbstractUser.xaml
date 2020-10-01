@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAbstractUser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements"
+             mc:Ignorable="d" 
+             MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControl_MouseLeave"
+             Background="WhiteSmoke"
+             Height="40" d:DesignWidth="1150"
+             >
+    <Border BorderBrush="Gainsboro" BorderThickness="0,0,0,1">
+
+        <Grid  MinHeight="30" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="0"/>
+            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="1"/>
+            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="2"/>
+            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="3"/>
+            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="4"/>
+            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="5"/>
+
+            <TextBlock Cursor="Hand" TextAlignment="Center"  x:Name="TextToken" Margin="10,0,0,0" VerticalAlignment="Center" Text="Token" Grid.Column="0" MouseDown="CopyToken"/>
+            <TextBlock TextAlignment="Center"  x:Name="TextUsername"  VerticalAlignment="Center" Text="Username" Grid.Column="1"/>
+            <TextBlock  TextAlignment="Center" x:Name="TextLastLogin"  VerticalAlignment="Center" Text="LastLogin" Grid.Column="2"/>
+            <TextBlock TextAlignment="Center" x:Name="TextCreated" VerticalAlignment="Center" Text="Created" Grid.Column="3"/>
+            <TextBlock TextAlignment="Center" x:Name="TextCountry" VerticalAlignment="Center" Text="Country" Grid.Column="4"/>
+            <TextBlock TextAlignment="Center"  x:Name="TextUTD" VerticalAlignment="Center" Text="VTD" Grid.Column="5"/>
+            <Button ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit" Click="OpenEdit" MaxWidth="150" Visibility="Collapsed" Margin="5" BorderBrush="Transparent" Background="DarkOrange" Foreground="White" Content="&#xE70F;" FontSize="15" Grid.Column="6" FontFamily="Segoe MDL2 Assets"/>
+        </Grid>
+    </Border>
+</UserControl>
