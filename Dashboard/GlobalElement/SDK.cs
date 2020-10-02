@@ -901,6 +901,31 @@ namespace Dashboard.GlobalElement
                     }
                 }
 
+                public sealed class PageSupport
+                {
+                  public static  ModelLinks.DashboardGame.PageSupport Links;
+
+                    public static async void AddSupport(BsonDocument Detail,Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.LinkAddSupport);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Detail",Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+                }
             }
         }
     }
@@ -965,6 +990,11 @@ namespace Dashboard.GlobalElement
             public struct PageDashboard
             {
                 public string LinkDashboard => "https://localhost:44346/PageDashboard/ReciveDetail";
+            }
+
+            public struct PageSupport
+            {
+                public string LinkAddSupport => "https://localhost:44346/PageSupport/AddSupport";
             }
         }
     }

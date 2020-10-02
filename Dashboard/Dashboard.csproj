@@ -197,6 +197,9 @@
     <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageInternalNotifaction\InternalNotifaction.xaml.cs">
       <DependentUpon>InternalNotifaction.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubpageSupport\SubpageSupport.xaml.cs">
+      <DependentUpon>SubpageSupport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -323,6 +326,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageSupport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubpageSupport\SubpageSupport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

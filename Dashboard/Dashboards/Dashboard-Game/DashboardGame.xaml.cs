@@ -6,6 +6,7 @@ using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.PageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
 using MongoDB.Bson;
@@ -136,7 +137,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         private void OpenSuppport(object sender, MouseButtonEventArgs e)
         {
-            Root.Children.Add(new SubPageSupport());
+            Root.Children.Add(new SubpageSupport());
         }
 
         private void ChangePage(object sender, MouseButtonEventArgs e)

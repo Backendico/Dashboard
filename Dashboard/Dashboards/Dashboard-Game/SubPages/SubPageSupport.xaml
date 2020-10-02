@@ -38,7 +38,7 @@
 
             <!--Bodys-->
             <!--BodyPage1-->
-            <StackPanel Visibility="Collapsed" Margin="20" Grid.Row="1">
+            <StackPanel Visibility="Visible" Margin="20" Grid.Row="1">
                 <TextBlock FontWeight="Bold" FontSize="15" TextAlignment="Center" Text="Choice A Part"/>
 
                 <!--Part-->
@@ -78,7 +78,7 @@
             </StackPanel>
 
             <!--BodyPage2-->
-            <Grid Visibility="Visible" Grid.Row="1" Margin="10">
+            <Grid Visibility="Collapsed" Grid.Row="1" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition/>

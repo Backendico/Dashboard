@@ -20,7 +20,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <!--<Grid.Triggers>
+            <Grid.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
@@ -28,7 +28,7 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
-            </Grid.Triggers>-->
+            </Grid.Triggers>
 
 
             <!--Header-->
