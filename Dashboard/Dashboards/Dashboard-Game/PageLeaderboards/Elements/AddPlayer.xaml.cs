@@ -24,12 +24,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 () =>
                 {
                     Close();
-                    MessageBox.Show("Added ! ");
+                    DashboardGame.Notifaction("Added ! ", Notifaction.StatusMessage.Ok);
                     Refreshlist();
+
+                    //Addlog
+                    var detaillog = new MongoDB.Bson.BsonDocument { { "NameLeaderboard", NameLeaderboard }, { "TokenPlayer", TextboxTokenPlayer.Text }, { "Value", TextboxValue.Text } };
+                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add player to leaderboard", $"You have added player \" {TextboxTokenPlayer.Text} \" to the \" {NameLeaderboard} \" leaderboard", detaillog, false, resultlog => { });
                 },
                 () =>
                 {
-                    MessageBox.Show("Faild  to add :(");
+                    DashboardGame.Notifaction("Faild Add ! ", Notifaction.StatusMessage.Error);
                 });
         }
 

@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction.Elements.ModelInternalNotifaction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction.Elements"
+            
+             >
+
+    <Border  x:Name="Root"   Background="White" BorderThickness="0,0,0,1" BorderBrush="LightGray">
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="BTNDelete" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation From="0.0" To="1.0"  Duration="0:0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="BTNDelete" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation From="1.0" To="0.0"  Duration="0:0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="White" To="Gainsboro" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="White" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        </Border.Triggers>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="10,0" Grid.Column="0">
+                <TextBlock Margin="0,5" x:Name="TextHeader" FontWeight="Bold" Text="Header"/>
+                <TextBlock MaxWidth="230"  Margin="0,5" TextWrapping="Wrap" x:Name="TextDescription"  Text="Discription"/>
+                <TextBlock Margin="0,5" x:Name="TextTime"  FontSize="12" Text="Time"/>
+                <TextBlock Margin="0,5"   x:Name="BTNDetail" Cursor="Hand" Foreground="OrangeRed" Text="Detail" TextDecorations="Underline" />
+            </StackPanel>
+            <TextBlock x:Name="BTNDelete" VerticalAlignment="Top" HorizontalAlignment="Right"  Opacity="0" Margin="10" Cursor="Hand" Text="&#xE8BB;" Grid.Column="1" FontFamily="Segoe MDL2 Assets"/>
+
+        </Grid>
+    </Border>
+</UserControl>

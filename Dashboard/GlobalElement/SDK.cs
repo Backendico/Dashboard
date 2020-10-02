@@ -209,13 +209,13 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("NameStudio", SettingUser.CurentDetailStudio["Database"]);
                         var response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
                         }
                         else
                         {
-                            Result(false);  
+                            Result(false);
                         }
                     }
                 }
@@ -786,7 +786,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PageLog
                 {
                     public static ModelLinks.DashboardGame.PageLog Links;
-                    public static async void ReciveLog(Action<BsonDocument> Result, Action ERR)
+                    public static async void ReciveLog(int Count,Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.LinkReciveLog);
                         client.Timeout = -1;
@@ -795,6 +795,7 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Count",Count);
                         var response = await client.ExecuteAsync(request);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -806,6 +807,55 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public static async void AddLog(string header, string Description, BsonDocument Detail, bool IsNotifaction, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.LinkAddLog);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        client.ClearHandlers();
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("Header", header);
+                        request.AddParameter("Description", Description);
+                        request.AddParameter("Detail", Detail.ToString());
+                        request.AddParameter("IsNotifaction", IsNotifaction.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+
+                    }
+
+                    public static async void DeleteLog(BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.LinkDeletLog);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("Detail", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+                    
+                        
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
 
                 }
 
@@ -908,6 +958,8 @@ namespace Dashboard.GlobalElement
             public struct PageLog
             {
                 public string LinkReciveLog => "https://localhost:44346/Log/ReciveLogs";
+                public string LinkAddLog => "https://localhost:44346/Log/AddLog";
+                public string LinkDeletLog => "https://localhost:44346/Log/DeleteLog";
             }
 
             public struct PageDashboard

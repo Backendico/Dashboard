@@ -64,8 +64,8 @@
                         </Border >
 
                         <!--Notifation-->
-                        <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave">
-                            <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xEA8F;" FontFamily="Segoe MDL2 Assets"/>
+                        <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="OpenInternalNotifaction">
+                            <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xF738;" FontFamily="Segoe MDL2 Assets"/>
                         </Border >
 
                         <!--CheackHealth-->
@@ -97,7 +97,6 @@
                     <TextBlock x:Name="BTNDashboard" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xF246;"  Foreground="Orange" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor"  MouseDown="ChangePage" />
                     <TextBlock x:Name="BTNPlayers" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xE902;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor" MouseDown="ChangePage"  />
                     <TextBlock x:Name="BTNLeaderboards" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor" MouseDown="ChangePage"  />
-                    <TextBlock x:Name="BTNLogs"  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xF738;" HorizontalAlignment="Center"  Foreground="Gray" TextAlignment="Left" Height="30" Background="Transparent"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor" MouseDown="ChangePage" />
 
                     <StackPanel.Triggers>
                         <!--Mouse Enter-->
@@ -128,7 +127,6 @@
                     <TextBlock Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Dashboard"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                     <TextBlock Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Players"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                     <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Leaderboards"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
-                    <TextBlock Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Logs"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"  />
                 </StackPanel>
 
                 <!--Content-->

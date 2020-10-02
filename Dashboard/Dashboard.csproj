@@ -191,6 +191,12 @@
     <Compile Include="Dashboards\Dashboard-Game\SubPages\PageSetting.xaml.cs">
       <DependentUpon>PageSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageInternalNotifaction\Elements\ModelInternalNotifaction.xaml.cs">
+      <DependentUpon>ModelInternalNotifaction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageInternalNotifaction\InternalNotifaction.xaml.cs">
+      <DependentUpon>InternalNotifaction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -301,6 +307,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\SubPages\PageSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageInternalNotifaction\Elements\ModelInternalNotifaction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageInternalNotifaction\InternalNotifaction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -429,8 +443,6 @@
   <ItemGroup>
     <Resource Include="Icons\milestone.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dashboards\Dashboard-Game\SubPages\SubPageNotifaction\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

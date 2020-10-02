@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
              {
                  Refreshlist(null, null);
                  DashboardGame.Notifaction("Player Added", StatusMessage.Ok);
+
+                 //add log
+                 var Detail = new BsonDocument
+                 {
+                     {"Username",TextBoxUsername.Text },
+                     {"Password",TextBoxPassword.Password },
+                     {"LocalTime",DateTime.Now }
+                 };
+
+                 SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add Player", $"You have added  \" {TextBoxUsername.Text} \" player", Detail, false, result => { });
              },
              () =>
              {

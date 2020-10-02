@@ -48,11 +48,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                         var _parent = (Parent as Grid);
                         _parent.Children.Remove(this);
                         (_parent.FindName("PageDashboard") as Grid).Effect = null;
+
                         InitDashbaord();
+                        
+                        
                     }
                     else
                     {
-                        DashboardGame.Notifaction("Faild Login", Notifaction.StatusMessage.Error); ;
+                        DashboardGame.Notifaction("Faild Login", Notifaction.StatusMessage.Error);
+                        
                     }
                 });
 

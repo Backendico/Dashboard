@@ -29,25 +29,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLogs
 
         private void Start(object sender, RoutedEventArgs e)
         {
-            SDK.SDK_PageDashboards.DashboardGame.PageLog.ReciveLog(
-                result =>
-                {
-                    foreach (var Category in result)
-                    {
-                        foreach (var Reports in Category.Value.AsBsonDocument)
-                        {
-                            foreach (var Values in Reports.Value.AsBsonDocument)
-                            {
-                                Values.Value.AsBsonDocument.Add("ID", Values.Name);
-                                PlaceReportModel.Children.Add(new ModelLogDashboard(Values.Value.AsBsonDocument));
-                            }
-                        }
-                        
-                    }
-                },
-                () =>
-                {
-                });
         }
 
     }

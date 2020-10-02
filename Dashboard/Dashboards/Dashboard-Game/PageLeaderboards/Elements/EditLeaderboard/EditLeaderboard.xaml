@@ -106,7 +106,7 @@
             </StackPanel>
 
             <!--BTNSave-->
-            <Button Cursor="Hand" Background="DeepSkyBlue" Foreground="White" BorderBrush="Transparent" Margin="0,10" Height="30" Content="Save" Click="Save"/>
+            <Button Cursor="Hand" Background="DarkOrange" Foreground="White" BorderBrush="Transparent" Margin="0,10" Height="30" Content="Save" Click="Save"/>
 
 
         </StackPanel>

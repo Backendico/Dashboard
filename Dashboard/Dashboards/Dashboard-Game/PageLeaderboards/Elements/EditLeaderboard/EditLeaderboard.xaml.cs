@@ -86,7 +86,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         }
 
-        private void Close(object sender,RoutedEventArgs e)
+        private void Close(object sender, RoutedEventArgs e)
         {
             (Parent as Grid).Children.Remove(this);
         }
@@ -112,13 +112,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
              {
                  if (result)
                  {
-                     MessageBox.Show("Saved !");
+                     DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
                      RefreshList(null, null);
+
+
+                     //log
+                     SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Leaderboard", $"You have changed the \" {Detail["Name"]} \" leaderboard settings", Detail, false, resultlog => { });
                  }
                  else
                  {
 
-                     MessageBox.Show("Not change! :(");
+                     DashboardGame.Notifaction("Faild Save !", Notifaction.StatusMessage.Error);
                  }
 
              });
@@ -129,24 +133,32 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             new AddPlayer(Detail["Name"].ToString(), ReciveLeaderboards).Show();
         }
 
-        private void Reset(object sender, RoutedEventArgs e)
+        private async void Reset(object sender, RoutedEventArgs e)
         {
-            var Result = MessageBox.Show("All records are lost\n Do you want to continue?", "Warning", MessageBoxButton.YesNo);
+            var Result = await DashboardGame.DialogYesNo("All records are lost\n Do you want to continue?");
 
             if (Result == MessageBoxResult.Yes)
             {
                 SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reset(Detail["Name"].AsString,
                     () =>
                     {
-                        MessageBox.Show("Reseted !");
+                        DashboardGame.Notifaction("Reseted !", Notifaction.StatusMessage.Ok);
                         ReciveLeaderboards();
                         TextStart.Text = DateTime.Now.ToString();
+
+                        //log
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Reset the leaderboard", $"You reset the \" {Detail["Name"]} \" leaderboard", new BsonDocument { }, false, result => { });
                     },
                     () =>
                     {
-                        MessageBox.Show("Reset Faild !");
+                        DashboardGame.Notifaction("Reset Faild !", Notifaction.StatusMessage.Error);
                     });
             }
+            else
+            {
+                DashboardGame.Notifaction("Reset Reject !", Notifaction.StatusMessage.Error);
+            }
+
         }
 
         private void Backup(object sender, RoutedEventArgs e)
@@ -154,11 +166,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Backup(Detail["Name"].AsString,
                 () =>
                 {
-                    MessageBox.Show("Saved");
+                    DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
+
+
+                    //log
+                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Leaderboard Backup", $"You have backed up your \"{Detail["Name"]}\" leadboard", new BsonDocument { }, false, result => { });
+
                 },
                 () =>
                 {
-                    MessageBox.Show("Faild Save :(");
+                    DashboardGame.Notifaction("Faild Save !", Notifaction.StatusMessage.Error);
                 });
 
         }
@@ -211,16 +228,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 Result =>
                 {
                     PlaceContentBackups.Children.Clear();
-                    
+
                     foreach (var item in Result)
                     {
                         item.Value.AsBsonDocument.Add("NameLeaderboard", Detail["Name"]);
-                        PlaceContentBackups.Children.Add(new ModelBackupAbstract(item.Value.AsBsonDocument,ReciveBackup));
+                        PlaceContentBackups.Children.Add(new ModelBackupAbstract(item.Value.AsBsonDocument, ReciveBackup));
                     }
                 },
                 () =>
                 {
-                    
+
                 });
         }
 

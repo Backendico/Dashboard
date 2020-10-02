@@ -45,7 +45,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock  Margin="30,0" VerticalAlignment="Center" Foreground="LightGray" >
+                    <TextBlock  Margin="30,0" VerticalAlignment="Center" Foreground="Gray" >
                     <Run x:Name="TextHeader" FontWeight="Bold" Text="Dialog"/>
                     </TextBlock>
                 </Grid>

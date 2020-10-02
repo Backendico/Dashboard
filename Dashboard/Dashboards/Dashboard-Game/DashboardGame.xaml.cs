@@ -5,8 +5,10 @@ using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.PageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
+using MongoDB.Bson;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -29,6 +31,8 @@ namespace Dashboard.Dashboards.Dashboard_Game
         UserControl CurentPage;
         TextBlock CurentTab;
 
+        InternalNotifaction internalNotifaction;
+
         public DashboardGame()
         {
             InitializeComponent();
@@ -48,6 +52,12 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         }
 
+
+        /// <summary>
+        /// 1: recive Studios
+        /// 2 if no studio page creat studio show
+        /// 3: if studio found frist srudio init 
+        /// </summary>
         public void Init()
         {
             SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
@@ -55,18 +65,24 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 {
                     if (result.ElementCount <= 0)
                     {
+                        
                         Root.Children.Add(new CreatStudio());
                     }
                     else
                     {
+                        //fill Studio user
                         SettingUser.CurentDetailStudio = result[0].AsBsonDocument;
 
+                        //Change Textheader dashboard
                         TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
 
+                        //add subpageDashbaord to dashbaord
                         CurentPage = new PageDashboard();
                         Content.Children.Add(CurentPage);
                         CurentTab = BTNDashboard;
 
+                        //add log
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} o'clock", new BsonDocument { }, false, resultlog => { });
                     }
                 },
                 () =>
@@ -132,10 +148,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             switch ((sender as TextBlock).Name)
             {
-                case "BTNLogs":
-                    CurentPage = new PageLogs.PageLogs();
-                    CurentTab = BTNLogs;
-                    break;
                 case "BTNLeaderboards":
                     CurentPage = new PageLeaderBoards();
                     CurentTab = BTNLeaderboards;
@@ -180,7 +192,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         }
 
-        
+
         //Statics
         public static void Notifaction(string Message, StatusMessage Status)
         {
@@ -209,5 +221,17 @@ namespace Dashboard.Dashboards.Dashboard_Game
             Debug.WriteLine("hi");
 
         }
+
+        private void OpenInternalNotifaction(object sender, MouseButtonEventArgs e)
+        {
+            if (internalNotifaction!=null)
+            MainRoot.Children.Remove(internalNotifaction);
+
+            var notif = new InternalNotifaction();
+
+            MainRoot.Children.Add(notif) ;
+            internalNotifaction = notif;
+        }
+   
     }
 }
