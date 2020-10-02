@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element"
              mc:Ignorable="d" d:DesignWidth="279.5" 
-             Cursor="Hand"
+             Cursor="Hand" MouseDown="OpenDetail"
+             
              >
+    
     <Border Background="Transparent" x:Name="Root" Margin="10" BorderBrush="Gainsboro" BorderThickness="1">
         <Border.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">

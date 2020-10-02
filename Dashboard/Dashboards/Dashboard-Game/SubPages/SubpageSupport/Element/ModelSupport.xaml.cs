@@ -1,18 +1,8 @@
 ﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
 {
@@ -21,9 +11,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
     /// </summary>
     public partial class ModelSupport : UserControl
     {
-        public ModelSupport(BsonDocument Detail)
+        Grid PageDetail;
+        public ModelSupport(BsonDocument Detail,Grid PageDetail)
         {
             InitializeComponent();
+            this.PageDetail = PageDetail;
 
             TextHeader.Text = Detail["Header"].ToString();
             if (Detail["IsOpen"].AsBoolean)
@@ -78,6 +70,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
             }
 
             TextTime.Text = Detail["Created"].ToLocalTime().ToString();
+
+            
+        }
+
+        private void OpenDetail(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            (Parent as StackPanel).Visibility = Visibility.Collapsed;
+            PageDetail.Visibility = Visibility.Visible;
+            PageDetail.Width = 300;
         }
     }
 }

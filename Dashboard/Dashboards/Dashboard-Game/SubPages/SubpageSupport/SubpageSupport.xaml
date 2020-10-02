@@ -82,7 +82,11 @@
                 
                 <!--PageEachQuestion-->
                 <Grid x:Name="PageEachQuestion" Width="0" Grid.Column="0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
+                        <Grid>
+                            <TextBlock Text="HI"/>
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
             
                 <!--Page Questions-->
@@ -123,9 +127,34 @@
                             <TextBlock Text="Title"/>
                             <TextBox x:Name="TextboxTitle" Height="30"/>
                         </StackPanel>
-                        <Border x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
+                        
+                        <!--BTN Controller-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Border Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="MouseDown">
+                                        <BeginStoryboard>
+                                            <Storyboard Storyboard.TargetName="PageAddQuestions" Storyboard.TargetProperty="Width">
+                                                <DoubleAnimation From="300" To="0"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                        <BeginStoryboard>
+                                            <Storyboard Storyboard.TargetName="PageQuestions" Storyboard.TargetProperty="Width">
+                                                <DoubleAnimation From="0" To="300"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                                
+                                <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Back"/>
+                            </Border>
+                        <Border  x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
                             <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Start"/>
                         </Border>
+
+
+                        </StackPanel>
 
                     </StackPanel>
                 </Grid>
