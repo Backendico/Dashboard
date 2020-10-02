@@ -786,7 +786,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PageLog
                 {
                     public static ModelLinks.DashboardGame.PageLog Links;
-                    public static async void ReciveLog(int Count,Action<BsonDocument> Result, Action ERR)
+                    public static async void ReciveLog(int Count, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.LinkReciveLog);
                         client.Timeout = -1;
@@ -795,7 +795,7 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         request.AddParameter("Token", SettingUser.Token);
-                        request.AddParameter("Count",Count);
+                        request.AddParameter("Count", Count);
                         var response = await client.ExecuteAsync(request);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -844,8 +844,8 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
                         request.AddParameter("Detail", Detail.ToString());
                         var response = await client.ExecuteAsync(request);
-                    
-                        
+
+
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
@@ -903,9 +903,9 @@ namespace Dashboard.GlobalElement
 
                 public sealed class PageSupport
                 {
-                  public static  ModelLinks.DashboardGame.PageSupport Links;
+                    public static ModelLinks.DashboardGame.PageSupport Links;
 
-                    public static async void AddSupport(BsonDocument Detail,Action<bool> Result)
+                    public static async void AddSupport(BsonDocument Detail, Action<bool> Result)
                     {
                         var client = new RestClient(Links.LinkAddSupport);
                         client.Timeout = -1;
@@ -913,16 +913,36 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
                         request.AddParameter("Token", SettingUser.Token);
-                        request.AddParameter("Detail",Detail.ToString());
+                        request.AddParameter("Detail", Detail.ToString());
                         var response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
                         }
                         else
                         {
                             Result(false);
+                        }
+                    }
+                    public static async void ReciveSupports(Action<BsonDocument> Result, Action ERR)
+                    {
+                        var client = new RestClient(Links.LinkReciveSupport);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            ERR();
                         }
                     }
                 }
@@ -995,6 +1015,7 @@ namespace Dashboard.GlobalElement
             public struct PageSupport
             {
                 public string LinkAddSupport => "https://localhost:44346/PageSupport/AddSupport";
+                public string LinkReciveSupport => "https://localhost:44346/PageSupport/ReciveSupports";
             }
         }
     }

@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             >
     <UserControl.Effect>
         <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
     </UserControl.Effect>
 
 
-    <Grid   Background="Transparent">
+    <Grid  Background="Transparent">
 
-        <Grid Focusable="True" Opacity="1"   Margin="10,50" x:Name="Root"  Width="300" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <Grid Background="Transparent" Focusable="True" Opacity="1"   Margin="10,50" x:Name="Root"  Width="300" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition/>
@@ -72,29 +72,37 @@
             </Grid>
 
             <!--Body-->
-            <Grid  MaxHeight="400"  Grid.Row="1" Background="White">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <!--PageQuestions-->
-                <Grid x:Name="PageQuestions" Grid.Row="0">
+            <Grid  MinHeight="200" MaxHeight="900"  Grid.Row="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                
+                
+                <!--PageEachQuestion-->
+                <Grid x:Name="PageEachQuestion" Width="0" Grid.Column="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
                 </Grid>
-                <!--Page EnterQuestions-->
-                <Grid x:Name="PageEnterQuestions" Height="0" Grid.Row="1">
-                    
+            
+                <!--Page Questions-->
+                <Grid x:Name="PageQuestions"  Width="300"  Grid.Column="1">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <StackPanel  x:Name="PlaceContentSupport">
+                            
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
+             
                 <!--Page AddQuestions-->
-                <Grid  x:Name="PageAddQuestions" Height="0"  Grid.Row="2">
+                <Grid  x:Name="PageAddQuestions" VerticalAlignment="Center"  Width="0" Grid.Column="2">
                     <StackPanel Margin="10">
                         <!--Part-->
                         <StackPanel Margin="0,10" >
                             <TextBlock Text="Section :"/>
                             <ComboBox x:Name="ComboBoxPart" >
-                                <ComboBoxItem Content="Other"/>
-                                <ComboBoxItem  IsSelected="True" Content="Authentication"/>
+                                <ComboBoxItem IsSelected="True" Content="Other"/>
+                                <ComboBoxItem   Content="Authentication"/>
                                 <ComboBoxItem Content="Dashboard"/>
                                 <ComboBoxItem Content="Payments"/>
                             </ComboBox>
@@ -104,9 +112,9 @@
                         <StackPanel Margin="0,10" >
                             <TextBlock Text="Priority"/>
                             <ComboBox Name="ComboBoxPriority">
-                                <ComboBoxItem Content="High"/>
-                                <ComboBoxItem Content="Normal"/>
                                 <ComboBoxItem IsSelected="True" Content="Low"/>
+                                <ComboBoxItem Content="Normal"/>
+                                <ComboBoxItem Content="High"/>
                             </ComboBox>
                         </StackPanel>
 
@@ -124,7 +132,7 @@
             </Grid>
 
             <!--footer-->
-            <Border  CornerRadius="0,0,10,10" Grid.Row="2"   Background="Orange" >
+            <Border  CornerRadius="0,0,10,10" Grid.Row="2" Background="Orange" >
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
                     <TextBlock  x:Name="BTNReload" Foreground="White" ToolTip="Update" Cursor="Hand" Margin="0,0,20,0"  FontSize="15" Text="&#xE777;" FontFamily="Segoe MDL2 Assets"/>
                     <TextBlock  x:Name="BTNaddCategory" Foreground="White"  ToolTip="Add Questions" Cursor="Hand" Margin="0,0,20,0"  FontSize="15" Text="&#xE710;" FontFamily="Segoe MDL2 Assets">
@@ -132,12 +140,21 @@
                         <TextBlock.Triggers>
                             <EventTrigger RoutedEvent="MouseDown">
                                 <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="PageAddQuestions" Storyboard.TargetProperty="Height">
-                                        <DoubleAnimation From="0" To="250" Duration="0:0:0:0.3"/>
+                                    <Storyboard Storyboard.TargetName="PageAddQuestions" Storyboard.TargetProperty="Width">
+                                        <DoubleAnimation From="0" To="300" Duration="0:0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            
+                            <EventTrigger RoutedEvent="MouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard Storyboard.TargetName="PageQuestions" Storyboard.TargetProperty="Width">
+                                        <DoubleAnimation From="300" To="0" Duration="0:0:0:0.3"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
                         </TextBlock.Triggers>
+                        
                     </TextBlock>
                 </StackPanel>
             </Border>

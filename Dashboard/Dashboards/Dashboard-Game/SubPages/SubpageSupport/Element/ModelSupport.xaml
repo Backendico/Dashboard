@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element.ModelSupport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element"
+             mc:Ignorable="d" d:DesignWidth="279.5" 
+             Cursor="Hand"
+             >
+    <Border Background="Transparent" x:Name="Root" Margin="10" BorderBrush="Gainsboro" BorderThickness="1">
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                        <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+
+                <BeginStoryboard  >
+                    <Storyboard Storyboard.TargetName="Arrow" Storyboard.TargetProperty="Margin">
+                        <ThicknessAnimation From="20,0" To="10,0" Duration="0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                        <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                
+                <BeginStoryboard  >
+                    <Storyboard Storyboard.TargetName="Arrow" Storyboard.TargetProperty="Margin">
+                        <ThicknessAnimation From="10,0" To="20,0" Duration="0:0:0.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                
+            </EventTrigger>
+        </Border.Triggers>
+        
+        <Border x:Name="Priority" BorderBrush="Transparent" BorderThickness="5,0,0,0">
+        <Grid Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel  Grid.Column="0">
+                <TextBlock Margin="0,5" x:Name="TextHeader" FontWeight="Bold" Text="Header"/>
+                <TextBlock Margin="0,5" x:Name="TextPart" Text="Part"/>
+                <TextBlock  x:Name="TextTime" Margin="0,5" FontSize="10" Text="Time"/>
+            </StackPanel>
+
+            <TextBlock x:Name="Arrow" Margin="20,0" FontSize="20" Text="&#xE76C;" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right" FontFamily="Segoe MDL2 Assets"/>
+
+        </Grid>
+        </Border>
+
+    </Border>
+</UserControl>

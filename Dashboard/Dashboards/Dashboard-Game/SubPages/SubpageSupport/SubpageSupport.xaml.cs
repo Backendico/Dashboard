@@ -1,7 +1,9 @@
-﻿using Dashboard.GlobalElement;
+﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element;
+using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +51,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 });
 
             };
+            SDK.SDK_PageDashboards.DashboardGame.PageSupport.ReciveSupports(
+                result =>
+                {
+                    foreach (var item in result[1].AsBsonArray)
+                    {
+                        PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument));
+                    }
+                },
+                () =>
+                {
+                });
+
         }
 
         private void Close(object sender, EventArgs e)
