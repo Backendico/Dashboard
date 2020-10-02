@@ -1,7 +1,9 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element;
 using Dashboard.GlobalElement;
+using Microsoft.AspNetCore.SignalR.Client;
 using MongoDB.Bson;
 using System;
+using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
@@ -49,10 +51,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 () =>
                 {
                 });
-
-
-            Signal();
-
         }
 
         private void Close(object sender, EventArgs e)
@@ -60,9 +58,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             DashboardGame.MainRoot.Children.Remove(this);
         }
 
-        public async void Signal()
-        {
+        ////here
+        //public async void Signal()
+        //{
+        //    var connection = new HubConnectionBuilder().WithUrl("https://localhost:44377/chathub").Build();
+            
+        //    //connection.On<string, string>("ReceiveMessage", (s, ss) =>
+        //    //    {
+        //    //        Debug.WriteLine(s, ss);
 
-        }
+        //    //    });
+
+        //    await connection.StartAsync();
+        //    await connection.InvokeAsync("SendMessage", "Koala", "slm");
+        //    Debug.WriteLine(connection.ConnectionId);
+
+        //}
     }
 }
