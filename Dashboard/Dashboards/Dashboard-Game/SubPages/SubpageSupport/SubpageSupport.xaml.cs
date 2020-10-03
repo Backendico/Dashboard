@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element;
 using Dashboard.GlobalElement;
+using Microsoft.Win32;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
@@ -59,9 +60,25 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 });
         }
 
-        private void Close(object sender, EventArgs e)
+
+        private void Close(object sender, MouseButtonEventArgs e)
         {
-            DashboardGame.MainRoot.Children.Remove(this);
+            if (e.Source.GetType() == typeof(Grid))
+            {
+                DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+
+                Storyboard.SetTargetName(Anim, Root.Name);
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+                Storyboard storyboard = new Storyboard();
+
+                storyboard.Children.Add(Anim);
+                storyboard.Completed += (s, ee) =>
+                {
+                    Debug.WriteLine("hi");
+                    DashboardGame.MainRoot.Children.Remove(this);
+                };
+                storyboard.Begin(this);
+            }
         }
 
         //PageEachMessage
@@ -87,9 +104,42 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 DashboardGame.Notifaction("Message To Short", Notifaction.StatusMessage.Error);
             }
         }
-        public void OpenEachPlayer()
+
+        public void BacktoPageQuestions(object sender, MouseButtonEventArgs e)
         {
-            DoubleAnimation Anim1 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(1));
+            var Story = new Storyboard();
+            if (PageEachQuestion.Width >= 0)
+            {
+                DoubleAnimation Anim1 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+
+                Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
+                Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
+                Story.Children.Add(Anim1);
+            }
+
+            if (PageAddQuestions.Width >= 0)
+            {
+                DoubleAnimation Anim3 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                Storyboard.SetTargetName(Anim3, PageAddQuestions.Name);
+                Storyboard.SetTargetProperty(Anim3, new PropertyPath("Width"));
+                Story.Children.Add(Anim3);
+            }
+
+
+
+            DoubleAnimation Anim2 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim2, PageQuestions.Name);
+            Storyboard.SetTargetProperty(Anim2, new PropertyPath("Width"));
+            Story.Children.Add(Anim2);
+
+
+            Story.Begin(this);
+
+        }
+
+        public void OpenEachSupport()
+        {
+            DoubleAnimation Anim1 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(0.3));
 
             Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
             Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
@@ -99,11 +149,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             storyboard.Begin(this);
 
+            if (CurentSupport["IsOpen"].AsBoolean)
+            {
+                EnableEachPage();
+            }
+            else
+            {
+                DisableEachPage();
+            }
+
+
         }
 
         public void CloseEachQuestion(object sender, MouseButtonEventArgs e)
         {
-            DoubleAnimation Anim = new DoubleAnimation(fromValue: 300, toValue: 0, TimeSpan.FromSeconds(1));
+            DoubleAnimation Anim = new DoubleAnimation(fromValue: 300, toValue: 0, TimeSpan.FromSeconds(0.3));
 
             Storyboard.SetTargetName(Anim, PageEachQuestion.Name);
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
@@ -117,7 +177,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             var Story = new Storyboard();
             if (PageEachQuestion.Width >= 0)
             {
-                DoubleAnimation Anim1 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(1));
+                DoubleAnimation Anim1 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
 
                 Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
                 Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
@@ -126,14 +186,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             if (PageQuestions.Width >= 0)
             {
-                DoubleAnimation Anim2 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(1));
+                DoubleAnimation Anim2 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
                 Storyboard.SetTargetName(Anim2, PageQuestions.Name);
                 Storyboard.SetTargetProperty(Anim2, new PropertyPath("Width"));
                 Story.Children.Add(Anim2);
             }
 
 
-            DoubleAnimation Anim3 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(1));
+            DoubleAnimation Anim3 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetName(Anim3, PageAddQuestions.Name);
             Storyboard.SetTargetProperty(Anim3, new PropertyPath("Width"));
 
@@ -144,7 +204,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
         }
 
 
-        public void CLoseSupport(object sender,MouseButtonEventArgs e)
+        public void CloseSupport(object sender, MouseButtonEventArgs e)
         {
             SDK.SDK_PageDashboards.DashboardGame.PageSupport.CloseSupport(CurentSupport["Token"].ToString(), result =>
             {
@@ -152,7 +212,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 {
                     DisableEachPage();
                     DashboardGame.Notifaction($"Support \" {CurentSupport["Header"]} \" Closed", Notifaction.StatusMessage.Ok);
-                
                 }
                 else
                 {
@@ -161,15 +220,34 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             });
         }
 
+
         void DisableEachPage()
         {
             TextMessage.Visibility = Visibility.Collapsed;
             BTNSendMessage.Visibility = Visibility.Collapsed;
+
+            BTNClose_EachSupport.Text = "\xE72E";
+
+            BTNClose_EachSupport.ToolTip = "Support Closed";
+
+            BTNClose_EachSupport.MouseDown -= CloseSupport;
+
+            BTNClose_EachSupport.Cursor = Cursors.No;
         }
         void EnableEachPage()
         {
             TextMessage.Visibility = Visibility.Visible;
             BTNSendMessage.Visibility = Visibility.Visible;
+
+            BTNClose_EachSupport.Text = "\xE785";
+
+            BTNClose_EachSupport.ToolTip = "Close Support";
+
+            BTNClose_EachSupport.MouseDown -= CloseSupport;
+            BTNClose_EachSupport.MouseDown += CloseSupport;
+
+            BTNClose_EachSupport.Cursor = Cursors.Hand;
         }
+
     }
 }

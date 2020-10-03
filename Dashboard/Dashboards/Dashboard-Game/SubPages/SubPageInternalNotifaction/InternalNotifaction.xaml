@@ -33,7 +33,7 @@
 
             <!--Header-->
             <Grid  Grid.Row="0">
-                <Rectangle   Height="20" Width="20" Fill="Orange"    RadiusX="3" RadiusY="4" Margin="215,-12,45,22"  >
+                <Rectangle   Height="20" Width="20" Fill="Orange"    RadiusX="3" RadiusY="4" Margin="186,-12,45,22"  >
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -54,17 +54,6 @@
                         <TextBlock VerticalAlignment="Center" Margin="10,0" Foreground="White" FontWeight="Bold">
                         <Run Text="History"/>
                         <Run Text="("/>  <Run x:Name="TextHistoryCount" Text="0"/>  <Run Text=")"/>
-                        </TextBlock>
-                        <TextBlock Cursor="Hand" Margin="10,0" Grid.Column="1" Background="Transparent" Foreground="White" Text="&#xE8BB;"  VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Right"  FontFamily="Segoe MDL2 Assets">
-                            <TextBlock.Triggers>
-                                <EventTrigger RoutedEvent="MouseDown">
-                                    <BeginStoryboard>
-                                        <Storyboard  Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
-                                            <DoubleAnimation Completed="Close" From="1" To="0.0"  Duration="0:0:0:0.3"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </TextBlock.Triggers>
                         </TextBlock>
 
                     </Grid>

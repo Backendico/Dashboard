@@ -76,7 +76,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
             MouseDown += (s, e) =>
             {
                 ParentClass.CurentSupport = Detail;
-                ParentClass.OpenEachPlayer();
+                ParentClass.OpenEachSupport();
             };
         }
     }

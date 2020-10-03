@@ -32,7 +32,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!--BTN Back-->
-                    <Border Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Margin="10" Width="80"  Background="#33FFFFFF" MouseDown="OpenStudios">
+                    <Border Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Margin="25,10" Width="80"  Background="#33FFFFFF" MouseDown="OpenStudios">
                         <TextBlock Background="Transparent " Foreground="LightGray" TextAlignment="Center" VerticalAlignment="Center"  Text="Studios"/>
                     </Border>
 
@@ -46,7 +46,7 @@
 
                 <!--Right-->
                 <Grid Grid.Column="2">
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="25,0">
 
                         <!--Refresh-->
                         <Border Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="OrangeRed" CornerRadius="30" >
@@ -75,7 +75,7 @@
 
 
                         <!--BTN report bug-->
-                        <Border Cursor="Hand" Width="30" Height="30" CornerRadius="30" MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="OpenPageBug" >
+                        <Border Cursor="Hand" Width="30" Height="30" CornerRadius="30" MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="OpenPageReportBug" >
                             <TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Tomato" Text="&#xEBE8;" FontFamily="Segoe MDL2 Assets"/>
                         </Border >
                     </StackPanel>

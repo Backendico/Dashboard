@@ -170,10 +170,11 @@ namespace Dashboard.Dashboards.Dashboard_Game
             CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
         }
 
-        private void OpenPageBug(object sender, MouseButtonEventArgs e)
+        private void OpenPageReportBug(object sender, MouseButtonEventArgs e)
         {
             Root.Children.Add(new SubPagesReportBug());
         }
+      
         private void CheackStatusServer(object sender, MouseButtonEventArgs e)
         {
             SDK.SDK_PageDashboards.DashboardGame.PageDashboard.CheackStatusServer(Result =>
@@ -217,11 +218,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             Notifaction("App service will be added soon", StatusMessage.Ok);
         }
 
-        public void hand()
-        {
-            Debug.WriteLine("hi");
-
-        }
 
         private void OpenInternalNotifaction(object sender, MouseButtonEventArgs e)
         {

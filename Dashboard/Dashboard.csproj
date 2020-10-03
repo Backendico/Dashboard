@@ -332,11 +332,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPagesReportBug.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageSupport.xaml">
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageReportBug\SubPagesReportBug.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -404,11 +400,8 @@
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\PagePlayers.xaml.cs">
       <DependentUpon>PagePlayers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPagesReportBug.xaml.cs">
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageReportBug\SubPagesReportBug.xaml.cs">
       <DependentUpon>SubPagesReportBug.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageSupport.xaml.cs">
-      <DependentUpon>SubPageSupport.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalElement\SDK.cs" />
     <Compile Include="GlobalElement\SettingUser.cs" />

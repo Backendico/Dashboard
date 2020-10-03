@@ -11,7 +11,7 @@
     </UserControl.Effect>
 
 
-    <Grid  Background="Transparent">
+    <Grid x:Name="CloseArea"  MouseDown="Close" Background="Transparent">
 
         <Grid Background="Transparent" Focusable="True" Opacity="1"   Margin="10,50" x:Name="Root"  Width="300" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
 
             <!--Header-->
             <Grid  Grid.Row="0">
-                <Rectangle   Height="20" Width="20" Fill="Orange"    RadiusX="3" RadiusY="4" Margin="145,-12,45,22"  >
+                <Rectangle   Height="20" Width="20" Fill="Orange"    RadiusX="3" RadiusY="4" Margin="116,-12,45,22"  >
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -53,18 +53,6 @@
                         <TextBlock VerticalAlignment="Center" Margin="10,0" Foreground="White" FontWeight="Bold">
                         <Run Text="Support"/>
                         </TextBlock>
-                        <TextBlock Cursor="Hand" Margin="10,0" Grid.Column="1" Background="Transparent" Foreground="White" Text="&#xE8BB;"  VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Right"  FontFamily="Segoe MDL2 Assets">
-                            <TextBlock.Triggers>
-                                <EventTrigger RoutedEvent="MouseDown">
-                                    <BeginStoryboard>
-                                        <Storyboard  Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
-                                            <DoubleAnimation  Completed="Close" From="1" To="0.0"  Duration="0:0:0:0.3"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </TextBlock.Triggers>
-                        </TextBlock>
-
                     </Grid>
 
                 </Border>
@@ -103,10 +91,7 @@
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock x:Name="BTNClose_EachSupport" MouseDown="CLoseSupport" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets"  Grid.Column="0" >
-                                    <Run  Cursor="Hand" FontSize="15" Text="&#xE785;"/>
-                                    <Grid></Grid>
-                                </TextBlock>
+                                <TextBlock   Cursor="Hand" FontSize="15" Text="&#xE785;" x:Name="BTNClose_EachSupport" MouseDown="CloseSupport" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets"  Grid.Column="0" />
                                 <TextBlock x:Name="BTNBack_EachSupport" MouseDown="CloseEachQuestion" Cursor="Hand" FontWeight="Bold" FontSize="15" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE973;" Grid.Column="1" />
                                 <TextBox  x:Name="TextMessage" TextWrapping="Wrap"  MaxHeight="100" MinHeight="30" Margin="10,5" BorderBrush="Transparent"  SpellCheck.IsEnabled="True" AcceptsReturn="True" AcceptsTab="True" Grid.Column="2" />
                                 <TextBlock x:Name="BTNSendMessage" Cursor="Hand" FontWeight="Bold" FontSize="20" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE724;" Grid.Column="3" MouseDown="SendMessage" />
@@ -157,23 +142,7 @@
                         
                         <!--BTN Controller-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Border Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
-                                <Border.Triggers>
-                                    <EventTrigger RoutedEvent="MouseDown">
-                                        <BeginStoryboard>
-                                            <Storyboard Storyboard.TargetName="PageAddQuestions" Storyboard.TargetProperty="Width">
-                                                <DoubleAnimation From="300" To="0"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-
-                                        <BeginStoryboard>
-                                            <Storyboard Storyboard.TargetName="PageQuestions" Storyboard.TargetProperty="Width">
-                                                <DoubleAnimation From="0" To="300"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </Border.Triggers>
-                                
+                            <Border MouseDown="BacktoPageQuestions" Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
                                 <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Back"/>
                             </Border>
                         <Border  x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
