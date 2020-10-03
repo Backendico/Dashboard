@@ -1,10 +1,12 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element;
 using Dashboard.GlobalElement;
-using Microsoft.AspNetCore.SignalR.Client;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 {
@@ -13,6 +15,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
     /// </summary>
     public partial class SubpageSupport : UserControl
     {
+
+        public BsonDocument CurentSupport;
+
+
         public SubpageSupport()
         {
             InitializeComponent();
@@ -45,7 +51,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 {
                     foreach (var item in result[1].AsBsonArray)
                     {
-                        PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, PageEachQuestion));
+                        PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, PageEachQuestion, this));
                     }
                 },
                 () =>
@@ -58,21 +64,112 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             DashboardGame.MainRoot.Children.Remove(this);
         }
 
-        ////here
-        //public async void Signal()
-        //{
-        //    var connection = new HubConnectionBuilder().WithUrl("https://localhost:44377/chathub").Build();
-            
-        //    //connection.On<string, string>("ReceiveMessage", (s, ss) =>
-        //    //    {
-        //    //        Debug.WriteLine(s, ss);
+        //PageEachMessage
+        private void SendMessage(object sender, MouseButtonEventArgs e)
+        {
+            Debug.WriteLine(CurentSupport.ToString());
 
-        //    //    });
+            if (TextMessage.Text.Length >= 1)
+            {
+                BsonDocument DetailMessage = new BsonDocument
+                  {
+                   {"Message",TextMessage.Text },
+                   {"TokenUser",SettingUser.Token }
+                  };
 
-        //    await connection.StartAsync();
-        //    await connection.InvokeAsync("SendMessage", "Koala", "slm");
-        //    Debug.WriteLine(connection.ConnectionId);
+                SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddMessage(CurentSupport["Token"].ToString(), DetailMessage, result =>
+                {
+                    Debug.WriteLine(result);
+                });
+            }
+            else
+            {
+                DashboardGame.Notifaction("Message To Short", Notifaction.StatusMessage.Error);
+            }
+        }
+        public void OpenEachPlayer()
+        {
+            DoubleAnimation Anim1 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(1));
 
-        //}
+            Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
+            Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim1);
+
+            storyboard.Begin(this);
+
+        }
+
+        public void CloseEachQuestion(object sender, MouseButtonEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation(fromValue: 300, toValue: 0, TimeSpan.FromSeconds(1));
+
+            Storyboard.SetTargetName(Anim, PageEachQuestion.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+        public void OpenAddSupport(object sender, MouseButtonEventArgs e)
+        {
+            var Story = new Storyboard();
+            if (PageEachQuestion.Width >= 0)
+            {
+                DoubleAnimation Anim1 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(1));
+
+                Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
+                Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
+                Story.Children.Add(Anim1);
+            }
+
+            if (PageQuestions.Width >= 0)
+            {
+                DoubleAnimation Anim2 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(1));
+                Storyboard.SetTargetName(Anim2, PageQuestions.Name);
+                Storyboard.SetTargetProperty(Anim2, new PropertyPath("Width"));
+                Story.Children.Add(Anim2);
+            }
+
+
+            DoubleAnimation Anim3 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(1));
+            Storyboard.SetTargetName(Anim3, PageAddQuestions.Name);
+            Storyboard.SetTargetProperty(Anim3, new PropertyPath("Width"));
+
+
+            Story.Children.Add(Anim3);
+
+            Story.Begin(this);
+        }
+
+
+        public void CLoseSupport(object sender,MouseButtonEventArgs e)
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageSupport.CloseSupport(CurentSupport["Token"].ToString(), result =>
+            {
+                if (result)
+                {
+                    DisableEachPage();
+                    DashboardGame.Notifaction($"Support \" {CurentSupport["Header"]} \" Closed", Notifaction.StatusMessage.Ok);
+                
+                }
+                else
+                {
+                    DashboardGame.Notifaction($" Close Faild", Notifaction.StatusMessage.Error);
+                }
+            });
+        }
+
+        void DisableEachPage()
+        {
+            TextMessage.Visibility = Visibility.Collapsed;
+            BTNSendMessage.Visibility = Visibility.Collapsed;
+        }
+        void EnableEachPage()
+        {
+            TextMessage.Visibility = Visibility.Visible;
+            BTNSendMessage.Visibility = Visibility.Visible;
+        }
     }
 }

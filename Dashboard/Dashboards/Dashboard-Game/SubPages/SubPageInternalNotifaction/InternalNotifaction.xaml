@@ -83,7 +83,7 @@
             <!--footer-->
             <Border  CornerRadius="0,0,10,10" Grid.Row="2"   Background="Orange" >
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
-                    <TextBlock x:Name="BTNDeleteAllView"  Foreground="White" ToolTip="Delete All"  Cursor="Hand"  Margin="10,0"  FontSize="15" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock x:Name="BTNDeleteAllView"  Foreground="White" ToolTip="Clear"  Cursor="Hand"  Margin="10,0"  FontSize="15" Text="&#xEA99;" FontFamily="Segoe MDL2 Assets"/>
                     <TextBlock  x:Name="BTNReload" Foreground="White" ToolTip="Update" Cursor="Hand" Margin="10,0"  FontSize="15" Text="&#xE777;" FontFamily="Segoe MDL2 Assets"/>
                     <TextBlock  x:Name="BTNReciveMore" Foreground="White" ToolTip="Recive More" Cursor="Hand" Margin="10,0"  FontSize="15" Text="&#xE74B;" FontFamily="Segoe MDL2 Assets"/>
                 </StackPanel>

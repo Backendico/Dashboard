@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
 {
@@ -11,11 +13,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
     /// </summary>
     public partial class ModelSupport : UserControl
     {
-        Grid PageDetail;
-        public ModelSupport(BsonDocument Detail,Grid PageDetail)
+
+        public ModelSupport(BsonDocument Detail, Grid PageDetail, SubpageSupport ParentClass)
         {
             InitializeComponent();
-            this.PageDetail = PageDetail;
 
             TextHeader.Text = Detail["Header"].ToString();
             if (Detail["IsOpen"].AsBoolean)
@@ -71,14 +72,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
 
             TextTime.Text = Detail["Created"].ToLocalTime().ToString();
 
-            
-        }
-
-        private void OpenDetail(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            (Parent as StackPanel).Visibility = Visibility.Collapsed;
-            PageDetail.Visibility = Visibility.Visible;
-            PageDetail.Width = 300;
+            //init mouse down 
+            MouseDown += (s, e) =>
+            {
+                ParentClass.CurentSupport = Detail;
+                ParentClass.OpenEachPlayer();
+            };
         }
     }
 }

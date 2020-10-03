@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element"
              mc:Ignorable="d" d:DesignWidth="279.5" 
-             Cursor="Hand" MouseDown="OpenDetail"
+             Cursor="Hand" 
              
              >
     

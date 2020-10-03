@@ -81,10 +81,37 @@
                 
                 
                 <!--PageEachQuestion-->
-                <Grid x:Name="PageEachQuestion" Width="0" Grid.Column="0">
+                <Grid x:Name="PageEachQuestion" Width="300" Grid.Column="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
                         <Grid>
-                            <TextBlock Text="HI"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition  MinHeight="30" Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Body-->
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0">
+                                <StackPanel/>
+                            </ScrollViewer>
+                            
+                            <!--Controoler send Option-->
+                            <Grid Grid.Row="1"   Background="#4CFFA500">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock x:Name="BTNClose_EachSupport" MouseDown="CLoseSupport" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets"  Grid.Column="0" >
+                                    <Run  Cursor="Hand" FontSize="15" Text="&#xE785;"/>
+                                    <Grid></Grid>
+                                </TextBlock>
+                                <TextBlock x:Name="BTNBack_EachSupport" MouseDown="CloseEachQuestion" Cursor="Hand" FontWeight="Bold" FontSize="15" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE973;" Grid.Column="1" />
+                                <TextBox  x:Name="TextMessage" TextWrapping="Wrap"  MaxHeight="100" MinHeight="30" Margin="10,5" BorderBrush="Transparent"  SpellCheck.IsEnabled="True" AcceptsReturn="True" AcceptsTab="True" Grid.Column="2" />
+                                <TextBlock x:Name="BTNSendMessage" Cursor="Hand" FontWeight="Bold" FontSize="20" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE724;" Grid.Column="3" MouseDown="SendMessage" />
+                            </Grid>
+
                         </Grid>
                     </ScrollViewer>
                 </Grid>
@@ -164,27 +191,7 @@
             <Border  CornerRadius="0,0,10,10" Grid.Row="2" Background="Orange" >
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0">
                     <TextBlock  x:Name="BTNReload" Foreground="White" ToolTip="Update" Cursor="Hand" Margin="0,0,20,0"  FontSize="15" Text="&#xE777;" FontFamily="Segoe MDL2 Assets"/>
-                    <TextBlock  x:Name="BTNaddCategory" Foreground="White"  ToolTip="Add Questions" Cursor="Hand" Margin="0,0,20,0"  FontSize="15" Text="&#xE710;" FontFamily="Segoe MDL2 Assets">
-                      <!--Animation openpageaddQuestion-->
-                        <TextBlock.Triggers>
-                            <EventTrigger RoutedEvent="MouseDown">
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="PageAddQuestions" Storyboard.TargetProperty="Width">
-                                        <DoubleAnimation From="0" To="300" Duration="0:0:0:0.3"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            
-                            <EventTrigger RoutedEvent="MouseDown">
-                                <BeginStoryboard>
-                                    <Storyboard Storyboard.TargetName="PageQuestions" Storyboard.TargetProperty="Width">
-                                        <DoubleAnimation From="300" To="0" Duration="0:0:0:0.3"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </TextBlock.Triggers>
-                        
-                    </TextBlock>
+                    <TextBlock MouseDown="OpenAddSupport"  x:Name="BTNaddCategory" Foreground="White"  ToolTip="Add Questions" Cursor="Hand" Margin="0,0,20,0"  FontSize="15" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"/>
                 </StackPanel>
             </Border>
         </Grid>

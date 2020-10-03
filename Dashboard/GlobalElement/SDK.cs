@@ -925,6 +925,7 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+                   
                     public static async void ReciveSupports(Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.LinkReciveSupport);
@@ -943,6 +944,49 @@ namespace Dashboard.GlobalElement
                         else
                         {
                             ERR();
+                        }
+                    }
+
+                    public static async void AddMessage(string TokenSupport, BsonDocument DetailMessage, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddMessage);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.PUT);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenSupport", TokenSupport);
+                        request.AddParameter("Detail", DetailMessage.ToString());
+                        var response = await client.ExecuteAsync(request);
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+
+                    public static async void CloseSupport( string TokenSupport,Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.CloseSupport);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenSupport",TokenSupport);
+                        var response = await client.ExecuteAsync(request);
+                      
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
                         }
                     }
                 }
@@ -1016,6 +1060,8 @@ namespace Dashboard.GlobalElement
             {
                 public string LinkAddSupport => "https://localhost:44346/PageSupport/AddSupport";
                 public string LinkReciveSupport => "https://localhost:44346/PageSupport/ReciveSupports";
+                public string AddMessage => "https://localhost:44346/PageSupport/AddMessage";
+                public string CloseSupport => "https://localhost:44346/PageSupport/CloseSupport";
             }
         }
     }
