@@ -205,6 +205,12 @@
     <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageInternalNotifaction\InternalNotifaction.xaml.cs">
       <DependentUpon>InternalNotifaction.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageStudios\Element\ModelStudio.xaml.cs">
+      <DependentUpon>ModelStudio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageStudios\SubPageStudios.xaml.cs">
+      <DependentUpon>SubPageStudios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\SubPages\SubpageSupport\Element\ModelSupport.xaml.cs">
       <DependentUpon>ModelSupport.xaml</DependentUpon>
     </Compile>
@@ -333,6 +339,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageReportBug\SubPagesReportBug.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageStudios\Element\ModelStudio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageStudios\SubPageStudios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

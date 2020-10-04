@@ -17,30 +17,25 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Notifaction
 {
-    /// <summary>
-    /// Interaction logic for Dialog.xaml
-    /// </summary>
     public partial class Dialog : UserControl
     {
-       
-
         public Dialog(string _Message, string Header)
         {
             InitializeComponent();
             TextMessage.Text = _Message;
 
-            DashboardGame.MainRoot.Children.Add(this);
-            DashboardGame._Dashboard.Effect = new BlurEffect();
+            DashboardGame.Dashboard.Root.Children.Add(this);
+            DashboardGame.Dashboard.Blure(true);
             TextHeader.Text = Header;
         }
 
 
 
-   
+
         private void Storyboard_Completed(object sender, EventArgs e)
         {
-            DashboardGame.MainRoot.Children.Remove(this);
-            DashboardGame._Dashboard.Effect = null;
+            DashboardGame.Dashboard.Root.Children.Remove(this);
+            DashboardGame.Dashboard.Blure(false);
         }
     }
 }

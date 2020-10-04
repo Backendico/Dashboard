@@ -227,7 +227,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
    
         private void Close(object sender, RoutedEventArgs e)
         {
-            DashboardGame.MainRoot.Children.Remove(this);
+            DashboardGame.Dashboard.Root.Children.Remove(this);
 
         }
 

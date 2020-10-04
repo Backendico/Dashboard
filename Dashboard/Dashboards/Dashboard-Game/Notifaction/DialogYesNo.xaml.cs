@@ -54,7 +54,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Notifaction
 
         private void Close (object sender, EventArgs e)
         {
-            DashboardGame.MainRoot.Children.Remove(this);
+            DashboardGame.Dashboard.Root.Children.Remove(this);
         }
     }
 }

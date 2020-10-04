@@ -6,6 +6,7 @@ using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.PageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
@@ -26,8 +27,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
     /// </summary>
     public partial class DashboardGame : Window
     {
-        public static Grid MainRoot;
-        public static Grid _Dashboard;
+        public static DashboardGame Dashboard;
 
         UserControl CurentPage;
         TextBlock CurentTab;
@@ -38,8 +38,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
         {
             InitializeComponent();
             Settings.Default.Reset();
-            MainRoot = Root;
-            _Dashboard = PageDashboard;
+            Dashboard = this;
 
             if (Settings.Default._id == "")
             {
@@ -61,12 +60,13 @@ namespace Dashboard.Dashboards.Dashboard_Game
         /// </summary>
         public void Init()
         {
+
             SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
                 result =>
                 {
                     if (result.ElementCount <= 0)
                     {
-                        
+
                         Root.Children.Add(new CreatStudio());
                     }
                     else
@@ -83,15 +83,25 @@ namespace Dashboard.Dashboards.Dashboard_Game
                         CurentTab = BTNDashboard;
 
                         //add log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} o'clock", new BsonDocument { }, false, resultlog => { });
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} ", new BsonDocument { }, false, resultlog => { });
                     }
                 },
                 () =>
                 {
                 });
-
         }
 
+        internal void Blure(bool OnOff)
+        {
+            if (OnOff)
+            {
+                PageDashboard.Effect = new BlurEffect();
+            }
+            else
+            {
+                PageDashboard.Effect = null;
+            }
+        }
 
         private void HoverColor(object sender, MouseEventArgs e)
         {
@@ -115,7 +125,8 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         private void OpenStudios(object sender, MouseButtonEventArgs e)
         {
-
+            Root.Children.Add(new SubPageStudios());
+            Blure(true);
         }
 
         private void BackgroundChangeEnter(object sender, MouseEventArgs e)
@@ -174,7 +185,18 @@ namespace Dashboard.Dashboards.Dashboard_Game
         {
             Root.Children.Add(new SubPagesReportBug());
         }
-      
+
+        private void OpenInternalNotifaction(object sender, MouseButtonEventArgs e)
+        {
+            if (internalNotifaction != null)
+                Root.Children.Remove(internalNotifaction);
+
+            var notif = new InternalNotifaction();
+
+            Root.Children.Add(notif);
+            internalNotifaction = notif;
+        }
+
         private void CheackStatusServer(object sender, MouseButtonEventArgs e)
         {
             SDK.SDK_PageDashboards.DashboardGame.PageDashboard.CheackStatusServer(Result =>
@@ -194,8 +216,46 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         }
 
+        private void SwitchApp(object sender, MouseButtonEventArgs e)
+        {
+            Notifaction("App service will be added soon", StatusMessage.Ok);
+        }
+
 
         //Statics
+        public static void ChangeStudio(DashboardGame Dashboard)
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
+              result =>
+              {
+                  if (result.ElementCount <= 0)
+                  {
+
+                      Dashboard.Root.Children.Add(new CreatStudio());
+                  }
+                  else
+                  {
+                      //fill Studio user
+                      SettingUser.CurentDetailStudio = result[0].AsBsonDocument;
+
+                      //Change Textheader dashboard
+                      Dashboard.TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
+
+                      //add subpageDashbaord to dashbaord
+                      Dashboard.CurentPage = new PageDashboard();
+
+                      Dashboard.Content.Children.Add(Dashboard.CurentPage);
+                      Dashboard.CurentTab = Dashboard.BTNDashboard;
+
+                      //add log
+                      SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} ", new BsonDocument { }, false, resultlog => { });
+                  }
+              },
+              () =>
+              {
+              });
+        }
+
         public static void Notifaction(string Message, StatusMessage Status)
         {
             new Notifaction.Notifaction(Message, Status);
@@ -208,27 +268,13 @@ namespace Dashboard.Dashboards.Dashboard_Game
         public static async Task<MessageBoxResult> DialogYesNo(string Message)
         {
             var Dialog = new DialogYesNo(Message);
-            MainRoot.Children.Add(Dialog);
+            Dashboard.Root.Children.Add(Dialog);
 
             return await Dialog.Result();
         }
 
-        private void SwitchApp(object sender, MouseButtonEventArgs e)
-        {
-            Notifaction("App service will be added soon", StatusMessage.Ok);
-        }
 
 
-        private void OpenInternalNotifaction(object sender, MouseButtonEventArgs e)
-        {
-            if (internalNotifaction!=null)
-            MainRoot.Children.Remove(internalNotifaction);
 
-            var notif = new InternalNotifaction();
-
-            MainRoot.Children.Add(notif) ;
-            internalNotifaction = notif;
-        }
-   
     }
 }

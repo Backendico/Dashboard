@@ -51,13 +51,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
         private void Add(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DashboardGame.MainRoot.Children.Add(new CreatNewPlayer(Start));
+            DashboardGame.Dashboard.Root.Children.Add(new CreatNewPlayer(Start));
 
         }
 
         private void Search(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DashboardGame.MainRoot.Children.Add(new SearchUser());
+            DashboardGame.Dashboard.Root.Children.Add(new SearchUser());
         }
 
     }

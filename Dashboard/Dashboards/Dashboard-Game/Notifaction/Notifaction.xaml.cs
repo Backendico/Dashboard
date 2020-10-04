@@ -20,7 +20,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Notifaction
 
     public partial class Notifaction : UserControl
     {
-
         public Notifaction(string _Message, StatusMessage Status)
         {
             InitializeComponent();
@@ -41,17 +40,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.Notifaction
                     BorderColor.BorderBrush = new SolidColorBrush(Colors.Black);
                     break;
             }
-            DashboardGame.MainRoot.Children.Add(this);
+            DashboardGame.Dashboard.Root.Children.Add(this);
         }
 
-     
+
 
         public void Close(object sender, EventArgs e)
         {
             try
             {
-
-                DashboardGame.MainRoot.Children.Remove(this);
+                DashboardGame.Dashboard.Root.Children.Remove(this);
             }
             catch (Exception)
             {

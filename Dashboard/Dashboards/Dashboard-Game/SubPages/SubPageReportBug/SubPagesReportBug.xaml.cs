@@ -49,7 +49,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 DoubleAnimation anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
                 anim.Completed += (s, ee) =>
                 {
-                    DashboardGame.MainRoot.Children.Remove(this);
+                    DashboardGame.Dashboard.Root.Children.Remove(this);
                 };
 
                 Storyboard.SetTargetName(anim, Root.Name);

@@ -41,7 +41,7 @@
                 <!--Center-->
 
                 <Grid Grid.Column="1">
-                    <TextBlock x:Name="TextStudioName" TextAlignment="Center" FontWeight="Bold" Text="Studio_Name" FontSize="15"  VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock x:FieldModifier="public" x:Name="TextStudioName" TextAlignment="Center" FontWeight="Bold" Text="Studio_Name" FontSize="15"  VerticalAlignment="Center" Foreground="White"/>
                 </Grid>
 
                 <!--Right-->

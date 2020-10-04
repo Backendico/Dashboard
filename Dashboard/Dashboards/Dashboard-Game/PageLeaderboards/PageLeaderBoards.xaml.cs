@@ -35,7 +35,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards
 
         private void CreatLeaderboard(object sender, MouseButtonEventArgs e)
         {
-            DashboardGame.MainRoot.Children.Add(new CreatLeaderBoard(Start));
+            DashboardGame.Dashboard.Root.Children.Add(new CreatLeaderBoard(Start));
 
         }
     }

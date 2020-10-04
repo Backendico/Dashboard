@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios.Element.ModelStudio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios.Element"
+             mc:Ignorable="d"
+             Name="Root"
+             Background="Transparent"
+             Cursor="Hand"
+             ToolTip="Open Studio"
+             >
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+       
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    
+    
+    <Grid Height="40">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" BorderBrush="Gainsboro" BorderThickness="0,0,2,2"/>
+        <Border Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="0,0,2,2"/>
+        <Border Grid.Column="0" BorderBrush="Gainsboro" BorderThickness="0,0,2,2"/>
+
+        <TextBlock x:Name="TextName" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" Text="Name"/>
+        <TextBlock x:Name="TextToken" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" Text="Token"/>
+    </Grid>
+</UserControl>

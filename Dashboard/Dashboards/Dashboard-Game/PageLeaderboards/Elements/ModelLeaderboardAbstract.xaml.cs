@@ -116,7 +116,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            DashboardGame.MainRoot.Children.Add(new EditLeaderboard(Detail, Refreshlist));
+            DashboardGame.Dashboard.Root.Children.Add(new EditLeaderboard(Detail, Refreshlist));
         }
 
         Action<object, RoutedEventArgs> Refreshlist;

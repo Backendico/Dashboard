@@ -94,7 +94,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifactio
 
         private void Close(object sender, EventArgs e)
         {
-            DashboardGame.MainRoot.Children.Remove(this);
+            DashboardGame.Dashboard.Root.Children.Remove(this);
         }
 
         private void _MouseDown(object sender, MouseButtonEventArgs e)

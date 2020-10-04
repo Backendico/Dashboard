@@ -74,8 +74,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 storyboard.Children.Add(Anim);
                 storyboard.Completed += (s, ee) =>
                 {
-                    Debug.WriteLine("hi");
-                    DashboardGame.MainRoot.Children.Remove(this);
+                    DashboardGame.Dashboard.Root.Children.Remove(this);
                 };
                 storyboard.Begin(this);
             }
