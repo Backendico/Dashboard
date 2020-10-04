@@ -18,6 +18,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 
 namespace Dashboard.Dashboards.Dashboard_Game
@@ -39,6 +40,8 @@ namespace Dashboard.Dashboards.Dashboard_Game
             InitializeComponent();
             Settings.Default.Reset();
             Dashboard = this;
+
+            CurentTab = BTNDashboard;
 
             if (Settings.Default._id == "")
             {
@@ -104,24 +107,65 @@ namespace Dashboard.Dashboards.Dashboard_Game
             }
         }
 
-        private void HoverColor(object sender, MouseEventArgs e)
+        public void ChangeColor_Active(object sender, MouseEventArgs e)
         {
-            var Hove = sender as TextBlock;
-            if (Hove.Name != CurentTab.Name)
-            {
-                Hove.Foreground = new SolidColorBrush(Colors.Orange);
-            }
+            var TextBlock = sender as TextBlock;
+            ColorAnimation Anim = new ColorAnimation(fromValue: Colors.Gray, toValue: Colors.Orange, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, TextBlock.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("(TextBlock.Foreground).(SolidColorBrush.Color)"));
+
+            DoubleAnimation Anim1 = new DoubleAnimation(18, 20, TimeSpan.FromSeconds(0.1));
+            Storyboard.SetTargetName(Anim1, TextBlock.Name);
+            Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
+
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Children.Add(Anim1);
+
+            storyboard.Begin(this);
+
         }
 
-        private void ExtitColor(object sender, MouseEventArgs e)
+        public void ChangeColor_DeActive(object sender, MouseEventArgs e)
         {
-            var Hove = sender as TextBlock;
-            if (Hove.Name != CurentTab.Name)
-            {
+            var TextBlock = sender as TextBlock;
 
-                Hove.Foreground = new SolidColorBrush(Colors.Gray);
+            ColorAnimation Anim = new ColorAnimation(fromValue: Colors.Orange, toValue: Colors.Gray, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, TextBlock.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("(TextBlock.Foreground).(SolidColorBrush.Color)"));
+
+            DoubleAnimation Anim1 = new DoubleAnimation(20, 18, TimeSpan.FromSeconds(0.1));
+            Storyboard.SetTargetName(Anim1, TextBlock.Name);
+            Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Children.Add(Anim1);
+            storyboard.Begin(this);
+
+        }
+
+
+        public void ControlPane(object sender, MouseButtonEventArgs e)
+        {
+            Storyboard storyboard = new Storyboard();
+            if (NameList.Width >= 100)
+            {
+                DoubleAnimation Anim = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(0.3));
+                Storyboard.SetTargetName(Anim, NameList.Name);
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
+                storyboard.Children.Add(Anim);
+            }
+            else
+            {
+                DoubleAnimation Anim = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(0.3));
+                Storyboard.SetTargetName(Anim, NameList.Name);
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
+                storyboard.Children.Add(Anim);
             }
 
+            storyboard.Begin(this);
         }
 
         private void OpenStudios(object sender, MouseButtonEventArgs e)
@@ -129,19 +173,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             Root.Children.Add(new SubPageStudios());
             Blure(true);
         }
-
-        private void BackgroundChangeEnter(object sender, MouseEventArgs e)
-        {
-            var Borders = sender as Border;
-            Borders.Background = new SolidColorBrush(new Color { R = 255, G = 255, B = 255, A = 33 });
-        }
-
-        private void BackgroundChangeLeave(object sender, MouseEventArgs e)
-        {
-            var Borders = sender as Border;
-            Borders.Background = new SolidColorBrush(Colors.Transparent);
-        }
-
         private void OpenSetting(object sender, MouseButtonEventArgs e)
         {
             Root.Children.Add(new PageSetting());
@@ -221,7 +252,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
         {
             Notifaction("App service will be added soon", StatusMessage.Ok);
         }
-        
+
         internal void ChangeStudio(BsonDocument DetailStudio, bool? NotifactionChange = null)
         {
             //fill Studio user
@@ -242,7 +273,22 @@ namespace Dashboard.Dashboards.Dashboard_Game
             }
         }
 
-        
+        private void Window_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (NameList.Width >= 100)
+            {
+                BTNOpenPane.Foreground = new SolidColorBrush(Colors.Orange);
+                BTNOpenPane.Text = "\xEA49";
+            }
+            else
+            {
+                BTNOpenPane.Text = "\xEA5B";
+            }
+
+            CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
+
+        }
+
         //Statics
         public static void Notifaction(string Message, StatusMessage Status)
         {
@@ -260,10 +306,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             return await Dialog.Result();
         }
-
-
-
-
 
     }
 }

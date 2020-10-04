@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game"
         mc:Ignorable="d"
+        LayoutUpdated="Window_LayoutUpdated"
         Title="Dashboard" Height="760" Width="1200">
     <Grid  x:Name="Root">
 
@@ -41,41 +42,38 @@
                 <!--Center-->
 
                 <Grid Grid.Column="1">
-                    <TextBlock x:FieldModifier="public" x:Name="TextStudioName" TextAlignment="Center" FontWeight="Bold" Text="Studio_Name" FontSize="15"  VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock x:FieldModifier="public" x:Name="TextStudioName" TextAlignment="Center" FontWeight="Bold" Text="Waiting . . ." FontSize="15"  VerticalAlignment="Center" Foreground="White"/>
                 </Grid>
 
                 <!--Right-->
                 <Grid Grid.Column="2">
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="25,0">
 
-                        <!--Refresh-->
-                        <Border Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="OrangeRed" CornerRadius="30" >
-                            <TextBlock Text="&#xE72C;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray" FontFamily="Segoe MDL2 Assets" />
-                        </Border >
+                        
 
                         <!--Setting-->
-                        <Border Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="#33ffffff" CornerRadius="30" MouseDown="OpenSetting" >
+                        <Border Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="OrangeRed" CornerRadius="30" MouseDown="OpenSetting" >
                             <TextBlock Text="&#xE713;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray" FontFamily="Segoe MDL2 Assets" />
                         </Border >
 
                         <!--Support-->
-                        <Border  Cursor="Hand" Margin="5,0" Width="30" Height="30" CornerRadius="30" MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="OpenSuppport">
+                        <Border  Cursor="Hand" Margin="5,0" Width="30" Height="30" CornerRadius="30"   MouseDown="OpenSuppport">
                             <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95B;" FontFamily="Segoe MDL2 Assets"  />
                         </Border >
 
                         <!--Notifation-->
-                        <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="OpenInternalNotifaction">
+                        <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"    MouseDown="OpenInternalNotifaction">
                             <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xF738;" FontFamily="Segoe MDL2 Assets"/>
                         </Border >
 
                         <!--CheackHealth-->
-                        <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30" MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="CheackStatusServer" >
+                        <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   MouseDown="CheackStatusServer" >
                             <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95E;" FontFamily="Segoe MDL2 Assets"/>
                         </Border >
 
 
                         <!--BTN report bug-->
-                        <Border Cursor="Hand" Width="30" Height="30" CornerRadius="30" MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" MouseDown="OpenPageReportBug" >
+                        <Border Cursor="Hand" Width="30" Height="30" CornerRadius="30"  MouseDown="OpenPageReportBug" >
                             <TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Tomato" Text="&#xEBE8;" FontFamily="Segoe MDL2 Assets"/>
                         </Border >
                     </StackPanel>
@@ -94,31 +92,9 @@
                 <!--Tabs-->
                 <StackPanel Margin="5,20,0,0"  Background="Transparent"  MinWidth="30">
 
-                    <TextBlock x:Name="BTNDashboard" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xF246;"  Foreground="Orange" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor"  MouseDown="ChangePage" />
-                    <TextBlock x:Name="BTNPlayers" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xE902;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor" MouseDown="ChangePage"  />
-                    <TextBlock x:Name="BTNLeaderboards" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseEnter="HoverColor" MouseLeave="ExtitColor" MouseDown="ChangePage"  />
-
-                    <StackPanel.Triggers>
-                        <!--Mouse Enter-->
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard >
-                                <Storyboard  >
-                                    <DoubleAnimation Storyboard.TargetProperty="Width"  Storyboard.TargetName="NameList"  From="1" To="100" Duration="0:0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-                        <!--Mouse Exit-->
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard >
-                                <Storyboard  >
-                                    <DoubleAnimation Storyboard.TargetProperty="Width"  Storyboard.TargetName="NameList"  From="100" To="1" Duration="0:0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-                    </StackPanel.Triggers>
-
+                    <TextBlock x:Name="BTNDashboard" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xF246;"  Foreground="Orange" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage" />
+                    <TextBlock x:Name="BTNPlayers" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xE902;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseDown="ChangePage"  />
+                    <TextBlock x:Name="BTNLeaderboards" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                 </StackPanel>
 
                 <!--Texts-->
@@ -162,34 +138,23 @@
 
 
                     <!--OpenPan-->
-                    <Border Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" >
-                    <Border.Triggers>
-                        <EventTrigger RoutedEvent="MouseDown">
-                            <BeginStoryboard >
-                                <Storyboard  Storyboard.TargetProperty="Width"  Storyboard.TargetName="NameList">
-                                    <DoubleAnimation From="1" To="100" Duration="0:0:0:1"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Border.Triggers>
-                        
-                        <TextBlock  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xEA5B;" FontFamily="Segoe MDL2 Assets"/>
-                   
+                    <Border Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
+                    <TextBlock x:Name="BTNOpenPane" MouseDown="ControlPane" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive"  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xEA5B;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
 
                     <!--OpenDocAPi-->
-                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" >
-                    <TextBlock  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE736;" FontFamily="Segoe MDL2 Assets"/>
+                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <TextBlock x:Name="BTNDocument" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE736;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
 
                 <!--Eduction-->
-                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" >
-                    <TextBlock  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE7BE;" FontFamily="Segoe MDL2 Assets"/>
+                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <TextBlock  x:Name="BTNEduction" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE7BE;" FontFamily="Segoe MDL2 Assets"/>
                 </Border >
 
                 <!--Help-->
-                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  MouseEnter="BackgroundChangeEnter"  MouseLeave="BackgroundChangeLeave" >
-                    <TextBlock  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE82F;" FontFamily="Segoe MDL2 Assets"/>
+                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <TextBlock x:Name="BTNHelp" MouseLeave="ChangeColor_DeActive" MouseEnter="ChangeColor_Active" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE82F;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
                     </StackPanel>
 

@@ -1,23 +1,11 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.PageStudios;
-using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios.Element;
+﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios.Element;
 using Dashboard.GlobalElement;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
 {
@@ -81,7 +69,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
 
                         foreach (var item in result["Settings"].AsBsonArray)
                         {
-                            
                             PlaceContentStudios.Children.Add(new ModelStudio(item["Setting"].AsBsonDocument, this));
                         }
                     }
@@ -96,7 +83,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
 
         internal void ShowPaneladdStudio()
         {
-                PanelAddStudio.Visibility = Visibility.Visible;
+            PanelAddStudio.Visibility = Visibility.Visible;
             DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
 
 
@@ -124,6 +111,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
 
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
+        }
+
+        private void Close(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource.GetType() == typeof(Grid))
+            {
+                ShowOffPanelStudio();
+            }
         }
     }
 }

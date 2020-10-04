@@ -107,9 +107,6 @@ namespace Dashboard.GlobalElement
                         {
                             Err();
                         }
-
-
-
                     }
 
                     public static async void CreatStudio(string NameStudio, Action<bool> Result)
@@ -180,7 +177,7 @@ namespace Dashboard.GlobalElement
 
                     public static async void ReciveMonetize(Action<BsonDocument> Result, Action ERR)
                     {
-                        var client = new RestClient("https://localhost:44346/ChoiceStudioGame/ReciveMonetize");
+                        var client = new RestClient(Links.ReciveMonetiz);
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         client.ClearHandlers();
@@ -198,6 +195,29 @@ namespace Dashboard.GlobalElement
                             ERR();
                         }
                     }
+
+                    public static async void RecivePaymentList(Action<BsonDocument> Result, Action ERR)
+                    {
+                        var client = new RestClient(Links.RecivePaymentList);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("NameStudio", SettingUser.CurentDetailStudio["Database"]);
+                        IRestResponse response = client.Execute(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            ERR();
+                        }
+
+                    }
+
 
                     public static async void AddPayment(BsonDocument Details, Action<bool> Result)
                     {
@@ -926,7 +946,7 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
-                   
+
                     public static async void ReciveSupports(Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.LinkReciveSupport);
@@ -970,7 +990,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void CloseSupport( string TokenSupport,Action<bool> Result)
+                    public static async void CloseSupport(string TokenSupport, Action<bool> Result)
                     {
                         var client = new RestClient(Links.CloseSupport);
                         client.Timeout = -1;
@@ -978,10 +998,10 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenSupport",TokenSupport);
+                        request.AddParameter("TokenSupport", TokenSupport);
                         var response = await client.ExecuteAsync(request);
-                      
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
                         }
@@ -1014,6 +1034,8 @@ namespace Dashboard.GlobalElement
                 public string CreatStudio => "https://localhost:44346/ChoiceStudioGame/CreatNewStudio";
                 public string Status => "https://localhost:44346/ChoiceStudiogame/Status";
                 public string AddPayment => "https://localhost:44346/ChoiceStudioGame/AddPayment";
+                public string ReciveMonetiz => "https://localhost:44346/ChoiceStudioGame/ReciveMonetize";
+                public string RecivePaymentList => "https://localhost:44346/ChoiceStudioGame/RecivePaymentList";
             }
 
             public struct PagePlayers

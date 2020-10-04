@@ -15,7 +15,7 @@
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
         </Border.Effect>
 
-        <Grid>
+        <Grid MouseDown="Close">
             <!--Main-->
             <Grid >
                 <Grid.RowDefinitions>
@@ -35,13 +35,12 @@
                         <TextBlock  Margin="10" VerticalAlignment="Center" Foreground="White" >
                     <Run FontWeight="Bold" Text="Studios"/>
                         </TextBlock>
-                        <Button Click="Close" Cursor="Hand"  FontSize="15"  Content="&#xEF2C;" Foreground="Gray" Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right" Margin="10,0" Width="20" Height="20" Grid.Column="1" FontFamily="Segoe MDL2 Assets" />
                     </Grid>
                 </Border>
 
 
                 <!--HeaderController-->
-                <Border   Background="WhiteSmoke" Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,1,0,0">
+                <Border Cursor="Hand"  Background="WhiteSmoke" Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,1,0,0">
                     <Border x:Name="BTNAddStudio" Margin="10,0" CornerRadius="5" Width="80" Height="30" Background="Orange"   HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="Add"/>
                     </Border>

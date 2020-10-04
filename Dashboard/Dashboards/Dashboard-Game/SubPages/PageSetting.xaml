@@ -70,9 +70,9 @@
                         </TextBlock>
 
                         <!--Token-->
-                        <TextBlock Margin="0,10">
+                        <TextBlock  Margin="0,10">
                         <Run  FontWeight="Bold" Text="Token : "/>
-                        <Run x:Name="TextToken" Text="XXX"/>
+                        <Run Cursor="Hand" x:Name="TextToken" Text="XXX"/>
                            <LineBreak/>
                          <Run Foreground="Gray"  Text="To authenticate your studio and your Apis key"/>
                         </TextBlock>
@@ -423,7 +423,6 @@
                                 <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
                                 <Border Grid.Column="3" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
                                 <Border Grid.Column="4" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
-                                <Border Grid.Column="5" BorderBrush="Gray" BorderThickness="0,0,2,0 "/>
 
                                 <TextBlock Grid.Column="0" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="ID"/>
                                 <TextBlock Grid.Column="1" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Created"/>

@@ -20,7 +20,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
         public Button CurentBTNHeader;
         public BsonDocument FristMonetiz = new BsonDocument();
         public BsonDocument CurentMonetiz = new BsonDocument();
-        public BsonDocument NewMonetiz=new BsonDocument();
+        public BsonDocument NewMonetiz = new BsonDocument();
 
         public PageSetting()
         {
@@ -204,7 +204,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                 TextTomanNumber.Text = "0";
                                 BTNRevite.Visibility = Visibility.Collapsed;
 
-                                
+
+                                //log
+                                SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Payment", $"{NewMonetiz["Cash"].AsInt32.ToString("#,##0") } \" Tomans will be deducted from your account credit", NewMonetiz, false, result => { });
                             }
                             else
                             {
@@ -212,6 +214,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             }
 
                         });
+
+
                     }
                     else
                     {
@@ -222,13 +226,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             };
 
+
+            TextToken.MouseDown += (s, e) =>
+            {
+                Clipboard.SetText(TextToken.Text);
+                DashboardGame.Notifaction("Token Copied", StatusMessage.Ok);
+            };
         }
 
-   
+
         private void Close(object sender, RoutedEventArgs e)
         {
             DashboardGame.Dashboard.Root.Children.Remove(this);
-
         }
 
 
@@ -291,10 +300,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
                         //Fill Payment
                         ContentPlacePay.Children.Clear();
-                        foreach (var item in result["PaymentList"].AsBsonArray)
-                        {
-                            ContentPlacePay.Children.Add(new ModelPayment(item.AsBsonDocument));
-                        }
+                        RecivePayments();
 
                         //fill CurentMonetiz  & Frist monetiz
                         CurentMonetiz.Clear();
@@ -306,7 +312,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             FristMonetiz.Add(item.Name, item.Value);
                         }
 
-                        NewMonetiz= new BsonDocument
+                        NewMonetiz = new BsonDocument
                         {
                             {"Players",0 },
                             {"Leaderboards",0 },
@@ -412,9 +418,27 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                     {
                         DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
                     });
-
             }
         }
+
+        void RecivePayments()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageStudios.RecivePaymentList(
+                result =>
+                {
+                    Debug.WriteLine(result["Detail"].AsBsonArray.Count);
+
+                    foreach (var item in result["Detail"].AsBsonArray)
+                    {
+                        ContentPlacePay.Children.Add(new ModelPayment(item.AsBsonDocument));
+                    }
+                },
+                () =>
+                {
+                    DashboardGame.Notifaction("Faild Recive List Payment", StatusMessage.Error);
+                });
+        }
+
 
         /// <summary>
         /// cheack cash and Disable btns
@@ -485,8 +509,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             TextTomanNumber.Text = NewMonetiz["Cash"].AsInt32.ToString("#,##0");
 
         }
-
-
 
     }
 }
