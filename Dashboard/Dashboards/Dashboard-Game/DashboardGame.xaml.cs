@@ -71,16 +71,17 @@ namespace Dashboard.Dashboards.Dashboard_Game
                     }
                     else
                     {
-                        //fill Studio user
-                        SettingUser.CurentDetailStudio = result[0].AsBsonDocument;
+                        ChangeStudio(result[0].AsBsonDocument);
+                        ////fill Studio user
+                        //SettingUser.CurentDetailStudio = result[0].AsBsonDocument;
 
-                        //Change Textheader dashboard
-                        TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
+                        ////Change Textheader dashboard
+                        //TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
 
-                        //add subpageDashbaord to dashbaord
-                        CurentPage = new PageDashboard();
-                        Content.Children.Add(CurentPage);
-                        CurentTab = BTNDashboard;
+                        ////add subpageDashbaord to dashbaord
+                        //CurentPage = new PageDashboard();
+                        //Content.Children.Add(CurentPage);
+                        //CurentTab = BTNDashboard;
 
                         //add log
                         SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} ", new BsonDocument { }, false, resultlog => { });
@@ -216,46 +217,33 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         }
 
-        private void SwitchApp(object sender, MouseButtonEventArgs e)
+        private void SwitchToApp(object sender, MouseButtonEventArgs e)
         {
             Notifaction("App service will be added soon", StatusMessage.Ok);
         }
-
-
-        //Statics
-        public static void ChangeStudio(DashboardGame Dashboard)
+        
+        internal void ChangeStudio(BsonDocument DetailStudio, bool? NotifactionChange = null)
         {
-            SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
-              result =>
-              {
-                  if (result.ElementCount <= 0)
-                  {
+            //fill Studio user
+            SettingUser.CurentDetailStudio = DetailStudio;
 
-                      Dashboard.Root.Children.Add(new CreatStudio());
-                  }
-                  else
-                  {
-                      //fill Studio user
-                      SettingUser.CurentDetailStudio = result[0].AsBsonDocument;
+            //Change Textheader dashboard
+            TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
 
-                      //Change Textheader dashboard
-                      Dashboard.TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
+            //add subpageDashbaord to dashbaord
+            CurentPage = new PageDashboard();
 
-                      //add subpageDashbaord to dashbaord
-                      Dashboard.CurentPage = new PageDashboard();
+            Content.Children.Add(CurentPage);
+            CurentTab = BTNDashboard;
 
-                      Dashboard.Content.Children.Add(Dashboard.CurentPage);
-                      Dashboard.CurentTab = Dashboard.BTNDashboard;
-
-                      //add log
-                      SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} ", new BsonDocument { }, false, resultlog => { });
-                  }
-              },
-              () =>
-              {
-              });
+            if (NotifactionChange != null)
+            {
+                Notifaction("Change Studio", StatusMessage.Ok);
+            }
         }
 
+        
+        //Statics
         public static void Notifaction(string Message, StatusMessage Status)
         {
             new Notifaction.Notifaction(Message, Status);
@@ -272,6 +260,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             return await Dialog.Result();
         }
+
 
 
 

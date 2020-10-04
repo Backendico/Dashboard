@@ -141,7 +141,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2">
 
                     <!--Switch APP Game-->
-                    <Border Cursor="Hand" x:Name="SwitchAPP" Margin="10,0" CornerRadius="3" Width="170" Height="25" Background="Gainsboro" MouseDown="SwitchApp" >
+                    <Border Cursor="Hand" x:Name="SwitchAPP" Margin="10,0" CornerRadius="3" Width="170" Height="25" Background="Gainsboro" MouseDown="SwitchToApp" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>

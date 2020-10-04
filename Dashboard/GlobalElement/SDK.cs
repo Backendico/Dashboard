@@ -100,7 +100,8 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result(BsonDocument.Parse(response.Content.ToString()));
+                            var Deserilsedata = BsonDocument.Parse(response.Content);
+                            Result(Deserilsedata);
                         }
                         else
                         {

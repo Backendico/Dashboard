@@ -1,4 +1,5 @@
-﻿using Dashboard.GlobalElement;
+﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
+using Dashboard.GlobalElement;
 using Dashboard.Properties;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                     if (resul)
                     {
                         //login
-                        new Notifaction.Notifaction("Logined", Notifaction.StatusMessage.Ok);
+                        DashboardGame.Notifaction("Logined", Notifaction.StatusMessage.Ok);
                         Settings.Default._id = Token;
                         Settings.Default.Save();
 
@@ -49,14 +50,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                         _parent.Children.Remove(this);
                         (_parent.FindName("PageDashboard") as Grid).Effect = null;
 
-                        InitDashbaord();
-                        
-                        
+                        DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
+
                     }
                     else
                     {
                         DashboardGame.Notifaction("Faild Login", Notifaction.StatusMessage.Error);
-                        
+
                     }
                 });
 
