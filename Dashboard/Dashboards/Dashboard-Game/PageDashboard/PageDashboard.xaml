@@ -23,14 +23,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <!--Players-->
-            <Border CornerRadius="20,20,0,0" BorderBrush="Gray" BorderThickness="2"  Margin="20" Background="WhiteSmoke" Grid.Row="0">
+            <Border  BorderBrush="Gray" BorderThickness="2"  Margin="20" Background="WhiteSmoke" Grid.Row="0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <!--Header-->
-                    <Border CornerRadius="20,20,0,0" BorderThickness="0,0,0,2" BorderBrush="Gray" Background="Gainsboro" >
+                    <Border  BorderThickness="0,0,0,2" BorderBrush="Gray" Background="Gainsboro" >
                         <TextBlock Text="Players" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
                     </Border>
                     <StackPanel Grid.Row="1" >
@@ -64,7 +64,7 @@
             </Border>
 
             <!--Logins-->
-            <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="20,20,0,0" Margin="20" Background="WhiteSmoke" Grid.Row="1">
+            <Border BorderBrush="Gray" BorderThickness="2"  Margin="20" Background="WhiteSmoke" Grid.Row="1">
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -72,7 +72,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <!--Header-->
-                    <Border BorderThickness="0,0,0,2" BorderBrush="Gray" CornerRadius="20,20,0,0" Background="Gainsboro">
+                    <Border BorderThickness="0,0,0,2" BorderBrush="Gray"  Background="Gainsboro">
                         <TextBlock Text="Logins" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
                     </Border>
                     <!--Body-->
@@ -109,37 +109,245 @@
         </Grid>
 
         <!--Collom2-->
-        <Border Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="2" CornerRadius="20,20,0,0"  Margin="20" Grid.Column="1">
-        <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border Background="Gainsboro" BorderBrush="Gray" CornerRadius="20,20,0,0"  BorderThickness="0,0,0,2">
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Text="Counts"/>
-                </Border>
-            
-            <StackPanel Grid.Row="1" Background="WhiteSmoke">
+        <Grid Margin="20" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-               
-                <!--Leaderboards-->
-                <StackPanel  Orientation="Horizontal" Margin="5">
-                    <TextBlock FontWeight="Bold" Text="Leaderboards :"/>
-                    <TextBlock x:Name="TextCount_Leaderboards" Text="XXXX "/>
-                </StackPanel>
+            <!--Leaderboards-->
+            <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                <!--Players-->
-                <StackPanel  Orientation="Horizontal" Margin="5">
-                    <TextBlock FontWeight="Bold" Text="Players :"/>
-                    <TextBlock x:Name="TextCount_Players" Text="XXXX "/>
-                </StackPanel>
+                    <!--Header-->
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" >
+                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Text="Leaderboards"/>
+                    </Border>
+                 <!--RowTable-->
+                    <Border Grid.Row="1" Background="Gainsboro">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,2"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,0,2"/>
 
-            </StackPanel>
+                            <TextBlock Text="Used" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Totally" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <!--value-->
+                    <Border Grid.Row="2" Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+
+                            <TextBlock x:Name="TextCount_Leaderboards" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock x:Name="TextCountTotal_Leaderbords" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!--Players-->
+            <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Header-->
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" >
+                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Text="Players"/>
+                    </Border>
+                    <!--RowTable-->
+                    <Border Grid.Row="1" Background="Gainsboro">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,2"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,0,2"/>
+
+                            <TextBlock Text="Used" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Totally" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <!--value-->
+                    <Border Grid.Row="2" Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+
+                            <TextBlock x:Name="TextCount_Players" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock  x:Name="TextCountTotal_Players" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!--Logs-->
+            <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Header-->
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" >
+                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Text="Logs"/>
+                    </Border>
+                    <!--RowTable-->
+                    <Border Grid.Row="1" Background="Gainsboro">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,2"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,0,2"/>
+
+                            <TextBlock Text="Used" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Totally" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <!--value-->
+                    <Border Grid.Row="2" Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+
+                            <TextBlock Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock x:Name="TextTotalCount_Logs" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!--Studios-->
+            <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Grid.Row="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Header-->
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" >
+                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Text="Studios"/>
+                    </Border>
+                    <!--RowTable-->
+                    <Border Grid.Row="1" Background="Gainsboro">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,2"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,0,2"/>
+
+                            <TextBlock Text="Used" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Totally" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <!--value-->
+                    <Border Grid.Row="2" Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+
+                            <TextBlock Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock x:Name="TextTotalCount_Studio" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!--APIs-->
+            <Border Margin="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Grid.Row="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Header-->
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" >
+                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Text="APIs"/>
+                    </Border>
+                    <!--RowTable-->
+                    <Border Grid.Row="1" Background="Gainsboro">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,2"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,0,2"/>
+
+                            <TextBlock Text="Used" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Totally" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <!--value-->
+                    <Border Grid.Row="2" Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+
+                            <TextBlock Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock x:Name="TextTotalCount_APIs" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
         </Grid>
-            
-        </Border>
-
     </Grid>
 
 </UserControl>

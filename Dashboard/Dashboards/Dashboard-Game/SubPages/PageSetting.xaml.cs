@@ -134,7 +134,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 RechangeNew();
             };
 
-
             BTNRevite.MouseDown += (s, obj) =>
             {
                 NewMonetiz = new BsonDocument
@@ -165,7 +164,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 TextStudiosNewValue.Text = "";
                 TextLogsNewValue.Text = "";
             };
-
 
             BTNPay.MouseDown += async (s, obj) =>
             {
@@ -225,7 +223,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 }
 
             };
-
 
             TextToken.MouseDown += (s, e) =>
             {
