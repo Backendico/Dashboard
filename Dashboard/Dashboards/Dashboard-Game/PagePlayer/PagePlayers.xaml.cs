@@ -1,11 +1,17 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard;
+using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using RestSharp;
+using System;
+using System.CodeDom;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 {
@@ -17,6 +23,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         public PagePlayers()
         {
             InitializeComponent();
+
+            PanelAddPlayer.MouseDown += (e, s) =>
+            {
+                if (s.Source.GetType() == typeof(Grid))
+                {
+                    ShowOffSubpagePlayer();
+                }
+            };
+
+            BTNSearch.MouseDown += (s, e) =>
+            {
+                ShowOpenPanelSearch();
+            };
+
+            PanelSearch.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowOffPanelSearch();
+                }
+            };
+
         }
 
 
@@ -31,14 +59,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(
                 result =>
                 {
-                    PlaceContentUser.Children.Clear();
-                    foreach (var item in result["ListPlayers"].AsBsonArray)
+                    if (result["ListPlayers"].AsBsonArray.Count >= 1)
                     {
-                        PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, Start,Parent as Grid));
+
+                        PlaceContentUser.Children.Clear();
+                        foreach (var item in result["ListPlayers"].AsBsonArray)
+                        {
+                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, Start, Parent as Grid));
+                        }
+                    }
+                    else
+                    {
+                        ShowSubpagePlayer();
                     }
 
                     //init total player
-                    TextTotalPlayer.Text = result["Players"].ToString() + "   total players";
+                    TextTotalPlayer.Text =$"( {result["Players"]} )   total players";
                 },
                 () =>
                 {
@@ -49,15 +85,233 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         }
 
 
-        private void Add(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AddNewPlayer(object sender, MouseButtonEventArgs e)
         {
-            DashboardGame.Dashboard.Root.Children.Add(new CreatNewPlayer(Start));
+            ShowSubpagePlayer();
 
         }
 
-        private void Search(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        //Subpage Add player
+        void ShowSubpagePlayer()
         {
-            DashboardGame.Dashboard.Root.Children.Add(new SearchUser());
+            PanelAddPlayer.Visibility = Visibility.Visible;
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddPlayer.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+
+        }
+
+        public void ShowOffSubpagePlayer()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelAddPlayer.Visibility = Visibility.Collapsed;
+            };
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddPlayer.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        /// <summary>
+        /// creat new user
+        /// </summary>
+        /// <param name="Sender"></param>
+        /// <param name="e"></param>
+        private void ActionAddPlayer(object sender, MouseButtonEventArgs e)
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(TextBoxUsername.Text, TextBoxPassword.Password,
+             () =>
+             {
+                 Start(null, null);
+
+                 ShowOffSubpagePlayer();
+
+                 DashboardGame.Notifaction("Player Added", StatusMessage.Ok);
+
+                 //add log
+                 var Detail = new BsonDocument
+                 {
+                     {"Username",TextBoxUsername.Text },
+                     {"Password",TextBoxPassword.Password },
+                     {"LocalTime",DateTime.Now }
+                 };
+
+                 SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add Player", $"You have added  \" {TextBoxUsername.Text} \" player", Detail, false, result => { });
+             },
+             () =>
+             {
+
+                 DashboardGame.Notifaction("Faild Add", StatusMessage.Error);
+
+             });
+
+        }
+
+        private void CheackUsername(object sender, TextChangedEventArgs e)
+        {
+            var textbox = sender as TextBox;
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(textbox.Text, Result =>
+            {
+                if (Result)
+                {
+
+                    textbox.BorderBrush = new SolidColorBrush(Colors.Tomato);
+                    textbox.Text += new Random().Next();
+                    DashboardGame.Notifaction("Username found ", StatusMessage.Error);
+                }
+                else
+                {
+                    textbox.BorderBrush = new SolidColorBrush(Colors.LightGreen);
+                }
+
+            });
+
+        }
+
+
+        //Subpage search
+        BsonDocument CurentSearchResult;
+
+        void ShowOpenPanelSearch()
+        {
+            PanelSearch.Visibility = Visibility.Visible;
+
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, PanelSearch.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+        void ShowOffPanelSearch()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelSearch_Result.Visibility = Visibility.Collapsed;
+
+                PanelSearch.Visibility = Visibility.Collapsed;
+
+                TextBoxUsername_Search.Text = "";
+                TextBoxEmail_Search.Text = "";
+                TextBoxToken_Search.Text = "";
+            };
+
+            Storyboard.SetTargetName(Anim, PanelSearch.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        void ChangeSearchTexts(BsonDocument Result)
+        {
+            PanelSearch_Result.Visibility = Visibility.Visible;
+
+            DoubleAnimation Anim = new DoubleAnimation(0, 130, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, PanelSearch_Result.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+
+            CurentSearchResult = Result;
+
+            TextUsername_Result.Text = Result["Account"]["Username"].ToString();
+            TextEmail_Result.Text = Result["Account"]["Email"].ToString();
+            TextToken_Result.Text = Result["Account"]["Token"].ToString();
+
+        }
+
+        private void SearchUsername(object sender, MouseButtonEventArgs e)
+        {
+            //cheack leght username
+            if (TextBoxUsername_Search.Text.Length >= 6)
+            {
+                //recive detail
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(TextBoxUsername_Search.Text,
+                    result =>
+                    {
+                        ChangeSearchTexts(result);
+                    },
+                    () =>
+                    {
+                        DashboardGame.Notifaction("Not Found", StatusMessage.Warrning);
+                    });
+
+            }
+            else
+            {
+                DashboardGame.Notifaction("Username Short(More than 6 charecter)", StatusMessage.Error);
+            }
+        }
+
+
+        private void SearchEmail(object sender, MouseButtonEventArgs e)
+        {
+            //cheack email valid
+            try
+            {
+                _ = new System.Net.Mail.MailAddress(TextBoxEmail_Search.Text);
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchEmail(TextBoxEmail_Search.Text,
+                    result =>
+                    {
+                        ChangeSearchTexts(result);
+                    },
+                    () =>
+                    {
+                        DashboardGame.Notifaction("Not Found", StatusMessage.Warrning);
+
+                    });
+            }
+            catch (Exception ex)
+            {
+                DashboardGame.Notifaction(ex.Message, StatusMessage.Error);
+            }
+        }
+
+
+        private void SearchToken(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                _ = ObjectId.Parse(TextBoxToken_Search.Text);
+
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchToken(TextBoxToken_Search.Text,
+                    result =>
+                    {
+                        ChangeSearchTexts(result);
+                    },
+                    () =>
+                    {
+                        DashboardGame.Notifaction("Not Found", StatusMessage.Warrning);
+                    });
+            }
+            catch (Exception ex)
+            {
+                DashboardGame.Notifaction(ex.Message, StatusMessage.Error);
+
+            }
+
+
+        }
+
+        private void OpenEditPlayer(object sender, MouseButtonEventArgs e)
+        {
+            ShowOffPanelSearch();
+
+            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(CurentSearchResult, Start));
         }
 
     }

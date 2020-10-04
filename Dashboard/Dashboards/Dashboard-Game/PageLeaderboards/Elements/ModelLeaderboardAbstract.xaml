@@ -31,7 +31,11 @@
         <TextBlock x:Name="TextReset" VerticalAlignment="Center"  TextAlignment="Center"  Margin="10,0,0,0" Text="Reset" Grid.Column="2"/>
         <TextBlock x:Name="TextSort" VerticalAlignment="Center"  TextAlignment="Center"  Margin="10,0,0,0" Text="Sort " Grid.Column="3"/>
         <TextBlock x:Name="TextPlayers" VerticalAlignment="Center"  TextAlignment="Center" Margin="10,0,0,0" Text="Players" Grid.Column="4"/>
-        <Button ToolTip="Edit leaderboard" Cursor="Hand" Visibility="Collapsed" x:Name="BTNEdit" Background="DeepSkyBlue" FontSize="15" BorderBrush="Transparent" Foreground="White" Content="&#xE70F;" MaxWidth="150" Grid.Column="6" Margin="5" Click="Edit" FontFamily="Segoe MDL2 Assets"/>
+
+        <Border  Width="80" Height="30" Margin="5" Background="Orange"  Grid.Column="6"  ToolTip="Edit leaderboard" Cursor="Hand" Visibility="Collapsed" x:Name="BTNEdit">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" FontSize="15" Foreground="White" Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" />
+        </Border>
+   
     </Grid>
 
 </UserControl>

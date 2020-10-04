@@ -258,10 +258,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\CreatLeaderBoard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\EditLeaderboard\EditLeaderboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -290,10 +286,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\CreatNewPlayer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -307,10 +299,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboardPlayer_New.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\SearchUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,9 +357,6 @@
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\EditLeaderboard\ContentValue.xaml.cs">
       <DependentUpon>ContentValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\CreatLeaderBoard.xaml.cs">
-      <DependentUpon>CreatLeaderBoard.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\EditLeaderboard\EditLeaderboard.xaml.cs">
       <DependentUpon>EditLeaderboard.xaml</DependentUpon>
     </Compile>
@@ -393,9 +378,6 @@
     <Compile Include="Dashboards\Dashboard-Game\PageLogs\PageLogs.xaml.cs">
       <DependentUpon>PageLogs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\CreatNewPlayer.xaml.cs">
-      <DependentUpon>CreatNewPlayer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml.cs">
       <DependentUpon>EditPlayer.xaml</DependentUpon>
     </Compile>
@@ -407,9 +389,6 @@
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboardPlayer_New.xaml.cs">
       <DependentUpon>ModelLeaderboardPlayer_New.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\SearchUser.xaml.cs">
-      <DependentUpon>SearchUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\PagePlayers.xaml.cs">
       <DependentUpon>PagePlayers.xaml</DependentUpon>

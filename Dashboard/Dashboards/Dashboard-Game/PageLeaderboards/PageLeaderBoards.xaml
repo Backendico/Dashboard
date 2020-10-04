@@ -6,86 +6,156 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards"
              mc:Ignorable="d" 
              Loaded="Start"
-             d:DesignHeight="280"
+             d:DesignHeight="422.7"
              d:DesignWidth="800"
              
              >
+    <Grid>
+        <!--MainPage-->
+        <Grid  Width="auto" Height="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--Controllers-->
+            <Grid Background="WhiteSmoke">
+                <StackPanel Orientation="Horizontal">
+                    <!--BTNS-->
+                    <StackPanel Margin="20,6" HorizontalAlignment="Right" Grid.Column="1" Orientation="Horizontal">
 
-    <Grid  Width="auto" Height="auto">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <!--Controllers-->
-        <Grid Background="WhiteSmoke">
-            <StackPanel Orientation="Horizontal">
-                <!--BTNS-->
-                <StackPanel Margin="10,6" HorizontalAlignment="Right" Grid.Column="1" Orientation="Horizontal">
-
-                    <Border Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="CreatLeaderboard">
-                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="ShowSubpageAddLeaderboard">
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Run  Foreground="White"  Text="&#xE948;   " FontFamily="Segoe MDL2 Assets"/>
                             <Run Foreground="White"  Text="Add"/>
-                        </TextBlock>
-                    </Border>
-
-                </StackPanel>
-
-            </StackPanel>
-        </Grid>
-
-        <!--Content-->
-        <Border Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="DarkGray" Grid.Row="1" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <!--Header-->
-                <Border  Grid.Row="0"   Background="Transparent">
-                    <Grid Background="Gainsboro"  Grid.Row="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="18"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Border BorderThickness="0,0,2,2" BorderBrush="DarkGray" Grid.Column="0"/>
-                            <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="1"/>
-                            <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="2"/>
-                            <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="3"/>
-                            <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="4"/>
-                            <Border BorderThickness="0,0,0,2"  BorderBrush="DarkGray" Grid.Column="5"/>
-                            <Border BorderThickness="0,0,0,2"  BorderBrush="DarkGray" Grid.Column="6"/>
-
-                            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Name" Grid.Column="0"/>
-                            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Token" Grid.Column="1"/>
-                            <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Reset" Grid.Column="2"/>
-                            <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Sort" Grid.Column="3"/>
-                            <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Player" Grid.Column="4"/>
-
-                        </Grid>
-
-                    </Grid>
-                </Border>
-
-                <!--Content-->
-                <ScrollViewer Grid.Row="1" >
-                    <StackPanel x:Name="PlaceLeaderboard">
-
+                            </TextBlock>
+                        </Border>
 
                     </StackPanel>
-                </ScrollViewer>
+
+                </StackPanel>
             </Grid>
 
+            <!--Content-->
+            <Border Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="DarkGray" Grid.Row="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-        </Border>
+                    <!--Header-->
+                    <Border  Grid.Row="0"   Background="Transparent">
+                        <Grid Background="Gainsboro"  Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="18"/>
+                                </Grid.ColumnDefinitions>
 
+                                <Border BorderThickness="0,0,2,2" BorderBrush="DarkGray" Grid.Column="0"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="1"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="2"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="3"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Grid.Column="4"/>
+                                <Border BorderThickness="0,0,0,2"  BorderBrush="DarkGray" Grid.Column="5"/>
+                                <Border BorderThickness="0,0,0,2"  BorderBrush="DarkGray" Grid.Column="6"/>
+
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Name" Grid.Column="0"/>
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Token" Grid.Column="1"/>
+                                <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Reset" Grid.Column="2"/>
+                                <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Sort" Grid.Column="3"/>
+                                <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Player" Grid.Column="4"/>
+
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+
+                    <!--Content-->
+                    <ScrollViewer Grid.Row="1" >
+                        <StackPanel x:Name="PlaceLeaderboard">
+
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+
+            </Border>
+
+        </Grid>
+
+        <!--Subpage-->
+        <!--SubPage Add-->
+        <Grid  x:Name="PanelAddLeaderboard"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+            <Grid.Effect>
+                <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+            </Grid.Effect>
+
+
+            <!--Header-->
+            <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="60,45,0,0"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+
+            <!--Body-->
+            <Border  Margin="10,58,0,0"  CornerRadius="10" Width="300" Height="260" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+
+                <Grid Margin="20">
+                    <StackPanel>
+
+                        <!--leaderboard name-->
+                        <StackPanel Margin="0,5">
+                            <TextBlock Text="Leaderboard name(More than 6 Charecter) *"/>
+                            <TextBlock Margin="0,5" Text="*Name cannot be changed" Foreground="Tomato"/>
+                            <TextBox x:Name="TextNameLeaderboard" Height="30" TextChanged="CheackNameLeaderboard"/>
+                        </StackPanel>
+
+                        <!--reset -->
+                        <StackPanel Margin="0,5">
+                            <TextBlock Text="Reset"/>
+                            <ComboBox x:Name="ComboboxReset" >
+                                <ComboBoxItem IsSelected="True" Content="Manually"/>
+                                <ComboBoxItem Content="Hourly"/>
+                                <ComboBoxItem Content="Daily"/>
+                                <ComboBoxItem Content="Weekly"/>
+                                <ComboBoxItem Content="Monthly"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!--reset -->
+                        <StackPanel Margin="0,5">
+                            <TextBlock Text="Sort"/>
+                            <ComboBox x:Name="ComboboxSort" >
+                                <ComboBoxItem IsSelected="True" Content="Last(always update with th new value)"/>
+                                <ComboBoxItem Content="Minimum(always use the lowest value)"/>
+                                <ComboBoxItem Content="Maximum(always use the highest value)"/>
+                                <ComboBoxItem Content="Sum(add this value to the existing value)"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <Border  MouseDown="AddLeaderBoard" Cursor="Hand" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10" Height="30" Width="80">
+                            <TextBlock Text="Add" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+
+
+        </Grid>
     </Grid>
 </UserControl>

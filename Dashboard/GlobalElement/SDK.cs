@@ -205,7 +205,7 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("NameStudio", SettingUser.CurentDetailStudio["Database"]);
-                        IRestResponse response = client.Execute(request);
+                        var response =await client.ExecuteAsync(request);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -213,6 +213,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
+
                             ERR();
                         }
 
@@ -524,6 +525,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
+                            Result(BsonDocument.Parse(response.Content));
                             ERR();
                         }
 

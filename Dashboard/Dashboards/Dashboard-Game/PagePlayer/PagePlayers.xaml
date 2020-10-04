@@ -9,61 +9,61 @@
       Loaded="Start" d:DesignHeight="400"
      >
 
-    <Grid Width="auto" Height="auto">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <Grid>
+        <Grid Width="auto" Height="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <!--Header-->
-        <Grid Background="WhiteSmoke" Grid.Row="0">
-            <!--BTNs-->
-            <StackPanel Margin="10,0" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1">
+            <!--Header-->
+            <Grid Background="WhiteSmoke" Grid.Row="0">
+                <!--BTNs-->
+                <StackPanel Margin="10,0" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1">
 
-                <!--search-->
-                <Border Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Search">
-                    <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--search-->
+                    <Border x:Name="BTNSearch" Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Run  Foreground="White"  Text="&#xE721;   " FontFamily="Segoe MDL2 Assets"/>
                             <Run Foreground="White"  Text="Search"/>
-                    </TextBlock>
-                </Border>
+                        </TextBlock>
+                    </Border>
 
-                <!--Add-->
-                <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Add">
-                    <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--Add-->
+                    <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="AddNewPlayer">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Run  Foreground="White"  Text="&#xE8FA;   " FontFamily="Segoe MDL2 Assets"/>
                             <Run Foreground="White"  Text="Add"/>
-                    </TextBlock>
-                </Border>
+                        </TextBlock>
+                    </Border>
 
-            </StackPanel>
+                </StackPanel>
+            </Grid>
 
-        </Grid>
+            <!--Query Recive-->
+            <Border Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="Gray" Grid.Row="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-        <!--Query Recive-->
-        <Border Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="Gray" Grid.Row="1" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                
-                <!--Header-->
-                <Border Grid.Row="0"  BorderThickness="0,0,0,2" BorderBrush="Gray"  Background="WhiteSmoke">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <!--Header-->
+                    <Border Grid.Row="0"  BorderThickness="0,0,0,2" BorderBrush="Gray"  Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock  VerticalAlignment="Center" Margin="10,0" x:Name="TextTotalPlayer" Text="Recive . . ." FontSize="15" Grid.Row="1"/>
+                            <TextBlock  VerticalAlignment="Center" Margin="10,0" x:Name="TextTotalPlayer" Text="Recive . . ." FontSize="15" Grid.Row="1"/>
 
-                    </Grid>
+                        </Grid>
 
-                </Border>
-                
-                <!--Row-->
+                    </Border>
+
+                    <!--Row-->
                     <Grid   Background="Gainsboro" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -95,17 +95,182 @@
                         <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="VTD" Grid.Column="5"/>
                         <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="" Grid.Column="6"/>
                     </Grid>
-               
-                
-                <!--Body-->
+
+
+                    <!--Body-->
                     <ScrollViewer  Grid.Row="2"  >
                         <StackPanel x:Name="PlaceContentUser"/>
                     </ScrollViewer>
-                
-            </Grid>
-       
-        </Border>
 
+                </Grid>
+
+            </Border>
+
+
+        </Grid>
+        <!--SubPage-->
+        <!--SubPage Add-->
+        <Grid  x:Name="PanelAddPlayer"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+            <Grid.Effect>
+                <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+            </Grid.Effect>
+
+
+            <!--Header-->
+            <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="160,45,0,0"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+
+            <!--Body-->
+            <Border  Margin="120,58,0,0"  CornerRadius="10" Width="300" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+
+                <Grid>
+
+                    <!--Body-->
+                    <StackPanel Grid.Row="0" Margin="10">
+                        <!--Username-->
+                        <StackPanel  Margin="0,10" >
+                            <TextBlock Text="Username :"/>
+                            <TextBox  x:Name="TextBoxUsername" Height="30" TextChanged="CheackUsername"/>
+                        </StackPanel>
+
+                        <!--Password-->
+                        <StackPanel   Margin="0,10" >
+                            <TextBlock Text="Password :"/>
+                            <PasswordBox x:Name="TextBoxPassword" Height="30"/>
+                        </StackPanel>
+
+                        <!--Footer-->
+                        <Border Margin="0,10"  Cursor="Hand"  HorizontalAlignment="Right" Height="30" Width="80" CornerRadius="5"  Background="DarkOrange"  Grid.Row="2"  MouseDown="ActionAddPlayer">
+                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White"   Text="Add" />
+                        </Border>
+
+                    </StackPanel>
+
+
+
+                </Grid>
+
+            </Border>
+
+
+        </Grid>
+
+        <!--SubPage Search-->
+        <Grid  x:Name="PanelSearch"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+            <Grid.Effect>
+                <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+            </Grid.Effect>
+
+
+            <!--Header-->
+            <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="60,45,0,0"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+
+            <!--Body-->
+            <Border  Margin="20,58,0,0"  CornerRadius="10" Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel >
+                        <!--Username Search-->
+                        <Grid  Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="10,0" Text=" Username :"/>
+                            <TextBox  x:Name="TextBoxUsername_Search" Margin="10,0"  Grid.Column="1"/>
+                            <Border Cursor="Hand" MouseDown="SearchUsername" CornerRadius="5" Width="80" Height="30" Background="Orange" Grid.Column="2">
+                                <TextBlock Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="&#xE721;" FontFamily="Segoe MDL2 Assets"/>
+                            </Border>
+                        </Grid>
+
+                        <!--Email -->
+                        <Grid  Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="10,0" Text=" Email :"/>
+                            <TextBox x:Name="TextBoxEmail_Search" Margin="10,0"  Grid.Column="1"/>
+
+                            <Border Cursor="Hand" MouseDown="SearchEmail" CornerRadius="5" Width="80" Height="30" Background="Orange" Grid.Column="2">
+                                <TextBlock Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="&#xE721;" FontFamily="Segoe MDL2 Assets"/>
+                            </Border>
+                        </Grid>
+
+                        <!--Email Token-->
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="10,0" Text=" Token :"/>
+                            <TextBox x:Name="TextBoxToken_Search"  Margin="10,0"  Grid.Column="1"/>
+
+                            <Border Cursor="Hand" MouseDown="SearchToken" CornerRadius="5" Width="80" Height="30" Background="Orange" Grid.Column="2">
+                                <TextBlock Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="&#xE721;" FontFamily="Segoe MDL2 Assets"/>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+
+                    <Border  x:Name="PanelSearch_Result" Height="0"  CornerRadius="5" Margin="10"  Grid.Row="1" Background="White" BorderBrush="Gray" BorderThickness="1">
+                        <StackPanel Margin="10">
+                            <!--Username-->
+                            <TextBlock Margin="0,5" >
+                                <Run FontWeight="Bold" Text="Usename :"/>
+                                <Run x:Name="TextUsername_Result" Text="XXX"/>
+                            </TextBlock>
+
+                            <!--Email-->
+                            <TextBlock Margin="0,5" >
+                                <Run FontWeight="Bold" Text="Email :"/>
+                                <Run x:Name="TextEmail_Result" Text="XXX"/>
+                            </TextBlock>
+
+                            <!--Token-->
+                            <TextBlock Margin="0,5" >
+                                <Run FontWeight="Bold" Text="Token :"/>
+                                <Run x:Name="TextToken_Result" Text="XXX"/>
+                            </TextBlock>
+
+                            <Border Cursor="Hand" MouseDown="OpenEditPlayer" CornerRadius="5" Width="80" Height="30" Background="Orange" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Edit"/>
+                            </Border>
+
+                        </StackPanel>
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+
+        </Grid>
 
     </Grid>
+
 </UserControl>

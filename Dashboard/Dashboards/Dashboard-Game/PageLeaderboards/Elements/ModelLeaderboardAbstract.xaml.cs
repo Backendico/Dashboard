@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -31,7 +22,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextName.Text = Detail["Name"].AsString;
             TextToken.Text = Detail["Token"].AsObjectId.ToString();
             TextPlayers.Text = Detail["Count"].ToString();
-            //TextHistory.Text = Detail["Setting"]["History"].ToString();
 
             switch (Detail["Reset"].AsInt32)
             {
@@ -93,13 +83,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     break;
             }
 
+            BTNEdit.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new EditLeaderboard(Detail, Refreshlist));
+            };
         }
 
         private void PointerEnter(object sender, MouseEventArgs e)
         {
             Background = new SolidColorBrush(Colors.Gainsboro);
             BTNEdit.Visibility = Visibility.Visible;
-
         }
         private void PointerExit(object sender, MouseEventArgs e)
         {
@@ -114,10 +107,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             MessageBox.Show("Token Leadeboard Copyed !");
         }
 
-        private void Edit(object sender, RoutedEventArgs e)
-        {
-            DashboardGame.Dashboard.Root.Children.Add(new EditLeaderboard(Detail, Refreshlist));
-        }
+
 
         Action<object, RoutedEventArgs> Refreshlist;
     }
