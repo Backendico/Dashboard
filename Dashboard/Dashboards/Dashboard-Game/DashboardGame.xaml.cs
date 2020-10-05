@@ -63,7 +63,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 PageDashboard.Effect = Blur;
                 while (Blur.Radius < 10)
                 {
-                    Blur.Radius += 0.1d;
+                    Blur.Radius += 0.5d;
                     await Task.Delay(4);
 
                     if (Blur.Radius >= 10)
@@ -74,7 +74,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
             {
                 while (Blur.Radius > 0)
                 {
-                    Blur.Radius -= 0.1d;
+                    Blur.Radius -= 0.5d;
                     await Task.Delay(4);
 
                     if (Blur.Radius <= 0)

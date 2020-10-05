@@ -190,9 +190,6 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PageStudios\CreatStudio.xaml.cs">
-      <DependentUpon>CreatStudio.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\SubPages\Elements\ModelPayment.xaml.cs">
       <DependentUpon>ModelPayment.xaml</DependentUpon>
     </Compile>
@@ -250,10 +247,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\AddPlayer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\EditLeaderboard\ContentValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,10 +299,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PageStudios\CreatStudio.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dashboards\Dashboard-Game\SubPages\Elements\ModelPayment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,9 +339,6 @@
   <ItemGroup>
     <Compile Include="Dashboards\Dashboard-Game\PageDashboard\PageDashboard.xaml.cs">
       <DependentUpon>PageDashboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\AddPlayer.xaml.cs">
-      <DependentUpon>AddPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\EditLeaderboard\ContentValue.xaml.cs">
       <DependentUpon>ContentValue.xaml</DependentUpon>

@@ -27,26 +27,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             this.RefreshList = RefreshList;
         }
 
-        private void Remove(object Sender, RoutedEventArgs e)
+        private async void Remove(object Sender, RoutedEventArgs e)
         {
 
-            if (MessageBox.Show("The value for the user is deleted \n Are you sure?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (await DashboardGame.DialogYesNo("The value for the user is deleted \n Are you sure?")==MessageBoxResult.Yes)
             {
                 SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Remove(DetailValue["Token"].ToString(), DetailValue["NameLeaderboard"].ToString(),
                     () =>
                     {
-                        MessageBox.Show("Deleted !");
+                        DashboardGame.Notifaction("Deleted", Notifaction.StatusMessage.Ok);
                         RefreshList();
                     },
                     () =>
                     {
-                        MessageBox.Show("Faild Delete :(");
+                        DashboardGame.Notifaction("Faild Delete",Notifaction.StatusMessage.Error);
                     });
+            }
+            else
+            {
+                DashboardGame.Notifaction("Delete reject", Notifaction.StatusMessage.Error);
             }
         }
 
 
-        Action RefreshList;
 
         private void PointerEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -57,5 +60,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         {
             Background = new SolidColorBrush(Colors.WhiteSmoke);
         }
+
+        Action RefreshList;
+
     }
 }

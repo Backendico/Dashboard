@@ -11,12 +11,12 @@
         <Border.Effect>
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
         </Border.Effect>
-    <Grid >
-        <Grid.RowDefinitions>
+        <Grid >
+            <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
             <!--Header-->
             <Border CornerRadius="5,5,0,0" Background="Black" >
@@ -36,236 +36,293 @@
 
 
             <!--Header-->
-        <Grid Margin="5,0" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
+            <Grid Margin="5,0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
 
-            <!--Header-->
-            <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="0"/>
-            <TextBlock Margin="10,0" x:Name="TextLeaderboardName" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Name Leaderboard/ID" Grid.Column="0"/>
+                <!--Header-->
+                <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="0"/>
+                <TextBlock Margin="10,0" x:Name="TextLeaderboardName" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Name Leaderboard/ID" Grid.Column="0"/>
 
-            <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
-                <Button Cursor="Hand" x:Name="BTNSetting"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Setting" Click="ChangePage" />
-                <Button Cursor="Hand" x:Name="BTNLeaderboard"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Leaderboard" Click="ChangePage" />
-                <Button Cursor="Hand" x:Name="BTNHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Backups" Click="ChangePage" />
-            </StackPanel>
-
-        </Grid>
-        <Border  Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,0,0,1"/>
-
-
-        <!--Bodys-->
-
-        <!--Setting -->
-        <StackPanel x:Name="ContentSetting" Visibility="Collapsed" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
-
-
-            <!--Token-->
-            <StackPanel Margin="0,10" Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" Text="Token: "/>
-                <TextBlock Cursor="Hand" x:Name="TextToken" Text="TokenLeaderboard" MouseDown="CopyToken"/>
-            </StackPanel>
-
-            <!--Name-->
-            <StackPanel Margin="0,10" Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" Text="Start at: "/>
-                <TextBlock x:Name="TextStart" Text="Startat"/>
-            </StackPanel>
-
-            <!--Name-->
-            <StackPanel Margin="0,10" Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" Text="Name: "/>
-                <TextBlock x:Name="TextName_Setting" Text="Name_Leaderboard"/>
-            </StackPanel>
-
-            <!--reset -->
-            <StackPanel Margin="0,10">
-                <TextBlock FontWeight="Bold" Text="Reset"/>
-                <ComboBox   x:Name="ComboboxReset"  >
-                    <ComboBoxItem  IsSelected="True" Content="Manually"/>
-                    <ComboBoxItem   Content="Hourly" />
-                    <ComboBoxItem  Content="Daily"/>
-                    <ComboBoxItem  Content="Weekly"/>
-                    <ComboBoxItem  Content="Monthly"/>
-                </ComboBox>
-            </StackPanel>
-
-            <!--reset -->
-            <StackPanel Margin="0,10" >
-                <TextBlock FontWeight="Bold" Text="Sort"/>
-                <ComboBox x:Name="ComboboxSort" >
-                    <ComboBoxItem IsSelected="True" Content="Last(always update with th new value)"/>
-                    <ComboBoxItem Content="Minimum(always use the lowest value)"/>
-                    <ComboBoxItem Content="Maximum(always use the highest value)"/>
-                    <ComboBoxItem Content="Sum(add this value to the existing value)"/>
-                </ComboBox>
-            </StackPanel>
-
-            <!--BTNSave-->
-            <Button Cursor="Hand" Background="DarkOrange" Foreground="White" BorderBrush="Transparent" Margin="0,10" Height="30" Content="Save" Click="Save"/>
-
-
-        </StackPanel>
-
-        <!--Leaderboard-->
-        <Grid x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Visible"  Grid.Row="2" >
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Margin="0,0,0,10" Orientation="Horizontal" Background="WhiteSmoke">
-                    <!--Add player-->
-                    <Border  MouseDown="AddPlayer" Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
-                            <TextBlock TextAlignment="Center" Text="&#xE8FA;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
-                        </StackPanel>
-                    </Border>
-
-                    <!--Reset List-->
-                    <Border MouseDown="Reset" Cursor="Hand" ToolTip="Reload List" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
-                        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
-                            <TextBlock  TextAlignment="Center" Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
-                        </StackPanel>
-                    </Border>
-
-                    <!--Save List-->
-                    <Border  MouseDown="Backup" Cursor="Hand" ToolTip="Save leaderboard to (Backups)"  Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
-                        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
-                            <TextBlock  TextAlignment="Center" Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
-                        </StackPanel>
-                    </Border>
-
-                    <!--Save List-->
-                    <StackPanel MouseDown="SeeMore" VerticalAlignment="Center"  Cursor="Hand" ToolTip="See More"  Margin="10,0"   >
-                        <StackPanel Orientation="Horizontal">
-                            <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
-                                <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
-                            </Border>
-                            <Border Margin="2,0" CornerRadius="0,5,5,0" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Background="Gainsboro" >
-                                <TextBlock x:Name="TextSeeMore" Margin="10,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="100"  />
-                            </Border>
-
-                        </StackPanel>
-                    </StackPanel>
-
+                <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
+                    <Button Cursor="Hand" x:Name="BTNSetting"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Setting" Click="ChangePage" />
+                    <Button Cursor="Hand" x:Name="BTNLeaderboard"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Leaderboard" Click="ChangePage" />
+                    <Button Cursor="Hand" x:Name="BTNHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Backups" Click="ChangePage" />
                 </StackPanel>
-            
-            <!--ListPlayer-->
-            <Border BorderBrush="Gray" BorderThickness="2" Margin="20"  Grid.Row="1">
+
+            </Grid>
+            <Border  Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,0,0,1"/>
+
+
+            <!--Bodys-->
+
+            <!--Setting -->
+            <StackPanel x:Name="ContentSetting" Visibility="Collapsed" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
+
+
+                <!--Token-->
+                <StackPanel Margin="0,10" Orientation="Horizontal">
+                    <TextBlock FontWeight="Bold" Text="Token: "/>
+                    <TextBlock Cursor="Hand" x:Name="TextToken" Text="TokenLeaderboard" MouseDown="CopyToken"/>
+                </StackPanel>
+
+                <!--Name-->
+                <StackPanel Margin="0,10" Orientation="Horizontal">
+                    <TextBlock FontWeight="Bold" Text="Start at: "/>
+                    <TextBlock x:Name="TextStart" Text="Startat"/>
+                </StackPanel>
+
+                <!--Name-->
+                <StackPanel Margin="0,10" Orientation="Horizontal">
+                    <TextBlock FontWeight="Bold" Text="Name: "/>
+                    <TextBlock x:Name="TextName_Setting" Text="Name_Leaderboard"/>
+                </StackPanel>
+
+                <!--reset -->
+                <StackPanel Margin="0,10">
+                    <TextBlock FontWeight="Bold" Text="Reset"/>
+                    <ComboBox   x:Name="ComboboxReset"  >
+                        <ComboBoxItem  IsSelected="True" Content="Manually"/>
+                        <ComboBoxItem   Content="Hourly" />
+                        <ComboBoxItem  Content="Daily"/>
+                        <ComboBoxItem  Content="Weekly"/>
+                        <ComboBoxItem  Content="Monthly"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--reset -->
+                <StackPanel Margin="0,10" >
+                    <TextBlock FontWeight="Bold" Text="Sort"/>
+                    <ComboBox x:Name="ComboboxSort" >
+                        <ComboBoxItem IsSelected="True" Content="Last(always update with th new value)"/>
+                        <ComboBoxItem Content="Minimum(always use the lowest value)"/>
+                        <ComboBoxItem Content="Maximum(always use the highest value)"/>
+                        <ComboBoxItem Content="Sum(add this value to the existing value)"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--BTNSave-->
+                <Border CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" MouseDown="Save"  Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="DarkOrange" >
+                    <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
+                </Border>
+
+
+            </StackPanel>
+
+            <!--Leaderboard-->
+            <Grid  x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Visible"  Grid.Row="2" >
                 <Grid>
-                    <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                     
 
-                        <!-- Head row-->
-                        <Grid Background="Gainsboro" Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="18"/>
-                            </Grid.ColumnDefinitions>
-                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
-                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1" />
-                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2" />
-                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="3" />
-                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="4" />
-
-                            <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
-                            <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
-                            <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
-                        </Grid>
-
-                        <!--Content-->
-                        <ScrollViewer Grid.Row="1" Name="ContentPlaceLeaderboard"/>
-
-
-                    </Grid>
-
-
-                </Grid>
-            </Border>
-        </Grid>
-
-
-        <!--History-->
-        <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" IsVisibleChanged="VisibilityChange">
-            <Border  CornerRadius="10,10,0,0" BorderBrush="Gray"  BorderThickness="2"   >
-                <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <!-- header -->
-                        <Border Background="WhiteSmoke"  CornerRadius="10,10,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Margin="10,0" FontSize="15" FontWeight="Bold" Text="History" VerticalAlignment="Center" Grid.Column="0"/>
-                            </Grid>
+                    <StackPanel Margin="0,0,0,10" Orientation="Horizontal" Background="WhiteSmoke">
+                        <!--Add player-->
+                        <Border  MouseDown="ShowPanelAddPlayer" Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
+                                <TextBlock TextAlignment="Center" Text="&#xE8FA;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                            </StackPanel>
                         </Border>
 
-                        <!-- Head row-->
-                        <Grid Background="Gainsboro" Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="17"/>
-                            </Grid.ColumnDefinitions>
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="0"/>
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="1"/>
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="2" />
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="3" />
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="4" />
-                            <Border BorderBrush="Gray" BorderThickness="0,2,0,2" Grid.Column="5" />
+                        <!--Reset List-->
+                        <Border MouseDown="Reset" Cursor="Hand" ToolTip="Reload List" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
+                                <TextBlock  TextAlignment="Center" Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                            </StackPanel>
+                        </Border>
 
-                            <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Version" Grid.Column="1"/>
-                            <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Start" Grid.Column="2"/>
-                            <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="End" Grid.Column="3"/>
+                        <!--Save List-->
+                        <Border  MouseDown="Backup" Cursor="Hand" ToolTip="Save leaderboard to (Backups)"  Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
+                                <TextBlock  TextAlignment="Center" Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                            </StackPanel>
+                        </Border>
+
+                        <!--Save List-->
+                        <StackPanel MouseDown="SeeMore" VerticalAlignment="Center"  Cursor="Hand" ToolTip="See More"  Margin="10,0"   >
+                            <StackPanel Orientation="Horizontal">
+                                <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
+                                    <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
+                                </Border>
+                                <Border Margin="2,0" CornerRadius="0,5,5,0" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Background="Gainsboro" >
+                                    <TextBlock x:Name="TextSeeMore" Margin="10,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="100"  />
+                                </Border>
+
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!--ListPlayer-->
+                    <Border BorderBrush="Gray" BorderThickness="2" Margin="20"  Grid.Row="1">
+                        <Grid>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+
+                                <!-- Head row-->
+                                <Grid Background="Gainsboro" Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="18"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1" />
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2" />
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="3" />
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="4" />
+
+                                    <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
+                                </Grid>
+
+                                <!--Content-->
+                                <ScrollViewer Grid.Row="1" Name="ContentPlaceLeaderboard"/>
+
+
+                            </Grid>
+
+
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!--SubPages-->
+                <!--SubPageAdd-->
+                <Grid  x:Name="PanelAddPlayer"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+                    <Grid.Effect>
+                        <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+                    </Grid.Effect>
+                    <!--Header-->
+                    <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="25,40,0,0"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="45"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <!--Body-->
+                    <Border  Margin="5,51,0,0"  CornerRadius="10" Width="200"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+
+                        <StackPanel Margin="10" Grid.Row="1">
+
+                            <!--Username-->
+                            <StackPanel Margin="0,5">
+                                <TextBlock Text="Token Player :"/>
+                                <TextBox x:Name="TextboxTokenPlayer"/>
+                            </StackPanel>
+
+
+                            <!--Value-->
+                            <StackPanel Margin="0,5">
+                                <TextBlock Text="Value : "/>
+                                <TextBox x:Name="TextboxValue"/>
+                            </StackPanel>
+
+                            <!--BTNAdd-->
+                            <StackPanel Margin="0,5">
+                                <TextBlock Text="*If the user is available, a new value will be replaced" TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Center"   />
+                            </StackPanel>
+
+                            <Border MouseDown="AddPlayer" Cursor="Hand" Margin="0,10" CornerRadius="5" Background="Orange" Height="30" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <TextBlock Text="Add" Foreground="White" VerticalAlignment="Center" TextAlignment="Center"/>
+
+                            </Border>
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+
+            </Grid>
+
+
+            <!--History-->
+            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" IsVisibleChanged="VisibilityChange">
+                <Border  CornerRadius="10,10,0,0" BorderBrush="Gray"  BorderThickness="2"   >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <!-- header -->
+                            <Border Background="WhiteSmoke"  CornerRadius="10,10,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Margin="10,0" FontSize="15" FontWeight="Bold" Text="History" VerticalAlignment="Center" Grid.Column="0"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Head row-->
+                            <Grid Background="Gainsboro" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="17"/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="0"/>
+                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="1"/>
+                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="2" />
+                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="3" />
+                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="4" />
+                                <Border BorderBrush="Gray" BorderThickness="0,2,0,2" Grid.Column="5" />
+
+                                <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Version" Grid.Column="1"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Start" Grid.Column="2"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="End" Grid.Column="3"/>
+
+                            </Grid>
+
+                            <!--Content-->
+                            <ScrollViewer Grid.Row="2">
+                                <StackPanel   x:Name="PlaceContentBackups">
+
+
+                                </StackPanel>
+
+                            </ScrollViewer>
 
                         </Grid>
 
-                        <!--Content-->
-                        <ScrollViewer Grid.Row="2">
-                            <StackPanel   x:Name="PlaceContentBackups">
-                           
-                                
-                            </StackPanel>
-
-                        </ScrollViewer>
-
                     </Grid>
+                </Border>
 
-                </Grid>
-            </Border>
+            </Grid>
+
 
         </Grid>
 
-
-    </Grid>
-        
     </Border>
 
 
-    
+
 </UserControl>

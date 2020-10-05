@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements"
              mc:Ignorable="d" 
-             Height="40"
+             Height="50"
              BorderBrush="Gainsboro"
              Background="WhiteSmoke"
              BorderThickness="0,0,0,1"
@@ -32,7 +32,7 @@
         <TextBlock x:Name="TextSort" VerticalAlignment="Center"  TextAlignment="Center"  Margin="10,0,0,0" Text="Sort " Grid.Column="3"/>
         <TextBlock x:Name="TextPlayers" VerticalAlignment="Center"  TextAlignment="Center" Margin="10,0,0,0" Text="Players" Grid.Column="4"/>
 
-        <Border  Width="80" Height="30" Margin="5" Background="Orange"  Grid.Column="6"  ToolTip="Edit leaderboard" Cursor="Hand" Visibility="Collapsed" x:Name="BTNEdit">
+        <Border CornerRadius="5"  Width="80" Height="30" Margin="5" Background="Orange"  Grid.Column="6"  ToolTip="Edit leaderboard" Cursor="Hand" Visibility="Collapsed" x:Name="BTNEdit">
             <TextBlock VerticalAlignment="Center" TextAlignment="Center" FontSize="15" Foreground="White" Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" />
         </Border>
    

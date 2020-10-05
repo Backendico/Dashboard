@@ -11,12 +11,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     /// </summary>
     public partial class ModelLeaderboardAbstract : UserControl
     {
-        MongoDB.Bson.BsonDocument Detail;
 
         public ModelLeaderboardAbstract(MongoDB.Bson.BsonDocument Detail, Action<object, RoutedEventArgs> Refreshlist)
         {
             InitializeComponent();
-            this.Detail = Detail;
             this.Refreshlist = Refreshlist;
 
             TextName.Text = Detail["Name"].AsString;
@@ -104,7 +102,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         {
             Clipboard.SetText((sender as TextBlock).Text);
 
-            MessageBox.Show("Token Leadeboard Copyed !");
+            DashboardGame.Notifaction("Token Copyed !", Notifaction.StatusMessage.Ok);
         }
 
 

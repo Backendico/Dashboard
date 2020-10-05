@@ -8,7 +8,7 @@
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
              Background="WhiteSmoke"
-             Height="40" d:DesignWidth="1150"
+             Height="50" d:DesignWidth="1150"
              >
     <Border BorderBrush="Gainsboro" BorderThickness="0,0,0,1">
 
@@ -36,7 +36,10 @@
             <TextBlock TextAlignment="Center" x:Name="TextCreated" VerticalAlignment="Center" Text="Created" Grid.Column="3"/>
             <TextBlock TextAlignment="Center" x:Name="TextCountry" VerticalAlignment="Center" Text="Country" Grid.Column="4"/>
             <TextBlock TextAlignment="Center"  x:Name="TextUTD" VerticalAlignment="Center" Text="VTD" Grid.Column="5"/>
-            <Button ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit" Click="OpenEdit" MaxWidth="150" Visibility="Collapsed" Margin="5" BorderBrush="Transparent" Background="DarkOrange" Foreground="White" Content="&#xE70F;" FontSize="15" Grid.Column="6" FontFamily="Segoe MDL2 Assets"/>
+
+            <Border MouseDown="OpenEdit" CornerRadius="5" Background="DarkOrange" Grid.Column="6" Width="80" Height="30" Visibility="Collapsed" ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit">
+                <TextBlock FontSize="15" VerticalAlignment="Center"  TextAlignment="Center" Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xE70F;"/>
+            </Border>
         </Grid>
     </Border>
 </UserControl>

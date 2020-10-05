@@ -67,16 +67,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        private void OpenEdit(object sender, RoutedEventArgs e)
+        private void OpenEdit(object sender, MouseButtonEventArgs e)
         {
-            _Parent.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));
+           DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));
 
         }
 
         private void CopyToken(object sender, MouseButtonEventArgs e)
         {
             Clipboard.SetText(TextToken.Text);
-            MessageBox.Show("Token Copied !");
+            DashboardGame.Notifaction("Token Copied !",Notifaction.StatusMessage.Ok);
 
         }
 

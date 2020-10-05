@@ -86,7 +86,7 @@
             </Grid>
 
             <!--Subpages-->
-            <Grid x:Name="PanelAddStudio"  Visibility="Visible" Background="#33000000" Opacity="1" >
+            <Grid x:Name="PanelAddStudio"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
 
                 <Grid.Effect>
                     <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>

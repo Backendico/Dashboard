@@ -8,6 +8,8 @@ using System.Windows.Media;
 using MongoDB.Bson;
 using System;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -33,6 +35,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
             ComboboxReset.SelectedIndex = Detail["Reset"].AsInt32;
             ComboboxSort.SelectedIndex = Detail["Sort"].AsInt32;
+
+            PanelAddPlayer.MouseDown += (s, e) =>
+            {
+
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowoffPaneladdPlayer(null, null);
+                }
+            };
 
         }
 
@@ -94,7 +105,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
 
         //page1 
-        private void Save(object sender, RoutedEventArgs e)
+        private void Save(object sender, MouseButtonEventArgs e)
         {
             Detail["Reset"] = ComboboxReset.SelectedIndex;
             Detail["Sort"] = ComboboxSort.SelectedIndex;
@@ -120,10 +131,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
              });
 
         }
-        private void CopyToken(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CopyToken(object sender, MouseButtonEventArgs e)
         {
             Clipboard.SetText((sender as TextBlock).Text);
-            MessageBox.Show("Token Copied !");
+            DashboardGame.Notifaction("Token Copied !", Notifaction.StatusMessage.Ok);
         }
 
 
@@ -135,11 +146,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextSeeMore.Text = Count.ToString();
             ReciveLeaderboards();
         }
-     
-        private void AddPlayer(object sender, MouseButtonEventArgs e)
-        {
-            new AddPlayer(Detail["Name"].ToString(), ReciveLeaderboards).Show();
-        }
+
 
         private async void Reset(object sender, MouseButtonEventArgs e)
         {
@@ -245,7 +252,66 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 });
         }
 
+        private void ShowPanelAddPlayer(object sender, MouseButtonEventArgs e)
+        {
+            PanelAddPlayer.Visibility = Visibility.Visible;
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddPlayer.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+        private void ShowoffPaneladdPlayer(object sender, MouseButtonEventArgs e)
+        {
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, ee) =>
+            {
+                TextboxTokenPlayer.Text = "";
+                TextboxValue.Text = "";
 
+                PanelAddPlayer.Visibility = Visibility.Collapsed;
+            };
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddPlayer.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        private void AddPlayer(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                _ = int.Parse(TextboxValue.Text);
+                _ = ObjectId.Parse(TextboxTokenPlayer.Text);
+
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.AddPlayer(Detail["Name"].ToString(), TextboxTokenPlayer.Text, int.Parse(TextboxValue.Text),
+                  () =>
+                  {
+                      DashboardGame.Notifaction("Added ! ", Notifaction.StatusMessage.Ok);
+                      ShowoffPaneladdPlayer(null, null);
+                      ReciveLeaderboards();
+
+                      //Addlog
+                      var detaillog = new BsonDocument { { "NameLeaderboard", Detail["Name"] }, { "TokenPlayer", TextboxTokenPlayer.Text }, { "Value", TextboxValue.Text } };
+                      SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add player to leaderboard", $"You have added player \" {TextboxTokenPlayer.Text} \" to the \" {Detail["Name"]} \" leaderboard", detaillog, false, resultlog => { });
+                  },
+                  () =>
+                  {
+                      DashboardGame.Notifaction("Faild Add ! ", Notifaction.StatusMessage.Error);
+                  });
+
+            }
+            catch (Exception ex)
+            {
+                TextboxValue.Text = "";
+                TextboxTokenPlayer.Text = "";
+                DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+            }
+        }
+       
         Action<object, RoutedEventArgs> RefreshList;
 
     }
