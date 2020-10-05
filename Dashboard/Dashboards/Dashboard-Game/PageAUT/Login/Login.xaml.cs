@@ -43,8 +43,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                         Settings.Default.Save();
 
                         //remove page and Effect
-                        var _parent = (Parent as Grid);
-                        _parent.Children.Remove(this);
+                        DashboardGame.Dashboard.Root.Children.Remove(this);
                         DashboardGame.Dashboard.Blure(true);
 
                         DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());

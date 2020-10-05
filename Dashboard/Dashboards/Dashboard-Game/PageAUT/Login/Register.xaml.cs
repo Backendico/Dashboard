@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
 using System;
@@ -53,11 +54,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
 
 
                             //remove page and Effect
-                            var _parent = (Parent as Grid);
-                            _parent.Children.Remove(this);
-                            (_parent.FindName("PageDashboard") as Grid).Effect = null;
-                            InitDashbaord();
+                            DashboardGame.Dashboard.Blure(false);
+                            DashboardGame.Dashboard.Root.Children.Remove(this);
 
+                            DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
 
                         },
                         () =>

@@ -62,14 +62,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
                 result =>
                 {
                     PlaceContentStudios.Children.Clear();
-
-                    if (result.ElementCount <= 0)
+                    if (result["Settings"].AsBsonArray.Count <= 0)
                     {
                         ShowPaneladdStudio();
                     }
                     else
                     {
-
                         foreach (var item in result["Settings"].AsBsonArray)
                         {
                             PlaceContentStudios.Children.Add(new ModelStudio(item["Setting"].AsBsonDocument, this));
