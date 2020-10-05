@@ -8,7 +8,7 @@
              Background="#33000000"
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Border x:Name="Root"  MaxHeight="450" MaxWidth="450" Background="White" CornerRadius="30">
+    <Border x:Name="Root"  MaxHeight="450" MaxWidth="450" Background="White" CornerRadius="10">
         <!--Animation-->
         <Border.Triggers>
             <EventTrigger RoutedEvent="Loaded">

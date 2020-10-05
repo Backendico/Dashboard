@@ -8,11 +8,9 @@
     Background="#33000000"
       >
     <Border Margin="60,60" Background="White" CornerRadius="5" BorderBrush="Transparent" >
-
         <Border.Effect>
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
         </Border.Effect>
-
     <Grid >
         <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>

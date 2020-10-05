@@ -27,6 +27,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextStart.Text = Detail["Start"].ToUniversalTime().ToString();
             TextEnd.Text = Detail["End"].ToUniversalTime().ToString();
 
+
         }
 
         private void PointerEnter(object sender, MouseEventArgs e)
@@ -61,7 +62,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         private void Download(object sender, RoutedEventArgs e)
         {
-            new ModelDownloadBackup(Detail["NameLeaderboard"].ToString(), Detail["Name"].ToString()).Show();
+            DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail["NameLeaderboard"].ToString(), Detail["Name"].ToString()));
         }
 
 

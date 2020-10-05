@@ -27,6 +27,6 @@
         <TextBlock x:Name="TextVersion" Text="Version" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextStart" Text="Start" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextEnd" Text="End" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
-        <Button Cursor="Hand" x:Name="BTNDownload" Visibility="Collapsed" FontSize="15" Content="&#xE896;" MaxWidth="150" Background="DeepSkyBlue" BorderBrush="Transparent" Foreground="White"  Grid.Column="4" Margin="5" Click="Download" FontFamily="Segoe MDL2 Assets"/>
+        <Button Cursor="Hand" x:Name="BTNDownload" Visibility="Collapsed" FontSize="15" Content="&#xE896;" Width="80" Height="30" Background="Orange" BorderBrush="Transparent" Foreground="White"  Grid.Column="4" Margin="5" Click="Download" FontFamily="Segoe MDL2 Assets"/>
     </Grid>
 </UserControl>
