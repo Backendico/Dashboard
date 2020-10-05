@@ -23,10 +23,19 @@
         <Border BorderBrush="Gainsboro" Grid.Column="3" BorderThickness="0,0,2,2"/>
         <Border BorderBrush="Gainsboro" Grid.Column="4" BorderThickness="0,0,2,2"/>
 
-        <Button Cursor="Hand" Click="RemoveBackup" Content="&#xE74D;" BorderThickness="0" Width="30" FontSize="20" Background="Transparent" Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/>
         <TextBlock x:Name="TextVersion" Text="Version" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextStart" Text="Start" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextEnd" Text="End" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
-        <Button Cursor="Hand" x:Name="BTNDownload" Visibility="Collapsed" FontSize="15" Content="&#xE896;" Width="80" Height="30" Background="Orange" BorderBrush="Transparent" Foreground="White"  Grid.Column="4" Margin="5" Click="Download" FontFamily="Segoe MDL2 Assets"/>
+
+        <StackPanel x:Name="Controllers" Cursor="Hand"  VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" Visibility="Collapsed"  Grid.Column="4" Margin="5">
+        <Border   CornerRadius="5,0,0,5" MouseDown="Download"  Background="Orange" Width="80" Height="30"  x:Name="BTNDownload"  >
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontSize="15"  FontFamily="Segoe MDL2 Assets" Text="&#xE896;"/>
+        </Border>
+
+            <Border Margin="2,0,0,0"  CornerRadius="0,5,5,0" MouseDown="RemoveBackup"  Background="Tomato" Width="30" Height="30"  >
+                <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontSize="15"  FontFamily="Segoe MDL2 Assets" Text="&#xE74D;"/>
+            </Border>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

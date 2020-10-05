@@ -18,7 +18,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         public ModelBackupAbstract(BsonDocument Detail, Action RefreshList)
         {
-            Debug.WriteLine(Detail.ToString());
             InitializeComponent();
             this.Detail = Detail;
             this.RefreshList = RefreshList;
@@ -33,34 +32,41 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         private void PointerEnter(object sender, MouseEventArgs e)
         {
             Background = new SolidColorBrush(Colors.Gainsboro);
-            BTNDownload.Visibility = Visibility.Visible;
+            Controllers.Visibility = Visibility.Visible;
         }
 
         private void PointerExit(object sender, MouseEventArgs e)
         {
             Background = new SolidColorBrush(Colors.WhiteSmoke);
-            BTNDownload.Visibility = Visibility.Collapsed;
+            Controllers.Visibility = Visibility.Collapsed;
         }
 
 
-        private void RemoveBackup(object sender, RoutedEventArgs e)
+        private async void RemoveBackup(object sender,MouseButtonEventArgs e)
         {
-            if (MessageBox.Show("Deleted data is not recoverable", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (await DashboardGame.DialogYesNo("Information can not be undone") == MessageBoxResult.Yes)
             {
                 SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.RemoveBackup(Detail["NameLeaderboard"].AsString, Detail["Name"].AsString,
                     () =>
                     {
-                        MessageBox.Show("Deleted !");
+                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
                         RefreshList();
+
+                        //log
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["NameLeaderboard"]}\" deleted", new BsonDocument { }, false, resultLog => { });
                     },
                     () =>
                     {
-                        MessageBox.Show("Not delete :(");
+                        DashboardGame.Notifaction("Fail Delete", Notifaction.StatusMessage.Error);
                     });
+            }
+            else
+            {
+                DashboardGame.Notifaction("Reject Delete", Notifaction.StatusMessage.Error);
             }
         }
 
-        private void Download(object sender, RoutedEventArgs e)
+        private void Download(object sender, MouseButtonEventArgs e)
         {
             DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail["NameLeaderboard"].ToString(), Detail["Name"].ToString()));
         }

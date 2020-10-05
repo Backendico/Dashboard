@@ -37,7 +37,7 @@
             <TextBlock TextAlignment="Center" x:Name="TextCountry" VerticalAlignment="Center" Text="Country" Grid.Column="4"/>
             <TextBlock TextAlignment="Center"  x:Name="TextUTD" VerticalAlignment="Center" Text="VTD" Grid.Column="5"/>
 
-            <Border MouseDown="OpenEdit" CornerRadius="5" Background="DarkOrange" Grid.Column="6" Width="80" Height="30" Visibility="Collapsed" ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit">
+            <Border MouseDown="OpenEdit" CornerRadius="5" Background="Orange" Grid.Column="6" Width="80" Height="30" Visibility="Collapsed" ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit">
                 <TextBlock FontSize="15" VerticalAlignment="Center"  TextAlignment="Center" Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xE70F;"/>
             </Border>
         </Grid>

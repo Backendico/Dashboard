@@ -59,7 +59,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <StackPanel x:Name="ContentSetting" Visibility="Collapsed" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
+            <StackPanel x:Name="ContentSetting" Visibility="Visible" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
 
 
                 <!--Token-->
@@ -112,7 +112,7 @@
             </StackPanel>
 
             <!--Leaderboard-->
-            <Grid  x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Visible"  Grid.Row="2" >
+            <Grid  x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Collapsed"  Grid.Row="2" >
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -170,7 +170,7 @@
                                 <!-- Head row-->
                                 <Grid Background="Gainsboro" Grid.Row="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="40"/>
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>

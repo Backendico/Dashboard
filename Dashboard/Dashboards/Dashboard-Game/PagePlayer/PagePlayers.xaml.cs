@@ -56,13 +56,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         /// <param name="e"></param>
         private void Start(object sender, RoutedEventArgs e)
         {
+                        PlaceContentUser.Children.Clear();
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(
                 result =>
                 {
                     if (result["ListPlayers"].AsBsonArray.Count >= 1)
                     {
 
-                        PlaceContentUser.Children.Clear();
                         foreach (var item in result["ListPlayers"].AsBsonArray)
                         {
                             PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, Start, Parent as Grid));

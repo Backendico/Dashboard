@@ -11,7 +11,7 @@
     <!-- Head row-->
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
@@ -21,7 +21,10 @@
         <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="2" />
         <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="3" />
 
-        <Button Cursor="Hand"  Click="Remove" FontSize="17" Width="30" Height="30" Background="Transparent" Content="&#xE74D;" BorderBrush="Gainsboro" BorderThickness="0,0,2,0" Foreground="Tomato" Grid.Column="0" FontFamily="Segoe MDL2 Assets"/>
+        <Border CornerRadius="5" MouseDown="Remove" Grid.Column="0"    Background="Tomato" Width="30" Height="30" Cursor="Hand">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE74D;"  FontSize="17"  FontFamily="Segoe MDL2 Assets"/>
+        </Border>
+        
         <TextBlock x:Name="TextRank" FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
         <TextBlock Cursor="Hand" x:Name="TextToken" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
         <TextBlock x:Name="TextValue" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>

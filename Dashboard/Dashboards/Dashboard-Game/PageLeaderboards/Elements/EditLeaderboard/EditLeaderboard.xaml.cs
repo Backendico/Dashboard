@@ -264,7 +264,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         }
         private void ShowoffPaneladdPlayer(object sender, MouseButtonEventArgs e)
         {
-            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
             Anim.Completed += (s, ee) =>
             {
                 TextboxTokenPlayer.Text = "";

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -209,29 +210,36 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        private void Delete(object sender, RoutedEventArgs e)
+        private async void Delete(object sender, MouseButtonEventArgs e)
         {
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Delete(PlayerDetail["Account"]["Token"].ToString(), result =>
+            if (await DashboardGame.DialogYesNo("All user information is lost \n Are you sure") == MessageBoxResult.Yes)
             {
-                if (result)
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Delete(PlayerDetail["Account"]["Token"].ToString(), result =>
                 {
-                    DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
+                    if (result)
+                    {
+                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
 
-                    RefreshList(null, null);
-                    (Parent as Grid).Children.Remove(this);
+                        RefreshList(null, null);
+                        DashboardGame.Dashboard.Root.Children.Remove(this);
 
-                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Player", $"You have deleted player \" {PlayerDetail["Account"]["Username"]} \"", PlayerDetail, false, resul => { });
-                }
-                else
-                {
-                    MessageBox.Show("Faild Delete! :(");
-                }
+                        //add log
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Player", $"You have deleted player \" {PlayerDetail["Account"]["Username"]} \"", PlayerDetail, false, resul => { });
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Delete !", Notifaction.StatusMessage.Ok);
+                    }
+                });
 
-            });
-
+            }
+            else
+            {
+                DashboardGame.Notifaction("Delete Reject", Notifaction.StatusMessage.Ok);
+            }
         }
 
-        private void Save(object sender, RoutedEventArgs e)
+        private void SaveSetting(object sender, MouseButtonEventArgs e)
         {
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save(PlayerDetail["Account"]["Token"].ToString(), PlayerDetail, result =>
             {
@@ -246,6 +254,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     TextboxEmail.BorderBrush = new SolidColorBrush(Colors.Transparent);
                     DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
 
+                    // add log
                     SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Player", $"You have Edit player \" {PlayerDetail["Account"]["Username"]} \" ", PlayerDetail, false, resul => { });
                 }
                 else
@@ -260,7 +269,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         private void CopyToken(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Clipboard.SetText((sender as TextBlock).Text);
-            MessageBox.Show("Copyed !");
+            DashboardGame.Notifaction("Token Copied", Notifaction.StatusMessage.Ok);
         }
 
 
@@ -335,7 +344,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            (Parent as Grid).Children.Remove(this);
+            DashboardGame.Dashboard.Root.Children.Remove(this);
         }
 
 

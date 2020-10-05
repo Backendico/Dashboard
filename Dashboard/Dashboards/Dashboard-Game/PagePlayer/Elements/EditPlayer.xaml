@@ -126,8 +126,10 @@
 
                         <!--Password-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock  Text="Password: "/>
-                            <Button Cursor="Hand" MinWidth="150" BorderBrush="Transparent" FontWeight="Normal"  Content="Send recovery"/>
+                            <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Password: "/>
+                            <Border Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
+                                <TextBlock VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="Send Email Recovery"/>
+                            </Border>
                         </StackPanel>
 
                         <!--Email-->
@@ -144,11 +146,16 @@
                         </StackPanel>
 
                         <!--Delete-->
-                        <StackPanel Height="30" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
-                            <Button Cursor="Hand" Click="Delete" Background="Tomato" BorderBrush="Transparent" Foreground="White"  MinWidth="200"   Content="Delete" />
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <!--BTN Delete-->
+                            <Border MouseDown="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Delete"/>
+                            </Border>
+                            <!--BTN Delete-->
+                            <Border MouseDown="SaveSetting" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" >
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Save"/>
+                            </Border>
                         </StackPanel>
-
-                        <Button Height="45" Cursor="Hand" Background="Orange" BorderBrush="Transparent" Foreground="White" HorizontalAlignment="Center"  Content="Save" Grid.Row="2" MinWidth="200" Click="Save"/>
 
                     </StackPanel>
                 </GroupBox>

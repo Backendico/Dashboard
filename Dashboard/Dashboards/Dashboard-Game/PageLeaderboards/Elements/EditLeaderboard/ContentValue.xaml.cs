@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
@@ -27,9 +28,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             this.RefreshList = RefreshList;
         }
 
-        private async void Remove(object Sender, RoutedEventArgs e)
+        private async void Remove(object Sender, MouseButtonEventArgs e)
         {
-
             if (await DashboardGame.DialogYesNo("The value for the user is deleted \n Are you sure?")==MessageBoxResult.Yes)
             {
                 SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Remove(DetailValue["Token"].ToString(), DetailValue["NameLeaderboard"].ToString(),
