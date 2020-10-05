@@ -3,7 +3,6 @@ using Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
-using Dashboard.Dashboards.Dashboard_Game.PageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
@@ -34,6 +33,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
         TextBlock CurentTab;
 
         InternalNotifaction internalNotifaction;
+        BlurEffect Blur = new BlurEffect() { Radius = 0 };
 
         public DashboardGame()
         {
@@ -45,7 +45,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             if (Settings.Default._id == "")
             {
-                PageDashboard.Effect = new BlurEffect();
+                Blure(true);
                 Root.Children.Add(new Login());
             }
             else
@@ -55,25 +55,35 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         }
 
+     
         internal async void Blure(bool OnOff)
         {
             if (OnOff)
             {
-                var Blur = new BlurEffect() { Radius = 0 };
                 PageDashboard.Effect = Blur;
-                while (Blur.Radius <= 10)
+                while (Blur.Radius < 10)
                 {
                     Blur.Radius += 0.1d;
-                    await Task.Delay(10);
+                    await Task.Delay(4);
 
                     if (Blur.Radius >= 10)
                         break;
                 }
-
             }
             else
             {
-                PageDashboard.Effect = null;
+                while (Blur.Radius > 0)
+                {
+                    Blur.Radius -= 0.1d;
+                    await Task.Delay(4);
+
+                    if (Blur.Radius <= 0)
+                    {
+                        PageDashboard.Effect = null;
+                        break;
+
+                    }
+                }
 
             }
         }
@@ -142,7 +152,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
         private void OpenStudios(object sender, MouseButtonEventArgs e)
         {
             Root.Children.Add(new SubPageStudios());
-            Blure(true);
         }
         private void OpenSetting(object sender, MouseButtonEventArgs e)
         {
@@ -233,10 +242,14 @@ namespace Dashboard.Dashboards.Dashboard_Game
             TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
 
             //add subpageDashbaord to dashbaord
+            Content.Children.Remove(CurentPage);
             CurentPage = new PageDashboard();
-
             Content.Children.Add(CurentPage);
+
+            CurentTab.Foreground = new SolidColorBrush(Colors.Gray);
             CurentTab = BTNDashboard;
+
+
 
             if (NotifactionChange != null)
             {

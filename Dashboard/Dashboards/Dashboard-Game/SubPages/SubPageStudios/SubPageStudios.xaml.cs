@@ -46,6 +46,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
                     DashboardGame.Notifaction("Name Studio Short", Notifaction.StatusMessage.Error);
                 }
             };
+
+            DashboardGame.Dashboard.Blure(true);
         }
 
         internal void Close(object sender, RoutedEventArgs e)

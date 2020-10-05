@@ -50,6 +50,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             };
 
+            //init btnReload
+            BTNReload.MouseDown += (s, e) =>
+            {
+                ReciveSupportList();
+                OpenPageQuestions(null, null);
+            };
+
             ReciveSupportList();
         }
 
@@ -225,14 +232,25 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             SDK.SDK_PageDashboards.DashboardGame.PageSupport.ReciveSupports(
                 result =>
                 {
-                    PlaceContentSupport.Children.Clear();
-                    foreach (var item in result[1].AsBsonArray)
+                    Debug.WriteLine(result[1].AsBsonArray.Count);
+                    if (result[1].AsBsonArray.Count >= 1)
                     {
-                        PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, PageEachQuestion, this));
+                        PlaceContentSupport.Children.Clear();
+                        foreach (var item in result[1].AsBsonArray)
+                        {
+                            PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, PageEachQuestion, this));
+                        }
                     }
+                    else
+                    {
+                        OpenAddSupport(null, null);
+
+                    }
+
                 },
                 () =>
                 {
+                    OpenAddSupport(null,null);
                 });
         }
 

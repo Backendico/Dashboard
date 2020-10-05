@@ -115,6 +115,9 @@
                                     <TextBox x:Name="Discription" MinHeight="100"   AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap"/>
                                 </StackPanel>
 
+                                <!--Add TO Support-->
+                                <CheckBox Margin="0,10" Content="followers Bug With Support"/>
+                                
                                 <!--DashboardName-->
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Dashboard Name : " FontWeight="Bold"/>

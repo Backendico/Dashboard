@@ -45,11 +45,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                         //remove page and Effect
                         var _parent = (Parent as Grid);
                         _parent.Children.Remove(this);
-                        (_parent.FindName("PageDashboard") as Grid).Effect = null;
+                        DashboardGame.Dashboard.Blure(true);
 
                         DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
-                        
-
                     }
                     else
                     {
