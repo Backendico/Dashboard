@@ -86,7 +86,7 @@
             </Grid>
 
             <!--Subpages-->
-            <Grid x:Name="PanelAddStudio"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+            <Grid x:Name="PanelAddStudio"  Visibility="Visible" Background="#33000000" Opacity="1" >
 
                 <Grid.Effect>
                     <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
@@ -106,22 +106,63 @@
                 </Rectangle>
 
                 <!--Body-->
-                <Border Margin="20,95,0,0"  CornerRadius="10" Width="200" Height="110" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+                <Border Margin="20,95,0,0"  CornerRadius="10" Width="200"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
 
                     <StackPanel Margin="10">
                         <StackPanel>
                             <TextBlock Text="Name Studio :"/>
                             <TextBox x:Name="TextNameStudio" Height="30" />
                         </StackPanel>
+
+                        <!--Plane-->
+                        <TextBlock Margin="5" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Text="Plane (Free)"/>
+
+                        <!--Players-->
+                        <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="Players:"/> 
+                             <Run  Text="0 T"/>
+                        </TextBlock>
+
+                        <!--Leaderboards-->
+                        <TextBlock   VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="Leaderboard :"/> 
+                             <Run  Text="3"/>
+                        </TextBlock>
+
+                        <!--APIs-->
+                        <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="APIs(Read/Write) :"/> 
+                             <Run  Text="90K"/>
+                        </TextBlock>
+
+                        <!--Studios-->
+                        <TextBlock   VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="Studio :"/> 
+                             <Run  Text="2"/>
+                        </TextBlock>
+
+                        <!--Logs-->
+                        <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="Log :"/> 
+                             <Run  Text="200"/>
+                        </TextBlock>
+
+                        <!--Cash-->
+                        <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="Cash :"/> 
+                             <Run  Text="0 T"/>
+                        </TextBlock>
+
                         <Border x:Name="BTNadd" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10">
                             <TextBlock Foreground="White" Text="Add" VerticalAlignment="Center" TextAlignment="Center"/>
                         </Border>
+
                     </StackPanel>
                 </Border>
 
 
             </Grid>
-            
+
         </Grid>
     </Border>
 
