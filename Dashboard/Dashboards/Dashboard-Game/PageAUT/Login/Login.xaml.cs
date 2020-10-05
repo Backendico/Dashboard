@@ -1,6 +1,7 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,16 +21,12 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : UserControl
     {
 
-        public Login(Action InitDashbaord)
+        public Login()
         {
             InitializeComponent();
-            this.InitDashbaord = InitDashbaord;
         }
 
         private void _Login(object sender, MouseButtonEventArgs e)
@@ -51,6 +48,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                         (_parent.FindName("PageDashboard") as Grid).Effect = null;
 
                         DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
+                        
 
                     }
                     else
@@ -71,10 +69,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
         {
             var _Parent = (Parent as Grid);
             _Parent.Children.Remove(this);
-            _Parent.Children.Add(new Register(InitDashbaord));
+            _Parent.Children.Add(new Register());
 
         }
 
-        Action InitDashbaord;
     }
 }

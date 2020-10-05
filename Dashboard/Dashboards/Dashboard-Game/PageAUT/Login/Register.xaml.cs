@@ -23,17 +23,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
     public partial class Register : UserControl
     {
 
-        public Register(Action InitDashbaord)
+        public Register()
         {
             InitializeComponent();
-            this.InitDashbaord = InitDashbaord;
         }
 
         private void _Login(object sender, MouseButtonEventArgs e)
         {
             var _parent = Parent as Grid;
             _parent.Children.Remove(this);
-            _parent.Children.Add(new Login(InitDashbaord));
+            _parent.Children.Add(new Login());
         }
 
         private void _Register(object sender, MouseButtonEventArgs e)

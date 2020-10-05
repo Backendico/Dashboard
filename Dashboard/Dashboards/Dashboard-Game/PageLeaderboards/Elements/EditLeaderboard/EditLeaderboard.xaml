@@ -61,7 +61,7 @@
         <!--Bodys-->
 
         <!--Setting -->
-        <StackPanel x:Name="ContentSetting" Visibility="Visible" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
+        <StackPanel x:Name="ContentSetting" Visibility="Collapsed" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
 
 
             <!--Token-->
@@ -112,39 +112,62 @@
         </StackPanel>
 
         <!--Leaderboard-->
-        <Grid x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Collapsed" Margin="10" Grid.Row="2" >
+        <Grid x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Visible"  Grid.Row="2" >
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal" Background="WhiteSmoke">
+                    <!--Add player-->
+                    <Border  MouseDown="AddPlayer" Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
+                            <TextBlock TextAlignment="Center" Text="&#xE8FA;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                        </StackPanel>
+                    </Border>
+
+                    <!--Reset List-->
+                    <Border MouseDown="Reset" Cursor="Hand" ToolTip="Reload List" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
+                            <TextBlock  TextAlignment="Center" Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                        </StackPanel>
+                    </Border>
+
+                    <!--Save List-->
+                    <Border  MouseDown="Backup" Cursor="Hand" ToolTip="Save leaderboard to (Backups)"  Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
+                            <TextBlock  TextAlignment="Center" Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                        </StackPanel>
+                    </Border>
+
+                    <!--Save List-->
+                    <StackPanel MouseDown="SeeMore" VerticalAlignment="Center"  Cursor="Hand" ToolTip="See More"  Margin="10,0"   >
+                        <StackPanel Orientation="Horizontal">
+                            <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
+                                <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
+                            </Border>
+                            <Border Margin="2,0" CornerRadius="0,5,5,0" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Background="Gainsboro" >
+                                <TextBlock x:Name="TextSeeMore" Margin="10,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="100"  />
+                            </Border>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            
             <!--ListPlayer-->
-            <Border CornerRadius="10,10,0,0" BorderBrush="Gray" BorderThickness="2" Margin="10,0" >
+            <Border BorderBrush="Gray" BorderThickness="2" Margin="20"  Grid.Row="1">
                 <Grid>
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <!-- header -->
-                        <Border Background="WhiteSmoke"  CornerRadius="10,10,0,0">
-                            <Grid Margin="10,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock  FontSize="15" FontWeight="Bold" Text="List Player" VerticalAlignment="Center" Grid.Column="0"/>
-                                <!--BTNS-->
-                                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" >
-                                    <Button ToolTip="See more list" Cursor="Hand" VerticalAlignment="Center"  Height="30" MaxWidth="250" Width="100" Content="See more" Grid.Row="1" Background="Transparent" BorderBrush="DeepSkyBlue"  BorderThickness="1" Foreground="Black" Click="SeeMore"/>
-                                    <Button ToolTip="Save leaderboard to (Backups)" Cursor="Hand" Margin="10,0"  Click="Backup" Background="Transparent" BorderBrush="Transparent" Foreground="Black" Content="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="17"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" />
-                                    <Button ToolTip="Manully Reset leaderboard" Cursor="Hand" Margin="10,0"  Click="Reset" Background="Transparent" BorderBrush="Transparent" Foreground="Black" Content="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" />
-                                    <Button ToolTip="Add Player to leaderboard" Cursor="Hand" Margin="10,0"  Click="AddPlayer" Background="DeepSkyBlue" BorderBrush="Transparent" Foreground="White" Content="&#xE8FA;" FontFamily="Segoe MDL2 Assets" FontSize="17"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" />
-                                </StackPanel>
-                            </Grid>
-
-                        </Border>
+                     
 
                         <!-- Head row-->
-                        <Grid Background="Gainsboro" Grid.Row="1">
+                        <Grid Background="Gainsboro" Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="1*"/>
@@ -152,11 +175,11 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="18"/>
                             </Grid.ColumnDefinitions>
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="0"/>
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="1" />
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="2" />
-                            <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="3" />
-                            <Border BorderBrush="Gray" BorderThickness="0,2,0,2" Grid.Column="4" />
+                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1" />
+                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2" />
+                            <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="3" />
+                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="4" />
 
                             <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
                             <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
@@ -164,7 +187,7 @@
                         </Grid>
 
                         <!--Content-->
-                        <ScrollViewer Grid.Row="2" Name="ContentPlaceLeaderboard"/>
+                        <ScrollViewer Grid.Row="1" Name="ContentPlaceLeaderboard"/>
 
 
                     </Grid>

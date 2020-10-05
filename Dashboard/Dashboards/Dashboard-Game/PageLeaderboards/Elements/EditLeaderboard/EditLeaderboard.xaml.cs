@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using MongoDB.Bson;
 using System;
+using System.Windows.Input;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -93,15 +94,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
 
         //page1 
-        private void CopyToken(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Clipboard.SetText((sender as TextBlock).Text);
-            MessageBox.Show("Token Copied !");
-        }
-
-
-
-        //page2
         private void Save(object sender, RoutedEventArgs e)
         {
             Detail["Reset"] = ComboboxReset.SelectedIndex;
@@ -128,12 +120,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
              });
 
         }
-        private void AddPlayer(object sender, RoutedEventArgs e)
+        private void CopyToken(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Clipboard.SetText((sender as TextBlock).Text);
+            MessageBox.Show("Token Copied !");
+        }
+
+
+
+        //page2
+        private void SeeMore(object sender, MouseButtonEventArgs e)
+        {
+            Count += 100;
+            TextSeeMore.Text = Count.ToString();
+            ReciveLeaderboards();
+        }
+     
+        private void AddPlayer(object sender, MouseButtonEventArgs e)
         {
             new AddPlayer(Detail["Name"].ToString(), ReciveLeaderboards).Show();
         }
 
-        private async void Reset(object sender, RoutedEventArgs e)
+        private async void Reset(object sender, MouseButtonEventArgs e)
         {
             var Result = await DashboardGame.DialogYesNo("All records are lost\n Do you want to continue?");
 
@@ -161,7 +169,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         }
 
-        private void Backup(object sender, RoutedEventArgs e)
+        private void Backup(object sender, MouseButtonEventArgs e)
         {
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Backup(Detail["Name"].AsString,
                 () =>
@@ -179,7 +187,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 });
 
         }
-
 
         private void VisibilityChange(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -201,8 +208,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         }
 
-
-
         public void ReciveLeaderboards()
         {
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Leaderboard(Count, Detail["Name"].ToString(),
@@ -221,7 +226,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         }
 
-
         public void ReciveBackup()
         {
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.BackupRecive(Detail["Name"].AsString,
@@ -239,16 +243,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 {
 
                 });
-        }
-
-
-        private void SeeMore(object sender, RoutedEventArgs e)
-        {
-            var btnseemore = sender as Button;
-            Count += 100;
-
-            btnseemore.Content = " SeeMore (" + Count + ")";
-            ReciveLeaderboards();
         }
 
 

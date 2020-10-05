@@ -46,7 +46,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
             if (Settings.Default._id == "")
             {
                 PageDashboard.Effect = new BlurEffect();
-                Root.Children.Add(new Login(Init));
+                Root.Children.Add(new Login());
             }
             else
             {
@@ -55,55 +55,26 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         }
 
-
-        /// <summary>
-        /// 1: recive Studios
-        /// 2 if no studio page creat studio show
-        /// 3: if studio found frist srudio init 
-        /// </summary>
-        public void Init()
-        {
-
-            SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
-                result =>
-                {
-                    if (result.ElementCount <= 0)
-                    {
-
-                        Root.Children.Add(new CreatStudio());
-                    }
-                    else
-                    {
-                        ChangeStudio(result[0].AsBsonDocument);
-                        ////fill Studio user
-                        //SettingUser.CurentDetailStudio = result[0].AsBsonDocument;
-
-                        ////Change Textheader dashboard
-                        //TextStudioName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
-
-                        ////add subpageDashbaord to dashbaord
-                        //CurentPage = new PageDashboard();
-                        //Content.Children.Add(CurentPage);
-                        //CurentTab = BTNDashboard;
-
-                        //add log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You logged in at {DateTime.Now} ", new BsonDocument { }, false, resultlog => { });
-                    }
-                },
-                () =>
-                {
-                });
-        }
-
-        internal void Blure(bool OnOff)
+        internal async void Blure(bool OnOff)
         {
             if (OnOff)
             {
-                PageDashboard.Effect = new BlurEffect();
+                var Blur = new BlurEffect() { Radius = 0 };
+                PageDashboard.Effect = Blur;
+                while (Blur.Radius <= 10)
+                {
+                    Blur.Radius += 0.1d;
+                    await Task.Delay(10);
+
+                    if (Blur.Radius >= 10)
+                        break;
+                }
+
             }
             else
             {
                 PageDashboard.Effect = null;
+
             }
         }
 
@@ -271,6 +242,10 @@ namespace Dashboard.Dashboards.Dashboard_Game
             {
                 Notifaction("Change Studio", StatusMessage.Ok);
             }
+
+            //addLog
+
+            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You login at {DateTime.Now} (Local Time)", new BsonDocument(), false, (Reslult) => { });
         }
 
         private void Window_LayoutUpdated(object sender, EventArgs e)

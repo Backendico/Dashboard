@@ -55,7 +55,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards
 
 
         //subpages
-
         private void AddLeaderBoard(object sender, MouseButtonEventArgs e)
         {
             if (TextNameLeaderboard.Text.Length >= 6)
@@ -81,6 +80,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards
         }
 
 
+        /// <summary>
+        /// show subpage Add Leaderboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ShowSubpageAddLeaderboard(object sender, MouseButtonEventArgs e)
         {
             PanelAddLeaderboard.Visibility = Visibility.Visible;
@@ -95,14 +99,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards
 
         }
 
+
+        /// <summary>
+        /// showof Panel AddLeaderboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ShowOffSubpageAddLeaderboard(object sender, MouseButtonEventArgs e)
         {
 
-            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
             Anim.Completed += (s, ee) =>
             {
-                TextNameLeaderboard.Text = "";
                 PanelAddLeaderboard.Visibility = Visibility.Collapsed;
+                TextNameLeaderboard.Text = "";
 
             };
             Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
@@ -111,7 +121,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-
         }
 
         private void CheackNameLeaderboard(object sender, TextChangedEventArgs e)

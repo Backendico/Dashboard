@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         LayoutUpdated="Window_LayoutUpdated"
         Title="Dashboard" Height="760" Width="1200">
+ 
+    
     <Grid  x:Name="Root">
 
         <Grid x:Name="PageDashboard">
