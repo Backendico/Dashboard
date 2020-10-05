@@ -10,7 +10,6 @@
              d:DesignHeight="450" d:DesignWidth="800" MouseEnter="PointerEnter" MouseLeave="PointerExit">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
@@ -21,13 +20,12 @@
         <Border BorderBrush="Gainsboro" Grid.Column="1" BorderThickness="0,0,2,2"/>
         <Border BorderBrush="Gainsboro" Grid.Column="2" BorderThickness="0,0,2,2"/>
         <Border BorderBrush="Gainsboro" Grid.Column="3" BorderThickness="0,0,2,2"/>
-        <Border BorderBrush="Gainsboro" Grid.Column="4" BorderThickness="0,0,2,2"/>
 
-        <TextBlock x:Name="TextVersion" Text="Version" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock x:Name="TextStart" Text="Start" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock x:Name="TextEnd" Text="End" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextVersion" Text="Version" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextStart" Text="Start" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextEnd" Text="End" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
 
-        <StackPanel x:Name="Controllers" Cursor="Hand"  VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" Visibility="Collapsed"  Grid.Column="4" Margin="5">
+        <StackPanel x:Name="Controllers" Cursor="Hand"  VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" Visibility="Collapsed"  Grid.Column="3" Margin="5">
         <Border   CornerRadius="5,0,0,5" MouseDown="Download"  Background="Orange" Width="80" Height="30"  x:Name="BTNDownload"  >
             <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontSize="15"  FontFamily="Segoe MDL2 Assets" Text="&#xE896;"/>
         </Border>

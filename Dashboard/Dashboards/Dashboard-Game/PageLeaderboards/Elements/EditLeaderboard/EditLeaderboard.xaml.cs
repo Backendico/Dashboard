@@ -13,9 +13,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
-    /// <summary>
-    /// Interaction logic for EditLeaderboard.xaml
-    /// </summary>
     public partial class EditLeaderboard : UserControl
     {
         BsonDocument Detail;
@@ -95,7 +92,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     Debug.WriteLine("not set");
                     break;
             }
-
+            ShowoffPaneladdPlayer(null, null);
         }
 
         private void Close(object sender, RoutedEventArgs e)

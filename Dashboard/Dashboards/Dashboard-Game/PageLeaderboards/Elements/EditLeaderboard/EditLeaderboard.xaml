@@ -253,9 +253,9 @@
             </Grid>
 
 
-            <!--History-->
+            <!--Backups-->
             <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" IsVisibleChanged="VisibilityChange">
-                <Border  CornerRadius="10,10,0,0" BorderBrush="Gray"  BorderThickness="2"   >
+                <Border   BorderBrush="Gray"  BorderThickness="2"   >
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -264,41 +264,28 @@
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
-                                <RowDefinition Height="40"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <!-- header -->
-                            <Border Background="WhiteSmoke"  CornerRadius="10,10,0,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBlock Margin="10,0" FontSize="15" FontWeight="Bold" Text="History" VerticalAlignment="Center" Grid.Column="0"/>
-                                </Grid>
-                            </Border>
+                           
 
                             <!-- Head row-->
-                            <Grid Background="Gainsboro" Grid.Row="1">
+                            <Grid Background="Gainsboro" Grid.Row="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="17"/>
                                 </Grid.ColumnDefinitions>
-                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="0"/>
-                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="1"/>
-                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="2" />
-                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="3" />
-                                <Border BorderBrush="Gray" BorderThickness="0,2,2,2" Grid.Column="4" />
-                                <Border BorderBrush="Gray" BorderThickness="0,2,0,2" Grid.Column="5" />
+                                <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+                                <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1" />
+                                <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2" />
+                                <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="3" />
+                                <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="4" />
 
-                                <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Version" Grid.Column="1"/>
-                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Start" Grid.Column="2"/>
-                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="End" Grid.Column="3"/>
+                                <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Version" Grid.Column="0"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Start" Grid.Column="1"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="End" Grid.Column="2"/>
 
                             </Grid>
 
