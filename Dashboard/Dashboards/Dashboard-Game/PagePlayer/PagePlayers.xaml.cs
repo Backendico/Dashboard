@@ -1,12 +1,8 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard;
-using Dashboard.Dashboards.Dashboard_Game.Notifaction;
+﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using RestSharp;
 using System;
-using System.CodeDom;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -56,7 +52,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         /// <param name="e"></param>
         private void Start(object sender, RoutedEventArgs e)
         {
-                        PlaceContentUser.Children.Clear();
+            PlaceContentUser.Children.Clear();
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(
                 result =>
                 {
@@ -74,7 +70,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     }
 
                     //init total player
-                    TextTotalPlayer.Text =$"( {result["Players"]} )   total players";
+                    TextTotalPlayer.Text = $"( {result["Players"]} )   total players";
                 },
                 () =>
                 {
