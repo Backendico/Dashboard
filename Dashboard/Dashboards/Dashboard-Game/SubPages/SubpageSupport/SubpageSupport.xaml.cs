@@ -238,7 +238,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                         PlaceContentSupport.Children.Clear();
                         foreach (var item in result[1].AsBsonArray)
                         {
-                            PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, PageEachQuestion, this));
+                            PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, this));
                         }
                     }
                     else

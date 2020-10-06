@@ -1,4 +1,5 @@
 ﻿using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,34 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             BTNSend.MouseDown += (s, e) =>
             {
-                if (Subject.Text.Length >= 1 && Discription.Text.Length >= 1)
+                if (Subject.Text.Length >= 1 && Description.Text.Length >= 1)
                 {
 
+                    var SerilseDetail = new BsonDocument
+                    {
+                        { "Topic",Topic.SelectedIndex},
+                        {"Priority" ,Priority.SelectedIndex},
+                        {"Subject",Subject.Text },
+                        {"Description",Description.Text},
+                        {"Follow",FllowBug.IsChecked.Value },
+                        {"Dashboard",DashboardName.Text },
+                        {"Database",Database.Text },
+                        {"Token",ObjectId.Parse(Token.Text) },
+                    };
+
+
+                    SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddReportBug(SerilseDetail, result =>
+                    {
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("We thank you for sending reports", Notifaction.StatusMessage.Ok);
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild sending ", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
                 }
                 else
                 {
@@ -41,6 +67,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             };
         }
+
 
         private void Close(object sender, MouseButtonEventArgs e)
         {

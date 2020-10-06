@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -14,7 +16,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
     public partial class ModelSupport : UserControl
     {
 
-        public ModelSupport(BsonDocument Detail, Grid PageDetail, SubpageSupport ParentClass)
+        public ModelSupport(BsonDocument Detail, SubpageSupport ParentClass)
         {
             InitializeComponent();
 
@@ -69,6 +71,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
                 TextTime.Visibility = Visibility.Collapsed;
                 TextPart.Visibility = Visibility.Collapsed;
             }
+
+            try
+            {
+                if (Detail["IsReport"].AsBoolean)
+                {
+                    TextPart.Text = "";
+                    TextPart.Inlines.Add(new TextBlock() { FontSize = 15, Foreground = new SolidColorBrush(Colors.Tomato), FontFamily = new FontFamily("Segoe MDL2 Assets"), Text = "\xEBE8" });
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+
 
             TextTime.Text = Detail["Created"].ToLocalTime().ToString();
 

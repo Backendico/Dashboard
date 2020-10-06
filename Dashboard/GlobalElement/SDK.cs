@@ -205,7 +205,7 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("NameStudio", SettingUser.CurentDetailStudio["Database"]);
-                        var response =await client.ExecuteAsync(request);
+                        var response = await client.ExecuteAsync(request);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -1012,6 +1012,27 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+
+                    public static async void AddReportBug(BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddReportBug);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Detail", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
                 }
             }
         }
@@ -1087,6 +1108,7 @@ namespace Dashboard.GlobalElement
                 public string LinkReciveSupport => "https://localhost:44346/PageSupport/ReciveSupports";
                 public string AddMessage => "https://localhost:44346/PageSupport/AddMessage";
                 public string CloseSupport => "https://localhost:44346/PageSupport/CloseSupport";
+                public string AddReportBug => "https://localhost:44346/PageSupport/AddReportBug";
             }
         }
     }

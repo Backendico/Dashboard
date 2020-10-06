@@ -8,7 +8,7 @@
              Cursor="Hand" 
              
              >
-    
+
     <Border Background="Transparent" x:Name="Root" Margin="10" BorderBrush="Gainsboro" BorderThickness="1">
         <Border.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
@@ -24,38 +24,38 @@
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-            
+
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                         <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0.3"/>
                     </Storyboard>
                 </BeginStoryboard>
-                
+
                 <BeginStoryboard  >
                     <Storyboard Storyboard.TargetName="Arrow" Storyboard.TargetProperty="Margin">
                         <ThicknessAnimation From="10,0" To="20,0" Duration="0:0:0.3"/>
                     </Storyboard>
                 </BeginStoryboard>
-                
+
             </EventTrigger>
         </Border.Triggers>
-        
-        <Border x:Name="Priority" BorderBrush="Transparent" BorderThickness="5,0,0,0">
-        <Grid Margin="10,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackPanel  Grid.Column="0">
-                <TextBlock Margin="0,5" x:Name="TextHeader" FontWeight="Bold" Text="Header"/>
-                <TextBlock Margin="0,5" x:Name="TextPart" Text="Part"/>
-                <TextBlock  x:Name="TextTime" Margin="0,5" FontSize="10" Text="Time"/>
-            </StackPanel>
 
-            <TextBlock x:Name="Arrow" Margin="20,0" FontSize="20" Text="&#xE76C;" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right" FontFamily="Segoe MDL2 Assets"/>
+        <Border  x:Name="Priority" BorderBrush="LightGreen" BorderThickness="5,0,0,0">
+            <Grid Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel  Grid.Column="0">
+                    <TextBlock Margin="0,5" x:Name="TextHeader" FontWeight="Bold" Text="Header"/>
+                    <TextBlock Margin="0,5" x:Name="TextPart" Text="Part"/>
+                    <TextBlock  x:Name="TextTime" Margin="0,5" FontSize="10" Text="Time"/>
+                </StackPanel>
 
-        </Grid>
+                <TextBlock x:Name="Arrow" Margin="20,0" FontSize="20" Text="&#xE76C;" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right" FontFamily="Segoe MDL2 Assets"/>
+
+            </Grid>
         </Border>
 
     </Border>
