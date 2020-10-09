@@ -29,6 +29,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             Database.Text = SettingUser.CurentDetailStudio["Database"].ToString();
             Token.Text = SettingUser.Token;
 
+            CloseArea.MouseDown+=(s,e)=>{
+                if (e.Source.GetType()==typeof(Grid))
+                {
+                    Close();
+                }
+            };
+
             BTNSend.MouseDown += (s, e) =>
             {
                 if (Subject.Text.Length >= 1 && Description.Text.Length >= 1)
@@ -51,6 +58,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                     {
                         if (result)
                         {
+                            Close();
+
                             DashboardGame.Notifaction("We thank you for sending reports", Notifaction.StatusMessage.Ok);
                         }
                         else
@@ -69,26 +78,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
         }
 
 
-        private void Close(object sender, MouseButtonEventArgs e)
+        private void Close()
         {
-            if (e.Source.GetType() == typeof(Grid))
+            DoubleAnimation anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            anim.Completed += (s, ee) =>
             {
-                DoubleAnimation anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
-                anim.Completed += (s, ee) =>
-                {
-                    DashboardGame.Dashboard.Root.Children.Remove(this);
-                };
+                DashboardGame.Dashboard.Root.Children.Remove(this);
+            };
 
-                Storyboard.SetTargetName(anim, Root.Name);
-                Storyboard.SetTargetProperty(anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(anim, Root.Name);
+            Storyboard.SetTargetProperty(anim, new PropertyPath("Opacity"));
 
-                Storyboard storyboard = new Storyboard();
-                storyboard.Children.Add(anim);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(anim);
 
-                storyboard.Begin(this);
+            storyboard.Begin(this);
 
-
-            }
         }
     }
 }

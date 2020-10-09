@@ -12,7 +12,7 @@
     </UserControl.Effect>
 
 
-    <Grid x:Name="CloseArea" MouseDown="Close"  Background="Transparent">
+    <Grid x:Name="CloseArea"   Background="Transparent">
 
         <Grid Background="Transparent" Focusable="True" Opacity="1"   Margin="10,50" x:Name="Root"  Width="300" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Grid.Triggers>
