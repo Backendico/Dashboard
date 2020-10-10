@@ -29,6 +29,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                     { "Header" ,TextboxTitle.Text},
                     {"Priority",ComboBoxPriority.SelectedIndex },
                     {"Part",ComboBoxPart.SelectedIndex },
+                    {"Description",TextDescription.Text }
                 };
                 SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddSupport(Detailsupport, result =>
                 {
@@ -37,6 +38,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                         ReciveSupportList();
                         OpenPageQuestions(null, null);
                         DashboardGame.Notifaction("Support Add \n You will receive the answer soon", Notifaction.StatusMessage.Ok);
+
+                        TextDescription.Text = null;
+                        TextboxTitle.Text = null;
 
                         //log
                         SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Support Created", $"You created the \"{Detailsupport["Header"]}\" ticket", Detailsupport, false, (R) => { });

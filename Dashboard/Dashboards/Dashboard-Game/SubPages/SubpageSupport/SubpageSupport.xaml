@@ -60,14 +60,14 @@
             </Grid>
 
             <!--Body-->
-            <Grid  MinHeight="200" MaxHeight="900"  Grid.Row="1" Background="White">
+            <Grid  MinHeight="300" MaxHeight="900"  Grid.Row="1" Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                
-                
+
+
                 <!--PageEachQuestion-->
                 <Grid x:Name="PageEachQuestion" Width="0" Grid.Column="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
@@ -81,7 +81,7 @@
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0">
                                 <StackPanel/>
                             </ScrollViewer>
-                            
+
                             <!--Controoler send Option-->
                             <Grid Grid.Row="1"   Background="#4CFFA500">
                                 <Grid.ColumnDefinitions>
@@ -100,66 +100,69 @@
                         </Grid>
                     </ScrollViewer>
                 </Grid>
-            
+
                 <!--Page Questions-->
-                <Grid x:Name="PageQuestions"  Width="000"  Grid.Column="1">
+                <Grid x:Name="PageQuestions"  Width="300"  Grid.Column="1">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <StackPanel  x:Name="PlaceContentSupport">
-                            
+
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-             
+
                 <!--Page AddQuestions-->
-                <Grid  x:Name="PageAddQuestions" VerticalAlignment="Center"  Width="200" Grid.Column="2">
-                    <StackPanel Margin="10">
-                        <!--Part-->
-                        <StackPanel Margin="0,10" >
-                            <TextBlock Text="Section :"/>
-                            <ComboBox x:Name="ComboBoxPart" >
-                                <ComboBoxItem IsSelected="True" Content="Other"/>
-                                <ComboBoxItem   Content="Authentication"/>
-                                <ComboBoxItem Content="Dashboard"/>
-                                <ComboBoxItem Content="Payments"/>
-                            </ComboBox>
-                        </StackPanel>
-                        
-                        <!--Priority -->
-                        <StackPanel Margin="0,10" >
-                            <TextBlock Text="Priority"/>
-                            <ComboBox Name="ComboBoxPriority">
-                                <ComboBoxItem IsSelected="True" Content="Low"/>
-                                <ComboBoxItem Content="Normal"/>
-                                <ComboBoxItem Content="High"/>
-                            </ComboBox>
-                        </StackPanel>
+                <Grid  x:Name="PageAddQuestions" VerticalAlignment="Center"  Width="0" Grid.Column="2">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
+                        <StackPanel Margin="10">
+                            <!--Part-->
+                            <StackPanel Margin="0,10" >
+                                <TextBlock Text="Section :"/>
+                                <ComboBox x:Name="ComboBoxPart" >
+                                    <ComboBoxItem IsSelected="True" Content="Other"/>
+                                    <ComboBoxItem   Content="Authentication"/>
+                                    <ComboBoxItem Content="Dashboard"/>
+                                    <ComboBoxItem Content="Payments"/>
+                                </ComboBox>
+                            </StackPanel>
 
-                        
-                        <!--Title -->
-                        <StackPanel Margin="0,10" >
-                            <TextBlock Text="Title"/>
-                            <TextBox x:Name="TextboxTitle" Height="30"/>
-                        </StackPanel>
-
-                        <!--DisCription -->
-                        <StackPanel Margin="0,10" >
-                            <TextBlock Text="Description :"/>
-                            <TextBox x:Name="TextDescription" Height="30" AcceptsReturn="True" AcceptsTab="True"/>
-                        </StackPanel>
-                       
-                        <!--BTN Controller-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Border MouseDown="OpenPageQuestions" Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
-                                <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Back"/>
-                            </Border>
-                        <Border  x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
-                            <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Start"/>
-                        </Border>
+                            <!--Priority -->
+                            <StackPanel Margin="0,10" >
+                                <TextBlock Text="Priority"/>
+                                <ComboBox Name="ComboBoxPriority">
+                                    <ComboBoxItem IsSelected="True" Content="Low"/>
+                                    <ComboBoxItem Content="Normal"/>
+                                    <ComboBoxItem Content="High"/>
+                                </ComboBox>
+                            </StackPanel>
 
 
+                            <!--Title -->
+                            <StackPanel Margin="0,10" >
+                                <TextBlock Text="Title"/>
+                                <TextBox x:Name="TextboxTitle" Height="30"/>
+                            </StackPanel>
+
+                            <!--DisCription -->
+                            <StackPanel  Margin="0,10" >
+                                <TextBlock Text="Description :"/>
+                                <TextBox MinHeight="100" x:Name="TextDescription"  AcceptsReturn="True" AcceptsTab="True"/>
+                            </StackPanel>
+
+                            <!--BTN Controller-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Border MouseDown="OpenPageQuestions" Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
+                                    <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Back"/>
+                                </Border>
+                                <Border  x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
+                                    <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Start"/>
+                                </Border>
+
+
+                            </StackPanel>
+
                         </StackPanel>
 
-                    </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
 
