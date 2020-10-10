@@ -155,8 +155,8 @@
                 </Border >
 
                 <!--Help-->
-                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
-                    <TextBlock x:Name="BTNHelp" MouseLeave="ChangeColor_DeActive" MouseEnter="ChangeColor_Active" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE82F;" FontFamily="Segoe MDL2 Assets"/>
+                <Border  x:Name="ActionBTNhelp" Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <TextBlock  x:Name="BTNHelp" MouseLeave="ChangeColor_DeActive" MouseEnter="ChangeColor_Active" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE82F;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
                     </StackPanel>
 

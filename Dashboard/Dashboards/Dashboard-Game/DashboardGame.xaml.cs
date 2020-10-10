@@ -4,6 +4,7 @@ using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageHelps;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport;
@@ -53,9 +54,16 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 Debug.WriteLine(Settings.Default._id);
             }
 
+
+            //action BTNHelp
+            BTNHelp.MouseDown += (s, e) =>
+            {
+
+                Root.Children.Add(new SubPageHelp());
+            };
         }
 
-     
+
         internal async void Blure(bool OnOff)
         {
             if (OnOff)
@@ -260,6 +268,8 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You login at {DateTime.Now} (Local Time)", new BsonDocument(), false, (Reslult) => { });
         }
+
+
 
         private void Window_LayoutUpdated(object sender, EventArgs e)
         {

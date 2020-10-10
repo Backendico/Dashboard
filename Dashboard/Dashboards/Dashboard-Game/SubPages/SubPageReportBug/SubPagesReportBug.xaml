@@ -117,7 +117,7 @@
 
                                 <!--Add TO Support-->
                                 <CheckBox x:Name="FllowBug" Margin="0,10" Content="follow Bug With Support"/>
-                                
+
                                 <!--DashboardName-->
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Dashboard Name : " FontWeight="Bold"/>
@@ -142,6 +142,14 @@
                                     <TextBlock Foreground="White"  TextAlignment="Center" VerticalAlignment="Center" Text="Send"/>
                                 </Border>
 
+                                <!--Prize-->
+                                <TextBlock VerticalAlignment="Center"  >
+                                    <Run Foreground="LightGreen" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Low : between 10,000 to 30,000 Tomans"/>
+                                    <LineBreak/>
+                                    <Run Foreground="Orange" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Normal : between 20,000 to 40,000 Tomans"/>
+                                    <LineBreak/>
+                                    <Run Foreground="Tomato" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="High : between 30,000 to 60,000 Tomans"/>
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
                     </ScrollViewer>
