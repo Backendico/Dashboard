@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageHelps"
              mc:Ignorable="d" 
+             Background="#33000000"
              d:DesignHeight="864.958" d:DesignWidth="800">
 
-    <Border Margin="50,60" MaxHeight="500" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
+    <Border Margin="50,60" MaxHeight="600" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
         <Border.Effect>
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
@@ -35,9 +36,9 @@
             </Border>
 
             <!--Body-->
-            <TabControl Margin="10" TabStripPlacement="Left"  Grid.Row="1" >
-                <TabItem Header="Tabs">
-                    <Grid>
+            <TabControl  Margin="10" TabStripPlacement="Left"  Grid.Row="1" >
+                <TabItem Height="30" Background="LightGray"  Header="Tabs">
+                    <Grid Margin="20"> 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -141,49 +142,370 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Dashboard">
-                    <StackPanel Margin="10">
+                <TabItem Height="30"   Background="LightGray" Header="Dashboard">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
                         
+                        <TextBlock Grid.Row="0" Margin="10,0" TextWrapping="Wrap" Text="General statistics of your account status and details of current studio sections"/>
+
+                        <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Colum0-->
+                        <StackPanel Grid.Column="0">
+                            
+                        <!--Player-->
+                        <TextBlock Margin="10" >
+                            <Run FontWeight="Bold" Text="-Player(statistics)"/>
+                            <LineBreak/>
+                            <Run Text="Summary of user registration status"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Registered in the last 24 hours"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Registered in the last 1 Day"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Registered in the last 7 Days"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Registered in the last 30 Days"/>
+                        </TextBlock>
+                        <!--Login-->
+                        <TextBlock Margin="10" >
+                            <Run FontWeight="Bold" Text="-Login(statistics)"/>
+                            <LineBreak/>
+                            <Run Text="Statistics of players active in the studio"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Log in past 24 hours"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Log in past 1 Day"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Log in past 7 Days"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Log in past 30 Days"/>
+                        </TextBlock>
+                       
+                        </StackPanel>
+                        
+                        <!--Colum1-->
+                    <StackPanel Grid.Column="1">
+                        <!--Leaderboard-->
+                        <TextBlock Margin="10" >
+                            <Run FontWeight="Bold" Text="-Leaderboard(Payment)"/>
+                            <LineBreak/>
+                            <Run  Text="View leaderboards made and used"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Totally: "/> <Run Text="Number of leaderboards purchased"/>
+                             <LineBreak/>
+                         <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Used: "/> <Run Text="Number of leaderboards used"/>
+                       
+                        </TextBlock>
+
+                            <!--Players-->
+                            <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="-Player(Payment)"/>
+                            <LineBreak/>
+                            <Run  Text="Number of users that can be registered in the studio"/>
+                            <LineBreak/>
+                            <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Totally: "/> <Run Text="Total number of registrable players purchased"/>
+                             <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Used: "/> <Run Text="Total number of players used"/>
+
+                            </TextBlock>
+                        
+
+                            <!--Logs-->
+                            <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="-Logs(Payment)"/>
+                            <LineBreak/>
+                            <Run  Text="Visible stored activity history"/>
+                            <LineBreak/>
+                            <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Totally: "/> <Run Text="Visible amount purchased"/>
+                             <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Used: "/> <Run Text="History used"/>
+                            </TextBlock>
+
+                            <!--Studio-->
+                            <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="-Studios(Payment)"/>
+                            <LineBreak/>
+                            <Run  Text="Statistics of creating a new studio"/>
+                            <LineBreak/>
+                            <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Totally: "/> <Run Text="Number of studios purchased"/>
+                             <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Used: "/> <Run Text="Number of studios used"/>
+                            </TextBlock>
+
+                            <!--Apis-->
+                            <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="-Apis(Payment)"/>
+                            <LineBreak/>
+                            <Run  Text="Reading and writing volume in the studio by apis"/>
+                            <LineBreak/>
+                            <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Totally: "/> <Run Text="Total volume"/>
+                             <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Used: "/> <Run Text="The amount of volume used"/>
+                            </TextBlock>
+
+
+
+                        </StackPanel>
+                        </Grid>
+                        
+                    </Grid>
+                        
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Height="30"  Background="LightGray" Header="Players">
+                    <ScrollViewer  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock  Grid.Row="0" Margin="10,0"   TextWrapping="Wrap" Text="The player authentication and management system allows you to manage your players professionally and change and manage different parts of them."/>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--Colum0-->
+                                <StackPanel Grid.Column="0">
+
+                                    <!--Search-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Search"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="Summary of user registration status"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="Search for users by username, token and email To use it, just enter one of the requested elements in the relevant field"/>
+                                    </TextBlock>
+
+                                    <!--Add-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Add Player"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="Add players manually"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="To manually add a specific user and manage it"/>
+                                    </TextBlock>
+
+
+                                    <!--Edit-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Edit Players"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="Edit and manage users"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="Manage and edit users manually EX: username, player email, registered leaderboards, view recent activity, etc."/>
+                                    </TextBlock>
+                                    
+                                </StackPanel>
+
+                                <!--Colum1-->
+                                <StackPanel Grid.Column="1">
+
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Height="30" Background="LightGray" Header="Leaderboards">
+                    <ScrollViewer   HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock  Grid.Row="0" Margin="10,0"   TextWrapping="Wrap" Text="Leaderboards allow you to create tables for recording and managing player scores (last value, largest value, smallest value) in sorting order (ascending and descending)."/>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--Colum0-->
+                                <StackPanel Grid.Column="0">
+
+                                    <!--Add-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Add Leaderboard"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="Add a new leaderboard and use it"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="You can add a table to create a table with custom settings"/>
+                                    </TextBlock>
+
+                                    <!--Edit-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Edit Leaderboard"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="Manage and edit created tables"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="Each table created can be edited, for example: editing tables, viewing player lists, backing up tables manually, downloading backup player lists, editing table settings"/>
+                                    </TextBlock>
+
+                                </StackPanel>
+
+                                <!--Colum1-->
+                                <StackPanel Grid.Column="1">
+
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Height="30" Background="LightGray" Header="Setting">
+                    <ScrollViewer  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock  Grid.Row="0" Margin="10,0"   TextWrapping="Wrap" Text="The current studio settings and your payments section are in this section to better manage payments and increase the studio's capabilities"/>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--Colum0-->
+                                <StackPanel Grid.Column="0">
+
+                                    <!--Add-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Settings"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="View and make basic changes"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="Studio settings and current studio relationship information and database information"/>
+                                    </TextBlock>
+
+                                    <!--Edit-->
+                                    <TextBlock TextWrapping="Wrap" Margin="10" >
+                            <Run FontWeight="Bold" Text="Monetiz"/>
+                            <LineBreak/>
+                            <Run Foreground="Gray" Text="Manage payments and enhance features"/>
+                            <LineBreak/>
+                            <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run  Text="EIncrease software capabilities (leaderboards, players, apis, etc.), view and manage payments made"/>
+                                    </TextBlock>
+
+                                </StackPanel>
+
+                                <!--Colum1-->
+                                <StackPanel Grid.Column="1">
+
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Height="30" Background="LightGray" Header="Payments">
+                    <StackPanel Margin="20">
+                        <TextBlock TextWrapping="Wrap" Text="Increase software capabilities (leader boards, apis, number of players, etc.) Studio features, purchases and enhancement management"/>
                     </StackPanel>
                 </TabItem>
 
-                <TabItem Header="Players">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem Height="30" Background="LightGray" Header="Supports">
+                    <StackPanel Margin="20">
+                        <TextBlock TextWrapping="Wrap" Text="In case of any problems, questions and. . . You can ask your questions and problems from the support department and get your answer in the shortest possible time. All studios have 24/7 support."/>
+                    </StackPanel>
+                    
                 </TabItem>
 
-                <TabItem Header="Leaderboards">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem Height="30" Background="LightGray" Header="Logs">
+                    <StackPanel Margin="20">
+                        <TextBlock TextWrapping="Wrap" Text="All effective changes are logged in your studio and stored in the history section."/>
+                        <TextBlock Margin="0,10">
+                            <Run FontWeight="Bold" Text="List Logs"/>
+                            <LineBreak/>
+                               <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Login"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Add Player"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Edit Player"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Remove Player"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Add Leaderboard"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Edit Leaderboards"/>
+                             <LineBreak/>
+                              <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Remove Leaderboard"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Prizes"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Add Support"/>
+                             <LineBreak/>
+                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Remove Support"/>
+                             <LineBreak/>
+                              <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Send Bugs"/>
+                        </TextBlock>
+                    </StackPanel>
                 </TabItem>
 
-                <TabItem Header="Setting">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem Height="30" Background="LightGray" Header="Server Status">
+                    <StackPanel Margin="20" >
+                        <TextBlock TextWrapping="Wrap" Text="Check the up-to-date status of your server. In case of any problem, you can share it with the support team."/>
+                    </StackPanel>
                 </TabItem>
 
-                <TabItem Header="Payments">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem Height="30" Background="LightGray" Header="Report Bug">
+                    <StackPanel Margin="20">
+                        <TextBlock TextWrapping="Wrap" Text="You can use the bug report section to report software problems and failures. If the reports are correct and important, an amount will be credited to your account"/>
+                        <TextBlock FontWeight="Bold" Margin="0,10" Text="Importance of bugs and payments"/>
+                        <TextBlock>
+                               <Run Foreground="LightGreen" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Low:"/><Run Text="Between 10,000 and 30,000 Tomans"/>
+                             <LineBreak/>
+                            <Run Foreground="Orange" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Normal:"/><Run Text="Between 20,000 and 40,000 Tomans"/>
+                             <LineBreak/>
+                             <Run Foreground="Tomato" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run FontWeight="Bold" Text="Normal:"/><Run Text="Between 30,000 and 60,000 Tomans"/>
+                             <LineBreak/>
+                        </TextBlock>
+                    </StackPanel>
                 </TabItem>
 
-                <TabItem Header="Supports">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem Height="30" Background="LightGray" Header="Services">
+                    <StackPanel Margin="20">
+                        <TextBlock TextWrapping="Wrap" Text="The software has several services"/>
+                        <TextBlock FontWeight="Bold" Margin="0,10" Text="Services are running:"/>
+                        <TextBlock>
+                            <Run FontWeight="Bold" Text="-Game Services"/>
+                            <LineBreak/>
+                            <Run Text="  &#xE915;" FontFamily="Segoe MDL2 Assets"/> 
+                            <Run   Text="Players / Authentication"/>
+                            <LineBreak/>
+                            <Run Text= "  &#xE915;" FontFamily="Segoe MDL2 Assets"/> 
+                            <Run   Text="Leaderboards"/>
+                             <LineBreak/>
+                            <LineBreak/>
+                              <Run FontWeight="Bold" Text="-App Services: "/><Run Text="Will be added soon"/>
+                          
+                        </TextBlock>
+                    </StackPanel>
                 </TabItem>
-
-                <TabItem Header="Logs">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
-
-                <TabItem Header="Server Status">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
-
-                <TabItem Header="Report Bug">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
-
-                <TabItem Header="Services">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
-                <TabItem Header="Studios">
-                    <Grid Background="#FFE5E5E5"/>
+              
+                <TabItem Height="30" Background="LightGray"  Header="Studios">
+                    <StackPanel Margin="20">
+                        <TextBlock TextWrapping="Wrap" Text="Your workspace is introduced as a studio, all facilities are the same for the studios."/>
+                    </StackPanel>
                 </TabItem>
             </TabControl>
 

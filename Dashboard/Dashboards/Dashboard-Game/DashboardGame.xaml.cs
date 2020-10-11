@@ -4,6 +4,7 @@ using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageEduction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageHelps;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
@@ -60,6 +61,13 @@ namespace Dashboard.Dashboards.Dashboard_Game
             {
 
                 Root.Children.Add(new SubPageHelp());
+            };
+
+            //action btn eduction
+            BTNEduction.MouseDown += (s, e) =>
+            {
+
+                Root.Children.Add(new SubPageEduction());
             };
         }
 

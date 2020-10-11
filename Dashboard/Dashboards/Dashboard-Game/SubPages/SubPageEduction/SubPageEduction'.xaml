@@ -1,0 +1,267 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageEduction.SubPageEduction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageEduction"
+             mc:Ignorable="d" 
+             Background="#33000000"
+             d:DesignHeight="789" d:DesignWidth="800">
+    <Border Margin="50,60" MaxHeight="600" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
+
+        <Border.Effect>
+            <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+        </Border.Effect>
+
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--Header-->
+            <Border CornerRadius="5,5,0,0" Background="Black" >
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock  Margin="10" VerticalAlignment="Center" Foreground="White" >
+                    <Run FontWeight="Bold" Text="Help"/>
+                    </TextBlock>
+                    <Button Cursor="Hand" Click="Close" FontSize="15"  Content="&#xEF2C;" Foreground="Gray" Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right" Margin="10,0" Width="20" Height="20" Grid.Column="1" FontFamily="Segoe MDL2 Assets" />
+                </Grid>
+            </Border>
+
+            <!--Body-->
+            <ScrollViewer Margin="0,0,0,10" Grid.Row="1">
+                <TabControl  Margin="10" TabStripPlacement="Left"  Grid.Row="1" >
+                    <TabItem Height="30" Background="LightGray"  Header="Register">
+                        <StackPanel Margin="20">
+                            <TextBlock TextWrapping="Wrap">
+                                <Run Text="By entering "/><Run FontWeight="Bold" Text=" ( password,username, email ) "/><Run Text="you can create your account, and use the software features."/>
+                                <LineBreak/>
+                                  <LineBreak/>
+                                <Run FontWeight="Bold" Text="Required fields:"/>
+                                 <LineBreak/>
+                              <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="Username"/>
+                                    <LineBreak/>
+                                <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="Password"/>
+                                    <LineBreak/>
+                                <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="Email"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Height="30"   Background="LightGray" Header="Login">
+                        <StackPanel Margin="20">
+                            <TextBlock TextWrapping="Wrap">
+                                <Run Text="To enter the software, it is necessary to enter your "/><Run FontWeight="Bold" Text=" (username and password) "/>
+                                <LineBreak/>
+                                  <LineBreak/>
+                                <Run FontWeight="Bold" Text="Required fields:"/>
+                                 <LineBreak/>
+                              <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="Username"/>
+                                    <LineBreak/>
+                                <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="Password"/>
+
+                            </TextBlock>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Height="30"  Background="LightGray" Header="Creat Studio">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="The following methods can be used to create a new studio. "/>
+                                <LineBreak/>
+                                  <LineBreak/>
+                                <Run FontWeight="Bold" Text="1- Creating a new studio after logging in:"/>
+                                 <LineBreak/>
+                              <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="  After logging in, click on"/> <Run FontWeight="Bold" Text="'New'"/> <Run Text="and click on the "/> <Run FontWeight="Bold" Text="Add"/> <Run Text="button by filling in the "/><Run FontWeight="Bold" Text="'Studio Name'"/>
+
+                                
+                                <LineBreak/>
+                                  <LineBreak/>
+                                <Run FontWeight="Bold" Text="2- Creating a new studio in the software :"/>
+                                 <LineBreak/>
+                              <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>  <Run Text="In the top tab, click on"/> <Run FontWeight="Bold" Text="'Studio'"/> <Run Text="click on "/> <Run FontWeight="Bold" Text="Add"/> <Run Text="button by filling in the "/><Run FontWeight="Bold" Text="'Studio Name'"/>
+
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Search Player">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="To search users can:"/>
+                            <LineBreak/>
+                               <LineBreak/>
+                            <Run Text="1: Click on the "/><Run FontWeight="Bold" Text="'Users'"/> <Run Text="tab."/>
+                             <LineBreak/>
+                            <Run Text="2: Click the "/><Run FontWeight="Bold" Text="'Search'"/> <Run Text="button."/>
+                            <LineBreak/>
+                            <Run Text="3: Enter "/><Run FontWeight="Bold" Text="'Email'"/> <Run Text="or"/> <Run FontWeight="Bold" Text="'Token'"/><Run Text=" or "/><Run FontWeight="Bold" Text="'Username'"/> <Run Text="button."/>
+                            <LineBreak/>
+                            <Run Text="4: Click the "/><Run FontWeight="Bold" Text="'Search'"/> <Run Text="button."/>
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Creat Player">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="To create a new user:"/>
+                            <LineBreak/>
+                               <LineBreak/>
+                            <Run Text="1: Click on the "/><Run FontWeight="Bold" Text="'Users'"/> <Run Text="tab."/>
+                             <LineBreak/>
+                            <Run Text="2: Click the "/><Run FontWeight="Bold" Text="'Add'"/> <Run Text="button."/>
+                            <LineBreak/>
+                            <Run Text="3: Enter "/><Run FontWeight="Bold" Text="'Username'"/> <Run Text="and"/> <Run FontWeight="Bold" Text="'Password'"/>
+                            <LineBreak/>
+                            <Run Text="4: Click the "/><Run FontWeight="Bold" Text="'Add'"/> <Run Text="button."/>
+                                   <LineBreak/>
+                                   <LineBreak/>
+                           <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="You can create without a username and password"/>
+
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Delete Player">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="To delete:"/>
+                            <LineBreak/>
+                               <LineBreak/>
+                            <Run Text="1: Open the "/><Run FontWeight="Bold" Text="'Users Edit'"/> <Run Text="page"/>
+                            <LineBreak/>
+                            <Run Text="2: Click on the "/><Run FontWeight="Bold" Text="'Delete"/> <Run Text="Button"/>
+                            <LineBreak/>
+                            <LineBreak/>
+                      <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>     <Run Text="If you remove a player all user data is deleted and can not be undone."/>
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Edit Player">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="You can completely edit your users.To edit the user you can:"/>
+                            <LineBreak/>
+                               <LineBreak/>
+                            <Run Text="1: Click on the "/><Run FontWeight="Bold" Text="'Player'"/> <Run Text="tab"/>
+                            <LineBreak/>
+                            <Run Text="2: Click the "/><Run FontWeight="Bold" Text="'Edit User"/> <Run Text="Button"/>
+                            <LineBreak/>
+                            <LineBreak/>
+                      <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Note: Edited information is not reversible."/>
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem  Height="30" Background="LightGray" Header="Add Player to Leaderboard">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="You can use the following methods to record user scores on leaderboards."/>
+                            <LineBreak/>
+                              <LineBreak/>
+                            <Run FontWeight="Bold" Text="1: From the player edit page"/>
+                               <LineBreak/>
+                            <Run Text="     1.1: Click on the"/><Run FontWeight="Bold" Text=" 'Edit Player'"/> <Run Text="button "/>
+                            <LineBreak/>
+                            <Run Text="     1.2: Click on the "/><Run FontWeight="Bold" Text="'Leaderboard'"/> <Run Text="tab"/>
+                               <LineBreak/>
+                            <Run Text="     1.3: Click the "/><Run FontWeight="Bold" Text="'Add'"/> <Run Text="button"/>
+                               <LineBreak/>
+                            <Run Text="     1.4: Assign the leaderboard name and score to the user. "/>
+                              <LineBreak/>
+                            <Run Text="     1.5: Click the "/><Run FontWeight="Bold" Text="'Save'"/> <Run Text="button"/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/>     <Run Text="The amount allocated to the user can not be removed from this method."/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <Run FontWeight="Bold" Text="2: From the leaderboards edit page"/>
+                            <LineBreak/>
+                            <Run Text="     2.1: Open the leaderboard editing page "/>
+                            <LineBreak/>
+                            <Run Text="     2.2: Click on the "/><Run FontWeight="Bold" Text="'Leaderboard'"/> <Run Text="button"/>
+                            <LineBreak/>
+                            <Run Text="     2.3: Click the "/><Run FontWeight="Bold" Text="'Add'"/> <Run Text="button"/>
+                            <LineBreak/>
+                            <Run Text="     2.4: Fill in the special fields "/>
+                             <LineBreak/>
+                             <Run Text="     2.5: Click the "/><Run FontWeight="Bold" Text="'Add'"/> <Run Text="button"/>
+                            <LineBreak/>
+                                 <LineBreak/>
+                      <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="You can delete your users in this section."/>
+                               <LineBreak/>
+                            <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Sign up with players in real time."/>
+
+
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Player Password Recovery">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="For more security of players, access and the possibility of changing the password through APIs is impossible."/>
+                                <LineBreak/>
+                                <LineBreak/>
+                             <Run Text="1: Open the"/><Run FontWeight="Bold" Text=" 'Edit Player'"/> <Run Text="page"/>
+                            <LineBreak/>
+                             <Run Text="2: Click the"/><Run FontWeight="Bold" Text=" 'Recover Email'"/> <Run Text="Button"/>
+                             <LineBreak/>
+                              <LineBreak/>
+                            <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The recovery email will be sent to the players' emails and the recovery link will be sent in the email."/>
+
+
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Creat Leaderboard">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="To create a new leaderboard:"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                             <Run Text="1: Click on the"/><Run FontWeight="Bold" Text=" 'Leaderboard'"/> <Run Text="Tab"/>
+                            <LineBreak/>
+                             <Run Text="2: Click the"/><Run FontWeight="Bold" Text=" 'Add'"/> <Run Text="Button"/>
+                             <LineBreak/>
+                             <Run Text="3: Complete the required fields."/>
+                             <LineBreak/>
+                             <Run Text="4: Click the"/><Run FontWeight="Bold" Text=" 'Add'"/> <Run Text="Button"/>
+                             <LineBreak/>
+                              <LineBreak/>
+                            <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Leaderboard name can not be changed."/>
+                              <LineBreak/>
+                            <Run FontWeight="Bold" Foreground="Tomato" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Leaderboard can not be removed"/>
+
+
+                        </TextBlock>
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray" Header="Edit Leaderboard">
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray"  Header="Delete Leaderboard">
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray"  Header="Reset Leaderboard">
+                    </TabItem>
+
+                    <TabItem Height="30" Background="LightGray"  Header="Leaderboard Backup">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Download and Remove Leaderboard">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Server Status">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Send Support">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Send Bug Report">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Manage History">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Setting">
+                    </TabItem>
+                    <TabItem Height="30" Background="LightGray"  Header="Payments">
+                    </TabItem>
+                </TabControl>
+            </ScrollViewer>
+
+
+        </Grid>
+    </Border>
+
+
+</UserControl>
