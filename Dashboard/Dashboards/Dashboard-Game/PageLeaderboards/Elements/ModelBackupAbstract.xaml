@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="40"
              Background="WhiteSmoke"
-             d:DesignHeight="450" d:DesignWidth="800" MouseEnter="PointerEnter" MouseLeave="PointerExit">
+             d:DesignHeight="450" d:DesignWidth="800" >
 
 
     <UserControl.Triggers>
