@@ -5,11 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements"
              mc:Ignorable="d" 
-             MouseEnter="UserControl_MouseEnter"
-             MouseLeave="UserControl_MouseLeave"
              Background="WhiteSmoke"
              Height="50" d:DesignWidth="1150"
+             x:Name="Root"
              >
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNEdit" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+            
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNEdit" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="1" To="0" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+            
+        </EventTrigger>
+    </UserControl.Triggers>
+
     <Border BorderBrush="Gainsboro" BorderThickness="0,0,0,1">
 
         <Grid  MinHeight="30" >
@@ -37,7 +69,7 @@
             <TextBlock TextAlignment="Center" x:Name="TextCountry" VerticalAlignment="Center" Text="Country" Grid.Column="4"/>
             <TextBlock TextAlignment="Center"  x:Name="TextUTD" VerticalAlignment="Center" Text="VTD" Grid.Column="5"/>
 
-            <Border MouseDown="OpenEdit" CornerRadius="5" Background="Orange" Grid.Column="6" Width="80" Height="30" Visibility="Collapsed" ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit">
+            <Border  MouseDown="OpenEdit" CornerRadius="5" Background="Orange" Opacity="0" Grid.Column="6" Width="80" Height="30"  ToolTip="Edit player" Cursor="Hand"  x:Name="BTNEdit">
                 <TextBlock FontSize="15" VerticalAlignment="Center"  TextAlignment="Center" Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xE70F;"/>
             </Border>
         </Grid>

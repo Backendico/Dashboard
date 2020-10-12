@@ -29,19 +29,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         }
 
-        private void PointerEnter(object sender, MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.Gainsboro);
-            Controllers.Visibility = Visibility.Visible;
-        }
-
-        private void PointerExit(object sender, MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.WhiteSmoke);
-            Controllers.Visibility = Visibility.Collapsed;
-        }
-
-
         private async void RemoveBackup(object sender,MouseButtonEventArgs e)
         {
             if (await DashboardGame.DialogYesNo("Information can not be undone") == MessageBoxResult.Yes)

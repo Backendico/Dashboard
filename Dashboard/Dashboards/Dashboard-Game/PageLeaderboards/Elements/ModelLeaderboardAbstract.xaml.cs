@@ -87,16 +87,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             };
         }
 
-        private void PointerEnter(object sender, MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.Gainsboro);
-            BTNEdit.Visibility = Visibility.Visible;
-        }
-        private void PointerExit(object sender, MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.WhiteSmoke);
-            BTNEdit.Visibility = Visibility.Collapsed;
-        }
 
         private void CopyToken(object sender, MouseButtonEventArgs e)
         {

@@ -50,17 +50,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         }
 
 
-
-        private void PointerEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.Gainsboro);
-        }
-
-        private void PointerExit(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.WhiteSmoke);
-        }
-
         Action RefreshList;
 
     }

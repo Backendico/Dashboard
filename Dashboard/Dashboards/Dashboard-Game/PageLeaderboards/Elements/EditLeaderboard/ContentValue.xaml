@@ -7,9 +7,43 @@
              mc:Ignorable="d" 
              Height="40"
              Background="WhiteSmoke"
-             d:DesignHeight="75" d:DesignWidth="800" MouseEnter="PointerEnter" MouseLeave="PointerExit">
+             d:DesignHeight="75" d:DesignWidth="800" >
+    
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNRemove" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNRemove" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="1" To="0" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+    </UserControl.Triggers>
+
     <!-- Head row-->
-    <Grid >
+    <Grid x:Name="Root" Background="Transparent" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="1*"/>
@@ -21,7 +55,8 @@
         <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="2" />
         <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="3" />
 
-        <Border CornerRadius="5" MouseDown="Remove" Grid.Column="0"    Background="Tomato" Width="30" Height="30" Cursor="Hand">
+        
+        <Border x:Name="BTNRemove"  CornerRadius="5" MouseDown="Remove" Grid.Column="0"  Opacity="0"   Background="Tomato" Width="30" Height="30" Cursor="Hand">
             <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE74D;"  FontSize="17"  FontFamily="Segoe MDL2 Assets"/>
         </Border>
         

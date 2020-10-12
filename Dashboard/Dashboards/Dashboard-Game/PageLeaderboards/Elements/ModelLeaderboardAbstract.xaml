@@ -9,8 +9,41 @@
              BorderBrush="Gainsboro"
              Background="WhiteSmoke"
              BorderThickness="0,0,0,1"
-             d:DesignHeight="30" d:DesignWidth="800" MouseEnter="PointerEnter" MouseLeave="PointerExit">
-    <Grid>
+             d:DesignHeight="30" d:DesignWidth="800" >
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNEdit" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNEdit" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="1" To="0" Duration="0:0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+    </UserControl.Triggers>
+    
+    <Grid Background="Transparent" x:Name="Root">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3*"/>
@@ -32,7 +65,7 @@
         <TextBlock x:Name="TextSort" VerticalAlignment="Center"  TextAlignment="Center"  Margin="10,0,0,0" Text="Sort " Grid.Column="3"/>
         <TextBlock x:Name="TextPlayers" VerticalAlignment="Center"  TextAlignment="Center" Margin="10,0,0,0" Text="Players" Grid.Column="4"/>
 
-        <Border CornerRadius="5"  Width="80" Height="30" Margin="5" Background="Orange"  Grid.Column="6"  ToolTip="Edit leaderboard" Cursor="Hand" Visibility="Collapsed" x:Name="BTNEdit">
+        <Border CornerRadius="5"  Width="80" Height="30" Margin="5" Background="Orange" Opacity="0"  Grid.Column="6"  ToolTip="Edit leaderboard" Cursor="Hand"  x:Name="BTNEdit">
             <TextBlock VerticalAlignment="Center" TextAlignment="Center" FontSize="15" Foreground="White" Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" />
         </Border>
    

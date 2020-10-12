@@ -54,19 +54,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             this.DetailPlayer = DetailPlayer;
         }
 
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.Gainsboro);
-            BTNEdit.Visibility = Visibility.Visible;
-        }
-
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Background = new SolidColorBrush(Colors.WhiteSmoke);
-            BTNEdit.Visibility = Visibility.Collapsed;
-        }
-
-
+    
+     
         private void OpenEdit(object sender, MouseButtonEventArgs e)
         {
            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));

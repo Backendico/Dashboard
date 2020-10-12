@@ -8,7 +8,42 @@
              Height="40"
              Background="WhiteSmoke"
              d:DesignHeight="450" d:DesignWidth="800" MouseEnter="PointerEnter" MouseLeave="PointerExit">
-    <Grid >
+
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Controllers" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Controllers" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="1" To="0" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+    </UserControl.Triggers>
+    
+    <Grid x:Name="Root" Background="Transparent" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
@@ -25,7 +60,7 @@
         <TextBlock x:Name="TextStart" Text="Start" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextEnd" Text="End" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
 
-        <StackPanel x:Name="Controllers" Cursor="Hand"  VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" Visibility="Collapsed"  Grid.Column="3" Margin="5">
+        <StackPanel x:Name="Controllers" Cursor="Hand" Opacity="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" Background="Transparent" Grid.Column="3" Margin="5">
         <Border   CornerRadius="5,0,0,5" MouseDown="Download"  Background="Orange" Width="80" Height="30"  x:Name="BTNDownload"  >
             <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontSize="15"  FontFamily="Segoe MDL2 Assets" Text="&#xE896;"/>
         </Border>

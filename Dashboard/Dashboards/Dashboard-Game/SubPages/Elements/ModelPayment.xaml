@@ -13,17 +13,32 @@
         <EventTrigger RoutedEvent="MouseEnter">
             <BeginStoryboard>
                 <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
-                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.1"/>
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3"/>
                 </Storyboard>
             </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNShowDetail" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Orange" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+            
         </EventTrigger>
         
         <EventTrigger RoutedEvent="MouseLeave">
+            
             <BeginStoryboard>
                 <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
-                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.1"/>
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3"/>
                 </Storyboard>
             </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNShowDetail" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Orange" To="Transparent" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
         </EventTrigger>
     </UserControl.Triggers>
     
@@ -48,9 +63,9 @@
             <TextBlock x:Name="TextCreated" Grid.Column="1" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Created"/>
             <TextBlock x:Name="TextCash" Grid.Column="2" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Cash"/>
             <TextBlock x:Name="TextCreator" Grid.Column="3" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Creator"/>
-            <Border x:Name="BTNShowDetail"  CornerRadius="5"  Cursor="Hand" BorderBrush="Transparent"  Margin="0,5" MinHeight="30" MinWidth="70" Background="Orange" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center"  >
+         
+            <Border Opacity="1" x:Name="BTNShowDetail"  CornerRadius="5"  Cursor="Hand" BorderBrush="Transparent"  Margin="0,5" MinHeight="30" MinWidth="70" Background="Orange" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center"  >
                 <TextBlock FontSize="15" VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xEF40;"/>
-               
             </Border>
         </Grid>
     </Border>
