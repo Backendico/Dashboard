@@ -9,7 +9,7 @@
              
              >
 
-    <Border Background="Transparent" x:Name="Root" Margin="10" BorderBrush="Gainsboro" BorderThickness="1">
+    <Border CornerRadius="5" Background="Transparent" x:Name="Root" Margin="10" BorderBrush="Gainsboro" BorderThickness="1">
         <Border.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
@@ -41,7 +41,7 @@
             </EventTrigger>
         </Border.Triggers>
 
-        <Border  x:Name="Priority" BorderBrush="LightGreen" BorderThickness="5,0,0,0">
+        <Border CornerRadius="2,0,0,2" x:Name="Priority" BorderBrush="LightGreen" BorderThickness="10,0,0,0">
             <Grid Margin="10,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -163,7 +163,7 @@
 
             <!-- body Leaderboard-->
             <Grid x:Name="PageLeaderboards" Visibility="Collapsed" Grid.Row="2">
-                <Border BorderBrush="Gray" BorderThickness="0,0,0,0" >
+                <Border  BorderBrush="Gray" BorderThickness="0,0,0,0" >
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -171,7 +171,7 @@
                         </Grid.RowDefinitions>
 
                         <!--Header-->
-                        <Border  Margin="0,0,0,10"  BorderBrush="Gray" Background="WhiteSmoke" >
+                        <Border   Margin="0,0,0,10"  BorderBrush="Gray" Background="WhiteSmoke" >
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--Addleaderobard-->
@@ -195,31 +195,32 @@
                         </Border>
 
                         <!--Body-->
-                        <Border BorderBrush="Gray" BorderThickness="2" Margin="10,10" Grid.Row="1">
+                        <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2" Margin="10,10" Grid.Row="1">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <!--Header Row-->
-                                <Grid Grid.Row="0">
+                                <Grid Grid.Row="0" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="18"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+                                    <Border CornerRadius="5,0,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
                                     <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1"/>
                                     <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2"/>
-                                    <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="3"/>
+                                    <Border CornerRadius="0,5,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="3"/>
 
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Name" Grid.Column="0"/>
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Value" Grid.Column="1"/>
 
                                 </Grid>
+                            
                                 <!--Place Content-->
-                                <ScrollViewer  BorderBrush="Gray" BorderThickness="2" Grid.Row="1">
+                                <ScrollViewer  Margin="0,0,0,5" BorderBrush="Gray" BorderThickness="2" Grid.Row="1">
                                     <StackPanel x:Name="PlaceContentLeaderboard"/>
                                 </ScrollViewer>
                             </Grid>

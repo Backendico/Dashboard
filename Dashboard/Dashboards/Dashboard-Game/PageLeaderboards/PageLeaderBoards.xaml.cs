@@ -37,7 +37,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards
                     if (resul.ElementCount >= 1)
                     {
                         PlaceLeaderboard.Children.Clear();
-                        Debug.WriteLine(resul.ToString());
                         foreach (var item in resul)
                         {
                             PlaceLeaderboard.Children.Add(new ModelLeaderboardAbstract(item.Value.AsBsonDocument, Start));

@@ -24,7 +24,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <!--Header-->
-                <Border CornerRadius="5,5,0,0" Background="Black" >
+                <Border  CornerRadius="5,5,0,0" Background="Black" >
 
                     <Grid Grid.Column="0">
                         <Grid.ColumnDefinitions>
@@ -40,14 +40,14 @@
 
 
                 <!--HeaderController-->
-                <Border Cursor="Hand"  Background="WhiteSmoke" Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,1,0,0">
+                <Border  Cursor="Hand"  Background="WhiteSmoke" Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,1,0,0">
                     <Border x:Name="BTNAddStudio" Margin="10,0" CornerRadius="5" Width="80" Height="30" Background="Orange"   HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="Add"/>
                     </Border>
                 </Border>
 
                 <!--Body-->
-                <Border Margin="20" BorderBrush="Gray" BorderThickness="2" Grid.Row="2">
+                <Border CornerRadius="5" Margin="20" BorderBrush="Gray" BorderThickness="2" Grid.Row="2">
 
                     <Grid >
                         <Grid.RowDefinitions>
@@ -55,7 +55,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <!--RowTable-->
-                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro">
+                        <Border  BorderBrush="Gray" BorderThickness="0,0,0,2">
                             <Grid>
 
                                 <Grid.ColumnDefinitions>
@@ -63,9 +63,9 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="17"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
-                                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
-                                <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,0,0,0"/>
+                                <Border  Background="Gainsboro" CornerRadius="4,0,0,0" Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+                                <Border  Background="Gainsboro" Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+                                <Border  Background="Gainsboro" CornerRadius="0,4,0,0" Grid.Column="2" BorderBrush="Gray" BorderThickness="0,0,0,0"/>
 
                                 <TextBlock Grid.Column="0" FontWeight="Bold" Text="Name" TextAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" FontWeight="Bold" Text="Token" TextAlignment="Center" VerticalAlignment="Center"/>
@@ -73,7 +73,7 @@
                             </Grid>
                         </Border>
                         <!--Body-->
-                        <ScrollViewer Grid.Row="1">
+                        <ScrollViewer Margin="0,0,0,4" Grid.Row="1">
                             <StackPanel x:Name="PlaceContentStudios">
 
 

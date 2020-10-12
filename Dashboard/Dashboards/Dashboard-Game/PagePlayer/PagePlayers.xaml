@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <!--Header-->
-            <Grid Background="WhiteSmoke" Grid.Row="0">
+            <Grid  Background="WhiteSmoke" Grid.Row="0">
                 <!--BTNs-->
                 <StackPanel Margin="10,0" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1">
 
@@ -41,7 +41,7 @@
             </Grid>
 
             <!--Query Recive-->
-            <Border Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="Gray" Grid.Row="1" >
+            <Border CornerRadius="5" Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="Gray" Grid.Row="1" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -50,7 +50,7 @@
                     </Grid.RowDefinitions>
 
                     <!--Header-->
-                    <Border Grid.Row="0"  BorderThickness="0,0,0,2" BorderBrush="Gray"  Background="WhiteSmoke">
+                    <Border CornerRadius="4,4,0,0" Grid.Row="0"  BorderThickness="0,0,0,2" BorderBrush="Gray"  Background="WhiteSmoke">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -98,7 +98,7 @@
 
 
                     <!--Body-->
-                    <ScrollViewer  Grid.Row="2"  >
+                    <ScrollViewer Margin="0,0,0,5" Grid.Row="2"  >
                         <StackPanel x:Name="PlaceContentUser"/>
                     </ScrollViewer>
 
