@@ -500,7 +500,30 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void SendEmailRecovery(ObjectId TokenPlayer, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.SendEmailRecovery);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+
                 }
+
 
                 public sealed class PageLeaderboard
                 {
@@ -1071,6 +1094,7 @@ namespace Dashboard.GlobalElement
                 public string Delete => "https://localhost:44346/PagePlayer/DeletePlayer";
                 public string Save => "https://localhost:44346/PagePlayer/SavePlayer";
                 public string Save_LeaderboardPlayer => "https://localhost:44346/PagePlayer/Save_LeaderboardPlayer";
+                public string SendEmailRecovery => "https://localhost:44346/PagePlayer/SendEmailRecovery";
 
             }
 

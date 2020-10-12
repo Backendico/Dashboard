@@ -1,4 +1,5 @@
-﻿using Dashboard.GlobalElement;
+﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
+using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using RestSharp;
 using System;
@@ -60,6 +61,38 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             }
 
 
+
+            //action btn Email Recovery
+            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            {
+
+                if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{PlayerDetail["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
+                {
+
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SendEmailRecovery(PlayerDetail["Account"]["Token"].AsObjectId, result =>
+                    {
+
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Email Send", Notifaction.StatusMessage.Ok);
+
+                            //add log
+                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Send Email Recovery", $"You sent a recovery email for \"{PlayerDetail["Account"]["Token"]}\" ", new BsonDocument(), false, (ResultLog) => { });
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
+                }
+                else
+                {
+
+                    DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
+                }
+
+            };
         }
 
         //global

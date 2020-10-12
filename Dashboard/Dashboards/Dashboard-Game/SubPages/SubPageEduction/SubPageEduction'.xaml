@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageEduction"
              mc:Ignorable="d" 
              Background="#33000000"
-             d:DesignHeight="789" d:DesignWidth="800">
+             d:DesignHeight="899" d:DesignWidth="800">
     <Border Margin="50,60" MaxHeight="600" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
         <Border.Effect>
@@ -28,7 +28,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock  Margin="10" VerticalAlignment="Center" Foreground="White" >
-                    <Run FontWeight="Bold" Text="Help"/>
+                    <Run FontWeight="Bold" Text="Eductions"/>
                     </TextBlock>
                     <Button Cursor="Hand" Click="Close" FontSize="15"  Content="&#xEF2C;" Foreground="Gray" Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right" Margin="10,0" Width="20" Height="20" Grid.Column="1" FontFamily="Segoe MDL2 Assets" />
                 </Grid>
@@ -232,29 +232,89 @@
                     </TabItem>
 
                     <TabItem Height="30" Background="LightGray" Header="Edit Leaderboard">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="edit leaderboards"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                             <Run Text="1: Click on the"/><Run FontWeight="Bold" Text=" 'Leaderboard'"/> <Run Text="Tab"/>
+                            <LineBreak/>
+                             <Run Text="2: Click the"/><Run FontWeight="Bold" Text=" 'Edit Leaderboard'"/> <Run Text="Button"/>
+                             <LineBreak/>
+
+
+                        </TextBlock>
                     </TabItem>
 
                     <TabItem Height="30" Background="LightGray"  Header="Delete Leaderboard">
+                        <TextBlock Margin="20" Text="Leaderboards cannot be removed."/>
                     </TabItem>
 
                     <TabItem Height="30" Background="LightGray"  Header="Reset Leaderboard">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="Reset Leaderboard List:"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                             <Run Text="1: Open the"/><Run FontWeight="Bold" Text=" 'Edit Leaderboard'"/> <Run Text="page"/>
+                            <LineBreak/>
+                             <Run Text="2: Click on the"/><Run FontWeight="Bold" Text=" 'Leaderboard'"/> <Run Text="tab"/>
+                             <LineBreak/>
+                             <Run Text="3: Click the"/><Run FontWeight="Bold" Text=" 'Reset'"/> <Run Text="Button"/>
+                             <LineBreak/>
+                            <Run Text="4: After your confirmation, the leaderboard will be reset."/>
+                             <LineBreak/>
+                              <LineBreak/>
+                            <Run FontWeight="Bold" Foreground="Tomato" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Leaderboards lose all their information after reset and users' registered points are lost. This change can not be undone."/>
+                        </TextBlock>
                     </TabItem>
 
                     <TabItem Height="30" Background="LightGray"  Header="Leaderboard Backup">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="Reset Leaderboard List:"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                             <Run Text="1: Open the"/><Run FontWeight="Bold" Text=" 'Edit Leaderboard'"/> <Run Text="page"/>
+                            <LineBreak/>
+                             <Run Text="2: Click on the"/><Run FontWeight="Bold" Text=" 'Leaderboard'"/> <Run Text="tab"/>
+                             <LineBreak/>
+                             <Run Text="3: Click the"/><Run FontWeight="Bold" Text=" 'Backup'"/> <Run Text="Button"/>
+                             <LineBreak/>
+                              <LineBreak/>
+                            <Run FontWeight="Bold"  Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="All values related to the current leaderboard will be saved (in the future it will be possible to replace the backups with the current settings)"/>
+                        </TextBlock>
                     </TabItem>
                     <TabItem Height="30" Background="LightGray"  Header="Download and Remove Leaderboard">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                                <Run Text="Download and delete backup leaderboards:"/>
+                                <LineBreak/>
+                                <LineBreak/>
+                             <Run Text="1: Open the"/><Run FontWeight="Bold" Text=" 'Edit Leaderboard'"/> <Run Text="page"/>
+                            <LineBreak/>
+                             <Run Text="2: Click on the"/><Run FontWeight="Bold" Text=" 'Backups'"/> <Run Text="tab"/>
+                             <LineBreak/>
+                             <Run Text="3: Click the"/><Run FontWeight="Bold" Text=" 'Download'"/> <Run Text="Button  from the list of backups."/>
+                            <LineBreak/>
+                          <Run FontWeight="Bold" Text="For Delete:"/>   <Run Text="Click the"/><Run FontWeight="Bold" Text=" 'Delete'"/> <Run Text="Button  from the list of backups."/>
+                              <LineBreak/>
+                             <Run Text="4: Select the storage location."/>
+                            <LineBreak/>
+                             <Run Text="3: Click the"/><Run FontWeight="Bold" Text=" 'Download'"/> <Run Text="Button"/>
+                                <LineBreak/>
+                             <Run Text="6: After the complete download, the selected folder will open for you."/>
+                             <LineBreak/>
+                        </TextBlock>
                     </TabItem>
                     <TabItem Height="30" Background="LightGray"  Header="Server Status">
-                    </TabItem>
-                    <TabItem Height="30" Background="LightGray"  Header="Send Support">
-                    </TabItem>
-                    <TabItem Height="30" Background="LightGray"  Header="Send Bug Report">
-                    </TabItem>
-                    <TabItem Height="30" Background="LightGray"  Header="Manage History">
-                    </TabItem>
-                    <TabItem Height="30" Background="LightGray"  Header="Setting">
-                    </TabItem>
-                    <TabItem Height="30" Background="LightGray"  Header="Payments">
+                        <TextBlock Margin="20" TextWrapping="Wrap">
+                             <Run Text="All software services are real-time. If you feel you have a problem with your servers and services, click the"/>
+                            <Run Text=" &#xE95E; " FontFamily="Segoe MDL2 Assets"/> <Run Text=" button and check the status of the service."/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <Run Foreground="LightGreen" Text="&#xE95E;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The server is working properly."/>
+                             <LineBreak/>
+                            <LineBreak/>
+                            <Run Foreground="Tomato" Text="&#xE95E;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The server has a problem. (Contact support to resolve the issue)"/>
+                        </TextBlock>
                     </TabItem>
                 </TabControl>
             </ScrollViewer>
