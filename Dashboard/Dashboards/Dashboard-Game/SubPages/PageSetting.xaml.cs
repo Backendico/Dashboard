@@ -36,7 +36,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             TextCreated.Text = SettingUser.CurentDetailStudio["Created"].ToLocalTime().ToString();
             TextDatabase.Text = SettingUser.CurentDetailStudio["Database"].ToString();
 
-            Debug.WriteLine(SettingUser.CurentDetailStudio.ToString());
 
             //action btn
             BTNPlayer.MouseDown += (s, obj) =>
@@ -423,8 +422,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             SDK.SDK_PageDashboards.DashboardGame.PageStudios.RecivePaymentList(
                 result =>
                 {
-                    Debug.WriteLine(result["Detail"].AsBsonArray.Count);
-
                     foreach (var item in result["Detail"].AsBsonArray)
                     {
                         ContentPlacePay.Children.Add(new ModelPayment(item.AsBsonDocument));
