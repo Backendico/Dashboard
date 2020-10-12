@@ -524,7 +524,6 @@ namespace Dashboard.GlobalElement
 
                 }
 
-
                 public sealed class PageLeaderboard
                 {
                     public static ModelLinks.DashboardGame.PageLeaderboard Links;

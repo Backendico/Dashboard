@@ -60,7 +60,7 @@
                         <!--Colum1-->
                         <StackPanel Margin="20">
                             <!--Name-->
-                            <TextBlock Margin="0,10">
+                            <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Name : "/>
                         <Run x:Name="TextName" Text="XXX"/>
                         <LineBreak/>
@@ -68,7 +68,7 @@
                             </TextBlock>
 
                             <!--Type-->
-                            <TextBlock Margin="0,10">
+                            <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Type : "/>
                         <Run x:Name="TextType" Text="XXX"/>
                           <LineBreak/>
@@ -76,7 +76,7 @@
                             </TextBlock>
 
                             <!--Token-->
-                            <TextBlock  Margin="0,10">
+                            <TextBlock  Margin="0,5">
                         <Run  FontWeight="Bold" Text="Token : "/>
                         <Run Cursor="Hand" x:Name="TextToken" Text="XXX"/>
                            <LineBreak/>
@@ -85,7 +85,7 @@
 
 
                             <!--Creator-->
-                            <TextBlock Margin="0,10">
+                            <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Creator : "/>
                         <Run x:Name="TextCreator" Text="XXX"/>
                           <LineBreak/>
@@ -93,7 +93,7 @@
                             </TextBlock>
 
                             <!--Created-->
-                            <TextBlock Margin="0,10">
+                            <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Created : "/>
                         <Run x:Name="TextCreated" Text="XXX"/>
                          <LineBreak/>
@@ -102,7 +102,7 @@
 
 
                             <!--Created-->
-                            <TextBlock Margin="0,10">
+                            <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Database : "/>
                         <Run x:Name="TextDatabase" Text="XXX"/>
                           <LineBreak/>

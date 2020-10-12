@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element.ModelMessage;
 using Dashboard.GlobalElement;
 using Microsoft.Win32;
 using MongoDB.Bson;
@@ -61,6 +62,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 OpenPageQuestions(null, null);
             };
 
+
+            BTNSendMessage.MouseDown += (s, e) =>
+            {
+
+            };
+
+
             ReciveSupportList();
         }
 
@@ -111,9 +119,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
         public void OpenPageQuestions(object sender, MouseButtonEventArgs e)
         {
             var Story = new Storyboard();
+
+            //clear Textboxs
+            TextboxTitle.Text = "";
+            TextDescription.Text = "";
+            TextMessage.Text = "";
+
             if (PageEachQuestion.Width > 0)
             {
-                DoubleAnimation Anim1 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim1 = new DoubleAnimation(500, 0, TimeSpan.FromSeconds(0.3));
 
                 Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
                 Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
@@ -122,13 +136,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             if (PageAddQuestions.Width > 0)
             {
-                DoubleAnimation Anim3 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim3 = new DoubleAnimation(500, 0, TimeSpan.FromSeconds(0.3));
                 Storyboard.SetTargetName(Anim3, PageAddQuestions.Name);
                 Storyboard.SetTargetProperty(Anim3, new PropertyPath("Width"));
                 Story.Children.Add(Anim3);
             }
 
-            DoubleAnimation Anim2 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim2 = new DoubleAnimation(0, 500, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetName(Anim2, PageQuestions.Name);
             Storyboard.SetTargetProperty(Anim2, new PropertyPath("Width"));
             Story.Children.Add(Anim2);
@@ -143,7 +157,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             if (PageQuestions.Width > 0)
             {
-                DoubleAnimation Anim2 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim2 = new DoubleAnimation(500, 0, TimeSpan.FromSeconds(0.3));
                 Storyboard.SetTargetName(Anim2, PageQuestions.Name);
                 Storyboard.SetTargetProperty(Anim2, new PropertyPath("Width"));
                 Story.Children.Add(Anim2);
@@ -151,13 +165,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             if (PageAddQuestions.Width > 0)
             {
-                DoubleAnimation Anim3 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim3 = new DoubleAnimation(500, 0, TimeSpan.FromSeconds(0.3));
                 Storyboard.SetTargetName(Anim3, PageAddQuestions.Name);
                 Storyboard.SetTargetProperty(Anim3, new PropertyPath("Width"));
                 Story.Children.Add(Anim3);
             }
 
-            DoubleAnimation Anim1 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim1 = new DoubleAnimation(0, 500, TimeSpan.FromSeconds(0.3));
 
             Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
             Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
@@ -178,6 +192,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             }
 
 
+            //Recive Message
+            PlaceContentMessages.Children.Clear();
+
+            foreach (var item in CurentSupport["Messages"].AsBsonArray)
+            {
+                PlaceContentMessages.Children.Add(new ModelMessage(item.AsBsonDocument));
+            }
+
         }
 
         public void OpenAddSupport(object sender, MouseButtonEventArgs e)
@@ -186,7 +208,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             if (PageEachQuestion.Width > 0)
             {
-                DoubleAnimation Anim1 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim1 = new DoubleAnimation(500, 0, TimeSpan.FromSeconds(0.3));
 
                 Storyboard.SetTargetName(Anim1, PageEachQuestion.Name);
                 Storyboard.SetTargetProperty(Anim1, new PropertyPath("Width"));
@@ -195,14 +217,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
             if (PageQuestions.Width > 0)
             {
-                DoubleAnimation Anim2 = new DoubleAnimation(300, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim2 = new DoubleAnimation(500, 0, TimeSpan.FromSeconds(0.3));
                 Storyboard.SetTargetName(Anim2, PageQuestions.Name);
                 Storyboard.SetTargetProperty(Anim2, new PropertyPath("Width"));
                 Story.Children.Add(Anim2);
             }
 
 
-            DoubleAnimation Anim3 = new DoubleAnimation(0, 300, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim3 = new DoubleAnimation(0, 500, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetName(Anim3, PageAddQuestions.Name);
             Storyboard.SetTargetProperty(Anim3, new PropertyPath("Width"));
 
@@ -236,7 +258,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             SDK.SDK_PageDashboards.DashboardGame.PageSupport.ReciveSupports(
                 result =>
                 {
-                    Debug.WriteLine(result[1].AsBsonArray.Count);
                     if (result[1].AsBsonArray.Count >= 1)
                     {
                         PlaceContentSupport.Children.Clear();
@@ -254,7 +275,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 },
                 () =>
                 {
-                    OpenAddSupport(null,null);
+                    OpenAddSupport(null, null);
                 });
         }
 
