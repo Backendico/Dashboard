@@ -66,6 +66,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             BTNSendMessage.MouseDown += (s, e) =>
             {
 
+                if (TextMessage.Text.Length >= 1)
+                {
+                    BsonDocument DetailMessage = new BsonDocument
+                  {
+                   {"Message",TextMessage.Text },
+                   {"Sender",0 }
+                  };
+
+                    SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddMessage(CurentSupport["Token"].AsObjectId, DetailMessage, result =>
+                    {
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Message Send to Support", Notifaction.StatusMessage.Ok);
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
+                        }
+                    });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Message To Short", Notifaction.StatusMessage.Error);
+                }
             };
 
 
@@ -93,28 +117,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
         }
 
         //PageEachMessage
-        private void SendMessage(object sender, MouseButtonEventArgs e)
-        {
-            Debug.WriteLine(CurentSupport.ToString());
-
-            if (TextMessage.Text.Length >= 1)
-            {
-                BsonDocument DetailMessage = new BsonDocument
-                  {
-                   {"Message",TextMessage.Text },
-                   {"TokenUser",SettingUser.Token }
-                  };
-
-                SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddMessage(CurentSupport["Token"].ToString(), DetailMessage, result =>
-                {
-                    Debug.WriteLine(result);
-                });
-            }
-            else
-            {
-                DashboardGame.Notifaction("Message To Short", Notifaction.StatusMessage.Error);
-            }
-        }
 
         public void OpenPageQuestions(object sender, MouseButtonEventArgs e)
         {

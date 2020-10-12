@@ -32,7 +32,7 @@
 
             <!--Header-->
             <Grid  Grid.Row="0">
-                <Rectangle   Height="20" Width="20" Fill="Orange"    RadiusX="3" RadiusY="4" Margin="116,-12,45,22"  >
+                <Rectangle   Height="20" Width="20" Fill="Orange"    RadiusX="3" RadiusY="4" Margin="315,-12,45,22"  >
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -78,7 +78,7 @@
                             </Grid.RowDefinitions>
 
                             <!--Body-->
-                            <ScrollViewer MaxHeight="350"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="0">
+                            <ScrollViewer  MaxHeight="350"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="0">
                                 <StackPanel x:Name="PlaceContentMessages"/>
                             </ScrollViewer>
 
@@ -94,7 +94,7 @@
                                 <TextBlock   Cursor="Hand" FontSize="15" Text="&#xE785;" x:Name="BTNClose_EachSupport" MouseDown="CloseSupport" Foreground="Tomato" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets"  Grid.Column="0" />
                                 <TextBlock x:Name="BTNBack_EachSupport" MouseDown="OpenPageQuestions" Cursor="Hand" FontWeight="Bold" FontSize="15" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE973;" Grid.Column="1" />
                                 <TextBox  x:Name="TextMessage" TextWrapping="Wrap"  MaxHeight="100" MinHeight="30" Margin="10,5" BorderBrush="Transparent"  SpellCheck.IsEnabled="True" AcceptsReturn="True" AcceptsTab="True" Grid.Column="2" />
-                                <TextBlock x:Name="BTNSendMessage" HorizontalAlignment="Center"  Cursor="Hand" FontWeight="Bold" FontSize="20" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE724;" Grid.Column="3" MouseDown="SendMessage" />
+                                <TextBlock x:Name="BTNSendMessage" HorizontalAlignment="Center"  Cursor="Hand" FontWeight="Bold" FontSize="20" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE724;" Grid.Column="3"  />
                             </Grid>
 
                         </Grid>

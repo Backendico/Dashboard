@@ -992,7 +992,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void AddMessage(string TokenSupport, BsonDocument DetailMessage, Action<bool> Result)
+                    public static async void AddMessage(ObjectId TokenSupport, BsonDocument DetailMessage, Action<bool> Result)
                     {
                         var client = new RestClient(Links.AddMessage);
                         client.Timeout = -1;
@@ -1000,7 +1000,7 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenSupport", TokenSupport);
+                        request.AddParameter("TokenSupport", TokenSupport.ToString());
                         request.AddParameter("Detail", DetailMessage.ToString());
                         var response = await client.ExecuteAsync(request);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -1055,6 +1055,8 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+
+                  
                 }
             }
         }
@@ -1132,6 +1134,7 @@ namespace Dashboard.GlobalElement
                 public string AddMessage => "https://localhost:44346/PageSupport/AddMessage";
                 public string CloseSupport => "https://localhost:44346/PageSupport/CloseSupport";
                 public string AddReportBug => "https://localhost:44346/PageSupport/AddReportBug";
+
             }
         }
     }
