@@ -66,10 +66,14 @@ namespace Dashboard.Dashboards.Dashboard_Game
             //action btn eduction
             BTNEduction.MouseDown += (s, e) =>
             {
-
                 Root.Children.Add(new SubPageEduction());
             };
+
+
+
+
         }
+
 
 
         internal async void Blure(bool OnOff)
@@ -277,6 +281,38 @@ namespace Dashboard.Dashboards.Dashboard_Game
             SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You login at {DateTime.Now} (Local Time)", new BsonDocument(), false, (Reslult) => { });
         }
 
+        internal void ReciveNotifactions()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageDashboard.Notifaction(result =>
+            {
+                if (result["Support"].ToInt32() >= 1)
+                {
+                    PlaceNotifactionSupport.Visibility = Visibility.Visible;
+                    TextNumberNotifactionSupport.Text = result["Support"].ToString();
+                }
+                else
+                {
+                    PlaceNotifactionSupport.Visibility = Visibility.Collapsed;
+                }
+
+
+                if (result["Logs"].ToInt32() >= 1)
+                {
+                    PlaceNotifactionLogs.Visibility = Visibility.Visible;
+                    TextNumbetNotifactionLogs.Text = result["Logs"].ToString();
+                }
+                else
+                {
+                    PlaceNotifactionLogs.Visibility = Visibility.Collapsed;
+                }
+
+
+            },
+            () =>
+            {
+
+            });
+        }
 
 
         private void Window_LayoutUpdated(object sender, EventArgs e)
@@ -312,6 +348,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             return await Dialog.Result();
         }
+
 
     }
 }

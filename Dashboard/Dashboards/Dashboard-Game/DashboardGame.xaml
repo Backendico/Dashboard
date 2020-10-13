@@ -60,12 +60,23 @@
 
                         <!--Support-->
                         <Border  Cursor="Hand" Margin="5,0" Width="30" Height="30" CornerRadius="30"   MouseDown="OpenSuppport">
+                            <Grid>
+                                
                             <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95B;" FontFamily="Segoe MDL2 Assets"  />
+                                <Border Visibility="Collapsed" x:Name="PlaceNotifactionSupport" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="15" Background="Tomato" Margin="12,18,-2,-8">
+                                    <TextBlock x:Name="TextNumberNotifactionSupport" Text="99" Foreground="White" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </Grid>
                         </Border >
 
                         <!--Notifation-->
                         <Border Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"    MouseDown="OpenInternalNotifaction">
-                            <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xF738;" FontFamily="Segoe MDL2 Assets"/>
+                            <Grid>
+                                <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xF738;" FontFamily="Segoe MDL2 Assets"/>
+                                <Border Visibility="Collapsed" x:Name="PlaceNotifactionLogs" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="15" Background="Tomato" Margin="12,18,-2,-8">
+                                    <TextBlock x:Name="TextNumbetNotifactionLogs" Text="99" Foreground="White" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </Grid>
                         </Border >
 
                         <!--CheackHealth-->

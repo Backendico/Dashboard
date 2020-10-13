@@ -944,6 +944,30 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+              
+                    public async static void Notifaction(Action<BsonDocument> Result,Action ERR)
+                    {
+                        var client = new RestClient(Links.Notifaction);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        client.ClearHandlers();
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token",SettingUser.Token );
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        var response = await client.ExecuteAsync(request);
+                        
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                            ERR();
+                        }
+                    
+                    }
+                
                 }
 
                 public sealed class PageSupport
@@ -1125,6 +1149,7 @@ namespace Dashboard.GlobalElement
             public struct PageDashboard
             {
                 public string LinkDashboard => "https://localhost:44346/PageDashboard/ReciveDetail";
+                public string Notifaction => "https://localhost:44346/PageDashboard/Notifaction";
             }
 
             public struct PageSupport

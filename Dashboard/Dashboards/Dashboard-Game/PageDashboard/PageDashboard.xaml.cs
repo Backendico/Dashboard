@@ -26,6 +26,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
         public PageDashboard()
         {
             InitializeComponent();
+
+            //recive Notifactions
+            DashboardGame.Dashboard.ReciveNotifactions();
         }
 
         private void Start(object sender, RoutedEventArgs e)
@@ -46,25 +49,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
                     TextLogin_30Day.Text = result["Logins"]["30Days"].ToString();
 
                     //leaderboards
-                    TextCount_Leaderboards.Text = result["Counts"]["Leaderboards"].ToString();
-                    TextCountTotal_Leaderbords.Text = result["Monetiz"]["Monetiz"]["Leaderboards"].ToString();
+                    TextCount_Leaderboards.Text = result["Leaderboards"]["Count"].ToString();
+                    TextCountTotal_Leaderbords.Text = result["Leaderboards"]["Totall"].ToString();
 
                     //Players
-                    TextCount_Players.Text = result["Counts"]["Players"].ToString();
-                    TextCountTotal_Players.Text = result["Monetiz"]["Monetiz"]["Players"].ToString();
+                    TextCount_Players.Text = result["PlayersMonetiz"]["Count"].ToString();
+                    TextCountTotal_Players.Text = result["PlayersMonetiz"]["Totall"].ToString();
 
                     //Logs
-                    TextTotalCount_Logs.Text = result["Monetiz"]["Monetiz"]["Logs"].ToString();
-
-                    //Studio
-                    TextTotalCount_Studio.Text = result["Monetiz"]["Monetiz"]["Studios"].ToString();
+                    TextCount_Logs.Text = result["Logs"]["Totall"].ToString();
+                    TextTotalCount_Logs.Text = result["Logs"]["Count"].ToString();
 
                     //Apis
-                    TextTotalCount_APIs.Text = result["Monetiz"]["Monetiz"]["Apis"].ToString();
+                    TextCount_APIs.Text = result["APIs"]["Count"].ToString();
+                    TextTotalCount_APIs.Text = result["APIs"]["Totall"].ToString();
+
+                    //Studio
+                    //TextTotalCount_Studio.Text = result["Monetiz"]["Monetiz"]["Studios"].ToString();
+
                 },
                 () =>
                 {
                 });
+
 
         }
     }
