@@ -965,7 +965,6 @@ namespace Dashboard.GlobalElement
                             Result(BsonDocument.Parse(response.Content));
                             ERR();
                         }
-                    
                     }
                 
                 }

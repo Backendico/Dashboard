@@ -11,6 +11,7 @@ using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
+using Microsoft.AspNetCore.SignalR.Client;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
@@ -33,6 +34,10 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         UserControl CurentPage;
         TextBlock CurentTab;
+
+        //singnal
+        internal string SignalID = "";
+        HubConnection HubConnection = new HubConnectionBuilder().WithUrl("https://localhost:44346/Signal").Build();
 
         InternalNotifaction internalNotifaction;
         BlurEffect Blur = new BlurEffect() { Radius = 0 };
@@ -70,7 +75,143 @@ namespace Dashboard.Dashboards.Dashboard_Game
             };
 
 
+            //action BTN Studio
+            BTNStudio.MouseDown += (s, e) =>
+            {
+                Root.Children.Add(new SubPageStudios());
 
+            };
+
+            //actionBTnSetting
+            BTNSetting.MouseDown += (s, e) =>
+            {
+                Root.Children.Add(new PageSetting());
+
+            };
+
+            //action btn Support
+            BTNSupport.MouseDown += (s, e) =>
+            {
+
+                Root.Children.Add(new SubpageSupport());
+            };
+
+            //action btn Notifaction
+            BTNNotifaction.MouseDown += (s, e) =>
+            {
+
+                if (internalNotifaction != null)
+                    Root.Children.Remove(internalNotifaction);
+
+                var notif = new InternalNotifaction();
+
+                Root.Children.Add(notif);
+                internalNotifaction = notif;
+
+            };
+
+            //action btn cheack Health
+            BTNCheackHealth.MouseDown += (s, e) =>
+            {
+
+                SDK.SDK_PageDashboards.DashboardGame.PageDashboard.CheackStatusServer(Result =>
+                {
+                    if (Result)
+                    {
+                        ((s as Border).Child as TextBlock).Foreground = new SolidColorBrush(Colors.LightGreen);
+                        Notifaction("Server is Up", StatusMessage.Ok);
+                    }
+                    else
+                    {
+                        ((s as Border).Child as TextBlock).Foreground = new SolidColorBrush(Colors.Tomato);
+                        Notifaction("Server connection error\n 1: Reset the program\n 2: Check your internet\n 3: Report the problem to support ", StatusMessage.Error);
+                    }
+
+                });
+
+            };
+
+            //actin Swichapp 
+            SwitchAPP.MouseDown += (s, e) =>
+            {
+                Notifaction("App service will be added soon", StatusMessage.Ok);
+            };
+
+            //action Report Bug
+            BTNReportBug.MouseDown += (s, e) =>
+            {
+                Root.Children.Add(new SubPagesReportBug());
+
+            };
+
+            //action Pane
+            BTNOpenPane.MouseDown += (s, e) =>
+            {
+                Storyboard storyboard = new Storyboard();
+                if (NameList.Width >= 100)
+                {
+                    DoubleAnimation Anim = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(0.3));
+                    Storyboard.SetTargetName(Anim, NameList.Name);
+                    Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
+                    storyboard.Children.Add(Anim);
+                }
+                else
+                {
+                    DoubleAnimation Anim = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(0.3));
+                    Storyboard.SetTargetName(Anim, NameList.Name);
+                    Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
+                    storyboard.Children.Add(Anim);
+                }
+
+                storyboard.Begin(this);
+
+            };
+
+        }
+
+
+        internal async void ReciveNotifactions()
+        {
+
+            if (HubConnection.State == HubConnectionState.Disconnected)
+            {
+                await HubConnection.StartAsync();
+
+                await HubConnection.SendAsync("AddClient", HubConnection.ConnectionId, SettingUser.Token);
+                SignalID = SignalID = HubConnection.ConnectionId;
+
+                HubConnection.On("Notifaction", () =>
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageDashboard.Notifaction(result =>
+                    {
+                        if (result["Support"].ToInt32() >= 1)
+                        {
+                            PlaceNotifactionSupport.Visibility = Visibility.Visible;
+                            TextNumberNotifactionSupport.Text = result["Support"].ToString();
+                        }
+                        else
+                        {
+                            PlaceNotifactionSupport.Visibility = Visibility.Collapsed;
+                        }
+
+
+                        if (result["Logs"].ToInt32() >= 1)
+                        {
+                            PlaceNotifactionLogs.Visibility = Visibility.Visible;
+                            TextNumbetNotifactionLogs.Text = result["Logs"].ToString();
+                        }
+                        else
+                        {
+                            PlaceNotifactionLogs.Visibility = Visibility.Collapsed;
+                        }
+                    },
+                    () =>
+                    {
+
+                    });
+                });
+
+            }
 
         }
 
@@ -107,6 +248,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             }
         }
+
 
         public void ChangeColor_Active(object sender, MouseEventArgs e)
         {
@@ -148,40 +290,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
         }
 
 
-        public void ControlPane(object sender, MouseButtonEventArgs e)
-        {
-            Storyboard storyboard = new Storyboard();
-            if (NameList.Width >= 100)
-            {
-                DoubleAnimation Anim = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(0.3));
-                Storyboard.SetTargetName(Anim, NameList.Name);
-                Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
-                storyboard.Children.Add(Anim);
-            }
-            else
-            {
-                DoubleAnimation Anim = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(0.3));
-                Storyboard.SetTargetName(Anim, NameList.Name);
-                Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
-                storyboard.Children.Add(Anim);
-            }
-
-            storyboard.Begin(this);
-        }
-
-        private void OpenStudios(object sender, MouseButtonEventArgs e)
-        {
-            Root.Children.Add(new SubPageStudios());
-        }
-        private void OpenSetting(object sender, MouseButtonEventArgs e)
-        {
-            Root.Children.Add(new PageSetting());
-        }
-
-        private void OpenSuppport(object sender, MouseButtonEventArgs e)
-        {
-            Root.Children.Add(new SubpageSupport());
-        }
 
         private void ChangePage(object sender, MouseButtonEventArgs e)
         {
@@ -213,45 +321,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
         }
 
-        private void OpenPageReportBug(object sender, MouseButtonEventArgs e)
-        {
-            Root.Children.Add(new SubPagesReportBug());
-        }
-
-        private void OpenInternalNotifaction(object sender, MouseButtonEventArgs e)
-        {
-            if (internalNotifaction != null)
-                Root.Children.Remove(internalNotifaction);
-
-            var notif = new InternalNotifaction();
-
-            Root.Children.Add(notif);
-            internalNotifaction = notif;
-        }
-
-        private void CheackStatusServer(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageDashboard.CheackStatusServer(Result =>
-            {
-                if (Result)
-                {
-                    ((sender as Border).Child as TextBlock).Foreground = new SolidColorBrush(Colors.LightGreen);
-                    Notifaction("Server is Up", StatusMessage.Ok);
-                }
-                else
-                {
-                    ((sender as Border).Child as TextBlock).Foreground = new SolidColorBrush(Colors.Tomato);
-                    Notifaction("Server connection error\n 1: Reset the program\n 2: Check your internet\n 3: Report the problem to support ", StatusMessage.Error);
-                }
-
-            });
-
-        }
-
-        private void SwitchToApp(object sender, MouseButtonEventArgs e)
-        {
-            Notifaction("App service will be added soon", StatusMessage.Ok);
-        }
 
         internal void ChangeStudio(BsonDocument DetailStudio, bool? NotifactionChange = null)
         {
@@ -279,39 +348,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             //addLog
 
             SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You login at {DateTime.Now} (Local Time)", new BsonDocument(), false, (Reslult) => { });
-        }
-
-        internal void ReciveNotifactions()
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageDashboard.Notifaction(result =>
-            {
-                if (result["Support"].ToInt32() >= 1)
-                {
-                    PlaceNotifactionSupport.Visibility = Visibility.Visible;
-                    TextNumberNotifactionSupport.Text = result["Support"].ToString();
-                }
-                else
-                {
-                    PlaceNotifactionSupport.Visibility = Visibility.Collapsed;
-                }
-
-
-                if (result["Logs"].ToInt32() >= 1)
-                {
-                    PlaceNotifactionLogs.Visibility = Visibility.Visible;
-                    TextNumbetNotifactionLogs.Text = result["Logs"].ToString();
-                }
-                else
-                {
-                    PlaceNotifactionLogs.Visibility = Visibility.Collapsed;
-                }
-
-
-            },
-            () =>
-            {
-
-            });
         }
 
 

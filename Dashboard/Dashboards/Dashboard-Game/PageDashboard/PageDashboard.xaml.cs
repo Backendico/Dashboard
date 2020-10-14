@@ -71,8 +71,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
                 () =>
                 {
                 });
-
-
         }
     }
 }
