@@ -25,9 +25,7 @@ using System.Windows.Media.Effects;
 
 namespace Dashboard.Dashboards.Dashboard_Game
 {
-    /// <summary>
-    /// Interaction logic for Dashboard.xaml
-    /// </summary>
+  
     public partial class DashboardGame : Window
     {
         public static DashboardGame Dashboard;
@@ -288,7 +286,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             storyboard.Begin(this);
 
         }
-
 
 
         private void ChangePage(object sender, MouseButtonEventArgs e)

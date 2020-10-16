@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -40,21 +41,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.Notifaction
                     BorderColor.BorderBrush = new SolidColorBrush(Colors.Black);
                     break;
             }
-            DashboardGame.Dashboard.Root.Children.Add(this);
+
+            DashboardGame.Dashboard.PlaceNotifaction.Children.Add(this);
         }
-
-
 
         public void Close(object sender, EventArgs e)
         {
             try
             {
-                DashboardGame.Dashboard.Root.Children.Remove(this);
+                DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+                Anim.Completed += (s, ee) =>
+                {
+                    DashboardGame.Dashboard.PlaceNotifaction.Children.Remove(this);
+                };
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+                Storyboard.SetTargetName(Anim, BorderColor.Name);
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Begin();
             }
             catch (Exception)
             {
-
-                Debug.WriteLine("error notifactio");
+                DashboardGame.Dashboard.PlaceNotifaction.Children.Remove(this);
             }
         }
 

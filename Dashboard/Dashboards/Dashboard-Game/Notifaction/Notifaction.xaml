@@ -4,16 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Notifaction"
-             mc:Ignorable="d"  
-             d:DesignHeight="330" d:DesignWidth="795">
-    <Border Margin="0,0,20,-100" x:Name="BorderColor" MinWidth="200" Background="White"   CornerRadius="0,5,5,0" BorderThickness="5,0,0,0" BorderBrush="Tomato" MinHeight="50"  HorizontalAlignment="Right" VerticalAlignment="Bottom"  >
+             mc:Ignorable="d"  >
+    
+    <Border x:FieldModifier="public" Margin="5"  x:Name="BorderColor" Opacity="1" MinWidth="200" Background="White"   CornerRadius="0,5,5,0" BorderThickness="5,0,0,0" BorderBrush="Tomato" MinHeight="50"   >
         <!--Animation-->
         <Border.Triggers>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard >
-                        <ThicknessAnimation  Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Margin" From="0,0,20,-100" To="0,0,20,10" Duration="0:0:0.5"/>
-                        <ThicknessAnimation Completed="Close" BeginTime="0:0:0:3"  Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Margin" From="0,0,20,10" To="0,0,20,-100" Duration="0:0:0.5"/>
+                        <DoubleAnimation  Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0:0.3"/>
+                        <DoubleAnimation Completed="Close" BeginTime="0:0:0:4"  Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0:0.3"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -21,9 +21,8 @@
             <EventTrigger RoutedEvent="MouseDown"  >
 
                 <BeginStoryboard>
-
                     <Storyboard >
-                        <ThicknessAnimation  Completed="Close" Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Margin" From="0,0,20,10" To="0,0,20,-100" Duration="0:0:0.5"/>
+                        <DoubleAnimation  Completed="Close" Storyboard.TargetName="BorderColor" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0:0.3"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
