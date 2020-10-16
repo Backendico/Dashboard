@@ -78,6 +78,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                     {
                         if (result)
                         {
+                            DetailMessage.Add("Created", DateTime.Now);
+
+                            ReciveSupportList();
+
+                            PlaceContentMessages.Children.Add(new ModelMessage(DetailMessage));
                             DashboardGame.Notifaction("Message Send to Support", Notifaction.StatusMessage.Ok);
                         }
                         else

@@ -280,14 +280,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PageLogs\Elements\ModelLogDashboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dashboards\Dashboard-Game\PageLogs\PageLogs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,12 +370,6 @@
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderBoards.xaml.cs">
       <DependentUpon>PageLeaderBoards.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PageLogs\Elements\ModelLogDashboard.xaml.cs">
-      <DependentUpon>ModelLogDashboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PageLogs\PageLogs.xaml.cs">
-      <DependentUpon>PageLogs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml.cs">
       <DependentUpon>EditPlayer.xaml</DependentUpon>

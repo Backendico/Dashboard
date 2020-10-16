@@ -4,10 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction.Elements"
-            
              >
 
-    <Border  x:Name="Root"   Background="White" BorderThickness="0,0,0,1" BorderBrush="LightGray">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard >
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Border  x:Name="Root" Opacity="1"  Background="White" BorderThickness="0,0,0,1" BorderBrush="LightGray">
         <Border.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>

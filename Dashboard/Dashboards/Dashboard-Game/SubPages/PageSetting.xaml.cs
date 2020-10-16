@@ -2,6 +2,7 @@
 using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
+using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -10,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 {
@@ -228,6 +230,62 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 Clipboard.SetText(TextToken.Text);
                 DashboardGame.Notifaction("Token Copied", StatusMessage.Ok);
             };
+
+            BTNState.MouseDown += (s, e) =>
+            {
+
+                SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
+                    result =>
+                    {
+                        var Text = "";
+                        foreach (var item in result)
+                        {
+                            Text += item.Name + ": " + item.Value.ToString() + "\n";
+                        }
+
+                        DashboardGame.Dialog(Text, "Server State");
+                    },
+                    () =>
+                    {
+                        DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
+                    });
+            };
+
+            BTNPayments.MouseDown += (s, e) =>
+            {
+                DoubleAnimation Anim = new DoubleAnimation(0, 400, TimeSpan.FromSeconds(0.3));
+
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+                Storyboard.SetTargetName(Anim, PaymentList.Name);
+
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Begin(this);
+
+            };
+
+            BTNCollaps.MouseDown += (s, e) =>
+            {
+                ClosePaymentList();
+            };
+
+            BTNAddMoney.MouseDown += (s, e) =>
+            {
+                DoubleAnimation Anim = new DoubleAnimation(0, 400, TimeSpan.FromSeconds(0.3));
+
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+                Storyboard.SetTargetName(Anim, PanelChargeMoney.Name);
+
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Begin(this);
+
+            };
+
+            BTNCloseCharge.MouseDown += (s, e) =>
+            {
+                CloseCharge();
+            };
         }
 
 
@@ -237,11 +295,46 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
         }
 
 
+        void ClosePaymentList()
+        {
+            if (PaymentList.Height >= 1)
+            {
+                DoubleAnimation Anim = new DoubleAnimation(400, 0, TimeSpan.FromSeconds(0.3));
+
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+                Storyboard.SetTargetName(Anim, PaymentList.Name);
+
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Begin(this);
+            }
+
+        }
+
+        void CloseCharge()
+        {
+            if (PanelChargeMoney.Height >= 1)
+            {
+                DoubleAnimation Anim = new DoubleAnimation(400, 0, TimeSpan.FromSeconds(0.3));
+
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+                Storyboard.SetTargetName(Anim, PanelChargeMoney.Name);
+
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Begin(this);
+            }
+
+        }
+
         //global
         private void ChangePage(object sender, RoutedEventArgs e)
         {
             CurentPage.Visibility = Visibility.Collapsed;
             CurentBTNHeader.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+            ClosePaymentList();
+            CloseCharge();
 
             switch ((sender as Button).Name)
             {
@@ -267,24 +360,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
         }
 
-        private void OpenState(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
-                result =>
-                {
-                    var Text = "";
-                    foreach (var item in result)
-                    {
-                        Text += item.Name + ": " + item.Value.ToString() + "\n";
-                    }
-
-                    DashboardGame.Dialog(Text, "Server State");
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
-                });
-        }
 
         private void ReciveMonetize(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -416,6 +491,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                     });
             }
         }
+
 
         void RecivePayments()
         {

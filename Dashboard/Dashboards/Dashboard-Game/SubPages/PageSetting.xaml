@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages"
              mc:Ignorable="d" 
              Background="#33000000"
-             d:DesignHeight="660" d:DesignWidth="1290">
+             d:DesignHeight="660" d:DesignWidth="1141.333">
     <Border Margin="50,60" MaxHeight="500" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
         <Border.Effect>
@@ -46,6 +46,7 @@
 
             </Grid>
             <Border Grid.Row="1" BorderBrush="Gainsboro" BorderThickness="0,0,0,1"/>
+
 
             <!--Bodys-->
             <!--Body Setting-->
@@ -109,7 +110,7 @@
                          <Run Foreground="Gray"  Text=" Database name attached to the studio"/>
                             </TextBlock>
 
-                            <Border HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="DarkOrange" MouseDown="OpenState" >
+                            <Border x:Name="BTNState" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="DarkOrange" >
                                 <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="State"/>
                             </Border>
 
@@ -137,7 +138,7 @@
                                 <TextBlock x:Name="TextCash" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="0 T"/>
                             </Border>
                             <!--Add-->
-                            <Border Cursor="Hand" CornerRadius="0,3,3,0" Margin="0,5,5,5"  Background="OliveDrab">
+                            <Border x:Name="BTNAddMoney" Cursor="Hand" CornerRadius="0,3,3,0" Margin="0,5,5,5"  Background="OliveDrab">
                                 <TextBlock FontSize="12" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="4,0" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"/>
                             </Border>
 
@@ -345,19 +346,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <!--Payments-->
-                            <Border  Grid.Column="0" Cursor="Hand" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="3" Margin="0,10,10,10"  Background="Orange">
-                                <!--animation-->
-                                <Border.Triggers>
-                                    <EventTrigger RoutedEvent="MouseDown">
-                                        <BeginStoryboard>
-                                            <Storyboard Storyboard.TargetName="PaymentList" Storyboard.TargetProperty="Height">
-                                                <DoubleAnimation From="0" To="400"  Duration="0:0:0:0.5"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </Border.Triggers>
-
-
+                            <Border x:Name="BTNPayments" Grid.Column="0" Cursor="Hand" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="3" Margin="0,10,10,10"  Background="Orange">
                                 <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="5,0" >
                                 <Run Text="&#xEC5B;" FontFamily="Segoe MDL2 Assets" />
                                 <Run Text="Payments"/>
@@ -396,16 +385,8 @@
                 </Grid.RowDefinitions>
 
                 <!--Collapse-->
-                <Border Cursor="Hand" CornerRadius="5" Background="Orange"  Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0">
-                    <Border.Triggers>
-                        <EventTrigger RoutedEvent="MouseDown">
-                            <BeginStoryboard>
-                                <Storyboard Storyboard.TargetName="PaymentList" Storyboard.TargetProperty="Height">
-                                    <DoubleAnimation From="400" To="0"  Duration="0:0:0:0.5"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Border.Triggers>
+                <Border x:Name="BTNCollaps" Cursor="Hand" CornerRadius="5" Background="Orange"  Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0">
+
 
                     <TextBlock Margin="5" Foreground="White" VerticalAlignment="Center">
                         <Run  Text="&#xE70D; " FontFamily="Segoe MDL2 Assets"/>
@@ -462,7 +443,131 @@
 
             </Grid>
 
+            <!--charge Wallet-->
+            <Grid x:Name="PanelChargeMoney" Margin="20" Height="0" Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--How to Buy-->
+                <StackPanel HorizontalAlignment="Right">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Right" >
+                        <Run FontWeight="Bold" Text="نحوه خرید از نرم افزار "/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="1:"/><Run Text="از بین پکیج های زیر پکیج مورد نظر را انتخاب کنید"/> 
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="2"/><Run Text="در صفحه باز شده فیلدهای مورد نظر را پرکنید و پرداخت را انجام دهید"/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="2.1:"/><Run Text="ضروری میباشد که در قسمت (توضیحات) توکن /کلید استودیو و در قسمت (نام و نام خانوادگی) نام کاربری خود را وارد کنید"/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="3:"/><Run Text="در کادر ثبت فاکتور مقدار های خواسته شده را پر کنید و ارسال را بزنید"/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="4:"/><Run Text="پس از بررسی فاکتور مبلغ واریزی به حساب شما اضافه خواهد شد"/>
 
+                    </TextBlock>
+                </StackPanel>
+                <!--Packeges-->
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+
+                    <WrapPanel Orientation="Horizontal" >
+
+                        <!--Pack1-->
+                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
+                            <StackPanel Margin="5">
+                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 1" TextAlignment="Center"/>
+                                <TextBlock TextAlignment="Center" Text="10,000 تومان "/>
+                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
+                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!--Pack2-->
+                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
+                            <StackPanel Margin="5">
+                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 2" TextAlignment="Center"/>
+                                <TextBlock TextAlignment="Center" Text="20,000 تومان "/>
+                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
+                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!--Pack3-->
+                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
+                            <StackPanel Margin="5">
+                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 3" TextAlignment="Center"/>
+                                <TextBlock TextAlignment="Center" Text="30,000 تومان "/>
+                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
+                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!--Pack4-->
+                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
+                            <StackPanel Margin="5">
+                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 4" TextAlignment="Center"/>
+                                <TextBlock TextAlignment="Center" Text="60,000 تومان "/>
+                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
+                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!--Pack5-->
+                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
+                            <StackPanel Margin="5">
+                                <TextBlock Margin="0,10" FontWeight="Bold" Text="حمایت از ما" TextAlignment="Center"/>
+                                <TextBlock TextAlignment="Center" Text="5,000 تومان "/>
+                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
+                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!--Pack6-->
+                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
+                            <StackPanel Margin="5">
+                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک ارزشی" TextAlignment="Center"/>
+                                <TextBlock TextAlignment="Center" Text="مبلغ دلخواه"/>
+                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
+                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                    </WrapPanel>
+                </ScrollViewer>
+
+                <Grid  Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Margin="10,0" TextAlignment="Right" Text=": شماره فاکتور"/>
+                        <TextBox Margin="10" Height="30"/>
+                    </StackPanel>
+
+                    <!--BTN-->
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                        <Border Margin="10,0" Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Background="OliveDrab" Width="80" Height="30" >
+                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="ثبت فاکتور"/>
+                        </Border>
+
+                        <Border x:Name="BTNCloseCharge" Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Background="LightGray" Width="80" Height="30" >
+                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="بازگشت"/>
+                        </Border>
+
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
