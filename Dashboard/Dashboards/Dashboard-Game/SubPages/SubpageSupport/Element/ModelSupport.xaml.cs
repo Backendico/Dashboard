@@ -21,6 +21,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
             InitializeComponent();
 
             TextHeader.Text = Detail["Header"].ToString();
+
             if (Detail["IsOpen"].AsBoolean)
             {
                 //init part
@@ -72,20 +73,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
                 TextPart.Visibility = Visibility.Collapsed;
             }
 
-            try
+
+            if (Detail["IsReport"].AsBoolean)
             {
-                if (Detail["IsReport"].AsBoolean)
-                {
-                    TextPart.Text = "";
-                    TextPart.Inlines.Add(new TextBlock() { FontSize = 15, Foreground = new SolidColorBrush(Colors.Tomato), FontFamily = new FontFamily("Segoe MDL2 Assets"), Text = "\xEBE8" });
-                }
-
+                TextPart.Text = "";
+                TextPart.Inlines.Add(new TextBlock() { FontSize = 15, Foreground = new SolidColorBrush(Colors.Tomato), FontFamily = new FontFamily("Segoe MDL2 Assets"), Text = "\xEBE8" });
             }
-            catch (Exception)
-            {
-
-            }
-
 
             TextTime.Text = Detail["Created"].ToLocalTime().ToString();
 

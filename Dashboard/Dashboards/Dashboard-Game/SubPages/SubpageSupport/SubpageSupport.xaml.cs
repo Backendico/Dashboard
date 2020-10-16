@@ -25,33 +25,41 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
             //init btnsener //send support
             BTNAddSupport.MouseDown += (o, s) =>
             {
-                var Detailsupport = new BsonDocument
+                if (TextboxTitle.Text.Length >= 1 && TextDescription.Text.Length >= 1)
                 {
-                    { "Header" ,TextboxTitle.Text},
-                    {"Priority",ComboBoxPriority.SelectedIndex },
-                    {"Part",ComboBoxPart.SelectedIndex },
-                    {"Description",TextDescription.Text }
-                };
-                SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddSupport(Detailsupport, result =>
+                    var Detailsupport = new BsonDocument
+                    {
+                        { "Header" ,TextboxTitle.Text},
+                        {"Priority",ComboBoxPriority.SelectedIndex },
+                        {"Part",ComboBoxPart.SelectedIndex },
+                        {"Description",TextDescription.Text },
+                        {"IsReport",false }
+                    };
+                    SDK.SDK_PageDashboards.DashboardGame.PageSupport.AddSupport(Detailsupport, result =>
+                    {
+                        if (result)
+                        {
+                            ReciveSupportList();
+                            OpenPageQuestions(null, null);
+                            DashboardGame.Notifaction("Support Add \n You will receive the answer soon", Notifaction.StatusMessage.Ok);
+
+                            TextDescription.Text = null;
+                            TextboxTitle.Text = null;
+
+                            //log
+                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Support Created", $"You created the \"{Detailsupport["Header"]}\" ticket", Detailsupport, false, (R) => { });
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild add", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
+                }
+                else
                 {
-                    if (result)
-                    {
-                        ReciveSupportList();
-                        OpenPageQuestions(null, null);
-                        DashboardGame.Notifaction("Support Add \n You will receive the answer soon", Notifaction.StatusMessage.Ok);
-
-                        TextDescription.Text = null;
-                        TextboxTitle.Text = null;
-
-                        //log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Support Created", $"You created the \"{Detailsupport["Header"]}\" ticket", Detailsupport, false, (R) => { });
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild add", Notifaction.StatusMessage.Error);
-                    }
-
-                });
+                    DashboardGame.Notifaction("Description or Titel Short", Notifaction.StatusMessage.Warrning);
+                }
 
             };
 
@@ -120,6 +128,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
                 storyboard.Begin(this);
             }
         }
+
+
+        void ReciveSupportList()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageSupport.ReciveSupports(
+                result =>
+                {
+                    if (result[1].AsBsonArray.Count >= 1)
+                    {
+                        PlaceContentSupport.Children.Clear();
+                        foreach (var item in result[1].AsBsonArray)
+                        {
+                            PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, this));
+                        }
+                    }
+                    else
+                    {
+                        OpenAddSupport(null, null);
+
+                    }
+
+                },
+                () =>
+                {
+                    OpenAddSupport(null, null);
+                });
+        }
+
+
 
         //PageEachMessage
 
@@ -260,31 +297,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
         }
 
 
-        void ReciveSupportList()
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageSupport.ReciveSupports(
-                result =>
-                {
-                    if (result[1].AsBsonArray.Count >= 1)
-                    {
-                        PlaceContentSupport.Children.Clear();
-                        foreach (var item in result[1].AsBsonArray)
-                        {
-                            PlaceContentSupport.Children.Add(new ModelSupport(item.AsBsonDocument, this));
-                        }
-                    }
-                    else
-                    {
-                        OpenAddSupport(null, null);
-
-                    }
-
-                },
-                () =>
-                {
-                    OpenAddSupport(null, null);
-                });
-        }
 
         void DisableEachPage()
         {
