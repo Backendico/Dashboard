@@ -3,6 +3,7 @@ using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,10 +17,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
     /// </summary>
     public partial class PagePlayers : UserControl
     {
+        int PlayerCount = 0;
+
         public PagePlayers()
         {
             InitializeComponent();
 
+
+            //close panel add player
             PanelAddPlayer.MouseDown += (e, s) =>
             {
                 if (s.Source.GetType() == typeof(Grid))
@@ -28,17 +33,68 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                 }
             };
 
-            BTNSearch.MouseDown += (s, e) =>
-            {
-                ShowOpenPanelSearch();
-            };
-
+            //close panel search
             PanelSearch.MouseDown += (s, e) =>
             {
                 if (e.Source.GetType() == typeof(Grid))
                 {
                     ShowOffPanelSearch();
                 }
+            };
+
+            //show panel search
+            BTNSearch.MouseDown += (s, e) =>
+            {
+                ShowOpenPanelSearch();
+            };
+
+            //show paneladdplayer
+            BTNShowPanelAdd.MouseDown += (s, e) =>
+            {
+                ShowSubpagePlayer();
+            };
+
+            //actin add player
+            BTNaddPlayer.MouseDown += (s, e) =>
+            {
+                SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveMonetize(result =>
+                {
+
+                    //limit filter
+                    if (PlayerCount + 1 <= result["Players"])
+                    {
+                        SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(TextBoxUsername.Text, TextBoxPassword.Password,
+                         () =>
+                         {
+                             RecivePlayersList(null, null);
+
+                             ShowOffSubpagePlayer();
+
+                             DashboardGame.Notifaction("Player Added", StatusMessage.Ok);
+
+                             //add log
+                             var Detail = new BsonDocument
+                             {
+                     {"Username",TextBoxUsername.Text },
+                     {"Password",TextBoxPassword.Password },
+                     {"LocalTime",DateTime.Now }
+                             };
+
+                             SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add Player", $"You have added  \" {TextBoxUsername.Text} \" player", Detail, false, resultlog => { });
+                         },
+                         () =>
+                         {
+                             DashboardGame.Notifaction("Player add faild", StatusMessage.Error);
+
+                         });
+                    }
+                    else
+                    {
+                             DashboardGame.Notifaction("Cannot create new player. Please buy more players than payments", StatusMessage.Error);
+                    }
+
+                }, () => { });
+
             };
 
         }
@@ -50,7 +106,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Start(object sender, RoutedEventArgs e)
+        private void RecivePlayersList(object sender, RoutedEventArgs e)
         {
             PlaceContentUser.Children.Clear();
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(
@@ -61,7 +117,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
                         foreach (var item in result["ListPlayers"].AsBsonArray)
                         {
-                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, Start, Parent as Grid));
+                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, RecivePlayersList, Parent as Grid));
                         }
                     }
                     else
@@ -71,19 +127,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
                     //init total player
                     TextTotalPlayer.Text = $"( {result["Players"]} )   total players";
+
+                    PlayerCount = result["Players"].ToInt32();
                 },
                 () =>
                 {
                     MessageBox.Show("Faild Recive Player :(");
 
                 });
-
-        }
-
-
-        private void AddNewPlayer(object sender, MouseButtonEventArgs e)
-        {
-            ShowSubpagePlayer();
 
         }
 
@@ -102,6 +153,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
         }
 
+
         public void ShowOffSubpagePlayer()
         {
             DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
@@ -116,41 +168,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
             storyboard.Begin(this);
         }
 
-
-        /// <summary>
-        /// creat new user
-        /// </summary>
-        /// <param name="Sender"></param>
-        /// <param name="e"></param>
-        private void ActionAddPlayer(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(TextBoxUsername.Text, TextBoxPassword.Password,
-             () =>
-             {
-                 Start(null, null);
-
-                 ShowOffSubpagePlayer();
-
-                 DashboardGame.Notifaction("Player Added", StatusMessage.Ok);
-
-                 //add log
-                 var Detail = new BsonDocument
-                 {
-                     {"Username",TextBoxUsername.Text },
-                     {"Password",TextBoxPassword.Password },
-                     {"LocalTime",DateTime.Now }
-                 };
-
-                 SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add Player", $"You have added  \" {TextBoxUsername.Text} \" player", Detail, false, result => { });
-             },
-             () =>
-             {
-
-                 DashboardGame.Notifaction("Faild Add", StatusMessage.Error);
-
-             });
-
-        }
 
         private void CheackUsername(object sender, TextChangedEventArgs e)
         {
@@ -307,7 +324,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         {
             ShowOffPanelSearch();
 
-            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(CurentSearchResult, Start));
+            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(CurentSearchResult, RecivePlayersList));
         }
 
     }
