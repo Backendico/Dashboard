@@ -1,8 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard;
-using Dashboard.Dashboards.Dashboard_Game.Elements.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
+using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageEduction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageHelps;
@@ -301,7 +301,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
             switch ((sender as TextBlock).Name)
             {
                 case "BTNLeaderboards":
-                    CurentPage = new PageLeaderBoards();
+                    CurentPage = new PageLeaderboard();
                     CurentTab = BTNLeaderboards;
                     break;
                 case "BTNPlayers":

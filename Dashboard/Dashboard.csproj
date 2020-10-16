@@ -190,6 +190,9 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderboard.xaml.cs">
+      <DependentUpon>PageLeaderboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\SubPages\Elements\ModelPayment.xaml.cs">
       <DependentUpon>ModelPayment.xaml</DependentUpon>
     </Compile>
@@ -276,7 +279,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderBoards.xaml">
+    <Page Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -367,9 +370,6 @@
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\ModelLeaderboardAbstract.xaml.cs">
       <DependentUpon>ModelLeaderboardAbstract.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderBoards.xaml.cs">
-      <DependentUpon>PageLeaderBoards.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml.cs">
       <DependentUpon>EditPlayer.xaml</DependentUpon>
