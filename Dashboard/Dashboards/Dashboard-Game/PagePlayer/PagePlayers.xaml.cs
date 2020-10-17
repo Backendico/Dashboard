@@ -132,7 +132,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                 },
                 () =>
                 {
-                    MessageBox.Show("Faild Recive Player :(");
+                    DashboardGame.Notifaction("Faild Recive",StatusMessage.Error);
 
                 });
 
