@@ -4,6 +4,7 @@ using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageDocuments;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageEduction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageHelps;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
@@ -25,7 +26,7 @@ using System.Windows.Media.Effects;
 
 namespace Dashboard.Dashboards.Dashboard_Game
 {
-  
+
     public partial class DashboardGame : Window
     {
         public static DashboardGame Dashboard;
@@ -165,6 +166,11 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             };
 
+            //acton BTNDocuments
+            BTNDocument.MouseDown += (s, e) =>
+            {
+                Root.Children.Add(new SubpageDocuments());
+            };
         }
 
 

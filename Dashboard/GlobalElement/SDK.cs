@@ -876,8 +876,6 @@ namespace Dashboard.GlobalElement
                         {
                             Result(false);
                         }
-
-
                     }
 
                     public static async void DeleteLog(BsonDocument Detail, Action<bool> Result)

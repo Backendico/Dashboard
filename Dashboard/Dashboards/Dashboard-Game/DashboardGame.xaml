@@ -154,7 +154,7 @@
                 </Border >
 
                 <!--OpenDocAPi-->
-                <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                <Border x:Name="BTNDocuments"  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
                     <TextBlock x:Name="BTNDocument" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE736;" FontFamily="Segoe MDL2 Assets"/>
                 </Border >
 

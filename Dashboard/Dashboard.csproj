@@ -199,6 +199,9 @@
     <Compile Include="Dashboards\Dashboard-Game\SubPages\PageSetting.xaml.cs">
       <DependentUpon>PageSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageDocuments\SubpageDocuments.xaml.cs">
+      <DependentUpon>SubpageDocuments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageEduction\SubPageEduction%27.xaml.cs">
       <DependentUpon>SubPageEduction%27.xaml</DependentUpon>
     </Compile>
@@ -308,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\SubPages\PageSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\SubPages\SubPageDocuments\SubpageDocuments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
