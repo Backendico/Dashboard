@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         LayoutUpdated="Window_LayoutUpdated"
         Title="Dashboard" Height="760" Width="1200">
- 
-    <Grid  x:Name="Root">
 
+    <Grid  x:Name="Root">
         <Grid x:Name="PageDashboard">
 
             <Grid.RowDefinitions>
@@ -17,7 +16,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
- 
+
             <!--Header-->
             <Grid Background="Black">
                 <Grid.ColumnDefinitions>
@@ -50,7 +49,7 @@
                 <Grid Grid.Column="2">
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="25,0">
 
-                        
+
 
                         <!--Setting-->
                         <Border x:Name="BTNSetting" Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="OrangeRed" CornerRadius="30"  >
@@ -60,8 +59,8 @@
                         <!--Support-->
                         <Border x:Name="BTNSupport"  Cursor="Hand" Margin="5,0" Width="30" Height="30" CornerRadius="30"   >
                             <Grid>
-                                
-                            <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95B;" FontFamily="Segoe MDL2 Assets"  />
+
+                                <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95B;" FontFamily="Segoe MDL2 Assets"  />
                                 <Border Visibility="Collapsed" x:Name="PlaceNotifactionSupport" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="15" Background="Tomato" Margin="12,18,-2,-8">
                                     <TextBlock x:Name="TextNumberNotifactionSupport" Text="99" Foreground="White" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Border>
@@ -123,41 +122,41 @@
                 </Grid>
 
             </Grid>
-            
-                <!-- Footer-->
-                <Border Grid.Row="2" BorderThickness="0,1,0,0"  BorderBrush="Gainsboro"/>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2">
 
-                    <!--Switch APP Game-->
-                    <Border Cursor="Hand" x:Name="SwitchAPP" Margin="10,0" CornerRadius="3" Width="170" Height="25" Background="Gainsboro" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+            <!-- Footer-->
+            <Border Grid.Row="2" BorderThickness="0,1,0,0"  BorderBrush="Gainsboro"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2">
 
-                            <Border Background="White" Margin="2" CornerRadius="3">
-                                <TextBlock FontSize="10" Foreground="DarkOrange" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Game Service"/>
-                            </Border>
+                <!--Switch APP Game-->
+                <Border Cursor="Hand" x:Name="SwitchAPP" Margin="10,0" CornerRadius="3" Width="170" Height="25" Background="Gainsboro" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            <!--Texts-->
-                            <TextBlock Grid.Column="1" Foreground="Gray" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="App Services"/>
-                        </Grid>
+                        <Border Background="White" Margin="2" CornerRadius="3">
+                            <TextBlock FontSize="10" Foreground="DarkOrange" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Game Service"/>
+                        </Border>
 
-
-                    </Border>
+                        <!--Texts-->
+                        <TextBlock Grid.Column="1" Foreground="Gray" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="App Services"/>
+                    </Grid>
 
 
+                </Border>
 
-                    <!--OpenPan-->
-                    <Border Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
+
+
+                <!--OpenPan-->
+                <Border Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
                     <TextBlock x:Name="BTNOpenPane"  MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive"  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xEA5B;" FontFamily="Segoe MDL2 Assets"/>
-                    </Border >
+                </Border >
 
-                    <!--OpenDocAPi-->
+                <!--OpenDocAPi-->
                 <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
                     <TextBlock x:Name="BTNDocument" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE736;" FontFamily="Segoe MDL2 Assets"/>
-                    </Border >
+                </Border >
 
                 <!--Eduction-->
                 <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
@@ -167,17 +166,13 @@
                 <!--Help-->
                 <Border  x:Name="ActionBTNhelp" Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
                     <TextBlock  x:Name="BTNHelp" MouseLeave="ChangeColor_DeActive" MouseEnter="ChangeColor_Active" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE82F;" FontFamily="Segoe MDL2 Assets"/>
-                    </Border >
-                    </StackPanel>
+                </Border >
+            </StackPanel>
 
-           
+
 
         </Grid>
-        
-        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" x:Name="PlaceNotifaction" HorizontalAlignment="Right" >
-            
-        </StackPanel>
 
-
+        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" x:Name="PlaceNotifaction" HorizontalAlignment="Right" />
     </Grid>
 </Window>

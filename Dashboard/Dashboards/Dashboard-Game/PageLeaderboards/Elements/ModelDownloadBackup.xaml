@@ -14,7 +14,7 @@
         <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
     </UserControl.Effect>
 
-    <Grid   Background="#33000000"  Opacity="0" x:Name="Root">
+    <Grid   Background="#33000000"  Opacity="1" x:Name="Root">
 
         <Border x:Name="Content"  VerticalAlignment="Top"  Margin="0,-200,0,0" Height="150" Width="400" Background="White" CornerRadius="10" BorderBrush="Transparent">
 

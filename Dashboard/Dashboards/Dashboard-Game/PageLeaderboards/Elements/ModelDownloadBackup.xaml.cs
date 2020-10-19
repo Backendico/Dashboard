@@ -52,19 +52,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.DownloadBackup(NameLeaderboard, Version,
                 result =>
                 {
-                    try
+                    if (result.ElementCount >= 1)
                     {
-                        File.WriteAllText(Path.SelectedPath + $"/{NameLeaderboard + "-" + Version}.json", result.ToString());
-                        DashboardGame.Notifaction("Donload Complited!\n Path: \n" + Path.SelectedPath, Notifaction.StatusMessage.Ok);
-                        Process.Start(Path.SelectedPath);
+                        try
+                        {
+                            File.WriteAllText(Path.SelectedPath + $"/{NameLeaderboard + "-" + Version}.json", result.ToString());
+                            DashboardGame.Notifaction("Donload Complited!\n Path: \n" + Path.SelectedPath, Notifaction.StatusMessage.Ok);
+                            Process.Start(Path.SelectedPath);
+                        }
+                        catch (Exception)
+                        {
+                            DashboardGame.Notifaction("Select Folder", Notifaction.StatusMessage.Warrning);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        DashboardGame.Notifaction("Select Folder", Notifaction.StatusMessage.Warrning);
+                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                    }
 
-                    }
                 },
-                () => { });
+                () =>
+                {
+                });
         }
 
 

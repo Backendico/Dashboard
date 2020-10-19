@@ -822,6 +822,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
+                            Result(BsonDocument.Parse(response.Content)) ;
                             ERR();
                         }
 
