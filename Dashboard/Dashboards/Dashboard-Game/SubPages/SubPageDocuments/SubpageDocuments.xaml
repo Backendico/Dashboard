@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageDocuments"
              mc:Ignorable="d" 
              Background="#33000000"
-             d:DesignHeight="550.666" d:DesignWidth="800"
+             d:DesignHeight="678.666" d:DesignWidth="800"
              
              >
     <Border Margin="50,60" MaxHeight="600" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
@@ -149,6 +149,19 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="User settings and information are received"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The information received contains TOKENPLAYER, take care of it."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Do not show the user personal information such as: contact number, username, email and token to other players"/>
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -236,9 +249,22 @@
                                             </StackPanel>
                                         </Border>
 
-                                        <TextBlock TextWrapping="Wrap" Margin="10">
-                                            "Username" and "Password" are optional. If the username and password are empty, it is done with a random token without a username and password.
-                                        </TextBlock>
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Create new players"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before creating a new player, call the amount of the purchased player to see the remaining amount."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The players' password is not visible after registration due to the security of the players."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="If you do not enter the username and password of the player will be registered with a random token."/>
+                                                 <LineBreak />
+                                                 <Run Text="&#xE915;" Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="Player password is case sensitive."/>
+                                                 <LineBreak />
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -332,6 +358,17 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Get leaderboard information and settings"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The received information contains information to change the settings. Please protect the received information"/>
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
                             </Grid>
@@ -423,6 +460,18 @@
                                             </StackPanel>
                                         </Border>
 
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Receive the list of players registered in the leaderboard to the requested number"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="To increase the speed of receiving the list of players, ask the amount of the number of received lists of players"/>
+                                                <LineBreak/>
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text=" Sorting the list received depends on the leaderboard settings"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
 
                                     </StackPanel>
                                 </Border>
@@ -523,7 +572,20 @@
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
-                                        <TextBlock TextWrapping="Wrap" Margin="20" Text="Your last sent value will be saved with the leaderboard settings. If the user does not have a value, a new value will be added."/>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Send player scores to leaderboards"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before sending the request, check that the value is a number."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Requests that do not send a value of the number type will encounter an error."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="If the user does not have a value, the value sent to the user is saved."/>
+                                            </TextBlock>
+                                        </StackPanel>
 
                                     </StackPanel>
                                 </Border>
@@ -619,6 +681,20 @@
                                             </StackPanel>
                                         </Border>
 
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Remove player from leaderboard"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Do not remove the player from the leaderboard to reduce bugs in your product."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="When a player is removed from the leaderboard, the amount saved for the player is deleted and the information stored for the player is not reversible."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -705,6 +781,18 @@
                                                 <TextBlock Margin="10,0" Text="The list of user leaderboards is returned as JSON" VerticalAlignment="Center" />
                                             </StackPanel>
                                         </Border>
+
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Get a list of saved player leaderboards"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes all the scores stored in the leaderboards."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
 
                                     </StackPanel>
                                 </Border>
@@ -810,6 +898,21 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Save the player avatar link"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before sending the request, check that the link entered is of link structure type, such as: "/> <LineBreak/><Run Text="https://www.google.com"/>
+                                                <LineBreak/>
+                                                <Run Text="&#xE915;" Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send a link outside the structure, you will encounter an error"/>
+
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -905,6 +1008,17 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="Save player language"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Use the language storage standard (ISO-639-1) for better product efficiency for example :"/> <LineBreak/><Run Text="(persia-fa )(english-en)"/>
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -995,6 +1109,22 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="To increase the security level of the player, the player's registered password is not visible at all at the beginning of registration, and to change the password, you can send a recovery email to the player, and all the recovery steps will be sent by email."/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before sending the request, be sure to check that the player has a registered email."/> 
+                                                  <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text=" How to recover the account In the first step, send the recovery email, the second step is to follow the email by the player and click on the recovery link and display the account recovery page, and the third step is to fill in the required fields and finally the account recovery."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="Player password is case sensitive."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1063,7 +1193,7 @@
 
                                                         <!--Password-->
                                                         <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokePlayer"/>
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
                                                         </Border>
 
                                                         <!--Password-->
@@ -1090,6 +1220,23 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Add player location or country"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="For better product efficiency, it is better to use the standard (ISO-3166-ALPHA-2)"/> 
+                                                  <LineBreak />
+                                                <Run Text="Example: (Iran-IR)(Deutschland-DE)"/>
+                                                <LineBreak/>
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="You can save the location from the player GPS or IP in this section."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="There is no filter to save"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -1184,6 +1331,22 @@
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
+
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Edit and add players usernames"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" Foreground="Orange" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before sending the request, you can check the non-duplication of the username."/> 
+                                                  <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="If the username is duplicate, you will encounter an error"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Username is case sensitive."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -1279,6 +1442,23 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Save players account recovery email"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" Foreground="Orange" FontFamily="Segoe MDL2 Assets"/> <Run Text="Ask players to display emails."/> 
+                                                  <LineBreak />
+                                                <Run Text="&#xE915;" Foreground="Orange"  FontFamily="Segoe MDL2 Assets"/> <Run Text=" Email is required to recover the account."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before sending the request, check that the structure of the email is correct. Requests that do not have an email structure will fail.for example : Admin@site.com"/>
+
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1370,6 +1550,18 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Ban and restrict players' use of services"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Players are blocked from the following services."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1461,6 +1653,18 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Unban and free players from restrictions"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Player restrictions are removed."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1550,6 +1754,18 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get Studio Stats"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Do not show your studio statistics to your players"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1641,6 +1857,20 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="The requested leaderboard reset will disappear after resetting all recorded scores, Scores cannot be recovered."/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Back up your leaderboard before sending a request."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="It is better not to reset the leaderboard request from the players side"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1748,6 +1978,21 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Create a log, history and view it in the histories"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The detail format is of JSON type. If you send another format, you will encounter an error. If the log is without detail, send an empty JSON."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="IsNotifaction is Bool and you just have to send (false) or (true). Sending another format will cause you an error."/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Send (IsNotifaction) to (true) to receive your notification in the dashboard."/>
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
@@ -1827,6 +2072,11 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text=" You can test the online status of the player, the connection of the player to the server, and the player's Internet."/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -1911,6 +2161,18 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get the requested studio settings"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The submitted information includes TOKEN Studio. Take care of the submitted information."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="It is better not to run this method on the player side."/>
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -2003,6 +2265,21 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Delete player and player information"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Do not remove your players to reduce errors in your product."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="In some games, this method can be used for random games and clearing the player after the game."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If the player is removed, it is not possible for the player to return."/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
                                     </StackPanel>
                                 </Border>
 
@@ -2091,6 +2368,21 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Search for players and get player settings and details via TOKENPLAYER"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received information does not have a player password."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The information submitted includes TOKENPLAYER Protect the information."/>
+                                             
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    
                                     </StackPanel>
                                 </Border>
 
@@ -2179,6 +2471,19 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Search for players and get player settings and details via Email"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received information does not have a player password."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The information submitted includes TOKENPLAYER Protect the information."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -2267,6 +2572,20 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Search for players and get player settings and details via Username"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received information does not have a player password."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The information submitted includes TOKENPLAYER Protect the information."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
                                     </StackPanel>
                                 </Border>
 
@@ -2355,6 +2674,18 @@
 
                                             </StackPanel>
                                         </Border>
+                                     
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of backups from the leaderboard"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Due to the high volume of some backups, it is better not to do it on the player side."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
                                     </StackPanel>
                                 </Border>
 
@@ -2447,6 +2778,18 @@
 
                                             </StackPanel>
                                         </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Save and backup the requested leaderboard"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Do not run from the player side to better control and manage the leaderboards."/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
                                     </StackPanel>
                                 </Border>
 
