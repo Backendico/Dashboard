@@ -9,7 +9,7 @@
              d:DesignHeight="678.666" d:DesignWidth="800"
              
              >
-    <Border Margin="50,60" MaxHeight="600" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
+    <Border Margin="50,60" MaxHeight="600" MaxWidth="720" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
         <Border.Effect>
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
@@ -68,7 +68,7 @@
 
                 <!--AUT-->
                 <TabItem  Height="30" Background="LightGray"  Header="Authentication API" >
-                    <TabControl  TabStripPlacement="Top">
+                    <TabControl  TabStripPlacement="Left">
                         <!--Login-->
                         <TabItem  Background="LightGray"  Height="30" Header="Login">
                             <Grid Margin="20">
@@ -277,7 +277,7 @@
 
                 <!--Leaderboard-->
                 <TabItem Height="30" Background="LightGray"  Header="Leaderboard API">
-                    <TabControl  TabStripPlacement="Top">
+                    <TabControl  TabStripPlacement="Left">
                         <!--ReciveLeaderboardSetting-->
                         <TabItem  Background="LightGray"  Height="30" Header="Recive Leaderboard Setting">
                             <Grid Margin="20">
@@ -807,7 +807,7 @@
 
                 <!--Players-->
                 <TabItem Height="30" Background="LightGray"  Header="Players API">
-                    <TabControl  TabStripPlacement="Top">
+                    <TabControl  TabStripPlacement="Left">
 
                         <!--Add Avatar-->
                         <TabItem  Background="LightGray"  Height="30" Header="Add Avatar">
@@ -1563,9 +1563,119 @@
                                                 <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Nickname is to display it to other players."/> 
                                                   <LineBreak />
                                                 <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The nickname can be used duplicate among your players."/>
-
-
                                             </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--Add Nickname-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Add Phone">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddPhone"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Username-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--Password-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+                                                        <!--Password-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="PhoneNumber"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+                                                <StackPanel>
+                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Save players contact numbers"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The type of contact number is string"/> 
+                                                  <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="For better retrieval it is better to save the contact number format with number."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Do not display the player's contact number publicly"/>
+                                                
+                                            </TextBlock>
+                                            
                                         </StackPanel>
 
                                     </StackPanel>
@@ -1896,9 +2006,9 @@
                     </TabControl>
                 </TabItem>
 
-                <!--AddLog-->
-                <TabItem Height="30" Background="LightGray"  Header="Admin API">
-                    <TabControl>
+                <!--Admin -->
+                <TabItem Height="30" Background="LightGray"   Header="Admin API">
+                    <TabControl TabStripPlacement="Left">
                         <!--ReciveStatices-->
                         <TabItem  Background="LightGray"  Height="30" Header="Recive Statices">
                             <Grid Margin="20">
