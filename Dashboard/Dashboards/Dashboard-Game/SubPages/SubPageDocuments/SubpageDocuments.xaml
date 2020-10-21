@@ -1465,6 +1465,116 @@
 
                         </TabItem>
 
+                        <!--Add Nickname-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Add Nickname">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddNickname"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Username-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--Password-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+                                                        <!--Password-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Nickname"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+                                                <StackPanel>
+                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Update and add nicknames for players"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="Nickname is to display it to other players."/> 
+                                                  <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The nickname can be used duplicate among your players."/>
+
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
                         <!--Add Email-->
                         <TabItem  Background="LightGray"  Height="30" Header="Add Email">
                             <Grid Margin="20">
