@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game"
         mc:Ignorable="d"
-        LayoutUpdated="Window_LayoutUpdated"
         Title="Dashboard" Height="760" Width="1200">
 
     <Grid>
@@ -173,7 +172,6 @@
 
 
             </Grid>
-
         </Grid>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" x:Name="PlaceNotifaction" HorizontalAlignment="Right" />

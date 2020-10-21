@@ -49,6 +49,9 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             CurentTab = BTNDashboard;
 
+
+
+
             if (Settings.Default._id == "")
             {
                 Blure(true);
@@ -165,12 +168,26 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 storyboard.Begin(this);
 
             };
+            BTNOpenPane.MouseLeave += (s, e) =>
+            {
+                if (NameList.Width >= 100)
+                {
+                    BTNOpenPane.Foreground = new SolidColorBrush(Colors.Orange);
+                    BTNOpenPane.Text = "\xEA49";
+                }
+                else
+                {
+                    BTNOpenPane.Text = "\xEA5B";
+                }
+            };
 
             //acton BTNDocuments
             BTNDocument.MouseDown += (s, e) =>
             {
                 Root.Children.Add(new SubpageDocuments());
             };
+
+
         }
 
 
@@ -299,7 +316,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
             Content.Children.Clear();
 
             CurentTab.Foreground = new SolidColorBrush(Colors.Gray);
-
+            CurentTab.MouseLeave -= (s, ee) => { };
 
             switch ((sender as TextBlock).Name)
             {
@@ -322,6 +339,13 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             Content.Children.Add(CurentPage);
             CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
+
+            //Curent change Color
+            CurentTab.MouseLeave += (s, ee) =>
+            {
+                CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
+            };
+
         }
 
 
@@ -340,6 +364,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             CurentTab.Foreground = new SolidColorBrush(Colors.Gray);
             CurentTab = BTNDashboard;
+            CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
 
 
 
@@ -353,22 +378,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Login", $"You login at {DateTime.Now} (Local Time)", new BsonDocument(), false, (Reslult) => { });
         }
 
-
-        private void Window_LayoutUpdated(object sender, EventArgs e)
-        {
-            if (NameList.Width >= 100)
-            {
-                BTNOpenPane.Foreground = new SolidColorBrush(Colors.Orange);
-                BTNOpenPane.Text = "\xEA49";
-            }
-            else
-            {
-                BTNOpenPane.Text = "\xEA5B";
-            }
-
-            CurentTab.Foreground = new SolidColorBrush(Colors.Orange);
-
-        }
 
         //Statics
         public static void Notifaction(string Message, StatusMessage Status)
