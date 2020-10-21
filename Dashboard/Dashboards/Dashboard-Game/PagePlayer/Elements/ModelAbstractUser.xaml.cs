@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -31,12 +33,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             TextCountry.Text = DetailPlayer["Account"]["Country"].AsString;
             TextUsername.Text = DetailPlayer["Account"]["Username"].AsString;
 
+            if (DetailPlayer["Account"]["IsBan"].AsBoolean)
+            {
+                StatusBan.BorderBrush = new SolidColorBrush(Colors.Tomato);
+            }
+
 
             this.DetailPlayer = DetailPlayer;
             this.Refreshlist = Refreshlist;
             _Parent = Parent;
+
+         
         }
 
+        
 
         /// <summary>
         /// non refresh list
@@ -54,18 +64,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             this.DetailPlayer = DetailPlayer;
         }
 
-    
-     
+
+
         private void OpenEdit(object sender, MouseButtonEventArgs e)
         {
-           DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));
+            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));
 
         }
 
         private void CopyToken(object sender, MouseButtonEventArgs e)
         {
             Clipboard.SetText(TextToken.Text);
-            DashboardGame.Notifaction("Token Copied !",Notifaction.StatusMessage.Ok);
+            DashboardGame.Notifaction("Token Copied !", Notifaction.StatusMessage.Ok);
 
         }
 

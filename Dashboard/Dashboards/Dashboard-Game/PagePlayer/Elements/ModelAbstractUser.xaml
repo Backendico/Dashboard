@@ -54,7 +54,8 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-
+            
+            <Border x:Name="StatusBan" BorderBrush="Transparent" BorderThickness="5,0,0,0" Grid.Column="0"/>
             <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="0"/>
             <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="1"/>
             <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="2"/>

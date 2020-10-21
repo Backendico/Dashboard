@@ -145,6 +145,8 @@
                             <TextBlock Cursor="Hand" x:Name="TextToken" MinWidth="200" FontWeight="Normal"  Text="TokenHERE" MouseDown="CopyToken"/>
                         </StackPanel>
 
+                        <CheckBox x:Name="CheackBoxBan" Margin="10" Content="Ban"/>
+
                         <!--Delete-->
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
                             <!--BTN Delete-->
@@ -155,6 +157,7 @@
                             <Border MouseDown="SaveSetting" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" >
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Save"/>
                             </Border>
+                            
                         </StackPanel>
 
                     </StackPanel>

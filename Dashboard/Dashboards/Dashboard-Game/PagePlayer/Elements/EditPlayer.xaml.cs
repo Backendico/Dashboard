@@ -48,6 +48,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             TextboxEmail.Text = this.PlayerDetail["Account"]["Email"].AsString;
             TextToken.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
 
+            CheackBoxBan.IsChecked = this.PlayerDetail["Account"]["IsBan"].AsBoolean;
+            CheackBoxBan.Checked += (s, e) =>
+            {
+                this.PlayerDetail["Account"]["IsBan"] = true;
+            };
+            CheackBoxBan.Unchecked += (s, e) =>
+            {
+                this.PlayerDetail["Account"]["IsBan"] = false;
+            };
+
             //init pageLeaderboard
             try
             {
@@ -233,15 +243,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         {
             DashboardGame.Dialog("Sample acceptable link\n\n https://example.com \n \n or\n \n http://example.com ", "Help Link");
         }
+
         private void LanguageHelp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("ISO is the language standard (ISO 639-1) \n for example:\n \n\n Persian : (fa) \n \n or\n \n English : (en) ", "Help Language");
         }
+
         private void CountryHelp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("ISO is the country  standard (ISO 3166 ALPHA3) \n for example:\n \n\n Iran : (IRN) \n \n or\n \n Belgien : (BEL) ", "Help Country");
         }
-
 
         private async void Delete(object sender, MouseButtonEventArgs e)
         {
