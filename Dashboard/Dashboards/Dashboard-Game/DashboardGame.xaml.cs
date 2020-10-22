@@ -170,7 +170,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
             };
             BTNOpenPane.MouseLeave += (s, e) =>
             {
-                if (NameList.Width >= 100)
+                if (NameList.Width >= 1)
                 {
                     BTNOpenPane.Foreground = new SolidColorBrush(Colors.Orange);
                     BTNOpenPane.Text = "\xEA49";
@@ -186,8 +186,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             {
                 Root.Children.Add(new SubpageDocuments());
             };
-
-
         }
 
 
