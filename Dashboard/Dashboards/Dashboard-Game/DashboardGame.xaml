@@ -150,7 +150,7 @@
 
                     <!--OpenPan-->
                     <Border Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
-                        <TextBlock x:Name="BTNOpenPane"  MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive"  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xEA5B;" FontFamily="Segoe MDL2 Assets"/>
+                        <TextBlock x:Name="BTNOpenPane"  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xEA5B;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
 
                     <!--OpenDocAPi-->

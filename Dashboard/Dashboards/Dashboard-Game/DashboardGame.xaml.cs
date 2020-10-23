@@ -147,15 +147,20 @@ namespace Dashboard.Dashboards.Dashboard_Game
             };
 
             //action Pane
+            var Pan = false;
             BTNOpenPane.MouseDown += (s, e) =>
             {
                 Storyboard storyboard = new Storyboard();
-                if (NameList.Width >= 100)
+                if (NameList.Width >= 1)
                 {
                     DoubleAnimation Anim = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(0.3));
                     Storyboard.SetTargetName(Anim, NameList.Name);
                     Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
                     storyboard.Children.Add(Anim);
+
+
+
+                    Pan = false;
                 }
                 else
                 {
@@ -163,23 +168,64 @@ namespace Dashboard.Dashboards.Dashboard_Game
                     Storyboard.SetTargetName(Anim, NameList.Name);
                     Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
                     storyboard.Children.Add(Anim);
+
+                    Pan = true;
                 }
 
                 storyboard.Begin(this);
 
             };
+
+            BTNOpenPane.MouseEnter += (s, e) =>
+            {
+                    var TextBlock = s as TextBlock;
+                    ColorAnimation Anim = new ColorAnimation(fromValue: Colors.Gray, toValue: Colors.Orange, TimeSpan.FromSeconds(0.3));
+                    Storyboard.SetTargetName(Anim, TextBlock.Name);
+                    Storyboard.SetTargetProperty(Anim, new PropertyPath("(TextBlock.Foreground).(SolidColorBrush.Color)"));
+
+                    DoubleAnimation Anim1 = new DoubleAnimation(18, 20, TimeSpan.FromSeconds(0.1));
+                    Storyboard.SetTargetName(Anim1, TextBlock.Name);
+                    Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
+
+
+                    Storyboard storyboard = new Storyboard();
+                    storyboard.Children.Add(Anim);
+                    storyboard.Children.Add(Anim1);
+
+                    storyboard.Begin(this);
+            };
+
             BTNOpenPane.MouseLeave += (s, e) =>
             {
-                if (NameList.Width >= 1)
+                var TextBlock = s as TextBlock;
+                ColorAnimation Anim = new ColorAnimation(fromValue: Colors.Orange, toValue: Colors.Gray, TimeSpan.FromSeconds(0.3));
+                Storyboard.SetTargetName(Anim, TextBlock.Name);
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("(TextBlock.Foreground).(SolidColorBrush.Color)"));
+
+                DoubleAnimation Anim1 = new DoubleAnimation(20, 18, TimeSpan.FromSeconds(0.1));
+                Storyboard.SetTargetName(Anim1, TextBlock.Name);
+                Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
+
+
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Children.Add(Anim1);
+
+                storyboard.Begin(this);
+
+                if (Pan)
                 {
                     BTNOpenPane.Foreground = new SolidColorBrush(Colors.Orange);
                     BTNOpenPane.Text = "\xEA49";
                 }
                 else
                 {
+                    BTNOpenPane.Foreground = new SolidColorBrush(Colors.Gray);
                     BTNOpenPane.Text = "\xEA5B";
                 }
             };
+
+
 
             //acton BTNDocuments
             BTNDocument.MouseDown += (s, e) =>
