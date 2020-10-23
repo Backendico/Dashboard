@@ -1,14 +1,17 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using RestSharp;
 using System;
+using System.CodeDom;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
@@ -26,6 +29,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         Grid CurentPage;
         Button CurentBTNHeader;
+
 
         public EditPlayer(BsonDocument PlayerDetail, Action<object, RoutedEventArgs> RefreshList)
         {
@@ -48,6 +52,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             TextboxEmail.Text = this.PlayerDetail["Account"]["Email"].AsString;
             TextToken.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
 
+            //cheak banplayer
             CheackBoxBan.IsChecked = this.PlayerDetail["Account"]["IsBan"].AsBoolean;
             CheackBoxBan.Checked += (s, e) =>
             {
@@ -61,13 +66,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //init pageLeaderboard
             try
             {
-                InitLeaderboard(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
+                ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
             }
             catch (Exception)
             {
                 PlayerDetail.Add("Leaderboards", new BsonDocument { { "List", new BsonDocument { } } });
 
-                InitLeaderboard(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
+                ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
             }
 
 
@@ -103,6 +108,74 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 }
 
             };
+
+            //action btgn see more
+            BTNSeeMoreLog.MouseDown += (s, e) =>
+            {
+                CountLog += 100;
+                TextSeeMoreNumber.Text = CountLog.ToString();
+            };
+
+            //actin btn Add Log
+            BTNAddLog.MouseDown += (s, e) =>
+            {
+                ShowPanelAddLogs();
+            };
+
+            //action btn ClosePaneladdlog
+            PanelAddLog.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowoffPaneladdLogs();
+                }
+            };
+
+            //action btn send log
+            BTNSendLog.MouseDown += (s, e) =>
+            {
+                if (TextboxHeader.Text.Length >= 1 && TextboxDescription.Text.Length >= 1)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.AddLogPlayer(PlayerDetail["Account"]["Token"].AsObjectId, TextboxHeader.Text, TextboxDescription.Text, result =>
+                    {
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Log Added", Notifaction.StatusMessage.Ok);
+                            ShowoffPaneladdLogs();
+                            RecivePlayerLogs();
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Header or Description Short", Notifaction.StatusMessage.Error);
+                }
+            };
+
+            //action btn clear
+            BTNClearLogs.MouseDown += (s, e) =>
+            {
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(PlayerDetail["Account"]["Token"].AsObjectId,
+                    result =>
+                    {
+                        if (result)
+                        {
+                            PlaceContentLogs.Children.Clear();
+                            DashboardGame.Notifaction("All Logs Deleted", Notifaction.StatusMessage.Ok);
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Clear faild", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
+            };
+
         }
 
         //global
@@ -131,8 +204,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     break;
                 case "BTNLogs":
                     {
-                        Debug.WriteLine("Set logs");
-
+                        CurentPage = PageLogs;
+                        PageLogs.Visibility = Visibility.Visible;
+                        CurentBTNHeader = BTNLogs;
+                        BTNLogs.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
+                        RecivePlayerLogs();
                     }
                     break;
                 default:
@@ -323,7 +399,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         /// if Player have a leaderboard
         /// </summary>
         /// <param name="Leaderboards"></param>
-        public void InitLeaderboard(BsonDocument Leaderboards)
+        public void ReciveLeaderboardPlayer(BsonDocument Leaderboards)
         {
 
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
@@ -354,7 +430,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-
         private void Add(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             try
@@ -376,7 +451,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 () =>
                 {
                     DashboardGame.Notifaction("Leaderboards Saved", Notifaction.StatusMessage.Ok);
-                    InitLeaderboard(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
+                    ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
 
                     SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("modifie Player Leaderboard", $"You have modifie player \" {PlayerDetail["Account"]["Username"]} \" ", PlayerDetail["Leaderboards"]["List"].AsBsonDocument, false, resul => { });
                 },
@@ -389,6 +464,64 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         private void Close(object sender, RoutedEventArgs e)
         {
             DashboardGame.Dashboard.Root.Children.Remove(this);
+        }
+
+        //page Log
+        int CountLog = 100;
+
+        public void RecivePlayerLogs()
+        {
+            PlaceContentLogs.Children.Clear();
+            CountLog = 100;
+            TextSeeMoreNumber.Text = CountLog.ToString();
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecivePlayerlog(PlayerDetail["Account"]["Token"].AsObjectId, CountLog,
+                Result =>
+                {
+
+                    if (Result["Logs"].AsBsonArray.Count >= 1)
+                    {
+                        foreach (var item in Result["Logs"].AsBsonArray)
+                        {
+                            PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
+                        }
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                    }
+                },
+                () =>
+                {
+                    DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
+                });
+        }
+
+        private void ShowPanelAddLogs()
+        {
+            PanelAddLog.Visibility = Visibility.Visible;
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+        private void ShowoffPaneladdLogs()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, ee) =>
+            {
+                TextboxDescription.Text = "";
+                TextboxHeader.Text = "";
+
+                PanelAddLog.Visibility = Visibility.Collapsed;
+            };
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
         }
 
 

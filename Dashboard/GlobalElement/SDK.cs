@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Conventions;
 using RestSharp;
 using System;
 using System.Diagnostics;
@@ -522,6 +523,72 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result, Action ERR)
+                    {
+                        var client = new RestClient(Links.RecivePlayerLogs);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("Count", Count);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                            ERR();
+                        }
+                    }
+
+                    public static async void AddLogPlayer(ObjectId TokenPlayer, string Header, string Description, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddPlayerlog);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("Header", Header);
+                        request.AddParameter("Description", Description);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void ClearLog(ObjectId TokenPlayer, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.ClearLog);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
                 }
 
                 public sealed class PageLeaderboard
@@ -822,7 +889,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            Result(BsonDocument.Parse(response.Content)) ;
+                            Result(BsonDocument.Parse(response.Content));
                             ERR();
                         }
 
@@ -943,19 +1010,19 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
-              
-                    public async static void Notifaction(Action<BsonDocument> Result,Action ERR)
+
+                    public async static void Notifaction(Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.Notifaction);
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         client.ClearHandlers();
                         request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Token",SettingUser.Token );
+                        request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         var response = await client.ExecuteAsync(request);
-                        
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
                         }
@@ -965,7 +1032,7 @@ namespace Dashboard.GlobalElement
                             ERR();
                         }
                     }
-                
+
                 }
 
                 public sealed class PageSupport
@@ -1078,7 +1145,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                  
+
                 }
             }
         }
@@ -1118,6 +1185,9 @@ namespace Dashboard.GlobalElement
                 public string Save => "https://localhost:44346/PagePlayer/SavePlayer";
                 public string Save_LeaderboardPlayer => "https://localhost:44346/PagePlayer/Save_LeaderboardPlayer";
                 public string SendEmailRecovery => "https://localhost:44346/PagePlayer/SendEmailRecovery";
+                public string RecivePlayerLogs => "https://localhost:44346/PagePlayer/RecivePlayerLogs";
+                public string AddPlayerlog => "https://localhost:44346/PagePlayer/AddPlayerLog";
+                public string ClearLog => "https://localhost:44346/PagePlayer/ClearLogs";
 
             }
 
