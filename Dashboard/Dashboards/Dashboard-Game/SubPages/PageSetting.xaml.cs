@@ -91,25 +91,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
 
                     BTNRevite.Visibility = Visibility.Visible;
-                }
-                Cheackcash();
-                RechangeNew();
-            };
-
-            BTNStudio.MouseDown += (s, obj) =>
-            {
-                if (CurentMonetiz["Cash"].AsInt32 - 10000 >= 0)
-                {
-                    CurentMonetiz["Studios"] = CurentMonetiz["Studios"].AsInt32 + 1;
-
-                    NewMonetiz["Studios"] = NewMonetiz["Studios"].AsInt32 + 1;
-
-                    NewMonetiz["Cash"] = NewMonetiz["Cash"].AsInt32 + 60000;
-
-                    CurentMonetiz["Cash"] = CurentMonetiz["Cash"].AsInt32 - 60000;
-
-
-                    BTNRevite.Visibility = Visibility.Visible;
+                    Debug.WriteLine(CurentMonetiz.ToString());
                 }
                 Cheackcash();
                 RechangeNew();
@@ -142,7 +124,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             {"Players",0 },
                             {"Leaderboards",0 },
                             {"Apis",0 },
-                            {"Studios",0 },
                             {"Logs",0 },
                             {"Cash",0 }
                         };
@@ -162,7 +143,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 TextPlayerNewValue.Text = "";
                 TextLeaderboardsNewValue.Text = "";
                 TextApisNewValue.Text = "";
-                TextStudiosNewValue.Text = "";
                 TextLogsNewValue.Text = "";
             };
 
@@ -178,15 +158,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                     {
                         var Detail = new BsonDocument
                                     {
-                                        { "Leaderboards",NewMonetiz["Leaderboards"].AsInt32 + CurentMonetiz["Leaderboards"].AsInt32},
-                                        { "Apis",NewMonetiz["Apis"].AsInt32 + CurentMonetiz["Apis"].AsInt32 },
-                                        { "Studios",NewMonetiz["Studios"].AsInt32 + CurentMonetiz["Studios"].AsInt32 },
-                                        { "Logs",NewMonetiz["Logs"].AsInt32 + CurentMonetiz["Logs"].AsInt32 },
-                                        { "Players",NewMonetiz["Players"].AsInt32 + CurentMonetiz["Players"].AsInt32},
+                                        { "Leaderboards",CurentMonetiz["Leaderboards"].AsInt32},
+                                        { "Apis",CurentMonetiz["Apis"].AsInt32 },
+                                        { "Logs", CurentMonetiz["Logs"].AsInt32 },
+                                        { "Players", CurentMonetiz["Players"].AsInt32},
                                         { "Creator" ,SettingUser.CurentDetailStudio["Creator"]},
                                         { "Cash",CurentMonetiz["Cash"].AsInt32 }
                                     };
 
+
+                        Debug.WriteLine(Detail["Leaderboards"].ToString());
+                        Debug.WriteLine(NewMonetiz["Leaderboards"]);
+                        Debug.WriteLine(CurentMonetiz["Leaderboards"]);
 
                         SDK.SDK_PageDashboards.DashboardGame.PageStudios.AddPayment(Detail, ResultPay =>
                         {
@@ -198,7 +181,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                 TextPlayerNewValue.Text = "";
                                 TextLeaderboardsNewValue.Text = "";
                                 TextApisNewValue.Text = "";
-                                TextStudiosNewValue.Text = "";
                                 TextLogsNewValue.Text = "";
                                 TextTomanNumber.Text = "0";
                                 BTNRevite.Visibility = Visibility.Collapsed;
@@ -388,7 +370,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             {"Players",0 },
                             {"Leaderboards",0 },
                             {"Apis",0 },
-                            {"Studios",0 },
                             {"Logs",0 },
                             {"Cash",0 }
                         };
@@ -441,19 +422,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                 TextApisValue.Text = (result["Apis"].AsInt32 / 1000000).ToString() + "M";
                             }
 
-                            //Studios
-                            if (result["Studios"].AsInt32 <= 999)
-                            {
-                                TextStudiosValue.Text = result["Studios"].ToString();
-                            }
-                            else if (result["Studios"].AsInt32 >= 1000 && result["Studios"].AsInt32 <= 999999)
-                            {
-                                TextStudiosValue.Text = (result["Studios"].AsInt32 / 1000).ToString() + "K";
-                            }
-                            else if (result["Studios"].AsInt32 >= 1000000)
-                            {
-                                TextStudiosValue.Text = (result["Studios"].AsInt32 / 1000000).ToString() + "M";
-                            }
+                        
 
                             //Logs
                             if (result["Logs"].AsInt32 <= 999)
@@ -487,7 +456,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                     },
                     () =>
                     {
-                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
+                        DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
                     });
             }
         }
@@ -544,16 +513,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             }
 
 
-            if (CurentMonetiz["Cash"].AsInt32 >= 60000)
-            {
-                BTNStudio.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                BTNStudio.Visibility = Visibility.Collapsed;
-            }
-
-
             if (CurentMonetiz["Cash"].AsInt32 >= 30000)
             {
                 BTNLogs.Visibility = Visibility.Visible;
@@ -573,7 +532,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             TextPlayerNewValue.Text = " + " + NewMonetiz["Players"].ToString();
             TextLeaderboardsNewValue.Text = " + " + NewMonetiz["Leaderboards"].ToString();
             TextApisNewValue.Text = " + " + NewMonetiz["Apis"].ToString();
-            TextStudiosNewValue.Text = " + " + NewMonetiz["Studios"].ToString();
             TextLogsNewValue.Text = " + " + NewMonetiz["Logs"].ToString();
 
             TextTomanNumber.Text = NewMonetiz["Cash"].AsInt32.ToString("#,##0");

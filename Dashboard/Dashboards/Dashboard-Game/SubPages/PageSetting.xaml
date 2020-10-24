@@ -50,7 +50,7 @@
 
             <!--Bodys-->
             <!--Body Setting-->
-            <Grid Margin="0,10" x:Name="PageSettings" Visibility="Visible" Grid.Row="2" >
+            <Grid Margin="0,10" x:Name="PageSettings" Visibility="Collapsed" Grid.Row="2" >
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -127,7 +127,7 @@
             </Grid>
 
             <!-- body Monetiz-->
-            <Grid IsVisibleChanged="ReciveMonetize" x:Name="PageMonetiz"  Visibility="Collapsed" Grid.Row="2" >
+            <Grid IsVisibleChanged="ReciveMonetize" x:Name="PageMonetiz"  Visibility="Visible" Grid.Row="2" >
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="10">
@@ -149,7 +149,6 @@
                         <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2"  >
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="40"/>
                                     <RowDefinition Height="40"/>
                                     <RowDefinition Height="40"/>
                                     <RowDefinition Height="40"/>
@@ -274,34 +273,7 @@
 
                                 </Grid>
 
-                                <!--Tabel Studios-->
-                                <Grid  Grid.Row="4">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,2,2,0"/>
-                                    <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,2,2,0"/>
-                                    <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="0,2,0,0"/>
-
-                                    <TextBlock Margin="10,0"  Grid.Column="0" VerticalAlignment="Center" TextAlignment="Left"  HorizontalAlignment="Left">
-                                        <Run  FontWeight="Bold" Text="Studios"/>
-                                        <LineBreak/>
-                                        <Run Foreground="Gray" Text="1 Studio is 60,000 Tomans"/>
-                                    </TextBlock>
-
-                                    <TextBlock  Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center"  HorizontalAlignment="Center">
-                                        <Run x:Name="TextStudiosValue"/>
-                                        <Run x:Name="TextStudiosNewValue" />
-                                    </TextBlock>
-
-                                    <Border x:Name="BTNStudio" Cursor="Hand" Width="30" Height="30" Grid.Column="2" VerticalAlignment="Center" CornerRadius="5"  BorderBrush="Transparent" Background="OliveDrab" >
-                                        <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White"   Text="&#xE710;" FontFamily="Segoe MDL2 Assets" />
-                                    </Border>
-
-                                </Grid>
+                              
 
                                 <!--Tabel Log history-->
                                 <Grid  Grid.Row="5">
