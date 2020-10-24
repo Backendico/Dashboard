@@ -64,7 +64,7 @@
             <TextBlock x:Name="TextCash" Grid.Column="2" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Cash"/>
             <TextBlock x:Name="TextCreator" Grid.Column="3" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="Creator"/>
          
-            <Border Opacity="1" x:Name="BTNShowDetail"  CornerRadius="5"  Cursor="Hand" BorderBrush="Transparent"  Margin="0,5" MinHeight="30" MinWidth="70" Background="Orange" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center"  >
+            <Border Opacity="1" x:Name="BTNShowDetail"  CornerRadius="5"  Cursor="Hand" BorderBrush="Transparent"  Margin="0,5" MinHeight="30" MinWidth="70" Background="Transparent" Grid.Column="4"   VerticalAlignment="Center" HorizontalAlignment="Center"  >
                 <TextBlock FontSize="15" VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontFamily="Segoe MDL2 Assets" Text="&#xEF40;"/>
             </Border>
         </Grid>

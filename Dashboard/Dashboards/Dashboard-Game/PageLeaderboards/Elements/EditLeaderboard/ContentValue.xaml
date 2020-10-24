@@ -61,8 +61,8 @@
         </Border>
         
         <TextBlock x:Name="TextRank" FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
-        <TextBlock Cursor="Hand" x:Name="TextToken" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
-        <TextBlock x:Name="TextValue" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
+        <TextBlock Cursor="Hand" x:Name="TextToken"   TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
+        <TextBlock x:Name="TextValue"  TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
     </Grid>
 
 </UserControl>
