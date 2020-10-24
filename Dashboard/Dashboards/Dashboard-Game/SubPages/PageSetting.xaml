@@ -78,19 +78,19 @@
 
                             <!--Token-->
                             <TextBlock  Margin="0,5">
-                        <Run  FontWeight="Bold" Text="Token : "/>
+                        <Run  FontWeight="Bold" Text="ID: "/>
                         <Run Cursor="Hand" x:Name="TextToken" Text="XXX"/>
                            <LineBreak/>
-                         <Run Foreground="Gray"  Text="To authenticate your studio and your Apis key"/>
+                         <Run Foreground="Gray"  Text="Studio ID"/>
                             </TextBlock>
 
 
                             <!--Creator-->
                             <TextBlock Margin="0,5">
-                        <Run  FontWeight="Bold" Text="Creator : "/>
+                        <Run  FontWeight="Bold" Text="TOKEN : "/>
                         <Run x:Name="TextCreator" Text="XXX"/>
                           <LineBreak/>
-                         <Run Foreground="Gray"  Text="Studio Builder User Token"/>
+                         <Run Foreground="Gray"  Text="To authenticate your studio and your Apis key"/>
                             </TextBlock>
 
                             <!--Created-->
@@ -104,7 +104,7 @@
 
                             <!--Created-->
                             <TextBlock Margin="0,5">
-                        <Run  FontWeight="Bold" Text="Database : "/>
+                        <Run  FontWeight="Bold" Text="Studio/Database : "/>
                         <Run x:Name="TextDatabase" Text="XXX"/>
                           <LineBreak/>
                          <Run Foreground="Gray"  Text=" Database name attached to the studio"/>

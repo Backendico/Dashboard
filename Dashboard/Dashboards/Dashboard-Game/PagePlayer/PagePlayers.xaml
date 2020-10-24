@@ -87,7 +87,7 @@
                         <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="7"/>
 
 
-                        <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Center" Text="Token" Grid.Column="0"/>
+                        <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Center" Text="TOKENPLAYER" Grid.Column="0"/>
                         <TextBlock  TextAlignment="Center"  VerticalAlignment="Center" Text="Username" Grid.Column="1"/>
                         <TextBlock  TextAlignment="Center"  VerticalAlignment="Center" Text="Last Login" Grid.Column="2"/>
                         <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Created" Grid.Column="3"/>
