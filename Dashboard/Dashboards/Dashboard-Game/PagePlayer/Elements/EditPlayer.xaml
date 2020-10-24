@@ -59,7 +59,7 @@
 
             <!--Bodys-->
             <!--Body Account-->
-            <Grid x:Name="PageAccount" Visibility="Collapsed" Grid.Row="2" >
+            <Grid x:Name="PageAccount" Visibility="Visible" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -237,7 +237,7 @@
             </Grid>
 
             <!-- body Logs-->
-            <Grid x:Name="PageLogs" Visibility="Visible" Grid.Row="2">
+            <Grid x:Name="PageLogs" Visibility="Collapsed" Grid.Row="2">
                 <Border  BorderBrush="Gray" BorderThickness="0,0,0,0" >
                     <Grid>
                         <Grid.RowDefinitions>

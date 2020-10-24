@@ -477,17 +477,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecivePlayerlog(PlayerDetail["Account"]["Token"].AsObjectId, CountLog,
                 Result =>
                 {
-
-                    if (Result["Logs"].AsBsonArray.Count >= 1)
+                    try
                     {
-                        foreach (var item in Result["Logs"].AsBsonArray)
+                        if (Result["Logs"].AsBsonArray.Count >= 1)
                         {
-                            PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
+                            foreach (var item in Result["Logs"].AsBsonArray)
+                            {
+                                PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
+                            }
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
                         }
                     }
-                    else
+                    catch (Exception)
                     {
-                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                        DashboardGame.Notifaction("No logs Content", Notifaction.StatusMessage.Warrning);
                     }
                 },
                 () =>
