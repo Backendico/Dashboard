@@ -138,6 +138,12 @@
                             <TextBox x:Name="TextboxEmail" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Email here" TextChanged="EmailChange"/>
                         </StackPanel>
 
+                        <!--Phone-->
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock  Text="Phone: "/>
+                            <TextBox x:Name="Textboxphone" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="N/A" TextChanged="EmailChange"/>
+                        </StackPanel>
+
 
                         <!--Token-->
                         <StackPanel Orientation="Horizontal" Margin="10">

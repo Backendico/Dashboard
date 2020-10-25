@@ -51,6 +51,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             TextboxUsername.Text = this.PlayerDetail["Account"]["Username"].AsString;
             TextboxEmail.Text = this.PlayerDetail["Account"]["Email"].AsString;
             TextToken.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
+            Textboxphone.Text = this.PlayerDetail["Account"]["Phone"].ToString() ;
 
             //cheak banplayer
             CheackBoxBan.IsChecked = this.PlayerDetail["Account"]["IsBan"].AsBoolean;
@@ -174,6 +175,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         }
 
                     });
+            };
+
+
+            //action BTN control and change phone
+            Textboxphone.TextChanged += (s, e) =>
+            {
+                var Phone = s as TextBox;
+
+                if (long.TryParse(Phone.Text, out long Handle))
+                {
+                    PlayerDetail["Account"]["Phone"] = Handle;
+                }
+                else
+                {
+                    Phone.Text = "";
+                }
             };
 
         }
