@@ -59,7 +59,8 @@
                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text=" Take care of the TOKEN and TOKENPLAYER keys."/>
                                 <LineBreak/>      <LineBreak/>
                             <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text="Game service is based on players. Each part of the service interacts with the players"/>
-
+                            <LineBreak/>      <LineBreak/>
+<Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text="Requests sent from APIs will check the amount of Write / Reads."/>
 
                         </TextBlock>
 
@@ -1806,7 +1807,7 @@
                             </Grid>
 
                         </TabItem>
-                    
+
                         <!--Recive Log-->
                         <TabItem  Background="LightGray"  Height="30" Header="Recive player Log ">
                             <Grid Margin="20">
@@ -1876,7 +1877,7 @@
                                                             <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Count"/>
                                                         </Border>
 
-                                                       
+
 
                                                     </StackPanel>
                                                 </Border>
@@ -1901,7 +1902,7 @@
                                             <TextBlock TextWrapping="Wrap" Margin="20">
                                                 <Run FontWeight="Bold" Text="Tips:"/>
                                                 <LineBreak />
-                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Due to the high number of logs, display a small number of player logs."/> 
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Due to the high number of logs, display a small number of player logs."/>
 
                                             </TextBlock>
                                         </StackPanel>

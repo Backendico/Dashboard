@@ -40,7 +40,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             CurentPage = PageAccount;
             CurentBTNHeader = BTNAccount;
 
-
             //change frist
             TextIDPlayer_Header.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
             TextboxNickname.Text = this.PlayerDetail["Account"]["Name"].AsString;
