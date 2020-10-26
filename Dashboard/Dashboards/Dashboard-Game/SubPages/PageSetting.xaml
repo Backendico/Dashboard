@@ -110,9 +110,21 @@
                          <Run Foreground="Gray"  Text=" Database name attached to the studio"/>
                             </TextBlock>
 
-                            <Border x:Name="BTNState" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="DarkOrange" >
-                                <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="State"/>
-                            </Border>
+                            <StackPanel Orientation="Horizontal">
+
+                                <!--BTNState-->
+                                <Border x:Name="BTNState" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="Orange" >
+                                    <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="State"/>
+                                </Border>
+
+                                <!--BTNUpdate-->
+                                <Border Margin="10,0" x:Name="BTNUpdate" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="LightGray" >
+                                    <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" >
+                                         <Run Text="Update"  />
+                                    </TextBlock>
+                                </Border>
+                                
+                            </StackPanel>
 
 
                         </StackPanel>
@@ -273,7 +285,7 @@
 
                                 </Grid>
 
-                              
+
 
                                 <!--Tabel Log history-->
                                 <Grid  Grid.Row="5">

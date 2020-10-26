@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
@@ -268,6 +269,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             {
                 CloseCharge();
             };
+
+            //Action BTN Update
+            BTNUpdate.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new SubPageUpdate.SubPageUpdate());
+            };
         }
 
 
@@ -422,7 +429,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                 TextApisValue.Text = (result["Apis"].AsInt32 / 1000000).ToString() + "M";
                             }
 
-                        
+
 
                             //Logs
                             if (result["Logs"].AsInt32 <= 999)
