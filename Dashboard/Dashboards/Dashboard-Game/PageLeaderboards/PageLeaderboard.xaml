@@ -32,10 +32,10 @@
             </Grid>
 
             <!--Content-->
-            <Border CornerRadius="5" Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="DarkGray" Grid.Row="1" >
+            <Border CornerRadius="5" Margin="10"  Background="Transparent"  BorderThickness="2" BorderBrush="Gray" Grid.Row="1" >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -53,13 +53,13 @@
                                     <ColumnDefinition Width="17"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Border CornerRadius="4,0,0,0" BorderThickness="0,0,2,2" Background="Gainsboro" BorderBrush="DarkGray" Grid.Column="0"/>
-                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Background="Gainsboro" Grid.Column="1"/>
-                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Background="Gainsboro" Grid.Column="2"/>
-                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Background="Gainsboro" Grid.Column="3"/>
-                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Background="Gainsboro" Grid.Column="4"/>
-                                <Border BorderThickness="0,0,2,2"  BorderBrush="DarkGray" Background="Gainsboro" Grid.Column="5"/>
-                                <Border CornerRadius="0,4,0,0" BorderThickness="0,0,0,2" Background="Gainsboro" BorderBrush="DarkGray" Grid.Column="6"/>
+                                <Border CornerRadius="4,0,0,0" BorderThickness="0,0,2,2" Background="Gainsboro" BorderBrush="Gray" Grid.Column="0"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="Gray" Background="Gainsboro" Grid.Column="1"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="Gray" Background="Gainsboro" Grid.Column="2"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="Gray" Background="Gainsboro" Grid.Column="3"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="Gray" Background="Gainsboro" Grid.Column="4"/>
+                                <Border BorderThickness="0,0,2,2"  BorderBrush="Gray" Background="Gainsboro" Grid.Column="5"/>
+                                <Border CornerRadius="0,4,0,0" BorderThickness="0,0,0,2" Background="Gainsboro" BorderBrush="Gray" Grid.Column="6"/>
 
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Name" Grid.Column="0"/>
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Token" Grid.Column="1"/>

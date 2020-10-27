@@ -192,6 +192,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 }
             };
 
+            //copyToken
+            TextToken.MouseDown += GlobalEvents.CopyText;
         }
 
         //global
@@ -402,11 +404,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         }
 
-        private void CopyToken(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Clipboard.SetText((sender as TextBlock).Text);
-            DashboardGame.Notifaction("Token Copied", Notifaction.StatusMessage.Ok);
-        }
 
 
         //page Leaderboards

@@ -42,6 +42,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 }
             };
 
+            //copy token
+            TextToken.MouseDown += GlobalEvents.CopyText;
+
         }
 
         //global method
@@ -128,12 +131,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
              });
 
         }
-        private void CopyToken(object sender, MouseButtonEventArgs e)
-        {
-            Clipboard.SetText((sender as TextBlock).Text);
-            DashboardGame.Notifaction("Token Copied !", Notifaction.StatusMessage.Ok);
-        }
-
+    
 
 
         //page2

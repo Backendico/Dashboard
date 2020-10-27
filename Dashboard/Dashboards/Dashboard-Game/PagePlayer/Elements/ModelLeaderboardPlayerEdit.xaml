@@ -14,9 +14,9 @@
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="0"/>
-        <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="1"/>
-        <Border BorderBrush="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="2"/>
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1"/>
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2"/>
 
         <ComboBox x:Name="ComboBoxName" IsEnabled="True" Margin="10" />
 

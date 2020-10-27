@@ -135,12 +135,6 @@
                              <Run  Text="90K"/>
                         </TextBlock>
 
-                        <!--Studios-->
-                        <TextBlock   VerticalAlignment="Center" TextAlignment="Left"  >
-                            <Run FontWeight="Bold" Text="Studio :"/> 
-                             <Run  Text="2"/>
-                        </TextBlock>
-
                         <!--Logs-->
                         <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
                             <Run FontWeight="Bold" Text="Log :"/> 

@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -43,6 +44,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             this.Refreshlist = Refreshlist;
             _Parent = Parent;
 
+            TextToken.MouseDown += GlobalEvents.CopyText;
          
         }
 
@@ -69,13 +71,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         private void OpenEdit(object sender, MouseButtonEventArgs e)
         {
             DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));
-
-        }
-
-        private void CopyToken(object sender, MouseButtonEventArgs e)
-        {
-            Clipboard.SetText(TextToken.Text);
-            DashboardGame.Notifaction("Token Copied !", Notifaction.StatusMessage.Ok);
 
         }
 

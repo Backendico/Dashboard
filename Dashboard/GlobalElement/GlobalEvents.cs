@@ -12,10 +12,10 @@ namespace Dashboard.GlobalElement
             if (sender is TextBlock)
             {
                 var Text = sender as TextBlock;
-                Clipboard.SetText(Text.Text) ;
+                Clipboard.SetText(Text.Text);
 
             }
-            else if(sender is Run)
+            else if (sender is Run)
             {
                 var Text = sender as Run;
                 Clipboard.SetText(Text.Text);
@@ -29,8 +29,6 @@ namespace Dashboard.GlobalElement
             }
 
             DashboardGame.Notifaction("Copyed !", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Ok);
-
-
         }
     }
 }

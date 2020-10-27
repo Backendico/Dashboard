@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dashboard.GlobalElement;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -85,15 +86,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             {
                 DashboardGame.Dashboard.Root.Children.Add(new EditLeaderboard(Detail, Refreshlist));
             };
+
+            TextToken.MouseDown += GlobalEvents.CopyText;
         }
 
 
-        private void CopyToken(object sender, MouseButtonEventArgs e)
-        {
-            Clipboard.SetText((sender as TextBlock).Text);
-
-            DashboardGame.Notifaction("Token Copyed !", Notifaction.StatusMessage.Ok);
-        }
+      
 
 
 

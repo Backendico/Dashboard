@@ -53,11 +53,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="0,0,1,0" BorderBrush="Gainsboro" Grid.Column="0"/>
-        <Border BorderThickness="0,0,1,0" BorderBrush="Gainsboro" Grid.Column="1"/>
-        <Border BorderThickness="0,0,1,0" BorderBrush="Gainsboro" Grid.Column="2"/>
-        <Border BorderThickness="0,0,1,0" BorderBrush="Gainsboro" Grid.Column="3"/>
-        <Border BorderThickness="0,0,1,0" BorderBrush="Gainsboro" Grid.Column="4"/>
+        <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="0"/>
+        <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="1"/>
+        <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="2"/>
+        <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="3"/>
+        <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="4"/>
+        <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="5"/>
 
         <TextBlock x:Name="TextName"  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="nameleaderboard" Grid.Column="0"/>
         <TextBlock Cursor="Hand" x:Name="TextToken"  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Token" Grid.Column="1" MouseDown="CopyToken"/>

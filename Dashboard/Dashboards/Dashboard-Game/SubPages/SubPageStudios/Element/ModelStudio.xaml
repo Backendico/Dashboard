@@ -36,9 +36,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" BorderBrush="Gainsboro" BorderThickness="0,0,2,2"/>
-        <Border Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="0,0,2,2"/>
-        <Border Grid.Column="0" BorderBrush="Gainsboro" BorderThickness="0,0,2,2"/>
+        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,2"/>
+        <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,1,2"/>
+        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,2"/>
 
         <TextBlock x:Name="TextName" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" Text="Name"/>
         <TextBlock x:Name="TextToken" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" Text="Token"/>

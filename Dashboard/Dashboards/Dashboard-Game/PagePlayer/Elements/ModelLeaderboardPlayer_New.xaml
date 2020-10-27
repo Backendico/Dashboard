@@ -18,14 +18,14 @@
                 </Grid.ColumnDefinitions>
 
                 <Border
-                    BorderBrush="Gainsboro" 
+                    BorderBrush="Gray" 
                     BorderThickness="0,0,2,2" 
                     Grid.Column="0"
                     />
-                <Border BorderBrush="Gainsboro" 
+                <Border BorderBrush="Gray" 
                         BorderThickness="0,0,2,2"
                         Grid.Column="1"/>
-                <Border BorderBrush="Gainsboro" 
+                <Border BorderBrush="Gray" 
                         BorderThickness="0,0,2,2"
                         Grid.Column="2"/>
 

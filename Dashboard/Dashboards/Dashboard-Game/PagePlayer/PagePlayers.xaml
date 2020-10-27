@@ -45,7 +45,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -73,7 +73,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="17"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Liner-->
@@ -83,7 +83,7 @@
                         <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="3"/>
                         <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="4"/>
                         <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="5"/>
-                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="6"/>
+                        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="6"/>
                         <Border BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="7"/>
 
 
