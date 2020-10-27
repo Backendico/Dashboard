@@ -28,14 +28,19 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock  Margin="10" VerticalAlignment="Center" Foreground="White" >
-                    <Run FontWeight="Bold" Text="Update"/>
+                    <Run FontWeight="Bold" Text="Update available"/>
                     </TextBlock>
-                    <Button Cursor="Hand" Click="Close" FontSize="15"  Content="&#xEF2C;" Foreground="Gray" Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right" Margin="10,0" Width="20" Height="20" Grid.Column="1" FontFamily="Segoe MDL2 Assets" />
+                    <Button   x:Name="BTNCLose" Cursor="Hand" Click="Close" FontSize="15"  Content="&#xEF2C;" Foreground="Gray" Background="Transparent" BorderBrush="Transparent"  HorizontalAlignment="Right" Margin="10,0" Width="20" Height="20" Grid.Column="1" FontFamily="Segoe MDL2 Assets" />
                 </Grid>
             </Border>
 
+            <!--Body IDLE-->
+            <TextBlock x:Name="TextWaiting" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+                <Run Text="Waiting . . ." FontSize="20"/><LineBreak/><LineBreak/>
+            </TextBlock>
+            
             <!--Body Updated-->
-                <TextBlock Visibility="Collapsed" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <TextBlock x:Name="PanelUpdated" Visibility="Collapsed" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" >
                     <Run Text="You are Update! "/>
                      <LineBreak/>
                     <Run Name="TextVersionUpdated" Text="v1.1.0"/>
@@ -46,20 +51,27 @@
                 </TextBlock>
             
             <!--Body Update finde-->
-            <StackPanel Margin="50" Grid.Row="1">
+            <StackPanel x:Name="PanelNewUpdate" Visibility="Collapsed" Margin="50" Grid.Row="1">
                 <TextBlock >
-                     <Run FontWeight="Bold" Text="Curent Version: "/> <Run Text="XXX"/><LineBreak/>
-                    <Run FontWeight="Bold" Text="Last Version: "/> <Run Text="XXX"/><LineBreak/>
-                     <Run FontWeight="Bold" Text="Detail: "/> <Run Text="XXX"/><LineBreak/>
-                    <Run FontWeight="Bold" Text="Size: "/> <Run Text="XXX"/><LineBreak/>
+                     <Run FontWeight="Bold" Text="Curent Version: "/> <Run x:Name="TextCurentVersion" Text="XXX"/><LineBreak/>
+                    <Run FontWeight="Bold" Text="Last Version: "/> <Run x:Name="TextLastVersion" Text="XXX"/><LineBreak/>
+                     <Run FontWeight="Bold" Text="Detail: "/> <Run x:Name="TextDetail" Text="XXX"/><LineBreak/>
+                    <Run FontWeight="Bold" Text="Size: "/> <Run x:Name="TextSize" Text="XXX"/><LineBreak/>
                 </TextBlock>
                 
+                <!--BTN Download-->
                 <Border Cursor="Hand"  Width="80" Height="30" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" >
                          <Run Text="&#xE896;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Download"/> 
                     </TextBlock>
                 </Border>
+
+                <StackPanel >
+                <TextBlock Text="Update Link :" FontWeight="Bold"/>
+                <TextBox Height="30" x:Name="TextLink" />
+                    
+                </StackPanel>
 
             </StackPanel>
             

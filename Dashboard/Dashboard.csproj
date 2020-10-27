@@ -235,6 +235,7 @@
     <Compile Include="Dashboards\Dashboard-Game\SubPages\SubPageUpdate\SubPageUpdate.xaml.cs">
       <DependentUpon>SubPageUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalElement\GlobalEvents.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

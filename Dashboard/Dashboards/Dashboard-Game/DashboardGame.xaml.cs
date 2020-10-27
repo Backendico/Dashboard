@@ -10,6 +10,7 @@ using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageHelps;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate;
 using Dashboard.GlobalElement;
 using Dashboard.Properties;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -43,6 +44,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         public DashboardGame()
         {
+            //frist init
             InitializeComponent();
             Settings.Default.Reset();
             Dashboard = this;
@@ -50,6 +52,8 @@ namespace Dashboard.Dashboards.Dashboard_Game
             CurentTab = BTNDashboard;
 
 
+            //cheack Update
+            SubPageUpdate.CheackUpdate();
 
 
             if (Settings.Default._id == "")
@@ -224,7 +228,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
                     BTNOpenPane.Text = "\xEA5B";
                 }
             };
-
 
 
             //acton BTNDocuments

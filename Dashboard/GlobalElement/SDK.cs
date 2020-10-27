@@ -997,7 +997,7 @@ namespace Dashboard.GlobalElement
 
                     public async static void CheackStatusServer(Action<bool> Result)
                     {
-                        var client = new RestClient("https://localhost:44346/PageDashboard/CheackStatusServer");
+                        var client = new RestClient(Links.CheackStatusServer);
                         client.Timeout = -1;
                         var request = new RestRequest(Method.GET);
                         IRestResponse response = await client.ExecuteAsync(request);
@@ -1033,6 +1033,25 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public async static void CheackUpdate(Action<BsonDocument> Result, Action ERR)
+                    {
+                        var client = new RestClient(Links.CheackUpdate);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                            ERR();
+                        }
+                    }
+            
                 }
 
                 public sealed class PageSupport
@@ -1217,7 +1236,10 @@ namespace Dashboard.GlobalElement
             public struct PageDashboard
             {
                 public string LinkDashboard => "https://localhost:44346/PageDashboard/ReciveDetail";
+                public string CheackStatusServer => "https://localhost:44346/PageDashboard/CheackStatusServer";
                 public string Notifaction => "https://localhost:44346/PageDashboard/Notifaction";
+                public string CheackUpdate => "https://localhost:44346/PageDashboard/CheackUpdate";
+
             }
 
             public struct PageSupport

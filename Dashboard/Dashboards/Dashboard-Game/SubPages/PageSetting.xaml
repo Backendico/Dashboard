@@ -71,15 +71,15 @@
                             <!--Type-->
                             <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Type : "/>
-                        <Run x:Name="TextType" Text="XXX"/>
+                        <Run x:Name="TextType" Cursor="Hand" Text="XXX"/>
                           <LineBreak/>
                          <Run Foreground="Gray"  Text="Type Studio defines"/>
                             </TextBlock>
 
-                            <!--Token-->
+                            <!--ID-->
                             <TextBlock  Margin="0,5">
                         <Run  FontWeight="Bold" Text="ID: "/>
-                        <Run Cursor="Hand" x:Name="TextToken" Text="XXX"/>
+                        <Run Cursor="Hand" x:Name="TextID" Text="XXX"/>
                            <LineBreak/>
                          <Run Foreground="Gray"  Text="Studio ID"/>
                             </TextBlock>
@@ -88,7 +88,7 @@
                             <!--Creator-->
                             <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="TOKEN : "/>
-                        <Run x:Name="TextCreator" Text="XXX"/>
+                        <Run Cursor="Hand" x:Name="TextToken" Text="XXX"/>
                           <LineBreak/>
                          <Run Foreground="Gray"  Text="To authenticate your studio and your Apis key"/>
                             </TextBlock>
@@ -105,7 +105,7 @@
                             <!--Created-->
                             <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="Studio/Database : "/>
-                        <Run x:Name="TextDatabase" Text="XXX"/>
+                        <Run Cursor="Hand" x:Name="TextDatabase" Text="XXX"/>
                           <LineBreak/>
                          <Run Foreground="Gray"  Text=" Database name attached to the studio"/>
                             </TextBlock>

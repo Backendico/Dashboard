@@ -1,16 +1,11 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
-using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -34,8 +29,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             //fill frist Setting
             TextName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
             TextType.Text = SettingUser.CurentDetailStudio["Type"].ToString();
-            TextToken.Text = SettingUser.CurentDetailStudio["Token"].ToString();
-            TextCreator.Text = SettingUser.CurentDetailStudio["Creator"].ToString();
+            TextID.Text = SettingUser.CurentDetailStudio["Token"].ToString();
+            TextToken.Text = SettingUser.CurentDetailStudio["Creator"].ToString();
             TextCreated.Text = SettingUser.CurentDetailStudio["Created"].ToLocalTime().ToString();
             TextDatabase.Text = SettingUser.CurentDetailStudio["Database"].ToString();
 
@@ -275,6 +270,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             {
                 DashboardGame.Dashboard.Root.Children.Add(new SubPageUpdate.SubPageUpdate());
             };
+
+
+            //copys
+            TextToken.MouseDown += GlobalEvents.CopyText;
+            TextDatabase.MouseDown += GlobalEvents.CopyText;
+            TextID.MouseDown += GlobalEvents.CopyText;
+
         }
 
 
