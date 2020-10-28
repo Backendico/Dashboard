@@ -17,7 +17,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
     /// </summary>
     public partial class PagePlayers : UserControl
     {
-        int PlayerCount = 100;
+         int PlayerCount =0;
+        int ReciveCount = 100;
 
         public PagePlayers()
         {
@@ -90,7 +91,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     }
                     else
                     {
-                             DashboardGame.Notifaction("Cannot create new player. Please buy more players than payments", StatusMessage.Error);
+                        DashboardGame.Notifaction("Cannot create new player. Please buy more players than payments", StatusMessage.Error);
                     }
 
                 }, () => { });
@@ -99,9 +100,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
             BTNSeeMorePlayer.MouseDown += (s, e) =>
             {
-                PlayerCount += 100;
-                TextSeeMoreNumber.Text = PlayerCount.ToString();
-
+                ReciveCount += 100;
+                TextSeeMoreNumber.Text = ReciveCount.ToString();
                 RecivePlayersList();
             };
 
@@ -114,10 +114,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RecivePlayersList()
+        public void RecivePlayersList()
         {
             PlaceContentUser.Children.Clear();
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(PlayerCount,
+
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(ReciveCount,
                 result =>
                 {
                     if (result["ListPlayers"].AsBsonArray.Count >= 1)
@@ -139,8 +140,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                 },
                 () =>
                 {
-                    DashboardGame.Notifaction("Faild Recive",StatusMessage.Error);
-
+                    DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
                 });
 
         }
@@ -333,6 +333,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
             DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(CurentSearchResult, RecivePlayersList));
         }
+
 
     }
 }
