@@ -59,7 +59,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <StackPanel x:Name="ContentSetting" Visibility="Visible" VerticalAlignment="Center" MaxWidth="250" Grid.Row="2">
+            <StackPanel x:Name="ContentSetting" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="2">
 
 
                 <!--Token-->
@@ -79,6 +79,23 @@
                     <TextBlock FontWeight="Bold" Text="Name: "/>
                     <TextBlock x:Name="TextName_Setting" Text="Name_Leaderboard"/>
                 </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <!--Min value-->
+                    <StackPanel MinWidth="100" Margin="0,10" Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" Text="Min value: "/>
+                        <TextBox x:Name="TextMinValue" />
+                    </StackPanel>
+
+                    <!--Min value-->
+                    <StackPanel MinWidth="100"  Margin="20,10" Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" Text="Max value: "/>
+                        <TextBox x:Name="TextMaxValue" />
+                    </StackPanel>
+                </StackPanel>
+
+
 
                 <!--reset -->
                 <StackPanel Margin="0,10">
@@ -104,7 +121,7 @@
                 </StackPanel>
 
                 <!--BTNSave-->
-                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" MouseDown="Save"  Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="DarkOrange" >
+                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="DarkOrange" >
                     <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
                 </Border>
 
@@ -122,28 +139,28 @@
                     <!--Header-->
                     <StackPanel Margin="0,0,0,10" Orientation="Horizontal" Background="WhiteSmoke">
                         <!--Add player-->
-                        <Border  MouseDown="ShowPanelAddPlayer" Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <Border  x:Name="BTNShowPanelAdd"  Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
                                 <TextBlock TextAlignment="Center" Text="&#xE8FA;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
                             </StackPanel>
                         </Border>
 
                         <!--Reset List-->
-                        <Border MouseDown="Reset" Cursor="Hand" ToolTip="Reload List" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <Border x:Name="BTNReset"  Cursor="Hand" ToolTip="Reload List" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
                             <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
                                 <TextBlock  TextAlignment="Center" Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
                             </StackPanel>
                         </Border>
 
                         <!--Save List-->
-                        <Border  MouseDown="Backup" Cursor="Hand" ToolTip="Save leaderboard to (Backups)"  Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <Border x:Name="BTNBackup"  Cursor="Hand" ToolTip="Save leaderboard to (Backups)"  Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
                             <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
                                 <TextBlock  TextAlignment="Center" Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
                             </StackPanel>
                         </Border>
 
-                        <!--Save List-->
-                        <StackPanel MouseDown="SeeMore" VerticalAlignment="Center"  Cursor="Hand" ToolTip="See More"  Margin="10,0"   >
+                        <!--BTN Seemore-->
+                        <StackPanel x:Name="BTNSeeMore" VerticalAlignment="Center"  Cursor="Hand" ToolTip="See More"  Margin="10,0"   >
                             <StackPanel Orientation="Horizontal">
                                 <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
                                     <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
@@ -240,10 +257,10 @@
                                 <TextBlock Text="*If the user is available, a new value will be replaced" TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Center"   />
                             </StackPanel>
 
-                            <Border MouseDown="AddPlayer" Cursor="Hand" Margin="0,10" CornerRadius="5" Background="Orange" Height="30" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Border x:Name="BTNAddPlayer" Cursor="Hand" Margin="0,10" CornerRadius="5" Background="Orange" Height="30" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right">
                                 <TextBlock Text="Add" Foreground="White" VerticalAlignment="Center" TextAlignment="Center"/>
-
                             </Border>
+                            
                         </StackPanel>
 
                     </Border>

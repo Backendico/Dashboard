@@ -56,7 +56,7 @@
         <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="3" />
 
         
-        <Border x:Name="BTNRemove"  CornerRadius="5" MouseDown="Remove" Grid.Column="0"  Opacity="0"   Background="Tomato" Width="30" Height="30" Cursor="Hand">
+        <Border ToolTip="Delete" x:Name="BTNRemove"  CornerRadius="5" MouseDown="Remove" Grid.Column="0"  Opacity="0"   Background="Tomato" Width="30" Height="30" Cursor="Hand">
             <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE74D;"  FontSize="17"  FontFamily="Segoe MDL2 Assets"/>
         </Border>
         

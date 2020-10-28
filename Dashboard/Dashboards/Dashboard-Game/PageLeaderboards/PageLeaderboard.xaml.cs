@@ -1,8 +1,10 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements;
 using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -49,19 +51,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                     {
                         if (PlaceLeaderboard.Children.Count + 1 <= result["Leaderboards"].ToInt32())
                         {
-                            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextNameLeaderboard.Text, ComboboxReset.SelectedIndex, ComboboxSort.SelectedIndex, Result =>
+                            try
                             {
-                                if (Result)
-                                {
-                                    DashboardGame.Notifaction("Leaderboard Added", Notifaction.StatusMessage.Ok);
-                                    ShowOffSubpageAddLeaderboard(null, null);
-                                    ReciveLeaderboards(null, null);
-                                }
-                                else
-                                {
-                                    DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
-                                }
-                            });
+                                _ = int.Parse(TextMaxValue.Text);
+                                _ = int.Parse(TextMinValue.Text);
+                                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextNameLeaderboard.Text, ComboboxReset.SelectedIndex, ComboboxSort.SelectedIndex, int.Parse(TextMinValue.Text), int.Parse(TextMaxValue.Text), Result =>
+                                  {
+                                      if (Result)
+                                      {
+                                          DashboardGame.Notifaction("Leaderboard Added", Notifaction.StatusMessage.Ok);
+                                          ShowOffSubpageAddLeaderboard(null, null);
+                                          ReciveLeaderboards(null, null);
+                                      }
+                                      else
+                                      {
+                                          DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
+                                      }
+                                  });
+                            }
+                            catch (Exception ex)
+                            {
+                                TextMinValue.Text = 0.ToString();
+                                TextMaxValue.Text = 10000.ToString();
+                                DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                            }
                         }
                         else
                         {

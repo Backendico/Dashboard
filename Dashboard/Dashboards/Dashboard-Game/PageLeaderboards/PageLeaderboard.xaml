@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PageLeaderboards"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="675" d:DesignWidth="800">
     <Grid>
         <!--MainPage-->
         <Grid  Width="auto" Height="auto">
@@ -108,7 +108,7 @@
 
             <!--Body-->
 
-            <Border   Margin="10,58,0,0"  CornerRadius="10" Width="300" Height="260" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+            <Border   Margin="10,58,0,0"  CornerRadius="10" Width="300" Height="370" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
 
                 <Grid Margin="20">
                     <StackPanel>
@@ -141,6 +141,19 @@
                                 <ComboBoxItem Content="Maximum(always use the highest value)"/>
                                 <ComboBoxItem Content="Sum(add this value to the existing value)"/>
                             </ComboBox>
+                        </StackPanel>
+
+
+                        <!--Min value-->
+                        <StackPanel Margin="0,5">
+                            <TextBlock Text="Min Value :"/>
+                            <TextBox x:Name="TextMinValue" Text="0" Height="30"/>
+                        </StackPanel>
+
+                        <!--Min value-->
+                        <StackPanel Margin="0,5">
+                            <TextBlock Text="Max Value :"/>
+                            <TextBox Text="10000" x:Name="TextMaxValue" Height="30" />
                         </StackPanel>
 
                         <Border ToolTip="Add" x:Name="BTNAddLeaderboard" Cursor="Hand" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10" Height="30" Width="80">

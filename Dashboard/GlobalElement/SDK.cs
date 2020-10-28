@@ -621,9 +621,16 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Creat(string NameLeaderboard, int reset, int Sort, Action<bool> Result)
+                    public static async void Creat(string NameLeaderboard, int reset, int Sort,int Min,int Max, Action<bool> Result)
                     {
-                        var SeriliseDetail = new BsonDocument { { "Name", NameLeaderboard }, { "Reset", reset }, { "Sort", Sort } };
+                        var SeriliseDetail = new BsonDocument
+                        {
+                            { "Name", NameLeaderboard },
+                            { "Reset", reset },
+                            { "Sort", Sort } ,
+                            {"Min" ,Min},
+                            {"Max",Max }
+                        };
 
                         var client = new RestClient(Links.Creat);
                         client.Timeout = -1;
