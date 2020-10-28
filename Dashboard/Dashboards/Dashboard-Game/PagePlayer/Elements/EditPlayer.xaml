@@ -127,7 +127,7 @@
                         <!--Password-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Password: "/>
-                            <Border x:Name="BTNSendEmailRecovery" Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
+                            <Border ToolTip="Send Email Recovery" x:Name="BTNSendEmailRecovery" Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
                                 <TextBlock VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="Send Email Recovery"/>
                             </Border>
                         </StackPanel>
@@ -156,11 +156,11 @@
                         <!--Delete-->
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
                             <!--BTN Delete-->
-                            <Border MouseDown="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
+                            <Border ToolTip="Delete" MouseDown="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Delete"/>
                             </Border>
-                            <!--BTN Delete-->
-                            <Border MouseDown="SaveSetting" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" >
+                            <!--BTN Save-->
+                            <Border ToolTip="Save Setting" MouseDown="SaveSetting" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" >
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Save"/>
                             </Border>
 
@@ -192,7 +192,7 @@
                                     </Border>
 
                                     <!--Save-->
-                                    <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Save">
+                                    <Border   Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Save Leaderboards " Background="LightGray" MouseDown="Save">
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE74E;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Save"/>
@@ -256,15 +256,15 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--AddLog-->
-                                    <Border x:Name="BTNAddLog"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Add">
+                                    <Border  x:Name="BTNAddLog"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new log " Background="LightGray" MouseDown="Add">
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
                                         </TextBlock>
                                     </Border>
 
-                                    <!--AddLog-->
-                                    <Border x:Name="BTNClearLogs"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Add">
+                                    <!--Clear all logs-->
+                                    <Border x:Name="BTNClearLogs"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Clear all log " Background="LightGray" MouseDown="Add">
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xEA99;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Clear"/>
@@ -272,7 +272,7 @@
                                     </Border>
 
                                     <!--BTN See more-->
-                                    <StackPanel Cursor="Hand" x:Name="BTNSeeMoreLog" Orientation="Horizontal">
+                                    <StackPanel ToolTip="See more list" Cursor="Hand" x:Name="BTNSeeMoreLog" Orientation="Horizontal">
                                         <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
                                             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
                                         </Border>

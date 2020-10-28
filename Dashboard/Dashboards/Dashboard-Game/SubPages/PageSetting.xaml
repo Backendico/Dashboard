@@ -113,12 +113,12 @@
                             <StackPanel Orientation="Horizontal">
 
                                 <!--BTNState-->
-                                <Border x:Name="BTNState" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="Orange" >
+                                <Border ToolTip="State Database" x:Name="BTNState" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="Orange" >
                                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="State"/>
                                 </Border>
 
                                 <!--BTNUpdate-->
-                                <Border Margin="10,0" x:Name="BTNUpdate" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="LightGray" >
+                                <Border ToolTip="Cheack Update"  Margin="10,0" x:Name="BTNUpdate" HorizontalAlignment="Left" Cursor="Hand"  MinWidth="100" MinHeight="35" MaxWidth="100" CornerRadius="5" Background="LightGray" >
                                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" >
                                          <Run Text="Update"  />
                                     </TextBlock>
@@ -150,7 +150,7 @@
                                 <TextBlock x:Name="TextCash" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="0 T"/>
                             </Border>
                             <!--Add-->
-                            <Border x:Name="BTNAddMoney" Cursor="Hand" CornerRadius="0,3,3,0" Margin="0,5,5,5"  Background="OliveDrab">
+                            <Border ToolTip="Buy " x:Name="BTNAddMoney" Cursor="Hand" CornerRadius="0,3,3,0" Margin="0,5,5,5"  Background="OliveDrab">
                                 <TextBlock FontSize="12" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="4,0" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"/>
                             </Border>
 
@@ -330,7 +330,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <!--Payments-->
-                            <Border x:Name="BTNPayments" Grid.Column="0" Cursor="Hand" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="3" Margin="0,10,10,10"  Background="Orange">
+                            <Border ToolTip="See list payments " x:Name="BTNPayments" Grid.Column="0" Cursor="Hand" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="3" Margin="0,10,10,10"  Background="Orange">
                                 <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="5,0" >
                                 <Run Text="&#xEC5B;" FontFamily="Segoe MDL2 Assets" />
                                 <Run Text="Payments"/>
@@ -346,7 +346,7 @@
                                 <LineBreak />
                                 <Run Text="Payment fee" FontSize="13" Foreground="Gray" />
                                 </TextBlock>
-                                <Border x:Name="BTNPay"  Cursor="Hand" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="3" Margin="20,10,3,10"  Background="OliveDrab">
+                                <Border ToolTip="Pay and save " x:Name="BTNPay"  Cursor="Hand" Width="80" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="3" Margin="20,10,3,10"  Background="OliveDrab">
                                     <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="5,0" >
                                 <Run Text="&#xEC59;" FontFamily="Segoe MDL2 Assets" />
                                 <Run Text="Pay / Save"/>
@@ -369,7 +369,7 @@
                 </Grid.RowDefinitions>
 
                 <!--Collapse-->
-                <Border x:Name="BTNCollaps" Cursor="Hand" CornerRadius="5" Background="Orange"  Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0">
+                <Border ToolTip="Collapse" x:Name="BTNCollaps" Cursor="Hand" CornerRadius="5" Background="Orange"  Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0">
 
 
                     <TextBlock Margin="5" Foreground="White" VerticalAlignment="Center">

@@ -22,7 +22,7 @@
                 <StackPanel Margin="10,0" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1">
 
                     <!--search-->
-                    <Border x:Name="BTNSearch" Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
+                    <Border x:Name="BTNSearch" Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Search Players " Background="LightGray" >
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Run  Foreground="White"  Text="&#xE721;   " FontFamily="Segoe MDL2 Assets"/>
                             <Run Foreground="White"  Text="Search"/>
@@ -30,7 +30,7 @@
                     </Border>
 
                     <!--Add-->
-                    <Border x:Name="BTNShowPanelAdd"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
+                    <Border x:Name="BTNShowPanelAdd"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new Player" Background="LightGray" >
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Run  Foreground="White"  Text="&#xE8FA;   " FontFamily="Segoe MDL2 Assets"/>
                             <Run Foreground="White"  Text="Add"/>
@@ -38,7 +38,7 @@
                     </Border>
 
                     <!--BTN See more-->
-                    <StackPanel  Cursor="Hand" x:Name="BTNSeeMorePlayer" Orientation="Horizontal">
+                    <StackPanel ToolTip="See more list "  Cursor="Hand" x:Name="BTNSeeMorePlayer" Orientation="Horizontal">
                         <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
                             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
                         </Border>

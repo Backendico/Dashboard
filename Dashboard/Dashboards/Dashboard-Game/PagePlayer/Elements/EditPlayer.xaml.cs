@@ -114,6 +114,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 CountLog += 100;
                 TextSeeMoreNumber.Text = CountLog.ToString();
+                RecivePlayerLogs();
             };
 
             //actin btn Add Log

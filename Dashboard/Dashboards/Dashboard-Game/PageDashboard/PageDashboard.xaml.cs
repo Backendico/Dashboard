@@ -52,7 +52,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
                     //leaderboards
                     TextCount_Leaderboards.Text = result["Leaderboards"]["Count"].ToString();
                     TextCountTotal_Leaderbords.Text = result["Leaderboards"]["Totall"].ToString();
-                    Debug.WriteLine(result["Leaderboards"].ToString());
 
                     //Players
                     TextCount_Players.Text = result["PlayersMonetiz"]["Count"].ToString();

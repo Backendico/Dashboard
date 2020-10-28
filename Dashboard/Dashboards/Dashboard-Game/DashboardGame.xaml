@@ -32,8 +32,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <!--BTN Back-->
-                        <Border x:Name="BTNStudio" Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Margin="25,10" Width="80"  Background="#33FFFFFF">
+                        <!--BTN Studio-->
+                        <Border ToolTip="Change Studios" x:Name="BTNStudio" Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Margin="25,10" Width="80"  Background="#33FFFFFF">
                             <TextBlock Background="Transparent " Foreground="LightGray" TextAlignment="Center" VerticalAlignment="Center"  Text="Studios"/>
                         </Border>
 
@@ -42,22 +42,19 @@
                     <!--Center-->
 
                     <Grid Grid.Column="1">
-                        <TextBlock x:FieldModifier="public" x:Name="TextStudioName" TextAlignment="Center" FontWeight="Bold" Text="Waiting . . ." FontSize="15"  VerticalAlignment="Center" Foreground="White"/>
+                        <TextBlock ToolTip="Studio Name"  x:FieldModifier="public" x:Name="TextStudioName" TextAlignment="Center" FontWeight="Bold" Text="Waiting . . ." FontSize="15"  VerticalAlignment="Center" Foreground="White"/>
                     </Grid>
 
                     <!--Right-->
                     <Grid Grid.Column="2">
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="25,0">
-
-
-
                             <!--Setting-->
-                            <Border x:Name="BTNSetting" Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="OrangeRed" CornerRadius="30"  >
+                            <Border ToolTip="Setting" x:Name="BTNSetting" Cursor="Hand" Margin="5,0" Width="30" Height="30" Background="OrangeRed" CornerRadius="30"  >
                                 <TextBlock Text="&#xE713;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray" FontFamily="Segoe MDL2 Assets" />
                             </Border >
 
                             <!--Support-->
-                            <Border x:Name="BTNSupport"  Cursor="Hand" Margin="5,0" Width="30" Height="30" CornerRadius="30"   >
+                            <Border ToolTip="Support" x:Name="BTNSupport"  Cursor="Hand" Margin="5,0" Width="30" Height="30" CornerRadius="30"   >
                                 <Grid>
 
                                     <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95B;" FontFamily="Segoe MDL2 Assets"  />
@@ -68,7 +65,7 @@
                             </Border >
 
                             <!--Notifation-->
-                            <Border Name="BTNNotifaction" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
+                            <Border ToolTip="History" Name="BTNNotifaction" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
                                 <Grid>
                                     <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xF738;" FontFamily="Segoe MDL2 Assets"/>
                                     <Border Visibility="Collapsed" x:Name="PlaceNotifactionLogs" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="15" Background="Tomato" Margin="12,18,-2,-8">
@@ -78,13 +75,13 @@
                             </Border >
 
                             <!--CheackHealth-->
-                            <Border x:Name="BTNCheackHealth" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
+                            <Border ToolTip="Cheack Health" x:Name="BTNCheackHealth" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
                                 <TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Text="&#xE95E;" FontFamily="Segoe MDL2 Assets"/>
                             </Border >
 
 
                             <!--BTN report bug-->
-                            <Border x:Name="BTNReportBug" Cursor="Hand" Width="30" Height="30" CornerRadius="30"   >
+                            <Border ToolTip="Report bugs" x:Name="BTNReportBug" Cursor="Hand" Width="30" Height="30" CornerRadius="30"   >
                                 <TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Tomato" Text="&#xEBE8;" FontFamily="Segoe MDL2 Assets"/>
                             </Border >
                         </StackPanel>
@@ -103,9 +100,9 @@
                     <!--Tabs-->
                     <StackPanel Margin="5,20,0,0"  Background="Transparent"  MinWidth="30">
 
-                        <TextBlock x:Name="BTNDashboard" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xF246;"  Foreground="Orange" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage" />
-                        <TextBlock x:Name="BTNPlayers" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xE902;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseDown="ChangePage"  />
-                        <TextBlock x:Name="BTNLeaderboards" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
+                        <TextBlock ToolTip="Dashboard" x:Name="BTNDashboard" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xF246;"  Foreground="Orange" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage" />
+                        <TextBlock ToolTip="Players" x:Name="BTNPlayers" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xE902;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseDown="ChangePage"  />
+                        <TextBlock ToolTip="Leaderboards" x:Name="BTNLeaderboards" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                     </StackPanel>
 
                     <!--Texts-->
@@ -128,7 +125,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2">
 
                     <!--Switch APP Game-->
-                    <Border Cursor="Hand" x:Name="SwitchAPP" Margin="10,0" CornerRadius="3" Width="170" Height="25" Background="Gainsboro" >
+                    <Border ToolTip="Switch to AppServices / Game Services" Cursor="Hand" x:Name="SwitchAPP" Margin="10,0" CornerRadius="3" Width="170" Height="25" Background="Gainsboro" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -149,22 +146,22 @@
 
 
                     <!--OpenPan-->
-                    <Border Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
+                    <Border ToolTip="Open/Close Pan" Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"  >
                         <TextBlock x:Name="BTNOpenPane"  FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xEA5B;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
 
                     <!--OpenDocAPi-->
-                    <Border x:Name="BTNDocuments"  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <Border ToolTip="Documents" x:Name="BTNDocuments"  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
                         <TextBlock x:Name="BTNDocument" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE736;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
 
                     <!--Eduction-->
-                    <Border  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <Border ToolTip="Education"  Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
                         <TextBlock  x:Name="BTNEduction" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE7BE;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
 
                     <!--Help-->
-                    <Border  x:Name="ActionBTNhelp" Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
+                    <Border ToolTip="Help"  x:Name="ActionBTNhelp" Margin="5,0" Cursor="Hand"  Width="30" Height="30"  CornerRadius="30"   >
                         <TextBlock  x:Name="BTNHelp" MouseLeave="ChangeColor_DeActive" MouseEnter="ChangeColor_Active" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Text="&#xE82F;" FontFamily="Segoe MDL2 Assets"/>
                     </Border >
                 </StackPanel>

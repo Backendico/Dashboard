@@ -92,9 +92,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock   Cursor="Hand" FontSize="15" Text="&#xE785;" x:Name="BTNClose_EachSupport" MouseDown="CloseSupport" Foreground="Tomato" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets"  Grid.Column="0" />
-                                <TextBlock x:Name="BTNBack_EachSupport" MouseDown="OpenPageQuestions" Cursor="Hand" FontWeight="Bold" FontSize="15" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE973;" Grid.Column="1" />
+                                <TextBlock ToolTip="Back to questions" x:Name="BTNBack_EachSupport" MouseDown="OpenPageQuestions" Cursor="Hand" FontWeight="Bold" FontSize="15" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE973;" Grid.Column="1" />
                                 <TextBox  x:Name="TextMessage" TextWrapping="Wrap"  MaxHeight="100" MinHeight="30" Margin="10,5" BorderBrush="Transparent"  SpellCheck.IsEnabled="True" AcceptsReturn="True" AcceptsTab="True" Grid.Column="2" />
-                                <TextBlock x:Name="BTNSendMessage" HorizontalAlignment="Center"  Cursor="Hand" FontWeight="Bold" FontSize="20" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE724;" Grid.Column="3"  />
+                                <TextBlock ToolTip="Send Message" x:Name="BTNSendMessage" HorizontalAlignment="Center"  Cursor="Hand" FontWeight="Bold" FontSize="20" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE724;" Grid.Column="3"  />
                             </Grid>
 
                         </Grid>
@@ -150,10 +150,10 @@
 
                             <!--BTN Controller-->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Border MouseDown="OpenPageQuestions" Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
+                                <Border ToolTip="Back to questions" MouseDown="OpenPageQuestions" Margin="10,0" x:Name="BTNBack" Cursor="Hand" HorizontalAlignment="Right" Background="LightGray" CornerRadius="5" Height="30" Width="80">
                                     <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Back"/>
                                 </Border>
-                                <Border  x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
+                                <Border  ToolTip="Start Support" x:Name="BTNAddSupport" Cursor="Hand" HorizontalAlignment="Right" Background="Orange" CornerRadius="5" Height="30" Width="80">
                                     <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="Start"/>
                                 </Border>
 
