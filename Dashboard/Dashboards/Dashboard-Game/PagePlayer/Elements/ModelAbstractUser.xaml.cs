@@ -25,7 +25,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         BsonDocument DetailPlayer;
         Grid _Parent;
 
-        public ModelAbstractUser(BsonDocument DetailPlayer, Action<object, RoutedEventArgs> Refreshlist, Grid Parent)
+        public ModelAbstractUser(BsonDocument DetailPlayer, Action Refreshlist, Grid Parent)
         {
             InitializeComponent();
             TextToken.Text = DetailPlayer["Account"]["Token"].AsObjectId.ToString();
@@ -75,7 +75,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        Action<object, RoutedEventArgs> Refreshlist;
+        Action Refreshlist;
 
     }
 }

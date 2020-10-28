@@ -246,7 +246,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PagePlayers
                 {
                     public static ModelLinks.DashboardGame.PagePlayers Links;
-                    public static async void ReciveListPlayer(Action<BsonDocument> Result, Action ERR)
+                    public static async void ReciveListPlayer(int Count,Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.ReciveListPlayer);
                         client.Timeout = -1;
@@ -255,6 +255,7 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].AsString);
                         request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Count", Count.ToString());
                         var response = await client.ExecuteAsync(request);
 
 

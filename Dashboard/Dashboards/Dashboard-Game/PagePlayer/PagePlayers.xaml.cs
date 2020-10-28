@@ -17,12 +17,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
     /// </summary>
     public partial class PagePlayers : UserControl
     {
-        int PlayerCount = 0;
+        int PlayerCount = 100;
 
         public PagePlayers()
         {
             InitializeComponent();
-
+            RecivePlayersList();
 
             //close panel add player
             PanelAddPlayer.MouseDown += (e, s) =>
@@ -66,7 +66,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                         SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(TextBoxUsername.Text, TextBoxPassword.Password,
                          () =>
                          {
-                             RecivePlayersList(null, null);
+                             RecivePlayersList();
 
                              ShowOffSubpagePlayer();
 
@@ -97,6 +97,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
 
             };
 
+            BTNSeeMorePlayer.MouseDown += (s, e) =>
+            {
+                PlayerCount += 100;
+                TextSeeMoreNumber.Text = PlayerCount.ToString();
+
+                RecivePlayersList();
+            };
+
         }
 
 
@@ -106,15 +114,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RecivePlayersList(object sender, RoutedEventArgs e)
+        private void RecivePlayersList()
         {
             PlaceContentUser.Children.Clear();
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(PlayerCount,
                 result =>
                 {
                     if (result["ListPlayers"].AsBsonArray.Count >= 1)
                     {
-
                         foreach (var item in result["ListPlayers"].AsBsonArray)
                         {
                             PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, RecivePlayersList, Parent as Grid));

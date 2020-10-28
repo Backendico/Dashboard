@@ -31,7 +31,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         Button CurentBTNHeader;
 
 
-        public EditPlayer(BsonDocument PlayerDetail, Action<object, RoutedEventArgs> RefreshList)
+        public EditPlayer(BsonDocument PlayerDetail, Action RefreshList)
         {
             InitializeComponent();
             //frist init
@@ -358,7 +358,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     {
                         DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
 
-                        RefreshList(null, null);
+                        RefreshList();
                         DashboardGame.Dashboard.Root.Children.Remove(this);
 
                         //add log
@@ -383,7 +383,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 if (result)
                 {
-                    RefreshList(null, null);
+                    RefreshList();
+
                     TextboxNickname.BorderBrush = new SolidColorBrush(Colors.Transparent);
                     TextboxAvatar.BorderBrush = new SolidColorBrush(Colors.Transparent);
                     TextLanguage.BorderBrush = new SolidColorBrush(Colors.Transparent);
@@ -544,6 +545,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        Action<object, RoutedEventArgs> RefreshList;
+        Action  RefreshList;
     }
 }
