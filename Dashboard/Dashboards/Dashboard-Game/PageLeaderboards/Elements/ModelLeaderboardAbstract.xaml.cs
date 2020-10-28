@@ -90,11 +90,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextToken.MouseDown += GlobalEvents.CopyText;
         }
 
-
-      
-
-
-
         Action<object, RoutedEventArgs> Refreshlist;
     }
 }

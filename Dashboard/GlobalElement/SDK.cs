@@ -1051,7 +1051,7 @@ namespace Dashboard.GlobalElement
                             ERR();
                         }
                     }
-            
+
                 }
 
                 public sealed class PageSupport
@@ -1173,83 +1173,98 @@ namespace Dashboard.GlobalElement
 
     public struct ModelLinks
     {
+
         public struct LinkAUT
         {
-            public string Login => "https://localhost:44346/AUT/Login";
-            public string Register => "https://localhost:44346/AUT/Register";
-            public string CheackUsername => "https://localhost:44346/AUT/CheackUsername";
+            public string BaseLink => "http://193.141.64.203/";
+
+            public string Login => BaseLink + "AUT/Login";
+            public string Register => BaseLink + "AUT/Register";
+            public string CheackUsername => BaseLink + "AUT/CheackUsername";
 
         }
 
         public struct DashboardGame
         {
+
             public struct PageStudios
             {
-                public string ReciveStudio => "https://localhost:44346/ChoiceStudioGame/ReciveStudios";
-                public string CreatStudio => "https://localhost:44346/ChoiceStudioGame/CreatNewStudio";
-                public string Status => "https://localhost:44346/ChoiceStudiogame/Status";
-                public string AddPayment => "https://localhost:44346/ChoiceStudioGame/AddPayment";
-                public string ReciveMonetiz => "https://localhost:44346/ChoiceStudioGame/ReciveMonetize";
-                public string RecivePaymentList => "https://localhost:44346/ChoiceStudioGame/RecivePaymentList";
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string ReciveStudio => BaseLink + "ChoiceStudioGame/ReciveStudios";
+                public string CreatStudio => BaseLink + "ChoiceStudioGame/CreatNewStudio";
+                public string Status => BaseLink + "ChoiceStudiogame/Status";
+                public string AddPayment => BaseLink + "ChoiceStudioGame/AddPayment";
+                public string ReciveMonetiz => BaseLink + "ChoiceStudioGame/ReciveMonetize";
+                public string RecivePaymentList => BaseLink + "ChoiceStudioGame/RecivePaymentList";
             }
 
             public struct PagePlayers
             {
-                public string ReciveListPlayer => "https://localhost:44346/PagePlayer/ReciveDetailPagePlayer";
-                public string CreatPlayer => "https://localhost:44346/PagePlayer/CreatPlayer";
-                public string SearchUsername => "https://localhost:44346/PagePlayer/SearchUsername";
-                public string SearchEmail => "https://localhost:44346/PagePlayer/SearchEmail";
-                public string SearchToken => "https://localhost:44346/PagePlayer/SearchToken";
-                public string Delete => "https://localhost:44346/PagePlayer/DeletePlayer";
-                public string Save => "https://localhost:44346/PagePlayer/SavePlayer";
-                public string Save_LeaderboardPlayer => "https://localhost:44346/PagePlayer/Save_LeaderboardPlayer";
-                public string SendEmailRecovery => "https://localhost:44346/PagePlayer/SendEmailRecovery";
-                public string RecivePlayerLogs => "https://localhost:44346/PagePlayer/RecivePlayerLogs";
-                public string AddPlayerlog => "https://localhost:44346/PagePlayer/AddPlayerLog";
-                public string ClearLog => "https://localhost:44346/PagePlayer/ClearLogs";
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string ReciveListPlayer => BaseLink + "PagePlayer/ReciveDetailPagePlayer";
+                public string CreatPlayer => BaseLink + "PagePlayer/CreatPlayer";
+                public string SearchUsername => BaseLink + "PagePlayer/SearchUsername";
+                public string SearchEmail => BaseLink + "PagePlayer/SearchEmail";
+                public string SearchToken => BaseLink + "PagePlayer/SearchToken";
+                public string Delete => BaseLink + "PagePlayer/DeletePlayer";
+                public string Save => BaseLink + "PagePlayer/SavePlayer";
+                public string Save_LeaderboardPlayer => BaseLink + "PagePlayer/Save_LeaderboardPlayer";
+                public string SendEmailRecovery => BaseLink + "PagePlayer/SendEmailRecovery";
+                public string RecivePlayerLogs => BaseLink + "PagePlayer/RecivePlayerLogs";
+                public string AddPlayerlog => BaseLink + "PagePlayer/AddPlayerLog";
+                public string ClearLog => BaseLink + "PagePlayer/ClearLogs";
 
             }
 
             public struct PageLeaderboard
             {
-                public string ReciveLeaderboards => "https://localhost:44346/PageLeaderBoard/ReciveLeaderboards";
-                public string Creat => "https://localhost:44346/PageLeaderBoard/CreatLeaderBoard";
-                public string CheackName => "https://localhost:44346/PageLeaderBoard/CheackLeaderboardName";
-                public string Editleaderboard => "https://localhost:44346/PageLeaderBoard/EditLeaderBoard";
-                public string Add => "https://localhost:44346/PageLeaderBoard/Add";
-                public string Remove => "https://localhost:44346/PageLeaderBoard/Remove";
-                public string Reset => "https://localhost:44346/PageLeaderBoard/Reset";
-                public string Backup => "https://localhost:44346/PageLeaderBoard/Backup";
-                public string ReciveBackup => "https://localhost:44346/PageLeaderBoard/ReciveBackup";
-                public string RemoveBackup => "https://localhost:44346/PageLeaderBoard/RemoveBackup";
-                public string DownloadBackup => "https://localhost:44346/PageLeaderBoard/DownloadBackup";
-                public string Leaderboard => "https://localhost:44346/PageLeaderBoard/Leaderboard";
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string ReciveLeaderboards => BaseLink + "PageLeaderBoard/ReciveLeaderboards";
+                public string Creat => BaseLink + "PageLeaderBoard/CreatLeaderBoard";
+                public string CheackName => BaseLink + "PageLeaderBoard/CheackLeaderboardName";
+                public string Editleaderboard => BaseLink + "PageLeaderBoard/EditLeaderBoard";
+                public string Add => BaseLink + "PageLeaderBoard/Add";
+                public string Remove => BaseLink + "PageLeaderBoard/Remove";
+                public string Reset => BaseLink + "PageLeaderBoard/Reset";
+                public string Backup => BaseLink + "PageLeaderBoard/Backup";
+                public string ReciveBackup => BaseLink + "PageLeaderBoard/ReciveBackup";
+                public string RemoveBackup => BaseLink + "PageLeaderBoard/RemoveBackup";
+                public string DownloadBackup => BaseLink + "PageLeaderBoard/DownloadBackup";
+                public string Leaderboard => BaseLink + "PageLeaderBoard/Leaderboard";
             }
 
             public struct PageLog
             {
-                public string LinkReciveLog => "https://localhost:44346/Log/ReciveLogs";
-                public string LinkAddLog => "https://localhost:44346/Log/AddLog";
-                public string LinkDeletLog => "https://localhost:44346/Log/DeleteLog";
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string LinkReciveLog => BaseLink + "Log/ReciveLogs";
+                public string LinkAddLog => BaseLink + "Log/AddLog";
+                public string LinkDeletLog => BaseLink + "Log/DeleteLog";
             }
 
             public struct PageDashboard
             {
-                public string LinkDashboard => "https://localhost:44346/PageDashboard/ReciveDetail";
-                public string CheackStatusServer => "https://localhost:44346/PageDashboard/CheackStatusServer";
-                public string Notifaction => "https://localhost:44346/PageDashboard/Notifaction";
-                public string CheackUpdate => "https://localhost:44346/PageDashboard/CheackUpdate";
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string LinkDashboard => BaseLink + "PageDashboard/ReciveDetail";
+                public string CheackStatusServer => BaseLink + "PageDashboard/CheackStatusServer";
+                public string Notifaction => BaseLink + "PageDashboard/Notifaction";
+                public string CheackUpdate => BaseLink + "PageDashboard/CheackUpdate";
 
             }
 
             public struct PageSupport
             {
-                public string LinkAddSupport => "https://localhost:44346/PageSupport/AddSupport";
-                public string LinkReciveSupport => "https://localhost:44346/PageSupport/ReciveSupports";
-                public string AddMessage => "https://localhost:44346/PageSupport/AddMessage";
-                public string CloseSupport => "https://localhost:44346/PageSupport/CloseSupport";
-                public string AddReportBug => "https://localhost:44346/PageSupport/AddReportBug";
-
+                public string BaseLink => "http://193.141.64.203/";
+                
+                public string LinkAddSupport => BaseLink + "PageSupport/AddSupport";
+                public string LinkReciveSupport => BaseLink + "PageSupport/ReciveSupports";
+                public string AddMessage => BaseLink + "PageSupport/AddMessage";
+                public string CloseSupport => BaseLink + "PageSupport/CloseSupport";
+                public string AddReportBug => BaseLink + "PageSupport/AddReportBug";
             }
         }
     }

@@ -37,7 +37,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         //singnal
         internal string SignalID = "";
-        HubConnection HubConnection = new HubConnectionBuilder().WithUrl("https://localhost:44346/Signal").Build();
+        HubConnection HubConnection = new HubConnectionBuilder().WithUrl("http://193.141.64.203/Signal").Build();
 
         InternalNotifaction internalNotifaction;
         BlurEffect Blur = new BlurEffect() { Radius = 0 };

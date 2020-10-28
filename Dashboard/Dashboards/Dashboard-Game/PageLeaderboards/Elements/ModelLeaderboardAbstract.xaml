@@ -61,7 +61,7 @@
         <Border BorderThickness="0,0,2,2" BorderBrush="Gray" Grid.Column="5"/>
 
         <TextBlock x:Name="TextName"  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="nameleaderboard" Grid.Column="0"/>
-        <TextBlock Cursor="Hand" x:Name="TextToken"  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Token" Grid.Column="1" MouseDown="CopyToken"/>
+        <TextBlock Cursor="Hand" x:Name="TextToken"  VerticalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0" Text="Token" Grid.Column="1" />
         <TextBlock x:Name="TextReset" VerticalAlignment="Center"  TextAlignment="Center"  Margin="10,0,0,0" Text="Reset" Grid.Column="2"/>
         <TextBlock x:Name="TextSort" VerticalAlignment="Center"  TextAlignment="Center"  Margin="10,0,0,0" Text="Sort " Grid.Column="3"/>
         <TextBlock x:Name="TextPlayers" VerticalAlignment="Center"  TextAlignment="Center" Margin="10,0,0,0" Text="Players" Grid.Column="4"/>

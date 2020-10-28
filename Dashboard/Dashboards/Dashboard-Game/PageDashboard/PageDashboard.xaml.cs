@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,22 +52,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
                     //leaderboards
                     TextCount_Leaderboards.Text = result["Leaderboards"]["Count"].ToString();
                     TextCountTotal_Leaderbords.Text = result["Leaderboards"]["Totall"].ToString();
+                    Debug.WriteLine(result["Leaderboards"].ToString());
 
                     //Players
                     TextCount_Players.Text = result["PlayersMonetiz"]["Count"].ToString();
                     TextCountTotal_Players.Text = result["PlayersMonetiz"]["Totall"].ToString();
 
                     //Logs
-                    TextCount_Logs.Text = result["Logs"]["Totall"].ToString();
-                    TextTotalCount_Logs.Text = result["Logs"]["Count"].ToString();
+                    TextCount_Logs.Text = result["Logs"]["Count"].ToString();
+                    TextTotalCount_Logs.Text = result["Logs"]["Totall"].ToString();
 
                     //Apis
                     TextCount_APIs.Text = result["APIs"]["Count"].ToString();
                     TextTotalCount_APIs.Text = result["APIs"]["Totall"].ToString();
-
-                    //Studio
-                    //TextTotalCount_Studio.Text = result["Monetiz"]["Monetiz"]["Studios"].ToString();
-
                 },
                 () =>
                 {
