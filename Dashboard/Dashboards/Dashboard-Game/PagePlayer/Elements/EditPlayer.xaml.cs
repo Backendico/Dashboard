@@ -445,7 +445,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        private void Add(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Add(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -459,9 +459,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             }
         }
 
-        private void Save(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Save(object sender, MouseButtonEventArgs e)
         {
-
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save_LeaderboardPlayer(PlayerDetail["Account"]["Token"].AsObjectId.ToString(), PlayerDetail["Leaderboards"]["List"].AsBsonDocument,
                 () =>
                 {

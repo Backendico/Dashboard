@@ -1,6 +1,7 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard;
 using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
+using Dashboard.Dashboards.Dashboard_Game.PageAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
@@ -240,7 +241,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
         internal async void ReciveNotifactions()
         {
-
             if (HubConnection.State == HubConnectionState.Disconnected)
             {
                 await HubConnection.StartAsync();
@@ -378,6 +378,10 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 case "BTNDashboard":
                     CurentPage = new PageDashboard();
                     CurentTab = BTNDashboard;
+                    break;
+                case "BTNAchievements":
+                    CurentPage = new PageAchievements.PageAchievements();
+                    CurentTab = BTNAchievements;
                     break;
                 default:
                     Debug.WriteLine("Not set");

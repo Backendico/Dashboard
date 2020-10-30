@@ -1,8 +1,10 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.Win32;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using RestSharp;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Dashboard.GlobalElement
 {
@@ -246,7 +248,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PagePlayers
                 {
                     public static ModelLinks.DashboardGame.PagePlayers Links;
-                    public static async void ReciveListPlayer(int Count,Action<BsonDocument> Result, Action ERR)
+                    public static async void ReciveListPlayer(int Count, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.ReciveListPlayer);
                         client.Timeout = -1;
@@ -621,7 +623,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Creat(string NameLeaderboard, int reset, int Sort,int Min,int Max, Action<bool> Result)
+                    public static async void Creat(string NameLeaderboard, int reset, int Sort, int Min, int Max, Action<bool> Result)
                     {
                         var SeriliseDetail = new BsonDocument
                         {
@@ -904,6 +906,78 @@ namespace Dashboard.GlobalElement
                     }
                 }
 
+                public sealed class PageAchievements
+                {
+                    public static ModelLinks.DashboardGame.PageAchievements Links = new ModelLinks.DashboardGame.PageAchievements();
+
+                    public static async void AddAchievements(string Name, long Value, Action<bool> Result, Action ERR)
+                    {
+                        var serilese = new BsonDocument { { "Name", Name }, { "Value", Value } };
+
+                        var client = new RestClient(Links.AddAchievements);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("Detail", serilese.ToString());
+
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            ERR();
+                            Result(false);
+                        }
+
+                    }
+
+                    public static async void CheackAchievements(string Textname, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.CheackNameAchievements);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("NameAchievements", Textname);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void ReciveAchievements(Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.ReciveAchievements);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token );
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        var response =await client.ExecuteAsync(request);
+                       
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
+                }
+
+
                 public sealed class PageLog
                 {
                     public static ModelLinks.DashboardGame.PageLog Links;
@@ -1174,6 +1248,8 @@ namespace Dashboard.GlobalElement
 
 
                 }
+
+
             }
         }
     }
@@ -1253,6 +1329,16 @@ namespace Dashboard.GlobalElement
                 public string LinkDeletLog => BaseLink + "Log/DeleteLog";
             }
 
+            public struct PageAchievements
+            {
+
+                public string BaseLink => "http://193.141.64.203/";
+                public string AddAchievements => BaseLink + "PageAchievements/AddAchievements";
+                public string CheackNameAchievements => BaseLink + "PageAchievements/CheackNameAchievements";
+                public string ReciveAchievements => BaseLink + "PageAchievements/ReciveAchievements";
+
+            }
+
             public struct PageDashboard
             {
                 public string BaseLink => "http://193.141.64.203/";
@@ -1267,7 +1353,7 @@ namespace Dashboard.GlobalElement
             public struct PageSupport
             {
                 public string BaseLink => "http://193.141.64.203/";
-                
+
                 public string LinkAddSupport => BaseLink + "PageSupport/AddSupport";
                 public string LinkReciveSupport => BaseLink + "PageSupport/ReciveSupports";
                 public string AddMessage => BaseLink + "PageSupport/AddMessage";
