@@ -32,13 +32,13 @@
             </Grid>
 
             <!--Total Score-->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-                <Border  Background="WhiteSmoke" CornerRadius="5,0,0,5"  MinWidth="30"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <TextBlock Margin="10"  FontSize="20" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Total :"/>
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                <Border BorderBrush="Gray" BorderThickness="2"  Background="WhiteSmoke" CornerRadius="5,0,0,5"  MinWidth="30"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBlock FontWeight="Bold" Margin="10"  FontSize="15" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Total :"/>
                 </Border>
-                <Border Margin="5" Background="WhiteSmoke" CornerRadius="0,5,5,0"  MinWidth="30"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Border Margin="3" Background="WhiteSmoke"  BorderBrush="Gray" BorderThickness="2"  CornerRadius="0,5,5,0"  MinWidth="30"  HorizontalAlignment="Center" VerticalAlignment="Center" >
 
-                    <TextBlock  Margin="10" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="9999999999999999"/>
+                    <TextBlock x:Name="TextTotallValue"  Margin="10" FontSize="15" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0"/>
                 </Border>
 
             </StackPanel>

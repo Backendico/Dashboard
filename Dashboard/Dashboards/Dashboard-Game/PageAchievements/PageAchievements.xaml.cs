@@ -24,6 +24,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
     /// </summary>
     public partial class PageAchievements : UserControl
     {
+        long Value = 0;
+
         public PageAchievements()
         {
             InitializeComponent();
@@ -98,7 +100,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
         public void ReciveListAchievements()
         {
             PlaceContentAchievements.Children.Clear();
-
+            Value = 0;
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result =>
             {
                 if (result.ElementCount >= 1)
@@ -107,8 +109,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                     {
                         foreach (var item in result["Achievements"].AsBsonArray)
                         {
-                            PlaceContentAchievements.Children.Add(new ModelAchivments());
+                            Value += item.AsBsonDocument["Value"].ToInt64();
+                            PlaceContentAchievements.Children.Add(new ModelAchivments(item.AsBsonDocument));
+                            TextTotallValue.Text = Value.ToString();
                         }
+
                     }
                     else
                     {
@@ -155,6 +160,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
+
+            TextBoxName.BorderBrush = new SolidColorBrush(Colors.Gainsboro);
         }
 
 

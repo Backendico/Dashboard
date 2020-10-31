@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
     /// </summary>
     public partial class ModelAchivments : UserControl
     {
-        public ModelAchivments()
+        public ModelAchivments(BsonDocument DetailAchievement)
         {
             InitializeComponent();
+            TextName.Text = DetailAchievement["Name"].AsString;
+            TextToken.Text = DetailAchievement["Token"].ToString();
+            TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
+            TextValue.Text = DetailAchievement["Value"].ToString();
+
         }
     }
 }
