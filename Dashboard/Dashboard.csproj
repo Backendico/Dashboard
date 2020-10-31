@@ -187,6 +187,9 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAchievements\Elements\EditAchievements\EditAchievements.xaml.cs">
       <DependentUpon>EditAchievements.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageAchievements\Elements\EditAchievements\Elements\ModelPlayersAchievements.xaml.cs">
+      <DependentUpon>ModelPlayersAchievements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageAchievements\Elements\ModelAchivments.xaml.cs">
       <DependentUpon>ModelAchivments.xaml</DependentUpon>
     </Compile>
@@ -267,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PageAchievements\Elements\EditAchievements\EditAchievements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageAchievements\Elements\EditAchievements\Elements\ModelPlayersAchievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

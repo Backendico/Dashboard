@@ -26,6 +26,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
     {
         long Value = 0;
 
+
         public PageAchievements()
         {
             InitializeComponent();

@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Conventions;
 using RestSharp;
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Dashboard.GlobalElement
@@ -996,6 +997,53 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public static async void AddPlayerAchievements(ObjectId TokenPlayer, BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddPlayerAchievements);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.PUT);
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("Detail", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void RecivePlayersAchivementsList(ObjectId TokenAchievements, int Count, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.RecivePlayersAchivementsList);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenAchievement", TokenAchievements.ToString());
+                        request.AddParameter("Count", Count.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+
+                    }
+
                 }
 
 
@@ -1358,6 +1406,8 @@ namespace Dashboard.GlobalElement
                 public string CheackNameAchievements => BaseLink + "PageAchievements/CheackNameAchievements";
                 public string ReciveAchievements => BaseLink + "PageAchievements/ReciveAchievements";
                 public string EditAchievements => BaseLink + "PageAchievements/EditAchievements";
+                public string AddPlayerAchievements => BaseLink + "PageAchievements/AddPlayerAchievements";
+                public string RecivePlayersAchivementsList => BaseLink + "PageAchievements/ReciveAchievementsPlayerList";
             }
 
             public struct PageDashboard
