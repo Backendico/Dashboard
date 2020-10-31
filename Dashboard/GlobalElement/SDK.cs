@@ -961,17 +961,38 @@ namespace Dashboard.GlobalElement
                         client.Timeout = -1;
                         client.ClearHandlers();
                         var request = new RestRequest(Method.POST);
-                        request.AddParameter("Token", SettingUser.Token );
+                        request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        var response =await client.ExecuteAsync(request);
-                       
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
                         }
                         else
                         {
                             Result(new BsonDocument());
+                        }
+                    }
+
+                    public static async void EditAchievements(ObjectId TokenAchievements, BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.EditAchievements);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenAchievements", TokenAchievements.ToString());
+                        request.AddParameter("Detail", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
                         }
                     }
 
@@ -1336,7 +1357,7 @@ namespace Dashboard.GlobalElement
                 public string AddAchievements => BaseLink + "PageAchievements/AddAchievements";
                 public string CheackNameAchievements => BaseLink + "PageAchievements/CheackNameAchievements";
                 public string ReciveAchievements => BaseLink + "PageAchievements/ReciveAchievements";
-
+                public string EditAchievements => BaseLink + "PageAchievements/EditAchievements";
             }
 
             public struct PageDashboard

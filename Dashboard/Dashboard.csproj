@@ -184,6 +184,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Notifaction\Notifaction.xaml.cs">
       <DependentUpon>Notifaction.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageAchievements\Elements\EditAchievements\EditAchievements.xaml.cs">
+      <DependentUpon>EditAchievements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageAchievements\Elements\ModelAchivments.xaml.cs">
       <DependentUpon>ModelAchivments.xaml</DependentUpon>
     </Compile>
@@ -260,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Notifaction\Notifaction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageAchievements\Elements\EditAchievements\EditAchievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

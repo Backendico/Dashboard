@@ -6,8 +6,16 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border BorderBrush="Gray" BorderThickness="2" Margin="10" CornerRadius="5" Background="WhiteSmoke" MinWidth="200" MinHeight="200">
+    <Border x:Name="Root" BorderBrush="Gray" Opacity="1" BorderThickness="2" Margin="10" CornerRadius="5" Background="WhiteSmoke" MinWidth="200" MinHeight="200">
         <Border.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3"/>
+                    </Storyboard>
+
+                </BeginStoryboard>
+            </EventTrigger>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetName="Controller" Storyboard.TargetProperty="Opacity">
@@ -68,12 +76,12 @@
             <StackPanel x:Name="Controller" Opacity="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
                
                 <!--Delete-->
-                <Border Margin="3,0" CornerRadius="5,0,0,5" Background="Tomato" Width="30" Height="30">
+                <Border x:Name="BTNDelete" Cursor="Hand" Margin="3,0" CornerRadius="5,0,0,5" Background="Tomato" Width="30" Height="30">
                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
                 </Border>
 
                 <!--Edit-->
-                <Border CornerRadius="0,5,5,0" Background="Orange" Width="80" Height="30">
+                <Border x:Name="BTNEdit" Cursor="Hand" CornerRadius="0,5,5,0" Background="Orange" Width="80" Height="30">
                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
                 </Border>
 

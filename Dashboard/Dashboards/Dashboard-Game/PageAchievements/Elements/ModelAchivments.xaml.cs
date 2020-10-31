@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
     /// </summary>
     public partial class ModelAchivments : UserControl
     {
-        public ModelAchivments(BsonDocument DetailAchievement)
+        public ModelAchivments(BsonDocument DetailAchievement,Action RefreshList)
         {
             InitializeComponent();
             TextName.Text = DetailAchievement["Name"].AsString;
             TextToken.Text = DetailAchievement["Token"].ToString();
             TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
             TextValue.Text = DetailAchievement["Value"].ToString();
+
+
+            BTNEdit.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new EditAchievements.EditAchievements(DetailAchievement,RefreshList)) ;
+            };
 
         }
     }
