@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Conventions;
 using RestSharp;
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -1068,6 +1069,25 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public static async void RemoveAchievements(BsonDocument DetailAchievements, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.RemoveAchievements);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.DELETE);
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("Detail", DetailAchievements.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
                 }
 
 
@@ -1432,7 +1452,8 @@ namespace Dashboard.GlobalElement
                 public string EditAchievements => BaseLink + "PageAchievements/EditAchievements";
                 public string AddPlayerAchievements => BaseLink + "PageAchievements/AddPlayerAchievements";
                 public string RecivePlayersAchivementsList => BaseLink + "PageAchievements/ReciveAchievementsPlayerList";
-                public string RemoveAchievements => BaseLink + "PageAchievements/RemoveAchievementPlayer";
+                public string RemoveAchievementsPlayer => BaseLink + "PageAchievements/RemoveAchievementPlayer";
+                public string RemoveAchievements => BaseLink + "PageAchievements/RemoveAchievements";
             }
 
             public struct PageDashboard

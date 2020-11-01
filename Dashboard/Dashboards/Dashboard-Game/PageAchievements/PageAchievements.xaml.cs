@@ -50,7 +50,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                         ReciveListAchievements();
 
                         //add log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Creat achievement",$"\" {TextBoxName.Text} \" achievement was created", new BsonDocument(), false, resultlog => { });
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Creat achievement", $"\" {TextBoxName.Text} \" achievement was created", new BsonDocument(), false, resultlog => { });
 
                     }, () =>
                     {
@@ -106,6 +106,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
         {
             PlaceContentAchievements.Children.Clear();
             Value = 0;
+            TextTotallValue.Text = "0";
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result =>
             {
                 if (result.ElementCount >= 1)
@@ -118,7 +119,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                             PlaceContentAchievements.Children.Add(new ModelAchivments(item.AsBsonDocument, ReciveListAchievements));
                             TextTotallValue.Text = Value.ToString();
                         }
-
                     }
                     else
                     {
