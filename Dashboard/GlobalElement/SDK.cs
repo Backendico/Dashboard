@@ -1085,6 +1085,29 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+
+                    public static async void PlayerAchievements(ObjectId TokenPlayer, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.PlayerAchievements);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+
+                    }
+
                 }
 
 
@@ -1451,6 +1474,7 @@ namespace Dashboard.GlobalElement
                 public string RecivePlayersAchivementsList => BaseLink + "PageAchievements/ReciveAchievementsPlayerList";
                 public string RemoveAchievementsPlayer => BaseLink + "PageAchievements/RemoveAchievementPlayer";
                 public string RemoveAchievements => BaseLink + "PageAchievements/RemoveAchievements";
+                public string PlayerAchievements => BaseLink + "PageAchievements/PlayerAchievements";
             }
 
             public struct PageDashboard

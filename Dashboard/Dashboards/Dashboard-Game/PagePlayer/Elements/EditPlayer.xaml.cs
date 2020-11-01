@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
@@ -50,7 +51,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             TextboxUsername.Text = this.PlayerDetail["Account"]["Username"].AsString;
             TextboxEmail.Text = this.PlayerDetail["Account"]["Email"].AsString;
             TextToken.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
-            Textboxphone.Text = this.PlayerDetail["Account"]["Phone"].ToString() ;
+            Textboxphone.Text = this.PlayerDetail["Account"]["Phone"].ToString();
 
             //cheak banplayer
             CheackBoxBan.IsChecked = this.PlayerDetail["Account"]["IsBan"].AsBoolean;
@@ -109,7 +110,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
             };
 
-            //action btgn see more
+            //action btn see more
             BTNSeeMoreLog.MouseDown += (s, e) =>
             {
                 CountLog += 100;
@@ -195,11 +196,32 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
             //copyToken
             TextToken.MouseDown += GlobalEvents.CopyText;
+
+
+            //action Panel Achievements
+            PanelAddAchievements.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowoffPaneladdAchievements();
+                }
+            };
+
+
+            //action show panel Add achievements
+            BTNShowPanelAddAchievement.MouseDown += (s, e) =>
+            {
+                ShowPanelAddAchievements();
+                RecivePlayerAchievements();
+            };
         }
 
         //global
         private void ChangePage(object sender, RoutedEventArgs e)
         {
+            ShowoffPaneladdLogs();
+            ShowoffPaneladdAchievements();
+
             CurentPage.Visibility = Visibility.Collapsed;
             CurentBTNHeader.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
@@ -228,6 +250,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         CurentBTNHeader = BTNLogs;
                         BTNLogs.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
                         RecivePlayerLogs();
+                    }
+                    break;
+                case "BTNAchievements":
+                    {
+                        CurentPage = PageAchievements;
+                        PageAchievements.Visibility = Visibility.Visible;
+                        CurentBTNHeader = BTNAchievements;
+                        BTNAchievements.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
+
+                        RecivePlayerAchievements();
                     }
                     break;
                 default:
@@ -545,6 +577,94 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        Action  RefreshList;
+        //page Achievements
+        public void RecivePlayerAchievements()
+        {
+            PlaceContentAchievements.Children.Clear();
+            ListStudioAchievement.Items.Clear();
+
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId,
+                result =>
+                {
+                    if (result.ElementCount >= 1)
+                    {
+                        if (result["Achievements"].AsBsonArray.Count >= 1)
+                        {
+                            foreach (var item in result["Achievements"].AsBsonArray)
+                            {
+                                PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument, PlayerDetail["Account"]["Token"].AsObjectId, RecivePlayerAchievements));
+                            }
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("This player has no achievements", Notifaction.StatusMessage.Error);
+                            ShowPanelAddAchievements();
+                        }
+
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
+                    }
+                });
+
+            //recive achievement for fill list achievements
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(Result =>
+            {
+                if (Result.ElementCount >= 1)
+                {
+                    if (Result["Achievements"].AsBsonArray.Count >= 1)
+                    {
+                        foreach (var item in Result["Achievements"].AsBsonArray)
+                        {
+
+                            ListStudioAchievement.Items.Add(
+                                new ListBoxItem()
+                                {
+                                    Content = new TextBlock() { Text = $"Name: {item["Name"]}" + "\n" + $"Value: {item["Value"]}" },
+                                    BorderBrush = new SolidColorBrush(Colors.Gray),
+                                    BorderThickness = new Thickness(0,0,0,1),
+                                }
+                                ) ;
+                               
+                        }
+                    }
+                    else
+                    {
+                        ListStudioAchievement.Items.Add(new TextBlock() { Text = "No achievement found " });
+                    }
+                }
+                else
+                {
+                    ListStudioAchievement.Items.Add(new TextBlock() { Text = "No achievement found " });
+                }
+            });
+        }
+
+        private void ShowPanelAddAchievements()
+        {
+            PanelAddAchievements.Visibility = Visibility.Visible;
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddAchievements.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+        private void ShowoffPaneladdAchievements()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            PanelAddAchievements.Visibility = Visibility.Collapsed;
+
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddAchievements.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        Action RefreshList;
     }
 }

@@ -205,6 +205,9 @@
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderboard.xaml.cs">
       <DependentUpon>PageLeaderboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAchievements\ModelAchievements.xaml.cs">
+      <DependentUpon>ModelAchievements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLog\ModelLogPlayer.xaml.cs">
       <DependentUpon>ModelLogPlayer.xaml</DependentUpon>
     </Compile>
@@ -326,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAbstractUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAchievements\ModelAchievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

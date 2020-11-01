@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements.ModelAchievements"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements"
+             mc:Ignorable="d" 
+             Height="40"
+             d:DesignHeight="63.6" d:DesignWidth="800">
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Transparent" To="Gainsboro" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNRemove" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)">
+                    <ColorAnimation From="Gainsboro" To="Transparent" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetName="BTNRemove" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="1" To="0" Duration="0:0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <!-- Head row-->
+    <Grid x:Name="Root" Background="Transparent" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+        <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="1" />
+        <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="2" />
+        <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="3" />
+
+
+        <Border ToolTip="Delete" x:Name="BTNRemove"  CornerRadius="5" Grid.Column="0"  Opacity="0"   Background="Tomato" Width="30" Height="30" Cursor="Hand">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE74D;"  FontSize="17"  FontFamily="Segoe MDL2 Assets"/>
+        </Border>
+
+        <TextBlock Cursor="Hand" x:Name="TextToken"   TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="1"/>
+        <TextBlock  x:Name="TextName"   TextAlignment="Center" VerticalAlignment="Center" Text="Name" Grid.Column="2"/>
+        <TextBlock  x:Name="TextRecive"   TextAlignment="Center" VerticalAlignment="Center" Text="Recieve at" Grid.Column="3"/>
+    </Grid>
+</UserControl>

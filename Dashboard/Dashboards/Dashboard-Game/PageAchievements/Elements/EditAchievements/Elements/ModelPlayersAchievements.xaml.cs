@@ -17,7 +17,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
             InitializeComponent();
             TextToken.Text = DetailPlayer["Token"].ToString();
             TextUsername.Text = DetailPlayer["Username"].ToString() == "" ? "Not Set" : DetailPlayer["Username"].ToString();
-            TextRecive.Text = DetailPlayer["Recive"].ToString();
+            TextRecive.Text = DetailPlayer["Recive"].ToLocalTime().ToString();
 
             //copy token
             TextToken.MouseDown += GlobalEvents.CopyText;
