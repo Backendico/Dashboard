@@ -59,7 +59,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <Grid Grid.Row="2" Visibility="Visible"  x:Name="ContentSetting" >
+            <Grid Grid.Row="2" Visibility="Collapsed"  x:Name="ContentSetting" >
 
                 <StackPanel MinWidth="300" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center"  >
 
@@ -106,7 +106,7 @@
             </Grid>
 
             <!--ContentList-->
-            <Grid  x:Name="ContentList" Visibility="Collapsed"  Grid.Row="2" >
+            <Grid  x:Name="ContentList" Visibility="Visible"  Grid.Row="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
@@ -162,6 +162,7 @@
                                         <ColumnDefinition Width="40"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="17"/>
                                     </Grid.ColumnDefinitions>
                                     <Border CornerRadius="4,0,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="0"/>
@@ -172,6 +173,7 @@
 
                                     <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="1"/>
                                     <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Username" Grid.Column="2"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Received" Grid.Column="3"/>
                                 </Grid>
 
                                 <!--Content-->

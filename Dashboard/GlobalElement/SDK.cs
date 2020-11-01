@@ -1045,19 +1045,16 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void RemoveAchievementsPlayer(ObjectId TokenPlayer, BsonDocument DetailAchievements, Action<bool> Result)
+                    public static async void RemoveAchievementsPlayer(ObjectId TokenPlayer, BsonDocument Detail, Action<bool> Result)
                     {
-                        var client = new RestClient(Links.RemoveAchievements);
+                        var client = new RestClient(Links.RemoveAchievementsPlayer);
                         client.Timeout = -1;
                         var request = new RestRequest(Method.DELETE);
-                        request.AddParameter("Token", SettingUser.Token);
-                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
                         request.AddParameter("TokenPlayer", TokenPlayer.ToString());
-                        request.AddParameter("TokenAchievements", DetailAchievements["Token"].ToString());
-                        request.AddParameter("NameAchievements", DetailAchievements["Name"]);
+                        request.AddParameter("Detail", Detail.ToString());
                         var response = await client.ExecuteAsync(request);
-
-                        Debug.WriteLine(response.Content);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
