@@ -122,8 +122,8 @@
                             </StackPanel>
                         </Border>
 
-                        <!--Reset List-->
-                        <Border x:Name="BTNReset"  Cursor="Hand" ToolTip="Reset" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <!--Refresh List-->
+                        <Border x:Name="BTNRefresh"  Cursor="Hand" ToolTip="Refresh" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
                             <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
                                 <TextBlock  TextAlignment="Center" Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
                             </StackPanel>

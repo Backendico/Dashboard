@@ -84,7 +84,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
             {
                 ShowPaneladdPlayer();
             };
-
+            
+            //close panel add
             PanelAddPlayer.MouseDown += (s, e) =>
             {
                 if (e.Source.GetType() == typeof(Grid))
@@ -92,7 +93,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                     ShowoffPaneladdPlayer();
                 }
             };
-
+       
+            //actin add player to achievements
             BTNAddPlayer.MouseDown += (s, e) =>
             {
                 try
@@ -107,7 +109,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
 
                     SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(ObjectId.Parse(TextboxTokenPlayer.Text), SerilseDetail, result =>
                     {
-
+                        if (result)
+                        {
+                            ReciveList();
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
+                        }
                     });
                 }
                 catch (Exception ex)
@@ -116,6 +125,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                 }
             };
 
+            //actin btn refresh
+            BTNRefresh.MouseDown += (s, e) =>
+            {
+                ReciveList();
+            };
+
+            //action  inc countlist
+            BTNSeeMore.MouseDown += (s, e) =>
+            {
+                CountList += 100;
+                TextSeeMore.Text = CountList.ToString();
+                ReciveList();
+            };
         }
 
 
@@ -139,6 +161,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                         CurentPage = ContentList;
                         CurentTab = BTNListAchievemetns;
                         CountList = 100;
+                        TextSeeMore.Text = CountList.ToString();
                         ReciveList();
 
                     }
