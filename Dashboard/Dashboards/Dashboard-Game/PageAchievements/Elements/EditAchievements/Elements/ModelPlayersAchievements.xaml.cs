@@ -26,7 +26,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                     {"Name",DetailAchievements["Name"] }
                 };
 
-                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(DetailPlayer["Token"], SerilseDetailachievements, result =>
+                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(DetailPlayer["Token"].AsObjectId, SerilseDetailachievements, result =>
                 {
                     if (result)
                     {

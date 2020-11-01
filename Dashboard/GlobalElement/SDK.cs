@@ -1430,7 +1430,7 @@ namespace Dashboard.GlobalElement
                 public string EditAchievements => BaseLink + "PageAchievements/EditAchievements";
                 public string AddPlayerAchievements => BaseLink + "PageAchievements/AddPlayerAchievements";
                 public string RecivePlayersAchivementsList => BaseLink + "PageAchievements/ReciveAchievementsPlayerList";
-                public string RemoveAchievements => BaseLink + "PageAchievements/RecivePlayersAchivementsList"
+                public string RemoveAchievements => BaseLink + "PageAchievements/RecivePlayersAchivementsList";
             }
 
             public struct PageDashboard
