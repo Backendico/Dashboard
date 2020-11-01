@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
 using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -47,6 +48,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                     {
                         ShowOffPanelAchievements();
                         ReciveListAchievements();
+
+                        //add log
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Creat achievement",$"\" {TextBoxName.Text} \" achievement was created", new BsonDocument(), false, resultlog => { });
 
                     }, () =>
                     {
@@ -111,7 +115,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                         foreach (var item in result["Achievements"].AsBsonArray)
                         {
                             Value += item.AsBsonDocument["Value"].ToInt64();
-                            PlaceContentAchievements.Children.Add(new ModelAchivments(item.AsBsonDocument,ReciveListAchievements));
+                            PlaceContentAchievements.Children.Add(new ModelAchivments(item.AsBsonDocument, ReciveListAchievements));
                             TextTotallValue.Text = Value.ToString();
                         }
 

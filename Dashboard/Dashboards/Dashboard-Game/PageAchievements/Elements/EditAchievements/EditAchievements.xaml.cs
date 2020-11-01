@@ -65,6 +65,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                         {
                             RefreshList();
                             DashboardGame.Notifaction("Updated", Notifaction.StatusMessage.Ok);
+
+                            //add log
+                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("modified achievement", $"Modify achievement  \" {DetailAchievement["Name"] } \" ", DetailAchievement, false, resultLog => { });
+
                         }
                         else
                         {
@@ -84,7 +88,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
             {
                 ShowPaneladdPlayer();
             };
-            
+
             //close panel add
             PanelAddPlayer.MouseDown += (s, e) =>
             {
@@ -93,7 +97,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                     ShowoffPaneladdPlayer();
                 }
             };
-       
+
             //actin add player to achievements
             BTNAddPlayer.MouseDown += (s, e) =>
             {
@@ -113,6 +117,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                         {
                             ShowoffPaneladdPlayer();
                             ReciveList();
+
+                            //add log
+                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add player to achievement", $"Player \" {TextboxTokenPlayer.Text} \" was added to the achievement of \" {DetailAchievement["Name"]} \"", new BsonDocument { }, false, resultLog => { });
                         }
                         else
                         {
@@ -221,12 +228,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                 if (result.ElementCount >= 1)
                 {
 
-                   
+
                     if (result["List"].AsBsonArray.Count >= 1)
                     {
                         foreach (var item in result["List"].AsBsonArray)
                         {
-                            ContentPlaceAchievements.Children.Add(new ModelPlayersAchievements(item.AsBsonDocument,DetailAchievements,ReciveList));
+                            ContentPlaceAchievements.Children.Add(new ModelPlayersAchievements(item.AsBsonDocument, DetailAchievements, ReciveList));
                         }
                     }
                     else

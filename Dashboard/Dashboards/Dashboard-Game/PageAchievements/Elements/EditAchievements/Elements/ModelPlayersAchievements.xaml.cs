@@ -34,6 +34,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                       {
                           DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
                           RefreshList();
+
+                          //add log
+                          SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Remove player from achievement", $"Player \" {DetailPlayer["Token"]} \" was removed from the \" {DetailAchievements["Name"]} \" achievement", new BsonDocument { }, false, resultLog => { });
                       }
                       else
                       {
