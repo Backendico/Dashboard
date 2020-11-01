@@ -1,5 +1,6 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
+using System;
 using System.Windows.Controls;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements.Elements
@@ -9,7 +10,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
     /// </summary>
     public partial class ModelPlayersAchievements : UserControl
     {
-        public ModelPlayersAchievements(BsonDocument DetailPlayer)
+        public ModelPlayersAchievements(BsonDocument DetailPlayer, BsonDocument DetailAchievements, Action RefreshList)
         {
             InitializeComponent();
             TextToken.Text = DetailPlayer["Token"].ToString();
@@ -19,7 +20,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
 
             BTNRemove.MouseDown += (s, e) =>
             {
+                var SerilseDetailachievements = new BsonDocument
+                {
+                    {"Token",DetailAchievements["Token"] },
+                    {"Name",DetailAchievements["Name"] }
+                };
 
+                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(DetailPlayer["Token"], SerilseDetailachievements, result =>
+                {
+                    if (result)
+                    {
+                        DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
+                        RefreshList();
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
+                    }
+                });
             };
         }
     }
