@@ -1056,6 +1056,8 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("NameAchievements", DetailAchievements["Name"]);
                         var response = await client.ExecuteAsync(request);
 
+                        Debug.WriteLine(response.Content);
+
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
@@ -1430,7 +1432,7 @@ namespace Dashboard.GlobalElement
                 public string EditAchievements => BaseLink + "PageAchievements/EditAchievements";
                 public string AddPlayerAchievements => BaseLink + "PageAchievements/AddPlayerAchievements";
                 public string RecivePlayersAchivementsList => BaseLink + "PageAchievements/ReciveAchievementsPlayerList";
-                public string RemoveAchievements => BaseLink + "PageAchievements/RecivePlayersAchivementsList";
+                public string RemoveAchievements => BaseLink + "PageAchievements/RemoveAchievementPlayer";
             }
 
             public struct PageDashboard

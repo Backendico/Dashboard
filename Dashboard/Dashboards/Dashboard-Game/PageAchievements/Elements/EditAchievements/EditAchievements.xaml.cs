@@ -111,6 +111,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                     {
                         if (result)
                         {
+                            ShowoffPaneladdPlayer();
                             ReciveList();
                         }
                         else
@@ -220,11 +221,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                 if (result.ElementCount >= 1)
                 {
 
+                   
                     if (result["List"].AsBsonArray.Count >= 1)
                     {
                         foreach (var item in result["List"].AsBsonArray)
                         {
-                            ContentPlaceAchievements.Children.Add(new ModelPlayersAchievements(item.AsBsonDocument));
+                            ContentPlaceAchievements.Children.Add(new ModelPlayersAchievements(item.AsBsonDocument,DetailAchievements,ReciveList));
                         }
                     }
                     else

@@ -18,27 +18,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
 
             TextToken.MouseDown += GlobalEvents.CopyText;
 
-            BTNRemove.MouseDown += (s, e) =>
-            {
-                var SerilseDetailachievements = new BsonDocument
-                {
+            BTNRemove.MouseDown += async (s, e) =>
+             {
+                 var SerilseDetailachievements = new BsonDocument
+                 {
                     {"Token",DetailAchievements["Token"] },
                     {"Name",DetailAchievements["Name"] }
-                };
+                 };
 
-                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(DetailPlayer["Token"].AsObjectId, SerilseDetailachievements, result =>
-                {
-                    if (result)
-                    {
-                        DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
-                        RefreshList();
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
-                    }
-                });
-            };
+                 if (await DashboardGame.DialogYesNo("All information about this player achievement will be deleted \n Are you sure ? ") == System.Windows.MessageBoxResult.Yes)
+                 {
+                     SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(DetailPlayer["Token"].AsObjectId, SerilseDetailachievements, async result =>
+                  {
+                      if (result)
+                      {
+                          DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
+                          RefreshList();
+                      }
+                      else
+                      {
+                          DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
+                      }
+                  });
+                 }
+                 else
+                 {
+                     DashboardGame.Notifaction("Reject", Notifaction.StatusMessage.Warrning);
+                 }
+
+             };
         }
     }
 }
