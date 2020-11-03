@@ -32,7 +32,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             TextToken.Text = DetailAchievement["Token"].ToString();
             TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
             TextValue.Text = DetailAchievement["Value"].ToString();
+            try
+            {
 
+                TextPlayers.Text = DetailAchievement["Players"]["Achievements"].ToString();
+            }
+            catch (Exception)
+            {
+
+                TextPlayers.Text = "(0) No player received ";
+            }
 
             BTNEdit.MouseDown += (s, e) =>
             {

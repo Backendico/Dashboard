@@ -54,7 +54,7 @@
 
             <!--Players-->
             <TextBlock Margin="10">
-                            <Run Text="Players: " FontWeight="Bold"/> <Run x:Name="TextPlayers" Text="XXX"/>
+                            <Run Text="received: " FontWeight="Bold"/> <Run x:Name="TextPlayers" Text="XXX"/>
             </TextBlock>
 
             <!--Percent-->
