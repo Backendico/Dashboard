@@ -336,7 +336,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         {
             var textbox = sender as TextBox;
 
-            if (IsLoaded && textbox.Text.Length >= 6)
+            if (IsLoaded && textbox.Text.Length >= 6 )
             {
                 SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(textbox.Text, result =>
                 {
@@ -376,17 +376,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        private void AvatarHelp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AvatarHelp(object sender,  MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("Sample acceptable link\n\n https://example.com \n \n or\n \n http://example.com ", "Help Link");
         }
 
-        private void LanguageHelp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void LanguageHelp(object sender,  MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("ISO is the language standard (ISO 639-1) \n for example:\n \n\n Persian : (fa) \n \n or\n \n English : (en) ", "Help Language");
         }
 
-        private void CountryHelp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CountryHelp(object sender,  MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("ISO is the country  standard (ISO 3166 ALPHA3) \n for example:\n \n\n Iran : (IRN) \n \n or\n \n Belgien : (BEL) ", "Help Country");
         }
@@ -592,8 +592,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         {
             PlaceContentAchievements.Children.Clear();
 
-
-
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId,
                 result =>
                 {
@@ -782,6 +780,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             });
 
 
+            //action select 
             MouseDown += (s, e) =>
             {
                 SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(TokenPlayer, Detail, result =>
@@ -799,6 +798,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
             };
 
+
+
+            MouseEnter += (s, e) =>
+            {
+                Background = new SolidColorBrush(Colors.Gainsboro);
+            };
+
+            MouseLeave += (s, e) =>
+            {
+                Background = new SolidColorBrush(Colors.White);
+            };
         }
 
     }
