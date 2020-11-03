@@ -484,10 +484,6 @@
                             </StackPanel>
                         </ScrollViewer>
 
-                        <Border  Grid.Row="1" x:Name="BTNSave_Achievement" Cursor="Hand" Margin=" 10" CornerRadius="5" Background="Orange" Height="30" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <TextBlock Text="Save" Foreground="White" VerticalAlignment="Center" TextAlignment="Center"/>
-                        </Border>
-
                     </Grid>
 
                 </Border>

@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
+using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
@@ -212,7 +213,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             BTNShowPanelAddAchievement.MouseDown += (s, e) =>
             {
                 ShowPanelAddAchievements();
-                RecivePlayerAchievements();
             };
         }
 
@@ -591,7 +591,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         public void RecivePlayerAchievements()
         {
             PlaceContentAchievements.Children.Clear();
-            ListStudioAchievement.Children.Clear();
+
+
 
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId,
                 result =>
@@ -600,6 +601,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     {
                         if (result["Achievements"].AsBsonArray.Count >= 1)
                         {
+
+                            ShowoffPaneladdAchievements();
+
                             foreach (var item in result["Achievements"].AsBsonArray)
                             {
                                 PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument, PlayerDetail["Account"]["Token"].AsObjectId, RecivePlayerAchievements));
@@ -618,41 +622,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     }
                 });
 
-            //recive achievement for fill list achievements
-            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(Result =>
-            {
-                if (Result.ElementCount >= 1)
-                {
-                    if (Result["Achievements"].AsBsonArray.Count >= 1)
-                    {
-                        foreach (var item in Result["Achievements"].AsBsonArray)
-                        {
-
-                            ListStudioAchievement.Children.Add(
-                                //new ListBoxItem()
-                                //{
-                                //    Height = 40,
-                                //    Content = new TextBlock() { Text = $"{item["Name"]} ({item["Value"]})" },
-                                //    BorderBrush = new SolidColorBrush(Colors.Gray),
-                                //    BorderThickness = new Thickness(0, 0, 0, 1),
-                                //    Cursor = Cursors.Hand
-                                //}
-
-                                new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument,RecivePlayerAchievements,ListStudioAchievement)
-                                );
-
-                        }
-                    }
-                    else
-                    {
-                        ListStudioAchievement.Children.Add(new TextBlock() { Text = "No achievement found " });
-                    }
-                }
-                else
-                {
-                    ListStudioAchievement.Children.Add(new TextBlock() { Text = "No achievement found " });
-                }
-            });
         }
 
         private void ShowPanelAddAchievements()
@@ -665,6 +634,91 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
+
+
+            //recive achievement for fill list achievements
+            ListStudioAchievement.Children.Clear();
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(StudioAchievements =>
+            {
+                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId, AchievementPlayer =>
+                {
+                    if (StudioAchievements.ElementCount >= 1)
+                    {
+                        if (StudioAchievements["Achievements"].AsBsonArray.Count >= 1)
+                        {
+
+                            if (AchievementPlayer["Achievements"].AsBsonArray.Count >= 1)
+                            {
+
+                                var Mustdelte = new BsonArray();
+
+                                foreach (var STDAchievements in StudioAchievements["Achievements"].AsBsonArray)
+                                {
+                                    foreach (var PLYRAchievements in AchievementPlayer["Achievements"].AsBsonArray)
+                                    {
+                                        if (STDAchievements["Token"].AsObjectId == PLYRAchievements["Token"].AsObjectId)
+                                        {
+                                            AchievementPlayer["Achievements"].AsBsonArray.Remove(STDAchievements);
+                                            Mustdelte.Add(STDAchievements);
+                                        }
+                                    }
+                                }
+
+                                for (int i = 0; i < StudioAchievements["Achievements"].AsBsonArray.Count; i++)
+                                {
+                                    for (int a = 0; a < Mustdelte.Count; a++)
+                                    {
+                                        if (StudioAchievements["Achievements"].AsBsonArray[i]["Token"] == Mustdelte[a]["Token"])
+                                        {
+                                            StudioAchievements["Achievements"].AsBsonArray.RemoveAt(i);
+                                        }
+                                    }
+                                }
+
+
+                                //cheack player recive all achievements
+                                if (StudioAchievements["Achievements"].AsBsonArray.Count>= 1)
+                                {
+
+                                    foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
+                                    {
+                                        ListStudioAchievement.Children.Add(new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument, RecivePlayerAchievements, ListStudioAchievement));
+                                    }
+                                }
+                                else
+                                {
+                                    ListStudioAchievement.Children.Add(new TextBlock() {Margin=new Thickness(10), Text= "The player has collected all the achievements" });
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
+                                {
+                                    ListStudioAchievement.Children.Add(new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument, RecivePlayerAchievements, ListStudioAchievement));
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            ListStudioAchievement.Children.Add(new TextBlock() { TextWrapping=TextWrapping.Wrap, Margin = new Thickness(10), Text = "The studio has not achieved!\nTo add an achievement,go to the achievements section and create one" });
+
+                            DashboardGame.Notifaction(" Studio No achievement", Notifaction.StatusMessage.Warrning);
+                        }
+
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Warrning);
+                    }
+
+
+
+                }
+                );
+            });
+
+
         }
 
         private void ShowoffPaneladdAchievements()
@@ -695,11 +749,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
     {
         public BsonDocument Detail;
 
-        public ModelFind(ObjectId TokenPlayer, BsonDocument Detail,Action Refreshlist,StackPanel PlaceListContentAchievements)
+        public ModelFind(ObjectId TokenPlayer, BsonDocument Detail, Action Refreshlist, StackPanel PlaceListContentAchievements)
         {
             Background = new SolidColorBrush(Colors.White);
 
             Margin = new Thickness(5);
+            Cursor = Cursors.Hand;
+
+
             var Name = new StackPanel() { Orientation = Orientation.Horizontal };
             var Value = new StackPanel() { Orientation = Orientation.Horizontal };
             var ID = new StackPanel() { Orientation = Orientation.Horizontal };
@@ -724,18 +781,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 BorderThickness = new Thickness(0, 1, 0, 0)
             });
 
-            
+
             MouseDown += (s, e) =>
             {
-                Debug.WriteLine("hi");
-
                 SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(TokenPlayer, Detail, result =>
                 {
                     if (result)
                     {
                         DashboardGame.Notifaction("Achievement add to player", Notifaction.StatusMessage.Ok);
                         Refreshlist();
-                        PlaceListContentAchievements.Children.Remove(this);
                     }
                     else
                     {
