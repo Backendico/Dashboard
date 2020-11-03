@@ -219,8 +219,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         //global
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            ShowoffPaneladdLogs();
-            ShowoffPaneladdAchievements();
+            if ((sender as Button).Content != BTNLogs.Content)
+            {
+                ShowoffPaneladdLogs();
+
+            }
+
+
+            if ((sender as Button).Content != BTNAchievements.Content)
+            {
+                ShowoffPaneladdAchievements();
+
+            }
 
             CurentPage.Visibility = Visibility.Collapsed;
             CurentBTNHeader.BorderBrush = new SolidColorBrush(Colors.Transparent);
@@ -581,7 +591,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         public void RecivePlayerAchievements()
         {
             PlaceContentAchievements.Children.Clear();
-            ListStudioAchievement.Items.Clear();
+            ListStudioAchievement.Children.Clear();
 
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId,
                 result =>
@@ -618,25 +628,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         foreach (var item in Result["Achievements"].AsBsonArray)
                         {
 
-                            ListStudioAchievement.Items.Add(
-                                new ListBoxItem()
-                                {
-                                    Content = new TextBlock() { Text = $"Name: {item["Name"]}" + "\n" + $"Value: {item["Value"]}" },
-                                    BorderBrush = new SolidColorBrush(Colors.Gray),
-                                    BorderThickness = new Thickness(0,0,0,1),
-                                }
-                                ) ;
-                               
+                            ListStudioAchievement.Children.Add(
+                                //new ListBoxItem()
+                                //{
+                                //    Height = 40,
+                                //    Content = new TextBlock() { Text = $"{item["Name"]} ({item["Value"]})" },
+                                //    BorderBrush = new SolidColorBrush(Colors.Gray),
+                                //    BorderThickness = new Thickness(0, 0, 0, 1),
+                                //    Cursor = Cursors.Hand
+                                //}
+
+                                new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument,RecivePlayerAchievements,ListStudioAchievement)
+                                );
+
                         }
                     }
                     else
                     {
-                        ListStudioAchievement.Items.Add(new TextBlock() { Text = "No achievement found " });
+                        ListStudioAchievement.Children.Add(new TextBlock() { Text = "No achievement found " });
                     }
                 }
                 else
                 {
-                    ListStudioAchievement.Items.Add(new TextBlock() { Text = "No achievement found " });
+                    ListStudioAchievement.Children.Add(new TextBlock() { Text = "No achievement found " });
                 }
             });
         }
@@ -644,6 +658,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         private void ShowPanelAddAchievements()
         {
             PanelAddAchievements.Visibility = Visibility.Visible;
+
             DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
             Storyboard.SetTargetName(Anim, PanelAddAchievements.Name);
@@ -654,17 +669,83 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         private void ShowoffPaneladdAchievements()
         {
-            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
-            PanelAddAchievements.Visibility = Visibility.Collapsed;
+            DoubleAnimation Anim1 = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
 
-            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard.SetTargetName(Anim, PanelAddAchievements.Name);
+            Anim1.Completed += (s, e) =>
+            {
+
+                PanelAddAchievements.Visibility = Visibility.Collapsed;
+            };
+
+            Storyboard.SetTargetProperty(Anim1, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim1, PanelAddAchievements.Name);
             Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(Anim);
+            storyboard.Children.Add(Anim1);
             storyboard.Begin(this);
+
         }
 
 
+
+
         Action RefreshList;
+    }
+
+    public class ModelFind : StackPanel
+    {
+        public BsonDocument Detail;
+
+        public ModelFind(ObjectId TokenPlayer, BsonDocument Detail,Action Refreshlist,StackPanel PlaceListContentAchievements)
+        {
+            Background = new SolidColorBrush(Colors.White);
+
+            Margin = new Thickness(5);
+            var Name = new StackPanel() { Orientation = Orientation.Horizontal };
+            var Value = new StackPanel() { Orientation = Orientation.Horizontal };
+            var ID = new StackPanel() { Orientation = Orientation.Horizontal };
+
+            Name.Children.Add(new TextBlock() { Text = "Name: ", FontWeight = FontWeights.Bold });
+            Name.Children.Add(new TextBlock() { Text = Detail["Name"].ToString() });
+
+            Value.Children.Add(new TextBlock() { Text = "Value: ", FontWeight = FontWeights.Bold });
+            Value.Children.Add(new TextBlock() { Text = Detail["Value"].ToString() });
+
+            ID.Children.Add(new TextBlock() { Text = "Token: ", FontWeight = FontWeights.Bold });
+            ID.Children.Add(new TextBlock() { Text = Detail["Token"].ToString() });
+
+
+            this.Detail = Detail;
+            Children.Add(Name);
+            Children.Add(Value);
+            Children.Add(ID);
+            Children.Add(new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Gray),
+                BorderThickness = new Thickness(0, 1, 0, 0)
+            });
+
+            
+            MouseDown += (s, e) =>
+            {
+                Debug.WriteLine("hi");
+
+                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(TokenPlayer, Detail, result =>
+                {
+                    if (result)
+                    {
+                        DashboardGame.Notifaction("Achievement add to player", Notifaction.StatusMessage.Ok);
+                        Refreshlist();
+                        PlaceListContentAchievements.Children.Remove(this);
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Add ", Notifaction.StatusMessage.Error);
+                    }
+                });
+
+            };
+
+        }
+
     }
 }
