@@ -1077,6 +1077,7 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Detail", DetailAchievements.ToString());
                         var response = await client.ExecuteAsync(request);
 
+                        Debug.WriteLine(response.Content);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);

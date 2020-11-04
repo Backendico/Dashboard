@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,18 +45,31 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
 
                     long.Parse(TextBoxValue.Text);
 
-                    SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddAchievements(TextBoxName.Text, long.Parse(TextBoxValue.Text), result =>
+                    SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveMonetize(Monetize =>
                     {
-                        ShowOffPanelAchievements();
-                        ReciveListAchievements();
+                        if (PlaceContentAchievements.Children.Count + 1 <= Monetize["Achievements"].ToInt32())
+                        {
 
-                        //add log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Creat achievement", $"\" {TextBoxName.Text} \" achievement was created", new BsonDocument(), false, resultlog => { });
+                            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddAchievements(TextBoxName.Text, long.Parse(TextBoxValue.Text), result =>
+                            {
+                                ShowOffPanelAchievements();
+                                ReciveListAchievements();
 
-                    }, () =>
-                    {
-                        DashboardGame.Notifaction("Faild Recive List", Notifaction.StatusMessage.Error);
-                    });
+                                //add log
+                                SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Creat achievement", $"\" {TextBoxName.Text} \" achievement was created", new BsonDocument(), false, resultlog => { });
+
+                            }, () =>
+                            {
+                                DashboardGame.Notifaction("Faild Recive List", Notifaction.StatusMessage.Error);
+                            });
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("You can not create new achievements. Buy more achievements", Notifaction.StatusMessage.Error);
+                        }
+
+                    }, () => { });
+
 
                 }
                 catch (Exception ex)

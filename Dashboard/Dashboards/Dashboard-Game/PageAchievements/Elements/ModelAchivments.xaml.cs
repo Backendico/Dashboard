@@ -49,6 +49,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
 
             BTNDelete.MouseDown += async (s, e) =>
              {
+                 DetailAchievement.Remove("Players");
+
                  if (await DashboardGame.DialogYesNo("All settings and achievement players are removed \n are you sure ? ") == MessageBoxResult.Yes)
                  {
                      SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievements(DetailAchievement,
@@ -70,6 +72,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
                  {
                      DashboardGame.Notifaction("Reject", StatusMessage.Warrning);
                  }
+
              };
 
         }
