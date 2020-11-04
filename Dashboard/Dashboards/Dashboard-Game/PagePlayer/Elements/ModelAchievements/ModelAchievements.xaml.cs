@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
             //action delete achievement
             BTNRemove.MouseDown += (s, e) =>
             {
+                DetailAchievement.Remove("Recive");
 
                 SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(TokenPlayer, DetailAchievement, result =>
                 {

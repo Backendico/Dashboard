@@ -34,7 +34,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             TextValue.Text = DetailAchievement["Value"].ToString();
             try
             {
-
                 TextPlayers.Text = DetailAchievement["Players"]["Achievements"].ToString();
             }
             catch (Exception)

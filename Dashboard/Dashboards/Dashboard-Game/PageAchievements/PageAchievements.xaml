@@ -44,7 +44,7 @@
             </StackPanel>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="2">
-                <WrapPanel Name="PlaceContentAchievements"  Margin="30" >
+                <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Center" Name="PlaceContentAchievements"  Margin="30" >
 
                 </WrapPanel>
             </ScrollViewer>

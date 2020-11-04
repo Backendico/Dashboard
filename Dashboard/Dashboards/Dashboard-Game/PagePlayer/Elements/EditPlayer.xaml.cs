@@ -783,6 +783,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //action select 
             MouseDown += (s, e) =>
             {
+                Detail.Remove("Players");
+                Detail.Remove("Created");
+                Detail.Remove("Value");
+
+                Debug.WriteLine(Detail);
+
                 SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(TokenPlayer, Detail, result =>
                 {
                     if (result)

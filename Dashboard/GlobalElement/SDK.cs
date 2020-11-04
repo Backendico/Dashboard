@@ -967,7 +967,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         var response = await client.ExecuteAsync(request);
 
-                        Debug.WriteLine(response.Content);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
