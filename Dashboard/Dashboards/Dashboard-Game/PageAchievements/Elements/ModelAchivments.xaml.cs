@@ -32,15 +32,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             TextToken.Text = DetailAchievement["Token"].ToString();
             TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
             TextValue.Text = DetailAchievement["Value"].ToString();
+          
+            Debug.WriteLine(DetailAchievement);
             try
             {
+            TextPercent.Text = ((DetailAchievement["Players"]["Achievements"].ToInt32()*100)/ DetailAchievement["TotalPlayer"].ToInt32())+"%";
                 TextPlayers.Text = DetailAchievement["Players"]["Achievements"].ToString();
             }
             catch (Exception)
             {
 
+                TextPercent.Text = "0 %";
                 TextPlayers.Text = "(0) No player received ";
             }
+
 
             BTNEdit.MouseDown += (s, e) =>
             {
@@ -50,6 +55,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             BTNDelete.MouseDown += async (s, e) =>
              {
                  DetailAchievement.Remove("Players");
+                 DetailAchievement.Remove("TotalPlayer");
 
                  if (await DashboardGame.DialogYesNo("All settings and achievement players are removed \n are you sure ? ") == MessageBoxResult.Yes)
                  {

@@ -43,7 +43,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
             TextValue.Text = DetailAchievement["Value"].ToString();
             TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
             TextToken.Text = DetailAchievement["Token"].ToString();
-
+            TextPercent.Text = DetailAchievement["TotalPlayer"].ToString();
 
             //actions
             //copy token
@@ -109,8 +109,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                         {"Name",DetailAchievement["Name"] },
                     };
 
-                    Debug.WriteLine(TextboxTokenPlayer.Text);
-
                     SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(ObjectId.Parse(TextboxTokenPlayer.Text), SerilseDetail, result =>
                     {
                         if (result)
@@ -145,6 +143,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                 CountList += 100;
                 TextSeeMore.Text = CountList.ToString();
                 ReciveList();
+            };
+
+            //refresh base list for edit setting
+            Unloaded += (s, e) =>
+            {
+                RefreshList();
             };
         }
 
@@ -228,7 +232,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                 if (result.ElementCount >= 1)
                 {
 
-
                     if (result["List"].AsBsonArray.Count >= 1)
                     {
                         foreach (var item in result["List"].AsBsonArray)
@@ -250,7 +253,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
                 }
             });
         }
-
-
+    
     }
 }

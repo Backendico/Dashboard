@@ -130,6 +130,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                         foreach (var item in result["Achievements"].AsBsonArray)
                         {
                             Value += item.AsBsonDocument["Value"].ToInt64();
+
+                            item.AsBsonDocument.Add(new BsonElement("TotalPlayer", result["TotalPlayer"]));
+
                             PlaceContentAchievements.Children.Add(new ModelAchivments(item.AsBsonDocument, ReciveListAchievements));
                             TextTotallValue.Text = Value.ToString();
                         }
