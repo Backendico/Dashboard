@@ -33,7 +33,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
             TextValue.Text = DetailAchievement["Value"].ToString();
           
-            Debug.WriteLine(DetailAchievement);
             try
             {
             TextPercent.Text = ((DetailAchievement["Players"]["Achievements"].ToInt32()*100)/ DetailAchievement["TotalPlayer"].ToInt32())+"%";
@@ -41,7 +40,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             }
             catch (Exception)
             {
-
                 TextPercent.Text = "0 %";
                 TextPlayers.Text = "(0) No player received ";
             }

@@ -43,7 +43,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
             TextValue.Text = DetailAchievement["Value"].ToString();
             TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
             TextToken.Text = DetailAchievement["Token"].ToString();
-            TextPercent.Text = DetailAchievement["TotalPlayer"].ToString();
+
+            try
+            {
+                TextPercent.Text = ((DetailAchievement["Players"]["Achievements"].ToInt32() * 100) / DetailAchievement["TotalPlayer"].ToInt32()) + "%";
+                TextPlayer.Text = DetailAchievement["Players"]["Achievements"].ToString();
+            }
+            catch (Exception)
+            {
+                TextPercent.Text = "0 %";
+                TextPlayer.Text = "(0) No player received ";
+            }
+
 
             //actions
             //copy token
