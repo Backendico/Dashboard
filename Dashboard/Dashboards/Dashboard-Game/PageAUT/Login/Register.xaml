@@ -76,12 +76,12 @@
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"  Grid.Row="2">
 
                     <!--Login-->
-                    <Border  Cursor="Hand" ToolTip="Login"  Height="40" CornerRadius="5"  Background="LightGray"  Width="80"  Grid.Row="2" Margin="20,0" MouseDown="_Login"  >
+                    <Border  Cursor="Hand" ToolTip="Login"  Height="30" CornerRadius="5"  Background="LightGray"  Width="80"  Grid.Row="2" Margin="20,0" MouseDown="_Login"  >
                         <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White"   Text="Login" />
                     </Border>
 
                     <!--Login-->
-                    <Border  Cursor="Hand"  ToolTip="Register"  Height="40" CornerRadius="5"  Background="DarkOrange"  Width="80"  Grid.Row="2" Margin="20,0" MouseDown="_Register"  >
+                    <Border  Cursor="Hand"  ToolTip="Register"  Height="30" CornerRadius="5"  Background="Orange"  Width="80"  Grid.Row="2" Margin="20,0" MouseDown="_Register"  >
                         <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White"   Text="Register" />
                     </Border>
 

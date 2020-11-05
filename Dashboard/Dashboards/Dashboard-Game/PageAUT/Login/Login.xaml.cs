@@ -27,47 +27,58 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
         public Login()
         {
             InitializeComponent();
-        }
 
-        private void _Login(object sender, MouseButtonEventArgs e)
-        {
-            if (TextUsername.Text.Length >= 6 && TextPassword.Password.Length >= 6)
+
+            //action btn login
+            BTNLogin.MouseDown += (s, e) =>
             {
-                SDK.SDK_PageAUT.Login(TextUsername.Text, TextPassword.Password, (resul, Token) =>
+                if (TextUsername.Text.Length >= 6 && TextPassword.Password.Length >= 6)
                 {
-                    if (resul)
+                    SDK.SDK_PageAUT.Login(TextUsername.Text, TextPassword.Password, (resul, Token) =>
                     {
+                        if (resul)
+                        {
                         //login
                         DashboardGame.Notifaction("Logined", Notifaction.StatusMessage.Ok);
-                        Settings.Default._id = Token;
-                        Settings.Default.Save();
+                            Settings.Default._id = Token;
+                            Settings.Default.Save();
 
                         //remove page and Effect
                         DashboardGame.Dashboard.Root.Children.Remove(this);
-                        DashboardGame.Dashboard.Blure(true);
+                            DashboardGame.Dashboard.Blure(true);
 
-                        DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Login", Notifaction.StatusMessage.Error);
+                            DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Login", Notifaction.StatusMessage.Error);
 
-                    }
-                });
+                        }
+                    });
 
-            }
-            else
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Username or Password Short", Notifaction.StatusMessage.Error);
+                }
+            };
+
+            //action btn register
+            BTNRegister.MouseDown += (s, e) =>
             {
-                DashboardGame.Notifaction("Username or Password Short", Notifaction.StatusMessage.Error);
-            }
-        }
+                var _Parent = (Parent as Grid);
+                _Parent.Children.Remove(this);
+                _Parent.Children.Add(new Register());
+            };
 
-        private void _Register(object sender, MouseButtonEventArgs e)
-        {
-            var _Parent = (Parent as Grid);
-            _Parent.Children.Remove(this);
-            _Parent.Children.Add(new Register());
+            //action  btn recovery
+            BTNRecovery.MouseDown += (s, e) =>
+            {
+                var _Parent = (Parent as Grid);
+                _Parent.Children.Remove(this);
+                _Parent.Children.Add(new PageRecoveryPassword());
 
+            };
         }
 
     }

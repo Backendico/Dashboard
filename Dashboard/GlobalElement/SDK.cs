@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Conventions;
 using RestSharp;
 using System;
 using System.Diagnostics;
+using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -73,6 +74,66 @@ namespace Dashboard.GlobalElement
                 var response = await client.ExecuteAsync(request);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK && bool.Parse(response.Content))
+                {
+                    Result(true);
+                }
+                else
+                {
+                    Result(false);
+                }
+            }
+
+            public async static void Recovery1(MailAddress Email,Action<bool> Result)
+            {
+                var client = new RestClient(Links.Recovery1);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AlwaysMultipartFormData = true;
+                request.AddParameter("Email", Email.Address);
+                var response =await client.ExecuteAsync(request);
+
+                if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                {
+                    Result(true);
+                }
+                else
+                {
+                    Result(false);  
+                }
+            }
+           
+            public async static void Recovery2(MailAddress Email,int Code, Action<bool> Result)
+            {
+                var client = new RestClient(Links.Recovery2);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AlwaysMultipartFormData = true;
+                request.AddParameter("Email", Email.Address);
+                request.AddParameter("Code", Code.ToString());
+                var response = await client.ExecuteAsync(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    Result(true);
+                }
+                else
+                {
+                    Result(false);
+                }
+            }
+
+            public async static void Recovery3(MailAddress Email, int Code,string NewPassword, Action<bool> Result)
+            {
+                var client = new RestClient(Links.Recovery3);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AlwaysMultipartFormData = true;
+                request.AddParameter("Email", Email.Address);
+                request.AddParameter("Code", Code.ToString());
+                request.AddParameter("NewPassword",NewPassword);
+                var response = await client.ExecuteAsync(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     Result(true);
                 }
@@ -1112,7 +1173,6 @@ namespace Dashboard.GlobalElement
 
                 }
 
-
                 public sealed class PageLog
                 {
                     public static ModelLinks.DashboardGame.PageLog Links;
@@ -1400,6 +1460,9 @@ namespace Dashboard.GlobalElement
             public string Login => BaseLink + "AUT/Login";
             public string Register => BaseLink + "AUT/Register";
             public string CheackUsername => BaseLink + "AUT/CheackUsername";
+            public string Recovery1 => BaseLink + "AUT/Recovery1";
+            public string Recovery2 => BaseLink + "AUT/Recovery2";
+            public string Recovery3 => BaseLink + "AUT/Recovery3";
 
         }
 

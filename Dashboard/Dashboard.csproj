@@ -199,6 +199,9 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\PageRecoveryPassword.xaml.cs">
+      <DependentUpon>PageRecoveryPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PageAUT\Login\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageAUT\Login\PageRecoveryPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
