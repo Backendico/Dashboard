@@ -28,7 +28,6 @@ using System.Windows.Media.Effects;
 
 namespace Dashboard.Dashboards.Dashboard_Game
 {
-
     public partial class DashboardGame : Window
     {
         public static DashboardGame Dashboard;

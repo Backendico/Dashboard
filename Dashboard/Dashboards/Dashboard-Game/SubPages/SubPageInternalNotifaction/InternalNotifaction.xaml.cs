@@ -58,7 +58,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifactio
                     if (CountNotifaction + 10 <= result["Logs"].ToInt32())
                     {
                         CountNotifaction += 10;
-                ReciveLogs();
+                        ReciveLogs();
                     }
                     else
                     {
@@ -94,6 +94,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifactio
                 }
             };
 
+            //mark Notifaction as read
+            SDK.SDK_PageDashboards.DashboardGame.PageLog.MarkNotifactionasRead(result =>
+            {
+                if (result)
+                {
+                    ReciveLogs();
+
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Faild Mark Read Notifactions", Notifaction.StatusMessage.Error);
+                }
+            });
         }
 
 

@@ -1339,6 +1339,25 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void MarkNotifactionasRead(Action<bool> Result)
+                    {
+                        var client = new RestClient("http://193.141.64.203/Log/MarkReadNotifaction");
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Studio",SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Token", SettingUser.Token);
+                        var response =await client.ExecuteAsync(request);
+
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);  
+                        }
+                    }
                 }
 
                 public sealed class PageDashboard
