@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.SubPages"
              mc:Ignorable="d" 
              Background="#33000000"
-             d:DesignHeight="660" d:DesignWidth="1141.333">
+             d:DesignHeight="841" d:DesignWidth="1141.333">
     <Border Margin="50,60" MaxHeight="500" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
         <Border.Effect>
@@ -123,7 +123,7 @@
                                          <Run Text="Update"  />
                                     </TextBlock>
                                 </Border>
-                                
+
                             </StackPanel>
 
 
@@ -428,129 +428,70 @@
             </Grid>
 
             <!--charge Wallet-->
-            <Grid x:Name="PanelChargeMoney" Margin="20" Height="0" Grid.Row="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition  Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <!--How to Buy-->
-                <StackPanel HorizontalAlignment="Right">
-                    <TextBlock TextWrapping="Wrap" TextAlignment="Right" >
-                        <Run FontWeight="Bold" Text="نحوه خرید از نرم افزار "/>
-                        <LineBreak/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" Text="1:"/><Run Text="از بین پکیج های زیر پکیج مورد نظر را انتخاب کنید"/> 
-                        <LineBreak/>
-                        <Run FontWeight="Bold" Text="2"/><Run Text="در صفحه باز شده فیلدهای مورد نظر را پرکنید و پرداخت را انجام دهید"/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" Text="2.1:"/><Run Text="ضروری میباشد که در قسمت (توضیحات) توکن /کلید استودیو و در قسمت (نام و نام خانوادگی) نام کاربری خود را وارد کنید"/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" Text="3:"/><Run Text="در کادر ثبت فاکتور مقدار های خواسته شده را پر کنید و ارسال را بزنید"/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" Text="4:"/><Run Text="پس از بررسی فاکتور مبلغ واریزی به حساب شما اضافه خواهد شد"/>
+            <Grid x:Name="PanelChargeMoney"  Height="400" Grid.Row="3">
 
-                    </TextBlock>
-                </StackPanel>
-                <!--Packeges-->
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <ScrollViewer>
 
-                    <WrapPanel Orientation="Horizontal" >
+                    <StackPanel Margin="20" Width="400">
 
-                        <!--Pack1-->
-                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
-                            <StackPanel Margin="5">
-                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 1" TextAlignment="Center"/>
-                                <TextBlock TextAlignment="Center" Text="10,000 تومان "/>
-                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
-                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                        <!--Amount-->
+                        <StackPanel Margin="10">
+                            <TextBlock FontWeight="Bold" Text="Amount (Rial/ريال): *"/>
+                            <TextBlock Foreground="Gray"  Text="The amount of account recharge is the amount in Rials/ ريال :"/>
+                            <TextBox Text="10000" x:Name="TextAmount_BackToBank" Height="30"/>
+                        </StackPanel>
 
-                        <!--Pack2-->
-                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
-                            <StackPanel Margin="5">
-                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 2" TextAlignment="Center"/>
-                                <TextBlock TextAlignment="Center" Text="20,000 تومان "/>
-                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
-                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                        <!--Name-->
+                        <StackPanel Margin="10">
+                            <TextBlock FontWeight="Bold" Text="Name : *"/>
+                            <TextBlock Foreground="Gray" Text="The amount paid will be paid in this name :"/>
+                            <TextBox Text="Handel" Name="TextName_BackToBank"  Height="30"/>
+                        </StackPanel>
 
-                        <!--Pack3-->
-                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
-                            <StackPanel Margin="5">
-                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 3" TextAlignment="Center"/>
-                                <TextBlock TextAlignment="Center" Text="30,000 تومان "/>
-                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
-                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                        <!--Phone-->
+                        <StackPanel Margin="10">
+                            <TextBlock FontWeight="Bold" Text="Phone : *"/>
+                            <TextBlock Foreground="Gray" Text="Payer contact number EX: 989333529966"/>
+                            <TextBox  Text="09333529966" x:Name="TextPhone_BackToBank" Height="30"/>
+                        </StackPanel>
 
-                        <!--Pack4-->
-                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
-                            <StackPanel Margin="5">
-                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک 4" TextAlignment="Center"/>
-                                <TextBlock TextAlignment="Center" Text="60,000 تومان "/>
-                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
-                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                        <!--Mail-->
+                        <StackPanel Margin="10">
 
-                        <!--Pack5-->
-                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
-                            <StackPanel Margin="5">
-                                <TextBlock Margin="0,10" FontWeight="Bold" Text="حمایت از ما" TextAlignment="Center"/>
-                                <TextBlock TextAlignment="Center" Text="5,000 تومان "/>
-                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
-                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                            <TextBlock FontWeight="Bold" Text="Email : *"/>
+                            <TextBlock Foreground="Gray" Text="Payer email"/>
+                            <TextBox Text="hossynassghary@gmail.com" x:Name="TextEamil_BackToBank"  Height="30"/>
+                        </StackPanel>
 
-                        <!--Pack6-->
-                        <Border Margin="5" Width="100" CornerRadius="5" Background="WhiteSmoke">
-                            <StackPanel Margin="5">
-                                <TextBlock Margin="0,10" FontWeight="Bold" Text="پک ارزشی" TextAlignment="Center"/>
-                                <TextBlock TextAlignment="Center" Text="مبلغ دلخواه"/>
-                                <Border Cursor="Hand" Margin="10" Height="20" Background="Orange" CornerRadius="5">
-                                    <TextBlock TextAlignment="Center" Foreground="White" Text="خرید"/>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                        <!--Description-->
+                        <StackPanel Margin="10">
+                            <TextBlock FontWeight="Bold" Text="Description :"/>
+                            <TextBlock Foreground="Gray" Text="Additional description"/>
+                            <TextBox  x:Name="TextDesc_BackToBank" MinHeight="60" AcceptsReturn="True" AcceptsTab="True" />
+                        </StackPanel>
 
-                    </WrapPanel>
+                        <!--BTN Control-->
+                        <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Margin="10">
+
+                            <!--BTN Back-->
+                            <Border Cursor="Hand"  Margin="10,0"  CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Height="30" Background="LightGray" x:Name="BTNCloseCharge">
+                                <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center"  Text="Back"/>
+                            </Border>
+
+                            <!--BTNPay-->
+                            <Border Cursor="Hand" Margin="10,0"  CornerRadius="5" VerticalAlignment="Center" Width="80" Height="30" Background="Orange" x:Name="BTNPaytoBank">
+                                <TextBlock  Foreground="White" VerticalAlignment="Center" TextAlignment="Center"  Text="Pay"/>
+                            </Border>
+
+                        </StackPanel>
+
+
+
+                    </StackPanel>
+
                 </ScrollViewer>
 
-                <Grid  Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
 
-                    <StackPanel>
-                        <TextBlock Margin="10,0" TextAlignment="Right" Text=": شماره فاکتور"/>
-                        <TextBox Margin="10" Height="30"/>
-                    </StackPanel>
-
-                    <!--BTN-->
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                        <Border Margin="10,0" Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Background="OliveDrab" Width="80" Height="30" >
-                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="ثبت فاکتور"/>
-                        </Border>
-
-                        <Border x:Name="BTNCloseCharge" Cursor="Hand" HorizontalAlignment="Left" CornerRadius="5" Background="LightGray" Width="80" Height="30" >
-                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="بازگشت"/>
-                        </Border>
-
-                    </StackPanel>
-
-                </Grid>
             </Grid>
         </Grid>
     </Border>

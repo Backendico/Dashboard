@@ -1,12 +1,18 @@
-﻿using Microsoft.Win32;
+﻿using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
+using Microsoft.Win32;
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization.Conventions;
 using RestSharp;
+using RestSharp.Serialization.Json;
 using System;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Dashboard.GlobalElement
@@ -83,26 +89,26 @@ namespace Dashboard.GlobalElement
                 }
             }
 
-            public async static void Recovery1(MailAddress Email,Action<bool> Result)
+            public async static void Recovery1(MailAddress Email, Action<bool> Result)
             {
                 var client = new RestClient(Links.Recovery1);
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AlwaysMultipartFormData = true;
                 request.AddParameter("Email", Email.Address);
-                var response =await client.ExecuteAsync(request);
+                var response = await client.ExecuteAsync(request);
 
-                if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     Result(true);
                 }
                 else
                 {
-                    Result(false);  
+                    Result(false);
                 }
             }
-           
-            public async static void Recovery2(MailAddress Email,int Code, Action<bool> Result)
+
+            public async static void Recovery2(MailAddress Email, int Code, Action<bool> Result)
             {
                 var client = new RestClient(Links.Recovery2);
                 client.Timeout = -1;
@@ -122,7 +128,7 @@ namespace Dashboard.GlobalElement
                 }
             }
 
-            public async static void Recovery3(MailAddress Email, int Code,string NewPassword, Action<bool> Result)
+            public async static void Recovery3(MailAddress Email, int Code, string NewPassword, Action<bool> Result)
             {
                 var client = new RestClient(Links.Recovery3);
                 client.Timeout = -1;
@@ -130,7 +136,7 @@ namespace Dashboard.GlobalElement
                 request.AlwaysMultipartFormData = true;
                 request.AddParameter("Email", Email.Address);
                 request.AddParameter("Code", Code.ToString());
-                request.AddParameter("NewPassword",NewPassword);
+                request.AddParameter("NewPassword", NewPassword);
                 var response = await client.ExecuteAsync(request);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -285,7 +291,6 @@ namespace Dashboard.GlobalElement
 
                     }
 
-
                     public static async void AddPayment(BsonDocument Details, Action<bool> Result)
                     {
                         var client = new RestClient(Links.AddPayment);
@@ -306,6 +311,95 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+
+                    public static async void AddPaytoList(BsonDocument PayementDetail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.PaymentAddToList);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token.ToString());
+                        request.AddParameter("Detail", PayementDetail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void OpenGatePaye(BsonDocument PaymentRequest, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.LinkIDPAY);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AddHeader("X-API-KEY", "a14190c5-c321-4a93-bdcc-e9f753608e00");
+                        request.AddHeader("X-SANDBOX", "1");
+                        request.AddHeader("Content-Type", "application/json");
+                        request.AddHeader("Cookie", "SSESS39ff69be91203b0b4d2039dd7a713620=7epaMgKagAqyX9SlMEc4j3MKve3PrWsPwYQQ5J0re20");
+                        request.AddParameter("application/json", PaymentRequest.ToString(), ParameterType.RequestBody);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
+                    public static async Task<BsonDocument> CheackPay(BsonDocument PaymentDetail)
+                    {
+                        var client = new RestClient(Links.CheackPay);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddHeader("Content-Type", "application/json");
+                        request.AddHeader("X-API-KEY", "a14190c5-c321-4a93-bdcc-e9f753608e00");
+                        request.AddHeader("X-SANDBOX", "1");
+                        request.AddHeader("Cookie", "SSESS39ff69be91203b0b4d2039dd7a713620=7epaMgKagAqyX9SlMEc4j3MKve3PrWsPwYQQ5J0re20");
+                        request.AddParameter("application/json", PaymentDetail.ToString(), ParameterType.RequestBody);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            return BsonDocument.Parse(response.Content);
+                        }
+                        else
+                        {
+                            return new BsonDocument();
+                        }
+                    }
+
+                    public static async void VerifiePay(BsonDocument DetailPay, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.VerifiePay);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Detail", DetailPay.ToString());
+
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+
                 }
 
                 public sealed class PagePlayers
@@ -1479,6 +1573,13 @@ namespace Dashboard.GlobalElement
                 public string AddPayment => BaseLink + "ChoiceStudioGame/AddPayment";
                 public string ReciveMonetiz => BaseLink + "ChoiceStudioGame/ReciveMonetize";
                 public string RecivePaymentList => BaseLink + "ChoiceStudioGame/RecivePaymentList";
+
+                public string LinkIDPAY => "https://api.idpay.ir/v1.1/payment";
+                public string PaymentAddToList => BaseLink + "payments/AddPaymentToList";
+
+                public string CheackPay => "https://api.idpay.ir/v1.1/payment/inquiry";
+
+                public string VerifiePay => BaseLink + "Payments/VerifiePay";
             }
 
             public struct PagePlayers

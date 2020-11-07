@@ -4,6 +4,9 @@ using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,7 +38,36 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             TextDatabase.Text = SettingUser.CurentDetailStudio["Database"].ToString();
 
 
-            //action btn
+            //page Setting
+
+            TextToken.MouseDown += GlobalEvents.CopyText;
+
+            BTNState.MouseDown += (s, e) =>
+            {
+
+                SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
+                    result =>
+                    {
+                        var Text = "";
+                        foreach (var item in result)
+                        {
+                            Text += item.Name + ": " + item.Value.ToString() + "\n";
+                        }
+
+                        DashboardGame.Dialog(Text, "Server State");
+                    },
+                    () =>
+                    {
+                        DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
+                    });
+            };
+
+            BTNUpdate.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new SubPageUpdate.SubPageUpdate());
+            };
+
+            //Page Monetize
             BTNPlayer.MouseDown += (s, obj) =>
             {
                 if (CurentMonetiz["Cash"].AsInt32 - 10000 >= 0)
@@ -203,32 +235,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             };
 
-            TextToken.MouseDown += (s, e) =>
-            {
-                Clipboard.SetText(TextToken.Text);
-                DashboardGame.Notifaction("Token Copied", StatusMessage.Ok);
-            };
-
-            BTNState.MouseDown += (s, e) =>
-            {
-
-                SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
-                    result =>
-                    {
-                        var Text = "";
-                        foreach (var item in result)
-                        {
-                            Text += item.Name + ": " + item.Value.ToString() + "\n";
-                        }
-
-                        DashboardGame.Dialog(Text, "Server State");
-                    },
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
-                    });
-            };
-
             BTNPayments.MouseDown += (s, e) =>
             {
                 DoubleAnimation Anim = new DoubleAnimation(0, 400, TimeSpan.FromSeconds(0.3));
@@ -247,6 +253,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 ClosePaymentList();
             };
 
+
+
+
+            //page Charge Wallet
             BTNAddMoney.MouseDown += (s, e) =>
             {
                 DoubleAnimation Anim = new DoubleAnimation(0, 400, TimeSpan.FromSeconds(0.3));
@@ -259,16 +269,118 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 storyboard.Begin(this);
 
             };
-
             BTNCloseCharge.MouseDown += (s, e) =>
             {
                 CloseCharge();
             };
+       
 
-            //Action BTN Update
-            BTNUpdate.MouseDown += (s, e) =>
+
+            BTNPaytoBank.MouseDown += (s, e) =>
             {
-                DashboardGame.Dashboard.Root.Children.Add(new SubPageUpdate.SubPageUpdate());
+                try
+                {
+                    if (TextAmount_BackToBank.Text.Length < 5 && int.Parse(TextAmount_BackToBank.Text) < 10000)
+                        throw new Exception("The amount is below 10,000 Rials");
+
+                    if (TextName_BackToBank.Text.Length < 2)
+                        throw new Exception("The name is short");
+
+                    _ = long.Parse(TextPhone_BackToBank.Text);
+                    _ = int.Parse(TextAmount_BackToBank.Text);
+                    _ = new MailAddress(TextEamil_BackToBank.Text);
+                    if (TextDesc_BackToBank.Text.Length <= 1)
+                        TextDesc_BackToBank.Text = "N/A";
+
+                    var Request = new BsonDocument()
+                    {
+                        {"amount",int.Parse(TextAmount_BackToBank.Text )},
+                        {"order_id",new Random().Next() },
+                        {"name",TextName_BackToBank.Text },
+                        {"phone",TextPhone_BackToBank.Text },
+                        {"mail",TextEamil_BackToBank.Text },
+                        {"desc",TextDesc_BackToBank.Text },
+                        {"callback","http://193.141.64.203/payments/callback" }
+                    };
+
+                    SDK.SDK_PageDashboards.DashboardGame.PageStudios.OpenGatePaye(Request, result =>
+                    {
+                        if (result.ElementCount >= 1)
+                        {
+                            var Detail = new BsonDocument()
+                            {
+                                {"Request",Request },
+                                {"DetailPay",result },
+                                {"Detail",new BsonDocument{ {"Studio",SettingUser.CurentDetailStudio["Database"] } ,{"Token",SettingUser.Token } } }
+                            };
+
+                            SDK.SDK_PageDashboards.DashboardGame.PageStudios.AddPaytoList(Detail, async ResultAdd =>
+                             {
+                                 if (ResultAdd)
+                                 {
+                                     DashboardGame.Notifaction("pls pay", StatusMessage.Ok);
+                                     Process.Start(result["link"].AsString);
+
+                                     var serilseDetailPay = new BsonDocument
+                                     {
+                                        {"id",result["id"] },
+                                        {"order_id",Request["order_id"] }
+                                     };
+
+                                     var Result = new BsonDocument();
+
+                                     while (true)
+                                     {
+                                         var Query = await SDK.SDK_PageDashboards.DashboardGame.PageStudios.CheackPay(serilseDetailPay);
+
+                                         if (Query.ElementCount >= 1)
+                                         {
+                                             if (Query["status"].ToInt32() == 10)
+                                             {
+                                                 SDK.SDK_PageDashboards.DashboardGame.PageStudios.VerifiePay(serilseDetailPay, ResultVerifiePay =>
+                                                 {
+                                                     if (ResultVerifiePay)
+                                                     {
+                                                         DashboardGame.Notifaction("Payment is done.", StatusMessage.Ok);
+                                                     }
+                                                     else
+                                                     {
+                                                         DashboardGame.Notifaction("Payment failed.Please contact support", StatusMessage.Error);
+                                                     }
+                                                 });
+                                                 break;
+                                             }
+
+                                         }
+                                         else
+                                         {
+                                             await Task.Delay(1);
+                                         }
+                                     }
+
+
+                                 }
+                                 else
+                                 {
+                                     DashboardGame.Notifaction("Faild Pay", StatusMessage.Error);
+                                 }
+
+                             });
+
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Pay", StatusMessage.Error);
+                        }
+
+                    });
+
+                }
+                catch (Exception ex)
+                {
+
+                    DashboardGame.Notifaction(ex.Message, StatusMessage.Error);
+                }
             };
 
 
@@ -547,4 +659,5 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
         }
 
     }
+
 }
