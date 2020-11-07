@@ -342,15 +342,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                                      if (ResultVerifiePay)
                                                      {
                                                          DashboardGame.Notifaction("Payment is done.", StatusMessage.Ok);
+                                                         ReciveMonetize(PageMonetiz, new DependencyPropertyChangedEventArgs());
                                                      }
                                                      else
                                                      {
                                                          DashboardGame.Notifaction("Payment failed.Please contact support", StatusMessage.Error);
+                                                         ReciveMonetize(PageMonetiz, new DependencyPropertyChangedEventArgs());
                                                      }
                                                  });
                                                  break;
                                              }
-
+                                             else if (Query["status"].ToInt32()==7)
+                                             {
+                                                 DashboardGame.Notifaction("Payment is Cancel", StatusMessage.Error);
+                                                 ReciveMonetize(PageMonetiz, new DependencyPropertyChangedEventArgs());
+                                                 CloseCharge();
+                                                 break;
+                                             }
+                                               
                                          }
                                          else
                                          {

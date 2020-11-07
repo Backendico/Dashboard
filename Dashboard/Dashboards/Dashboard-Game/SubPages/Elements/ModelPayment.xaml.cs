@@ -25,11 +25,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.Elements
         public ModelPayment(BsonDocument DetailPay)
         {
             InitializeComponent();
+            try
+            {
 
-            TextID.Text = DetailPay["ID"].ToString();
-            TextCreated.Text = DetailPay["Created"].ToLocalTime().ToString();
-            TextCash.Text = DetailPay["Cash"].ToString();
-            TextCreator.Text = DetailPay["Creator"].ToString();
+                TextID.Text = DetailPay["ID"].ToString();
+                TextCreated.Text = DetailPay["Created"].ToLocalTime().ToString();
+                TextCash.Text = DetailPay["Cash"].ToString();
+                TextCreator.Text = DetailPay["Creator"].ToString();
+                
+            }
+            catch (Exception)
+            {
+                TextID.Text = DetailPay["Request"]["order_id"].ToString();
+                TextCreated.Text = DetailPay["Detail"]["Created"].ToLocalTime().ToString();
+                TextCash.Text=DetailPay["Request"]["amount"].ToString();
+                TextCreator.Text = DetailPay["Detail"]["Token"].ToString();
+                
+            }
+
 
             BTNShowDetail.MouseDown += (obj, e) =>
             {

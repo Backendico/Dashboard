@@ -339,7 +339,7 @@ namespace Dashboard.GlobalElement
                         client.ClearHandlers();
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("X-API-KEY", "a14190c5-c321-4a93-bdcc-e9f753608e00");
-                        request.AddHeader("X-SANDBOX", "1");
+                        //request.AddHeader("X-SANDBOX", "1");
                         request.AddHeader("Content-Type", "application/json");
                         request.AddHeader("Cookie", "SSESS39ff69be91203b0b4d2039dd7a713620=7epaMgKagAqyX9SlMEc4j3MKve3PrWsPwYQQ5J0re20");
                         request.AddParameter("application/json", PaymentRequest.ToString(), ParameterType.RequestBody);
@@ -362,7 +362,7 @@ namespace Dashboard.GlobalElement
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("Content-Type", "application/json");
                         request.AddHeader("X-API-KEY", "a14190c5-c321-4a93-bdcc-e9f753608e00");
-                        request.AddHeader("X-SANDBOX", "1");
+                        //request.AddHeader("X-SANDBOX", "1");
                         request.AddHeader("Cookie", "SSESS39ff69be91203b0b4d2039dd7a713620=7epaMgKagAqyX9SlMEc4j3MKve3PrWsPwYQQ5J0re20");
                         request.AddParameter("application/json", PaymentDetail.ToString(), ParameterType.RequestBody);
                         var response = await client.ExecuteAsync(request);

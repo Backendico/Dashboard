@@ -428,7 +428,7 @@
             </Grid>
 
             <!--charge Wallet-->
-            <Grid x:Name="PanelChargeMoney"  Height="400" Grid.Row="3">
+            <Grid x:Name="PanelChargeMoney"  Height="0" Grid.Row="3">
 
                 <ScrollViewer>
 
@@ -470,6 +470,14 @@
                             <TextBox  x:Name="TextDesc_BackToBank" MinHeight="60" AcceptsReturn="True" AcceptsTab="True" />
                         </StackPanel>
 
+
+                        <TextBlock >
+                            <Run FontWeight="Bold" Text="Tips:"/><LineBreak/>
+                            <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text="Payment gateway and payment method is from (idpay.ir)" /> <LineBreak/>
+                             <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text="The fee is with the payer (you). (1%)" /> <LineBreak/>
+                             <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text="Any problems in the payment process will be returned to your account" /> <LineBreak/>
+                            <Run  Text="&#xE915;" FontFamily="Segoe MDL2 Assets" /> <Run Text="Contact support if you have a problem" /> <LineBreak/>
+                        </TextBlock>
                         <!--BTN Control-->
                         <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Margin="10">
 
