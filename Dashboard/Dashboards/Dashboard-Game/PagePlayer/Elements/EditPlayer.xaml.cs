@@ -108,6 +108,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         if (Result)
                         {
                             DashboardGame.Notifaction("Password Changed", Notifaction.StatusMessage.Ok);
+
+                            TextNewPassword.Text = "";
                             PanelChangePassword.Visibility = Visibility.Collapsed;
                         }
                         else

@@ -13,13 +13,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
     {
         BsonDocument PlayerLeaderboards;
 
-     
+
         public ModelLeaderboardPlayer_New(BsonDocument TotalLeaderboard, BsonDocument PlayerLeaderboards)
         {
             InitializeComponent();
 
             this.PlayerLeaderboards = PlayerLeaderboards;
-          
+
 
             //ini combobox items
             foreach (var T in TotalLeaderboard)
@@ -63,16 +63,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 }
             };
 
+            //action btn delete
+            BTNDelete.MouseDown += (s, e) =>
+            {
+                if (TextValue.IsEnabled)
+                    PlayerLeaderboards.Remove(ComboBoxName.Text);
+                (Parent as StackPanel).Children.Remove(this);
+            };
         }
-
-
-        private void Delete(object obj, RoutedEventArgs E)
-        {
-            if (TextValue.IsEnabled)
-                PlayerLeaderboards.Remove(ComboBoxName.Text);
-            (Parent as StackPanel).Children.Remove(this);
-        }
-
 
     }
 

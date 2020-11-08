@@ -44,19 +44,10 @@
                           IsEnabled="False"
                           />
 
-                <Button Cursor="Hand"
-                        Click="Delete"
-                        Grid.Column="2" 
-                        Background="Tomato" 
-                        Foreground="White" 
-                        BorderBrush="Transparent" 
-                        Content="&#xE74D;"
-                        Width="30"
-                        Height="30"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        FontFamily="Segoe MDL2 Assets"
-                        />
+                <Border Cursor="Hand" x:Name="BTNDelete" Background="Tomato" CornerRadius="5" Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30">
+                    <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
+                </Border>
+             
 
             </Grid>
 

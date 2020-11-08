@@ -50,7 +50,7 @@
                 <!--BTNs Header-->
                 <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
                     <Button Click="ChangePage" x:Name="BTNAccount" Cursor="Hand"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Account" />
-                    <Button Click="ChangePage"  x:Name="BTNLeaderboards" Cursor="Hand"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="LeaderBoards" />
+                    <Button Click="ChangePage"  x:Name="BTNLeaderboards" Cursor="Hand"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Leaderboards" />
                     <Button Click="ChangePage" x:Name="BTNAchievements" Cursor="Hand"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Achievements" />
                     <Button Click="ChangePage" x:Name="BTNLogs" Cursor="Hand"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Logs" />
 
