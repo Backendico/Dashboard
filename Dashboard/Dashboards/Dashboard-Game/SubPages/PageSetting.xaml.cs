@@ -40,8 +40,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             //page Setting
 
-            TextToken.MouseDown += GlobalEvents.CopyText;
-
             BTNState.MouseDown += (s, e) =>
             {
 
