@@ -119,14 +119,20 @@
 
                         <!--Players-->
                         <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
-                            <Run FontWeight="Bold" Text="Players:"/> 
-                             <Run  Text="0 T"/>
+                            <Run FontWeight="Bold" Text="Players :"/> 
+                             <Run  Text="6000"/>
                         </TextBlock>
 
                         <!--Leaderboards-->
                         <TextBlock   VerticalAlignment="Center" TextAlignment="Left"  >
                             <Run FontWeight="Bold" Text="Leaderboard :"/> 
                              <Run  Text="3"/>
+                        </TextBlock>
+
+                        <!--Achievements-->
+                        <TextBlock   VerticalAlignment="Center" TextAlignment="Left"  >
+                            <Run FontWeight="Bold" Text="Achievements :"/> 
+                             <Run  Text="4"/>
                         </TextBlock>
 
                         <!--APIs-->
