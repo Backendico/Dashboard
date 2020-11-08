@@ -661,28 +661,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void SendEmailRecovery(ObjectId TokenPlayer, Action<bool> Result)
-                    {
-                        var client = new RestClient(Links.SendEmailRecovery);
-                        client.Timeout = -1;
-                        var request = new RestRequest(Method.POST);
-                        request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Token", SettingUser.Token);
-                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
-                        var response = await client.ExecuteAsync(request);
-
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            Result(true);
-                        }
-                        else
-                        {
-                            Result(false);
-                        }
-
-                    }
-
+                   
                     public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.RecivePlayerLogs);
@@ -749,6 +728,77 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public static async void Recovery1(ObjectId TokenPlayer,MailAddress Email,Action<int> CodeRecovery)
+                    {
+
+                        var client = new RestClient(Links.Recovery1);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer",TokenPlayer.ToString());
+                        request.AddParameter("Email", Email.Address);
+                        var response =await client.ExecuteAsync(request);
+
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            CodeRecovery(int.Parse(response.Content));
+                        }
+                        else
+                        {
+                            CodeRecovery(0);
+                        }
+
+                    }
+
+                    public static async void Recovery2(ObjectId TokenPlayer, MailAddress Email,int Code, Action<bool> CodeRecovery)
+                    {
+                        var client = new RestClient(Links.Recovery2);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("Email", Email.Address);
+                        request.AddParameter("Code", Code);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            CodeRecovery(true);
+                        }
+                        else
+                        {
+                            CodeRecovery(false);
+                        }
+
+                    }
+                   
+                    public static async void ChangePassword(ObjectId TokenPlayer, string Password,  Action<bool> CodeRecovery)
+                    {
+                        var client = new RestClient(Links.ChangePassword);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("Password", Password);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            CodeRecovery(true);
+                        }
+                        else
+                        {
+                            CodeRecovery(false);
+                        }
+
+                    }
+               
                 }
 
                 public sealed class PageLeaderboard
@@ -1613,11 +1663,12 @@ namespace Dashboard.GlobalElement
                 public string Delete => BaseLink + "PagePlayer/DeletePlayer";
                 public string Save => BaseLink + "PagePlayer/SavePlayer";
                 public string Save_LeaderboardPlayer => BaseLink + "PagePlayer/Save_LeaderboardPlayer";
-                public string SendEmailRecovery => BaseLink + "PagePlayer/SendEmailRecovery";
                 public string RecivePlayerLogs => BaseLink + "PagePlayer/RecivePlayerLogs";
                 public string AddPlayerlog => BaseLink + "PagePlayer/AddPlayerLog";
                 public string ClearLog => BaseLink + "PagePlayer/ClearLogs";
-
+                public string Recovery1 => BaseLink + "PagePlayer/RecoveryStep1";
+                public string Recovery2 => BaseLink + "PagePlayer/RecoveryStep2";
+                public string ChangePassword => BaseLink + "PagePlayer/ChangePassword";
             }
 
             public struct PageLeaderboard

@@ -1,20 +1,13 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
-using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
-using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
-using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
+﻿using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using RestSharp;
 using System;
-using System.CodeDom;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
@@ -65,6 +58,95 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 this.PlayerDetail["Account"]["IsBan"] = false;
             };
 
+
+            #region PageSetting
+            //action btn Email Recovery
+            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            {
+                if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{PlayerDetail["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+
+                        SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Recovery1(PlayerDetail["Account"]["Token"].AsObjectId, new System.Net.Mail.MailAddress(PlayerDetail["Account"]["Email"].AsString),
+                            Code =>
+                            {
+                                if (Code != 0)
+                                {
+                                    DashboardGame.Dialog(Code.ToString(), "Recovery Code");
+                                    PanelChangePassword.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
+                                }
+
+                            });
+                    }
+                    catch (Exception ex)
+                    {
+
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    }
+                }
+                else
+                {
+
+                    DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
+                }
+
+            };
+
+            //action btn Change Password
+            BTNChangePassword.MouseDown += (s, e) =>
+            {
+                if (TextNewPassword.Text.Length >= 6)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ChangePassword(PlayerDetail["Account"]["Token"].AsObjectId, TextNewPassword.Text, Result =>
+                    {
+
+                        if (Result)
+                        {
+                            DashboardGame.Notifaction("Password Changed", Notifaction.StatusMessage.Ok);
+                            PanelChangePassword.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Change Password", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Password Short", Notifaction.StatusMessage.Warrning);
+                }
+            };
+
+            //copyToken
+            TextToken.MouseDown += GlobalEvents.CopyText;
+
+            //action BTN control and change phone
+            Textboxphone.TextChanged += (s, e) =>
+            {
+                var Phone = s as TextBox;
+
+                if (long.TryParse(Phone.Text, out long Handle))
+                {
+                    PlayerDetail["Account"]["Phone"] = Handle;
+                }
+                else
+                {
+                    Phone.Text = "";
+                }
+            };
+
+
+            #endregion
+
+            #region PageLeaderboard
+
+
             //init pageLeaderboard
             try
             {
@@ -77,62 +159,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
             }
 
+            #endregion
 
-
-            //action btn Email Recovery
-            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            #region PageAchievements
+            //action show panel Add achievements
+            BTNShowPanelAddAchievement.MouseDown += (s, e) =>
             {
-
-                if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{PlayerDetail["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
-                {
-
-                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SendEmailRecovery(PlayerDetail["Account"]["Token"].AsObjectId, result =>
-                    {
-
-                        if (result)
-                        {
-                            DashboardGame.Notifaction("Email Send", Notifaction.StatusMessage.Ok);
-
-                            //add log
-                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Send Email Recovery", $"You sent a recovery email for \"{PlayerDetail["Account"]["Token"]}\" ", new BsonDocument(), false, (ResultLog) => { });
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
-                        }
-
-                    });
-                }
-                else
-                {
-
-                    DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
-                }
-
+                ShowPanelAddAchievements();
             };
 
-            //action btn see more
-            BTNSeeMoreLog.MouseDown += (s, e) =>
-            {
-                CountLog += 100;
-                TextSeeMoreNumber.Text = CountLog.ToString();
-                RecivePlayerLogs();
-            };
-
-            //actin btn Add Log
-            BTNAddLog.MouseDown += (s, e) =>
-            {
-                ShowPanelAddLogs();
-            };
-
-            //action btn ClosePaneladdlog
-            PanelAddLog.MouseDown += (s, e) =>
+            //action Panel Achievements
+            PanelAddAchievements.MouseDown += (s, e) =>
             {
                 if (e.Source.GetType() == typeof(Grid))
                 {
-                    ShowoffPaneladdLogs();
+                    ShowoffPaneladdAchievements();
                 }
             };
+
+            #endregion
+
+            #region PageLogs
+
 
             //action btn send log
             BTNSendLog.MouseDown += (s, e) =>
@@ -179,41 +227,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     });
             };
 
-
-            //action BTN control and change phone
-            Textboxphone.TextChanged += (s, e) =>
-            {
-                var Phone = s as TextBox;
-
-                if (long.TryParse(Phone.Text, out long Handle))
-                {
-                    PlayerDetail["Account"]["Phone"] = Handle;
-                }
-                else
-                {
-                    Phone.Text = "";
-                }
-            };
-
-            //copyToken
-            TextToken.MouseDown += GlobalEvents.CopyText;
-
-
-            //action Panel Achievements
-            PanelAddAchievements.MouseDown += (s, e) =>
+            //action btn ClosePaneladdlog
+            PanelAddLog.MouseDown += (s, e) =>
             {
                 if (e.Source.GetType() == typeof(Grid))
                 {
-                    ShowoffPaneladdAchievements();
+                    ShowoffPaneladdLogs();
                 }
             };
 
-
-            //action show panel Add achievements
-            BTNShowPanelAddAchievement.MouseDown += (s, e) =>
+            //actin btn Add Log
+            BTNAddLog.MouseDown += (s, e) =>
             {
-                ShowPanelAddAchievements();
+                ShowPanelAddLogs();
             };
+            //action btn see more
+            BTNSeeMoreLog.MouseDown += (s, e) =>
+            {
+                CountLog += 100;
+                TextSeeMoreNumber.Text = CountLog.ToString();
+                RecivePlayerLogs();
+            };
+
+            #endregion
+
         }
 
         //global
@@ -336,7 +373,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         {
             var textbox = sender as TextBox;
 
-            if (IsLoaded && textbox.Text.Length >= 6 )
+            if (IsLoaded && textbox.Text.Length >= 6)
             {
                 SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(textbox.Text, result =>
                 {
@@ -376,17 +413,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        private void AvatarHelp(object sender,  MouseButtonEventArgs e)
+        private void AvatarHelp(object sender, MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("Sample acceptable link\n\n https://example.com \n \n or\n \n http://example.com ", "Help Link");
         }
 
-        private void LanguageHelp(object sender,  MouseButtonEventArgs e)
+        private void LanguageHelp(object sender, MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("ISO is the language standard (ISO 639-1) \n for example:\n \n\n Persian : (fa) \n \n or\n \n English : (en) ", "Help Language");
         }
 
-        private void CountryHelp(object sender,  MouseButtonEventArgs e)
+        private void CountryHelp(object sender, MouseButtonEventArgs e)
         {
             DashboardGame.Dialog("ISO is the country  standard (ISO 3166 ALPHA3) \n for example:\n \n\n Iran : (IRN) \n \n or\n \n Belgien : (BEL) ", "Help Country");
         }
@@ -675,7 +712,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
 
                                 //cheack player recive all achievements
-                                if (StudioAchievements["Achievements"].AsBsonArray.Count>= 1)
+                                if (StudioAchievements["Achievements"].AsBsonArray.Count >= 1)
                                 {
 
                                     foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
@@ -685,7 +722,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                                 }
                                 else
                                 {
-                                    ListStudioAchievement.Children.Add(new TextBlock() {Margin=new Thickness(10), Text= "The player has collected all the achievements" });
+                                    ListStudioAchievement.Children.Add(new TextBlock() { Margin = new Thickness(10), Text = "The player has collected all the achievements" });
                                 }
                             }
                             else
@@ -699,7 +736,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         }
                         else
                         {
-                            ListStudioAchievement.Children.Add(new TextBlock() { TextWrapping=TextWrapping.Wrap, Margin = new Thickness(10), Text = "The studio has not achieved!\nTo add an achievement,go to the achievements section and create one" });
+                            ListStudioAchievement.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(10), Text = "The studio has not achieved!\nTo add an achievement,go to the achievements section and create one" });
 
                             DashboardGame.Notifaction(" Studio No achievement", Notifaction.StatusMessage.Warrning);
                         }
