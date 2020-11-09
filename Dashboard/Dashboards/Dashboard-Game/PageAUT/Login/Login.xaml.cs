@@ -28,6 +28,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
         {
             InitializeComponent();
 
+            //blure Controll
+            DashboardGame.Dashboard.Blure(true);
+            Unloaded += (s, e) =>
+            {
+                DashboardGame.Dashboard.Blure(false);
+            };
 
             //action btn login
             BTNLogin.MouseDown += (s, e) =>
@@ -38,13 +44,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                     {
                         if (resul)
                         {
-                        //login
-                        DashboardGame.Notifaction("Logined", Notifaction.StatusMessage.Ok);
+                            //login
+                            DashboardGame.Notifaction("Logined", Notifaction.StatusMessage.Ok);
                             Settings.Default._id = Token;
                             Settings.Default.Save();
 
-                        //remove page and Effect
-                        DashboardGame.Dashboard.Root.Children.Remove(this);
+                            //remove page and Effect
+                            DashboardGame.Dashboard.Root.Children.Remove(this);
                             DashboardGame.Dashboard.Blure(true);
 
                             DashboardGame.Dashboard.Root.Children.Add(new SubPageStudios());
@@ -80,6 +86,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
 
             };
         }
+
 
     }
 }

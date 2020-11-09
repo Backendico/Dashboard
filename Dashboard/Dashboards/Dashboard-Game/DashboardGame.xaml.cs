@@ -147,7 +147,6 @@ namespace Dashboard.Dashboards.Dashboard_Game
             BTNReportBug.MouseDown += (s, e) =>
             {
                 Root.Children.Add(new SubPagesReportBug());
-
             };
 
             //action Pane
@@ -234,6 +233,12 @@ namespace Dashboard.Dashboards.Dashboard_Game
             BTNDocument.MouseDown += (s, e) =>
             {
                 Root.Children.Add(new SubpageDocuments());
+            };
+
+            //actin btn Logout
+            BTNLogout.MouseDown += (S, e) =>
+            {
+                Root.Children.Add(new Login());
             };
         }
 

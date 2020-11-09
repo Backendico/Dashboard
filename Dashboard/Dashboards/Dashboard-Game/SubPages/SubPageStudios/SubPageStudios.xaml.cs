@@ -16,8 +16,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
         public SubPageStudios()
         {
             InitializeComponent();
+            //control blure
+            DashboardGame.Dashboard.Blure(true);
+            Unloaded += (s, e) =>
+            {
+                DashboardGame.Dashboard.Blure(false);
+            };
+
 
             ReciveStudios();
+
 
             BTNAddStudio.MouseDown += (o, s) =>
             {
@@ -47,13 +55,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
                 }
             };
 
-            DashboardGame.Dashboard.Blure(true);
-        }
+            PanelAddStudio.MouseDown += (s, e) =>
+            {
+                ShowOffPanelStudio();
+            };
 
-        internal void Close(object sender, RoutedEventArgs e)
-        {
-            DashboardGame.Dashboard.Root.Children.Remove(this);
-            DashboardGame.Dashboard.Blure(false);
         }
 
         internal void ReciveStudios()
@@ -113,16 +119,5 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
-
-        private void Close(object sender, MouseButtonEventArgs e)
-        {
-            if (e.OriginalSource.GetType() == typeof(Grid))
-            {
-                ShowOffPanelStudio();
-            }
-        }
-
-
-
     }
 }

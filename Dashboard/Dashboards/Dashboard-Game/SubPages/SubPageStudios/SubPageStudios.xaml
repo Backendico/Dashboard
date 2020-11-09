@@ -15,7 +15,7 @@
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
         </Border.Effect>
 
-        <Grid MouseDown="Close">
+        <Grid >
             <!--Main-->
             <Grid >
                 <Grid.RowDefinitions>

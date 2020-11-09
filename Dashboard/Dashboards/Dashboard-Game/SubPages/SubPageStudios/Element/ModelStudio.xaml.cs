@@ -21,17 +21,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios.Element
     /// </summary>
     public partial class ModelStudio : UserControl
     {
-        public ModelStudio(BsonDocument DetailStudio, SubPageStudios _Parent)
+        public ModelStudio(BsonDocument DetailStudio,SubPageStudios Root)
         {
             InitializeComponent();
             TextToken.Text = DetailStudio["Token"].ToString();
 
             TextName.Text = DetailStudio["Name"].ToString();
+            
             MouseDown += (s, e) =>
             {
                 DashboardGame.Dashboard.ChangeStudio(DetailStudio, true);
 
-                _Parent.Close(null, null);
+                DashboardGame.Dashboard.Root.Children.Remove(Root);
 
             };
         }
