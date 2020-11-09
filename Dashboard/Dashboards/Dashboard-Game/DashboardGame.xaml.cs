@@ -157,7 +157,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 Storyboard storyboard = new Storyboard();
                 if (NameList.Width >= 1)
                 {
-                    DoubleAnimation Anim = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(0.3));
+                    DoubleAnimation Anim = new DoubleAnimation(120, 0, TimeSpan.FromSeconds(0.3));
                     Storyboard.SetTargetName(Anim, NameList.Name);
                     Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
                     storyboard.Children.Add(Anim);
@@ -168,7 +168,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 }
                 else
                 {
-                    DoubleAnimation Anim = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(0.3));
+                    DoubleAnimation Anim = new DoubleAnimation(0, 120, TimeSpan.FromSeconds(0.3));
                     Storyboard.SetTargetName(Anim, NameList.Name);
                     Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
                     storyboard.Children.Add(Anim);
