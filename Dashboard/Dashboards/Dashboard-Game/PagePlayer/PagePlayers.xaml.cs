@@ -130,6 +130,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     }
                     else
                     {
+                        DashboardGame.Notifaction("No content", StatusMessage.Warrning);
                         ShowSubpagePlayer();
                     }
 

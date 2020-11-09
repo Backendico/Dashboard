@@ -106,6 +106,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                     }
                     else
                     {
+                        DashboardGame.Notifaction("No content", Notifaction.StatusMessage.Warrning);
                         ShowSubpageAddLeaderboard();
                     }
                 },
