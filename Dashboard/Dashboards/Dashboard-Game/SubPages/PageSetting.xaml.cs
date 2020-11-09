@@ -143,6 +143,26 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 RechangeNew();
             };
 
+            BTNAddAchievements.MouseDown += (s, e) =>
+            {
+                if (CurentMonetiz["Cash"].AsInt32 - 10000 >= 0)
+                {
+                    CurentMonetiz["Achievements"] = CurentMonetiz["Achievements"].AsInt32 + 2;
+
+                    NewMonetiz["Achievements"] = NewMonetiz["Achievements"].AsInt32 + 2;
+
+                    NewMonetiz["Cash"] = NewMonetiz["Cash"].AsInt32 + 10000;
+
+                    CurentMonetiz["Cash"] = CurentMonetiz["Cash"].AsInt32 - 10000;
+
+
+                    BTNRevite.Visibility = Visibility.Visible;
+                }
+
+                Cheackcash();
+                RechangeNew();
+            };
+
             BTNRevite.MouseDown += (s, obj) =>
             {
                 NewMonetiz = new BsonDocument
@@ -150,6 +170,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             {"Players",0 },
                             {"Leaderboards",0 },
                             {"Apis",0 },
+                    {"Achievements",0 },
                             {"Logs",0 },
                             {"Cash",0 }
                         };
@@ -170,8 +191,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 TextLeaderboardsNewValue.Text = "";
                 TextApisNewValue.Text = "";
                 TextLogsNewValue.Text = "";
+                TextAchievementsNewValue.Text = "";
             };
 
+            //acatin btn pay/save
             BTNPay.MouseDown += async (s, obj) =>
             {
                 if (NewMonetiz == CurentMonetiz)
@@ -187,15 +210,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                         { "Leaderboards",CurentMonetiz["Leaderboards"].AsInt32},
                                         { "Apis",CurentMonetiz["Apis"].AsInt32 },
                                         { "Logs", CurentMonetiz["Logs"].AsInt32 },
+                                        {"Achievements",CurentMonetiz["Achievements"].AsInt32 },
                                         { "Players", CurentMonetiz["Players"].AsInt32},
                                         { "Creator" ,SettingUser.CurentDetailStudio["Creator"]},
                                         { "Cash",CurentMonetiz["Cash"].AsInt32 }
                                     };
-
-
-                        Debug.WriteLine(Detail["Leaderboards"].ToString());
-                        Debug.WriteLine(NewMonetiz["Leaderboards"]);
-                        Debug.WriteLine(CurentMonetiz["Leaderboards"]);
 
                         SDK.SDK_PageDashboards.DashboardGame.PageStudios.AddPayment(Detail, ResultPay =>
                         {
@@ -208,6 +227,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                 TextLeaderboardsNewValue.Text = "";
                                 TextApisNewValue.Text = "";
                                 TextLogsNewValue.Text = "";
+                                TextAchievementsNewValue.Text = "";
                                 TextTomanNumber.Text = "0";
                                 BTNRevite.Visibility = Visibility.Collapsed;
 
@@ -271,9 +291,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             {
                 CloseCharge();
             };
-       
 
 
+            //Page Buy money
             BTNPaytoBank.MouseDown += (s, e) =>
             {
                 try
@@ -350,14 +370,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                                                  });
                                                  break;
                                              }
-                                             else if (Query["status"].ToInt32()==7)
+                                             else if (Query["status"].ToInt32() == 7)
                                              {
                                                  DashboardGame.Notifaction("Payment is Cancel", StatusMessage.Error);
                                                  ReciveMonetize(PageMonetiz, new DependencyPropertyChangedEventArgs());
                                                  CloseCharge();
                                                  break;
                                              }
-                                               
+
                                          }
                                          else
                                          {
@@ -497,6 +517,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             {"Players",0 },
                             {"Leaderboards",0 },
                             {"Apis",0 },
+                            {"Achievements",0 },
                             {"Logs",0 },
                             {"Cash",0 }
                         };
@@ -550,6 +571,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                             }
 
 
+                            //achievements
+                            if (result["Achievements"].AsInt32 <= 999)
+                            {
+                                TextAchievementsValue.Text = result["Achievements"].ToString();
+                            }
+                            else if (result["Achievements"].AsInt32 >= 1000 && result["Achievements"].AsInt32 <= 999999)
+                            {
+                                TextAchievementsValue.Text = (result["Achievements"].AsInt32 / 1000).ToString() + "K";
+                            }
+                            else if (result["Achievements"].AsInt32 >= 1000000)
+                            {
+                                TextAchievementsValue.Text = (result["Achievements"].AsInt32 / 1000000).ToString() + "M";
+                            }
 
                             //Logs
                             if (result["Logs"].AsInt32 <= 999)
@@ -611,6 +645,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
         /// </summary>
         void Cheackcash()
         {
+            //Player controller
+
             if (CurentMonetiz["Cash"].AsInt32 >= 10000)
             {
                 BTNPlayer.Visibility = Visibility.Visible;
@@ -620,6 +656,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 BTNPlayer.Visibility = Visibility.Collapsed;
             }
 
+            //leaderboard controller
             if (CurentMonetiz["Cash"].AsInt32 >= 10000)
             {
                 BTNLeaderboards.Visibility = Visibility.Visible;
@@ -630,6 +667,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             }
 
+
+            //Api controller
             if (CurentMonetiz["Cash"].AsInt32 >= 20000)
             {
                 BTNAPIs.Visibility = Visibility.Visible;
@@ -639,7 +678,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 BTNAPIs.Visibility = Visibility.Collapsed;
             }
 
+            //Achievements controller
+            if (CurentMonetiz["Cash"].AsInt32 >= 10000)
+            {
+                BTNAddAchievements.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BTNAddAchievements.Visibility = Visibility.Collapsed;
+            }
 
+            //log controller
             if (CurentMonetiz["Cash"].AsInt32 >= 30000)
             {
                 BTNLogs.Visibility = Visibility.Visible;
@@ -660,6 +709,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             TextLeaderboardsNewValue.Text = " + " + NewMonetiz["Leaderboards"].ToString();
             TextApisNewValue.Text = " + " + NewMonetiz["Apis"].ToString();
             TextLogsNewValue.Text = " + " + NewMonetiz["Logs"].ToString();
+            TextAchievementsNewValue.Text = "+" + NewMonetiz["Achievements"].ToString();
 
             TextTomanNumber.Text = NewMonetiz["Cash"].AsInt32.ToString("#,##0");
 
