@@ -29,19 +29,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
         {
             InitializeComponent();
 
-            ReciveLeaderboards(null, null); ;
-            PanelAddLeaderboard.MouseDown += (s, e) =>
-            {
-                if (e.Source.GetType() == typeof(Grid))
-                {
-                    ShowOffSubpageAddLeaderboard(null, null);
-                }
-            };
+            ReciveLeaderboards();
 
-            BTNShowPanelAddLeaderboards.MouseDown += (s, e) =>
-            {
-                ShowSubpageAddLeaderboard();
-            };
+
+
+
+            #region SubPage Add Leaderboard
 
             BTNAddLeaderboard.MouseDown += (s, e) =>
             {
@@ -53,26 +46,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                         {
                             try
                             {
-                                _ = int.Parse(TextMaxValue.Text);
-                                _ = int.Parse(TextMinValue.Text);
-                                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextNameLeaderboard.Text, ComboboxReset.SelectedIndex, ComboboxSort.SelectedIndex, int.Parse(TextMinValue.Text), int.Parse(TextMaxValue.Text), Result =>
-                                  {
-                                      if (Result)
-                                      {
-                                          DashboardGame.Notifaction("Leaderboard Added", Notifaction.StatusMessage.Ok);
-                                          ShowOffSubpageAddLeaderboard(null, null);
-                                          ReciveLeaderboards(null, null);
-                                      }
-                                      else
-                                      {
-                                          DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
-                                      }
-                                  });
+                                //amount not 0
+                                if (int.Parse(TextAmount.Text) == 0)
+                                    TextAmount.Text = 1.ToString();
+
+
+                                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextNameLeaderboard.Text, ComboboxReset.SelectedIndex, int.Parse(TextAmount.Text), ComboboxSort.SelectedIndex, int.Parse(TextMinValue.Text), int.Parse(TextMaxValue.Text), Result =>
+                                   {
+                                       if (Result)
+                                       {
+                                           DashboardGame.Notifaction("Leaderboard Added", Notifaction.StatusMessage.Ok);
+                                           ShowOffSubpageAddLeaderboard();
+                                           ReciveLeaderboards();
+                                       }
+                                       else
+                                       {
+                                           DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
+                                       }
+                                   });
                             }
                             catch (Exception ex)
                             {
                                 TextMinValue.Text = 0.ToString();
                                 TextMaxValue.Text = 10000.ToString();
+                                TextAmount.Text = 1.ToString();
                                 DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
                             }
                         }
@@ -88,10 +85,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                     DashboardGame.Notifaction("Leaderboard name short ", Notifaction.StatusMessage.Warrning);
                 }
             };
+           
+            BTNShowPanelAddLeaderboards.MouseDown += (s, e) =>
+            {
+                ShowSubpageAddLeaderboard();
+            };
+           
+            PanelAddLeaderboard.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowOffSubpageAddLeaderboard();
+                }
+            };
+          
+            ComboboxReset.SelectionChanged += (s, e) =>
+            {
+                ChangeAmount();
+            };
+
+            #endregion
         }
 
 
-        private void ReciveLeaderboards(object sender, RoutedEventArgs e)
+        private void ReciveLeaderboards()
         {
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
                 resul =>
@@ -165,7 +182,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ShowOffSubpageAddLeaderboard(object sender, MouseButtonEventArgs e)
+        void ShowOffSubpageAddLeaderboard()
         {
 
             DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
@@ -173,6 +190,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
             {
                 PanelAddLeaderboard.Visibility = Visibility.Collapsed;
                 TextNameLeaderboard.Text = "";
+                ComboboxReset.SelectedIndex = 0;
 
             };
             Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
@@ -184,5 +202,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
         }
 
 
+        void ChangeAmount()
+        {
+            if (ComboboxReset.SelectedIndex == 0)
+            {
+                PanelAmount.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PanelAmount.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

@@ -660,7 +660,6 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-
                    
                     public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result, Action ERR)
                     {
@@ -830,13 +829,14 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Creat(string NameLeaderboard, int reset, int Sort, int Min, int Max, Action<bool> Result)
+                    public static async void Creat(string NameLeaderboard, int reset,int Amount, int Sort, int Min, int Max, Action<bool> Result)
                     {
                         var SeriliseDetail = new BsonDocument
                         {
                             { "Name", NameLeaderboard },
                             { "Reset", reset },
                             { "Sort", Sort } ,
+                            {"Amount",Amount },
                             {"Min" ,Min},
                             {"Max",Max }
                         };

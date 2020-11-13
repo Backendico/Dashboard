@@ -88,7 +88,7 @@
 
         <!--Subpage-->
         <!--SubPage Add-->
-        <Grid  x:Name="PanelAddLeaderboard"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+        <Grid  x:Name="PanelAddLeaderboard"  Visibility="Visible" Background="#33000000" Opacity="1" >
 
             <Grid.Effect>
                 <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
@@ -108,7 +108,7 @@
 
             <!--Body-->
 
-            <Border   Margin="10,58,0,0"  CornerRadius="10" Width="300" Height="370" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+            <Border   Margin="10,58,0,0"  CornerRadius="10" Width="300" Height="430" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
 
                 <Grid Margin="20">
                     <StackPanel>
@@ -130,6 +130,12 @@
                                 <ComboBoxItem Content="Weekly"/>
                                 <ComboBoxItem Content="Monthly"/>
                             </ComboBox>
+                        </StackPanel>
+                        
+                        <!--Amount -->
+                        <StackPanel Visibility="Collapsed" x:Name="PanelAmount" Margin="0,5">
+                            <TextBlock Text="Amount"/>
+                            <TextBox Height="30" Text="1" x:Name="TextAmount"/>
                         </StackPanel>
 
                         <!--reset -->

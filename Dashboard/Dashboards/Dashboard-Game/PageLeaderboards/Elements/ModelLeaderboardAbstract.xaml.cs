@@ -13,7 +13,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     public partial class ModelLeaderboardAbstract : UserControl
     {
 
-        public ModelLeaderboardAbstract(MongoDB.Bson.BsonDocument Detail, Action<object, RoutedEventArgs> Refreshlist)
+        public ModelLeaderboardAbstract(MongoDB.Bson.BsonDocument Detail, Action Refreshlist)
         {
             InitializeComponent();
             this.Refreshlist = Refreshlist;
@@ -90,6 +90,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextToken.MouseDown += GlobalEvents.CopyText;
         }
 
-        Action<object, RoutedEventArgs> Refreshlist;
+        Action Refreshlist;
     }
 }

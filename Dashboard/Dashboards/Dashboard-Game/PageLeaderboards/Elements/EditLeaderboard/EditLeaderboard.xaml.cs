@@ -18,12 +18,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         BsonDocument Detail;
         int Count;
 
-        public EditLeaderboard(BsonDocument Detail, Action<object, RoutedEventArgs> RefreshList)
+        public EditLeaderboard(BsonDocument Detail, Action RefreshList)
         {
             InitializeComponent();
 
+            #region Frist Init
+
             this.Detail = Detail;
             this.RefreshList = RefreshList;
+
 
             TextLeaderboardName.Text = Detail["Name"].AsString;
             TextToken.Text = Detail["Token"].AsObjectId.ToString();
@@ -33,10 +36,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextMaxValue.Text = Detail["Max"].ToString();
 
             ComboboxReset.SelectedIndex = Detail["Reset"].AsInt32;
+            TextAmount.Text = Detail["Amount"].ToString();
+
+            
             ComboboxSort.SelectedIndex = Detail["Sort"].AsInt32;
 
+            ControlAmount();
 
-            //actions page 1 Setting
+            #endregion
+
+
+            #region Page Setting
+
             //action btn SaveSetting
             BTNSaveSetting.MouseDown += (s, e) =>
             {
@@ -50,13 +61,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     Detail["Min"] = int.Parse(TextMinValue.Text);
                     Detail["Max"] = int.Parse(TextMaxValue.Text);
 
+                    ControlAmount();
+
                     Detail.Remove("Count");
+
                     SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.EditLeaderboard(Detail, result =>
                     {
                         if (result)
                         {
                             DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
-                            RefreshList(null, null);
+                            RefreshList();
 
 
                             //log
@@ -80,6 +94,33 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 }
             };
 
+            //Control and Deploy amount
+            TextAmount.TextChanged += (s, e) =>
+            {
+                try
+                {
+                    Detail["Amount"] = int.Parse(TextAmount.Text);
+                }
+                catch (Exception ex)
+                {
+                    Detail["Amount"] = 1;
+                    TextAmount.Text = "1";
+
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                }
+            };
+
+            //copy token
+            TextToken.MouseDown += GlobalEvents.CopyText;
+
+            ComboboxReset.SelectionChanged += (s, e) =>
+            {
+                ControlAmount();
+            };
+
+            #endregion
+
+            #region PageLeaderboards
 
             //actions page 2 Leaderboards
             //action btn SaveSetting
@@ -127,8 +168,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                    DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
 
 
-                    //log
-                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Leaderboard Backup", $"You have backed up your \"{Detail["Name"]}\" leadboard", new BsonDocument { }, false, result => { });
+                   //log
+                   SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Leaderboard Backup", $"You have backed up your \"{Detail["Name"]}\" leadboard", new BsonDocument { }, false, result => { });
 
                },
                () =>
@@ -156,8 +197,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                           ShowoffPaneladdPlayer();
                           ReciveLeaderboards();
 
-                      //Addlog
-                      var detaillog = new BsonDocument { { "NameLeaderboard", Detail["Name"] }, { "TokenPlayer", TextboxTokenPlayer.Text }, { "Value", TextboxValue.Text } };
+                          //Addlog
+                          var detaillog = new BsonDocument { { "NameLeaderboard", Detail["Name"] }, { "TokenPlayer", TextboxTokenPlayer.Text }, { "Value", TextboxValue.Text } };
                           SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add player to leaderboard", $"You have added player \" {TextboxTokenPlayer.Text} \" to the \" {Detail["Name"]} \" leaderboard", detaillog, false, resultlog => { });
                       },
                       () =>
@@ -183,9 +224,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 }
             };
 
+            #endregion
 
-            //copy token
-            TextToken.MouseDown += GlobalEvents.CopyText;
 
         }
 
@@ -244,6 +284,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         {
             (Parent as Grid).Children.Remove(this);
         }
+
+
+        private void ControlAmount()
+        {
+
+            if (Detail["Reset"].ToInt32() == 0 || ComboboxReset.SelectedIndex == 0 )
+            {
+                PanelAmount.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PanelAmount.Visibility = Visibility.Visible;
+            }
+        }
+
 
 
         //page2 leaderboard
@@ -332,7 +387,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             storyboard.Begin(this);
         }
 
-        Action<object, RoutedEventArgs> RefreshList;
+        Action RefreshList;
 
     }
 }

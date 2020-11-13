@@ -85,34 +85,42 @@
                     <!--Min value-->
                     <StackPanel MinWidth="100" Margin="0,10" Orientation="Vertical">
                         <TextBlock FontWeight="Bold" Text="Min value: "/>
-                        <TextBox x:Name="TextMinValue" />
+                        <TextBox  Height="30" x:Name="TextMinValue" />
                     </StackPanel>
 
                     <!--Min value-->
                     <StackPanel MinWidth="100"  Margin="20,10" Orientation="Vertical">
                         <TextBlock FontWeight="Bold" Text="Max value: "/>
-                        <TextBox x:Name="TextMaxValue" />
+                        <TextBox Height="30" x:Name="TextMaxValue" />
                     </StackPanel>
                 </StackPanel>
 
 
+                <StackPanel Margin="0,10" Orientation="Horizontal">
 
-                <!--reset -->
-                <StackPanel Margin="0,10">
-                    <TextBlock FontWeight="Bold" Text="Reset"/>
-                    <ComboBox   x:Name="ComboboxReset"  >
-                        <ComboBoxItem  IsSelected="True" Content="Manually"/>
-                        <ComboBoxItem   Content="Hourly" />
-                        <ComboBoxItem  Content="Daily"/>
-                        <ComboBoxItem  Content="Weekly"/>
-                        <ComboBoxItem  Content="Monthly"/>
-                    </ComboBox>
+                    <!--reset -->
+                    <StackPanel  MinWidth="100" >
+                        <TextBlock FontWeight="Bold" Text="Reset"/>
+                        <ComboBox  Height="30"  x:Name="ComboboxReset"  >
+                            <ComboBoxItem  IsSelected="True" Content="Manually"/>
+                            <ComboBoxItem   Content="Hourly" />
+                            <ComboBoxItem  Content="Daily"/>
+                            <ComboBoxItem  Content="Weekly"/>
+                            <ComboBoxItem  Content="Monthly"/>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!--Amount-->
+                    <StackPanel x:Name="PanelAmount" MinWidth="100" Margin="20,0">
+                        <TextBlock FontWeight="Bold" Text="Amount"/>
+                        <TextBox x:Name="TextAmount"  Text="1" Height="30" />
+                    </StackPanel>
                 </StackPanel>
 
-                <!--reset -->
+                <!--Sort -->
                 <StackPanel Margin="0,10" >
                     <TextBlock FontWeight="Bold" Text="Sort"/>
-                    <ComboBox x:Name="ComboboxSort" >
+                    <ComboBox Height="30" x:Name="ComboboxSort" >
                         <ComboBoxItem IsSelected="True" Content="Last(always update with th new value)"/>
                         <ComboBoxItem Content="Minimum(always use the lowest value)"/>
                         <ComboBoxItem Content="Maximum(always use the highest value)"/>
@@ -121,7 +129,7 @@
                 </StackPanel>
 
                 <!--BTNSave-->
-                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="DarkOrange" >
+                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="Orange" >
                     <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
                 </Border>
 
@@ -260,7 +268,7 @@
                             <Border x:Name="BTNAddPlayer" Cursor="Hand" Margin="0,10" CornerRadius="5" Background="Orange" Height="30" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right">
                                 <TextBlock Text="Add" Foreground="White" VerticalAlignment="Center" TextAlignment="Center"/>
                             </Border>
-                            
+
                         </StackPanel>
 
                     </Border>
