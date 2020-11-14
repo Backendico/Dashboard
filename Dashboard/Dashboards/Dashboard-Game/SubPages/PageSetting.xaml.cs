@@ -42,22 +42,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             BTNState.MouseDown += (s, e) =>
             {
-
-                SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
-                    result =>
-                    {
-                        var Text = "";
-                        foreach (var item in result)
+                    SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
+                        result =>
                         {
-                            Text += item.Name + ": " + item.Value.ToString() + "\n";
-                        }
+                            var Text = "";
+                            foreach (var item in result)
+                            {
+                                Text += item.Name + ": " + item.Value.ToString() + "\n";
+                            }
 
-                        DashboardGame.Dialog(Text, "Server State");
-                    },
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
-                    });
+                            DashboardGame.Dialog(Text, "Server State");
+                        },
+                        () =>
+                        {
+                            DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
+                        });
+              
+
             };
 
             BTNUpdate.MouseDown += (s, e) =>
@@ -165,6 +166,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
 
             BTNRevite.MouseDown += (s, obj) =>
             {
+
                 NewMonetiz = new BsonDocument
                         {
                             {"Players",0 },

@@ -100,11 +100,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifactio
                 if (result)
                 {
                     ReciveLogs();
-
                 }
                 else
                 {
-                    DashboardGame.Notifaction("Faild Mark Read Notifactions", Notifaction.StatusMessage.Error);
+                   
                 }
             });
         }

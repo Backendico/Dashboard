@@ -30,6 +30,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
 
             //recive Notifactions
             DashboardGame.Dashboard.ReciveNotifactions();
+            
+            DashboardGame.ReciveManuallNotifaction();
 
             Loaded += (s, e) =>
             {

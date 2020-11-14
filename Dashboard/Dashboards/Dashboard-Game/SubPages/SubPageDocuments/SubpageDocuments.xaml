@@ -2441,6 +2441,448 @@
                     </TabControl>
                 </TabItem>
 
+                <!--Achievements -->
+                <TabItem Height="30" Background="LightGray"   Header="Achievements API">
+                    <TabControl TabStripPlacement="Left">
+
+                        <!--Achievements List-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Achievements List">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/ListAchievements"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <TextBlock Margin="10,0" Text="The achievement list is sent in JSON format" VerticalAlignment="Center" />
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of achievements along with its settings"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes tokens"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--Add Player To achievements List-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Add Achievement">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/AddPlayerAchievements"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--TokenPlayer-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+                                                        <!--Detail-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
+                                                        </Border>
+
+
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <StackPanel>
+                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Add achievements to the player"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The detail format is json, which must be submitted with this standard:"/>
+                                                <LineBreak />
+                                              <Run Text=" { Name : NameAchievements ,  Token : TokenAchievements }"/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="For the name and the token, it is necessary to send his achievement token exactly"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send incorrect information about the name and token of achievement in operations, you will encounter a problem"/>
+                                                <LineBreak />
+                                                 <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send incorrect information about the name and token of achievement in operations, you will encounter a problem"/>
+                                                <LineBreak />
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--Remove achievements -->
+                        <TabItem  Background="LightGray"  Height="30" Header=" Remove Achievement">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/RemovePlayerAchievements"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Tomato" Margin="10" Text="Delete"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--TokenPlayer-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+                                                        <!--Detail-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
+                                                        </Border>
+
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <StackPanel>
+                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Add achievements to the player"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="It is better to tell the player the reason for deleting the player achievement"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The detail format is json, which must be submitted with this standard:"/>
+                                                <LineBreak />
+                                              <Run Text=" { Name : NameAchievements ,  Token : TokenAchievements }"/>
+                                                 <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="For the name and the token, it is necessary to send his achievement token exactly"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send incorrect information about the name and token of achievement in operations, you will encounter a problem"/>
+                                                <LineBreak />
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--Player achievements -->
+                        <TabItem  Background="LightGray"  Height="30" Header=" Player Achievements">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/PlayerAchievements"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--TokenPlayer-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <TextBlock Margin="10,0" Text="The achievement list is sent in JSON format" VerticalAlignment="Center" />
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of player achievements"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                 <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes the achievement token"/>
+                                                <LineBreak />
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+
+
+                    </TabControl>
+                </TabItem>
+               
                 <!--Admin -->
                 <TabItem Height="30" Background="LightGray"   Header="Admin API">
                     <TabControl TabStripPlacement="Left">
@@ -3566,447 +4008,6 @@
                     </TabControl>
                 </TabItem>
 
-                <!--Admin -->
-                <TabItem Height="30" Background="LightGray"   Header="Achievements API">
-                    <TabControl TabStripPlacement="Left">
-
-                        <!--Achievements List-->
-                        <TabItem  Background="LightGray"  Height="30" Header="Achievements List">
-                            <Grid Margin="20">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
-                                    <StackPanel>
-                                        <!--link-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Link-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
-                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
-                                                </Border>
-
-                                                <!--Link-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/ListAchievements"/>
-                                                </Border>
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Method-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Body Params-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <StackPanel  Orientation="Horizontal">
-                                                        <!--Token-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
-                                                        </Border>
-
-                                                        <!--Studio-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
-                                                        </Border>
-
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Response-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
-                                                </Border>
-
-                                                <TextBlock Margin="10,0" Text="The achievement list is sent in JSON format" VerticalAlignment="Center" />
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Info Tips-->
-                                        <StackPanel Margin="10">
-                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of achievements along with its settings"/>
-                                            <TextBlock TextWrapping="Wrap" Margin="20">
-                                                <Run FontWeight="Bold" Text="Tips:"/>
-                                                <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes tokens"/>
-
-                                            </TextBlock>
-                                        </StackPanel>
-
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
-
-                        </TabItem>
-
-                        <!--Add Player To achievements List-->
-                        <TabItem  Background="LightGray"  Height="30" Header="Add Achievement">
-                            <Grid Margin="20">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
-                                    <StackPanel>
-                                        <!--link-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Link-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
-                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
-                                                </Border>
-
-                                                <!--Link-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/AddPlayerAchievements"/>
-                                                </Border>
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Method-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Body Params-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <StackPanel  Orientation="Horizontal">
-                                                        <!--Token-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
-                                                        </Border>
-
-                                                        <!--Studio-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
-                                                        </Border>
-
-                                                        <!--TokenPlayer-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
-                                                        </Border>
-
-                                                        <!--Detail-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
-                                                        </Border>
-
-
-
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Response-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
-                                                </Border>
-
-                                                <StackPanel>
-                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
-                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
-                                                </StackPanel>
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Info Tips-->
-                                        <StackPanel Margin="10">
-                                            <TextBlock TextWrapping="Wrap"  Text="Add achievements to the player"/>
-                                            <TextBlock TextWrapping="Wrap" Margin="20">
-                                                <Run FontWeight="Bold" Text="Tips:"/>
-                                                <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The detail format is json, which must be submitted with this standard:"/>
-                                                <LineBreak />
-                                              <Run Text=" { Name : NameAchievements ,  Token : TokenAchievements }"/>
-                                                 <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="For the name and the token, it is necessary to send his achievement token exactly"/>
-                                                <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send incorrect information about the name and token of achievement in operations, you will encounter a problem"/>
-                                                <LineBreak />
-                                                 <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send incorrect information about the name and token of achievement in operations, you will encounter a problem"/>
-                                                <LineBreak />
-
-                                            </TextBlock>
-                                        </StackPanel>
-
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
-
-                        </TabItem>
-
-                        <!--Remove achievements -->
-                        <TabItem  Background="LightGray"  Height="30" Header=" Remove Achievement">
-                            <Grid Margin="20">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
-                                    <StackPanel>
-                                        <!--link-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Link-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
-                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
-                                                </Border>
-
-                                                <!--Link-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/RemovePlayerAchievements"/>
-                                                </Border>
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Method-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Foreground="Tomato" Margin="10" Text="Delete"/>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Body Params-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <StackPanel  Orientation="Horizontal">
-                                                        <!--Token-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
-                                                        </Border>
-
-                                                        <!--Studio-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
-                                                        </Border>
-
-                                                        <!--TokenPlayer-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
-                                                        </Border>
-
-                                                        <!--Detail-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
-                                                        </Border>
-
-
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Response-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
-                                                </Border>
-
-                                                <StackPanel>
-                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
-                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
-                                                </StackPanel>
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Info Tips-->
-                                        <StackPanel Margin="10">
-                                            <TextBlock TextWrapping="Wrap"  Text="Add achievements to the player"/>
-                                            <TextBlock TextWrapping="Wrap" Margin="20">
-                                                <Run FontWeight="Bold" Text="Tips:"/>
-                                                <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="It is better to tell the player the reason for deleting the player achievement"/>
-                                                <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The detail format is json, which must be submitted with this standard:"/>
-                                                <LineBreak />
-                                              <Run Text=" { Name : NameAchievements ,  Token : TokenAchievements }"/>
-                                                 <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="For the name and the token, it is necessary to send his achievement token exactly"/>
-                                                <LineBreak />
-                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="If you send incorrect information about the name and token of achievement in operations, you will encounter a problem"/>
-                                                <LineBreak />
-
-                                            </TextBlock>
-                                        </StackPanel>
-
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
-
-                        </TabItem>
-
-                        <!--Player achievements -->
-                        <TabItem  Background="LightGray"  Height="30" Header=" Player Achievements">
-                            <Grid Margin="20">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
-                                    <StackPanel>
-                                        <!--link-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Link-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
-                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
-                                                </Border>
-
-                                                <!--Link-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Achievements/PlayerAchievements"/>
-                                                </Border>
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Method-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Body Params-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <StackPanel  Orientation="Horizontal">
-                                                        <!--Token-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
-                                                        </Border>
-
-                                                        <!--Studio-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
-                                                        </Border>
-
-                                                        <!--TokenPlayer-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
-                                                        </Border>
-
-
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Response-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
-                                                </Border>
-
-                                                <TextBlock Margin="10,0" Text="The achievement list is sent in JSON format" VerticalAlignment="Center" />
-
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Info Tips-->
-                                        <StackPanel Margin="10">
-                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of player achievements"/>
-                                            <TextBlock TextWrapping="Wrap" Margin="20">
-                                                <Run FontWeight="Bold" Text="Tips:"/>
-                                                <LineBreak />
-                                                 <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes the achievement token"/>
-                                                <LineBreak />
-                                            </TextBlock>
-                                        </StackPanel>
-
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
-
-                        </TabItem>
-
-
-
-                    </TabControl>
-                </TabItem>
 
             </TabControl>
 

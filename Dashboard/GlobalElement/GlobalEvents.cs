@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -30,5 +31,6 @@ namespace Dashboard.GlobalElement
 
             DashboardGame.Notifaction("Copyed !", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Ok);
         }
+
     }
 }

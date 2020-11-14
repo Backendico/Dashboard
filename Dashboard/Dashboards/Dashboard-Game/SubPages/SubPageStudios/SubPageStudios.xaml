@@ -120,7 +120,7 @@
                         <!--Players-->
                         <TextBlock  VerticalAlignment="Center" TextAlignment="Left"  >
                             <Run FontWeight="Bold" Text="Players :"/> 
-                             <Run  Text="6000"/>
+                             <Run  Text="6K"/>
                         </TextBlock>
 
                         <!--Leaderboards-->

@@ -39,6 +39,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
         internal string SignalID = "";
         HubConnection HubConnection = new HubConnectionBuilder().WithUrl("http://193.141.64.203/Signal").Build();
 
+
         InternalNotifaction internalNotifaction;
         BlurEffect Blur = new BlurEffect() { Radius = 0 };
 
@@ -54,6 +55,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             //cheack Update
             SubPageUpdate.CheackUpdate();
+
 
 
             if (Settings.Default._id == "")
@@ -108,6 +110,8 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
                 if (internalNotifaction != null)
                     Root.Children.Remove(internalNotifaction);
+
+                PlaceNotifactionLogs.Visibility = Visibility.Collapsed;
 
                 var notif = new InternalNotifaction();
 
@@ -181,21 +185,21 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             BTNOpenPane.MouseEnter += (s, e) =>
             {
-                    var TextBlock = s as TextBlock;
-                    ColorAnimation Anim = new ColorAnimation(fromValue: Colors.Gray, toValue: Colors.Orange, TimeSpan.FromSeconds(0.3));
-                    Storyboard.SetTargetName(Anim, TextBlock.Name);
-                    Storyboard.SetTargetProperty(Anim, new PropertyPath("(TextBlock.Foreground).(SolidColorBrush.Color)"));
+                var TextBlock = s as TextBlock;
+                ColorAnimation Anim = new ColorAnimation(fromValue: Colors.Gray, toValue: Colors.Orange, TimeSpan.FromSeconds(0.3));
+                Storyboard.SetTargetName(Anim, TextBlock.Name);
+                Storyboard.SetTargetProperty(Anim, new PropertyPath("(TextBlock.Foreground).(SolidColorBrush.Color)"));
 
-                    DoubleAnimation Anim1 = new DoubleAnimation(18, 20, TimeSpan.FromSeconds(0.1));
-                    Storyboard.SetTargetName(Anim1, TextBlock.Name);
-                    Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
+                DoubleAnimation Anim1 = new DoubleAnimation(18, 20, TimeSpan.FromSeconds(0.1));
+                Storyboard.SetTargetName(Anim1, TextBlock.Name);
+                Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
 
 
-                    Storyboard storyboard = new Storyboard();
-                    storyboard.Children.Add(Anim);
-                    storyboard.Children.Add(Anim1);
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(Anim);
+                storyboard.Children.Add(Anim1);
 
-                    storyboard.Begin(this);
+                storyboard.Begin(this);
             };
 
             BTNOpenPane.MouseLeave += (s, e) =>
@@ -282,11 +286,69 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
                     });
                 });
+            }
+            else
+            {
+                SDK.SDK_PageDashboards.DashboardGame.PageDashboard.Notifaction(result =>
+                {
+                    if (result["Support"].ToInt32() >= 1)
+                    {
+                        PlaceNotifactionSupport.Visibility = Visibility.Visible;
+                        TextNumberNotifactionSupport.Text = result["Support"].ToString();
+                    }
+                    else
+                    {
+                        PlaceNotifactionSupport.Visibility = Visibility.Collapsed;
+                    }
 
+
+                    if (result["Logs"].ToInt32() >= 1)
+                    {
+                        PlaceNotifactionLogs.Visibility = Visibility.Visible;
+                        TextNumbetNotifactionLogs.Text = result["Logs"].ToString();
+                    }
+                    else
+                    {
+                        PlaceNotifactionLogs.Visibility = Visibility.Collapsed;
+                    }
+                },
+                   () =>
+                   {
+
+                   });
             }
 
         }
+        public static void ReciveManuallNotifaction()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageDashboard.Notifaction(result =>
+            {
+                if (result["Support"].ToInt32() >= 1)
+                {
+                    Dashboard.PlaceNotifactionSupport.Visibility = Visibility.Visible;
+                    Dashboard.TextNumberNotifactionSupport.Text = result["Support"].ToString();
+                }
+                else
+                {
+                    Dashboard.PlaceNotifactionSupport.Visibility = Visibility.Collapsed;
+                }
 
+
+                if (result["Logs"].ToInt32() >= 1)
+                {
+                    Dashboard.PlaceNotifactionLogs.Visibility = Visibility.Visible;
+                    Dashboard.TextNumbetNotifactionLogs.Text = result["Logs"].ToString();
+                }
+                else
+                {
+                    Dashboard.PlaceNotifactionLogs.Visibility = Visibility.Collapsed;
+                }
+            },
+                  () =>
+                  {
+
+                  });
+        }
 
 
         internal async void Blure(bool OnOff)

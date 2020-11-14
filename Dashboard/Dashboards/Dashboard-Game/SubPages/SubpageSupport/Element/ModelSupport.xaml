@@ -41,7 +41,7 @@
             </EventTrigger>
         </Border.Triggers>
 
-        <Border CornerRadius="2,0,0,2" x:Name="Priority" BorderBrush="LightGreen" BorderThickness="10,0,0,0">
+        <Border CornerRadius="3,0,0,3" x:Name="Priority" BorderBrush="LightGreen" BorderThickness="4,0,0,0">
             <Grid Margin="10,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

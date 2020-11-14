@@ -92,6 +92,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport
 
                             PlaceContentMessages.Children.Add(new ModelMessage(DetailMessage));
                             DashboardGame.Notifaction("Message Send to Support", Notifaction.StatusMessage.Ok);
+
+                            //Cheack Support notifaction
+                            DashboardGame.ReciveManuallNotifaction();
                         }
                         else
                         {
