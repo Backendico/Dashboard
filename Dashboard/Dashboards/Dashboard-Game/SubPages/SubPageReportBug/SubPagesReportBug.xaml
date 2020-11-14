@@ -14,7 +14,7 @@
 
     <Grid x:Name="CloseArea"   Background="Transparent">
 
-        <Grid Background="Transparent" Focusable="True" Opacity="1"   Margin="10,50" x:Name="Root"  Width="300" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <Grid Background="Transparent" Focusable="True" Opacity="1"   Margin="10,50" x:Name="Root"  Width="300"  HorizontalAlignment="Right" VerticalAlignment="Top">
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard>
@@ -63,7 +63,7 @@
             <Border CornerRadius="0,0,10,10" MaxHeight="800"  Grid.Row="1" Background="White">
 
                 <Grid>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  Grid.Row="1">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  Grid.Row="1">
 
                         <Grid Margin="20,10">
                             <StackPanel>
