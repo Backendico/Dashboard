@@ -474,14 +474,14 @@
                         <StackPanel Margin="10">
                             <TextBlock FontWeight="Bold" Text="Name : *"/>
                             <TextBlock Foreground="Gray" Text="The amount paid will be paid in this name :"/>
-                            <TextBox Text="Handel" Name="TextName_BackToBank"  Height="30"/>
+                            <TextBox Text="" Name="TextName_BackToBank"  Height="30"/>
                         </StackPanel>
 
                         <!--Phone-->
                         <StackPanel Margin="10">
                             <TextBlock FontWeight="Bold" Text="Phone : *"/>
                             <TextBlock Foreground="Gray" Text="Payer contact number EX: 989333529966"/>
-                            <TextBox  Text="09333529966" x:Name="TextPhone_BackToBank" Height="30"/>
+                            <TextBox  Text="0" x:Name="TextPhone_BackToBank" Height="30"/>
                         </StackPanel>
 
                         <!--Mail-->
@@ -489,7 +489,7 @@
 
                             <TextBlock FontWeight="Bold" Text="Email : *"/>
                             <TextBlock Foreground="Gray" Text="Payer email"/>
-                            <TextBox Text="hossynassghary@gmail.com" x:Name="TextEamil_BackToBank"  Height="30"/>
+                            <TextBox Text="" x:Name="TextEamil_BackToBank"  Height="30"/>
                         </StackPanel>
 
                         <!--Description-->

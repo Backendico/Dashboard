@@ -81,10 +81,11 @@
                                             <ComboBoxItem IsSelected="True" Content="Other"/>
                                             <ComboBoxItem  Content="Authentication"/>
                                             <ComboBoxItem Content="Dashboard"/>
-                                            <ComboBoxItem Content="Dashboard -> PageDashboard"/>
-                                            <ComboBoxItem Content="Dashboard -> PagePlayer"/>
-                                            <ComboBoxItem Content="Dashboard -> PageLeaderboard"/>
-                                            <ComboBoxItem Content="Dashboard -> PageLogs"/>
+                                            <ComboBoxItem Content="Dashboard -> Page Dashboard"/>
+                                            <ComboBoxItem Content="Dashboard -> Page Player"/>
+                                            <ComboBoxItem Content="Dashboard -> Page Leaderboard"/>
+                                            <ComboBoxItem Content="Dashboard -> Page Logs"/>
+                                            <ComboBoxItem Content="Dashboard -> Page Achievements"/>
                                             <ComboBoxItem Content="Payments"/>
                                             <ComboBoxItem Content="Studios"/>
                                             <ComboBoxItem Content="Language"/>

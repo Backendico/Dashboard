@@ -338,7 +338,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                              {
                                  if (ResultAdd)
                                  {
-                                     DashboardGame.Notifaction("pls pay", StatusMessage.Ok);
+                                     DashboardGame.Notifaction("You will be redirected to the payment page", StatusMessage.Ok);
                                      Process.Start(result["link"].AsString);
 
                                      var serilseDetailPay = new BsonDocument
