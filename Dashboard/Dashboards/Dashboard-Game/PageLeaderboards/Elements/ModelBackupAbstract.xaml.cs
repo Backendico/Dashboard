@@ -23,8 +23,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             this.RefreshList = RefreshList;
 
             TextVersion.Text = Detail["Name"].AsString;
-            TextStart.Text = Detail["Start"].ToUniversalTime().ToString();
-            TextEnd.Text = Detail["End"].ToUniversalTime().ToString();
+            TextStart.Text =DateTime.Parse( Detail["Start"].ToString()).ToString();
+            TextEnd.Text =DateTime.Parse( Detail["End"].ToString()).ToString();
 
 
         }

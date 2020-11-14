@@ -29,8 +29,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         {
             InitializeComponent();
             TextToken.Text = DetailPlayer["Account"]["Token"].AsObjectId.ToString();
-            TextLastLogin.Text = DetailPlayer["Account"]["LastLogin"].ToUniversalTime().ToString();
-            TextCreated.Text = DetailPlayer["Account"]["Created"].ToUniversalTime().ToString();
+            TextLastLogin.Text =DateTime.Parse( DetailPlayer["Account"]["LastLogin"].ToString()).ToString();
+            TextCreated.Text =DateTime.Parse( DetailPlayer["Account"]["Created"].ToString()).ToString();
             TextCountry.Text = DetailPlayer["Account"]["Country"].AsString;
             TextUsername.Text = DetailPlayer["Account"]["Username"].AsString;
 

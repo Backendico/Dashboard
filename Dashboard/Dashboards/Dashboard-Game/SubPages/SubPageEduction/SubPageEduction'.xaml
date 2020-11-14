@@ -195,12 +195,12 @@
 
                     <TabItem Height="30" Background="LightGray" Header="Player Password Recovery">
                         <TextBlock Margin="20" TextWrapping="Wrap">
-                                <Run Text="For more security of players, access and the possibility of changing the password through APIs is impossible."/>
+                                <Run Text="Inform your player before sending the recovery email and do not do this without informing the player."/>
                                 <LineBreak/>
                                 <LineBreak/>
                              <Run Text="1: Open the"/><Run FontWeight="Bold" Text=" 'Edit Player'"/> <Run Text="page"/>
                             <LineBreak/>
-                             <Run Text="2: Click the"/><Run FontWeight="Bold" Text=" 'Recover Email'"/> <Run Text="Button"/>
+                             <Run Text="2: Click the"/><Run FontWeight="Bold" Text=" 'Send Email Recover '"/> <Run Text="Button"/>
                              <LineBreak/>
                               <LineBreak/>
                             <Run FontWeight="Bold" Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="The recovery email will be sent to the players' emails and the recovery link will be sent in the email."/>

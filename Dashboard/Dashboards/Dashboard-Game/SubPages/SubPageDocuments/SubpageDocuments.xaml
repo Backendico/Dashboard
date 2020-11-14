@@ -86,7 +86,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Login/Token"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Login/Token"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -186,7 +186,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Register/Token"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Register/Token"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -295,7 +295,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Leaderboard/ReciveLeaderboardSetting"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Leaderboard/ReciveLeaderboardSetting"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -392,7 +392,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Leaderboard/ReciveLeaderboard"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Leaderboard/ReciveLeaderboard"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -497,7 +497,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Leaderboard/AddPlayer"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Leaderboard/AddPlayer"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -610,7 +610,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Leaderboard/RemovePlayer"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Leaderboard/RemovePlayer"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -719,7 +719,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/Leaderboard/RecivePlayerLeaderboards"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Leaderboard/RecivePlayerLeaderboards"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -826,7 +826,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddAvatarLink"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddAvatarLink"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -937,7 +937,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddLanguage"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddLanguage"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1042,7 +1042,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddPassword"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddPassword"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1155,7 +1155,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddCountry"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddCountry"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1267,7 +1267,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddUsername"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddUsername"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1377,7 +1377,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddNickname"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddNickname"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1485,7 +1485,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddPhone"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddPhone"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1597,7 +1597,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddEmail"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddEmail"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1710,7 +1710,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/AddLogPlayer"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/AddLogPlayer"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1824,7 +1824,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/RecivePlayerlogs"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/RecivePlayerlogs"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -1915,108 +1915,320 @@
                         </TabItem>
 
                         <!--SendEmailRecovery-->
-                        <TabItem  Background="LightGray"  Height="30" Header="Send Email Recovery">
-                            <Grid Margin="20">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
-                                    <StackPanel>
-                                        <!--link-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
+                        <TabItem  Background="LightGray"  Height="30" Header="Recovery Account">
+                            <ScrollViewer>
 
-                                                <!--Link-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
-                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
-                                                </Border>
+                                <StackPanel Margin="20">
+                                    <!--Step1-->
+                                    <Border CornerRadius="5" BorderBrush="Gray" Margin="0,10"  BorderThickness="2">
+                                        <StackPanel>
+                                            <!--link-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
 
-                                                <!--Link-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/SendEmailRecovery"/>
-                                                </Border>
+                                                    <!--Link-->
+                                                    <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                        <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                    </Border>
 
-                                            </StackPanel>
-                                        </Border>
+                                                    <!--Link-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/RecoveryStep1"/>
+                                                    </Border>
 
-                                        <!--Method-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Body Params-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
-                                                </Border>
-
-                                                <!--Method-->
-                                                <Border BorderBrush="Gray" >
-                                                    <StackPanel  Orientation="Horizontal">
-                                                        <!--Token-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
-                                                        </Border>
-
-                                                        <!--Username-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
-                                                        </Border>
-
-                                                        <!--Password-->
-                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
-                                                        </Border>
-
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-
-                                        <!--Response-->
-                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--Method-->
-                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
-                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
-                                                </Border>
-                                                <StackPanel>
-                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
-                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
                                                 </StackPanel>
+                                            </Border>
 
-                                            </StackPanel>
-                                        </Border>
+                                            <!--Method-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
 
-                                        <!--Info Tips-->
-                                        <StackPanel Margin="10">
-                                            <TextBlock TextWrapping="Wrap"  Text="To increase the security level of the player, the player's registered password is not visible at all at the beginning of registration, and to change the password, you can send a recovery email to the player, and all the recovery steps will be sent by email."/>
-                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                    <!--Method-->
+                                                    <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                    </Border>
+
+                                                    <!--Method-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Body Params-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Method-->
+                                                    <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                    </Border>
+
+                                                    <!--Method-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <StackPanel  Orientation="Horizontal">
+                                                            <!--Token-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                            </Border>
+
+                                                            <!--Studio-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                            </Border>
+
+                                                            <!--TokenPlayer-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                            </Border>
+
+                                                            <!--Email-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Email"/>
+                                                            </Border>
+
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Response-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Method-->
+                                                    <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                    </Border>
+                                                    <TextBlock Margin="10,0" Text="The recovery code is returned as an int." VerticalAlignment="Center" />
+
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Info Tips-->
+                                            <StackPanel Margin="10">
+                                                <TextBlock TextWrapping="Wrap"  Text="Step 1: To recover and change the user's password, in the first step, the recovery code will be sent to the user's email and the same code will be sent to you in response."/>
+                                                <TextBlock TextWrapping="Wrap" Margin="20">
                                                 <Run FontWeight="Bold" Text="Tips:"/>
                                                 <LineBreak />
-                                                <Run Text="&#xE915;"  Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="Before sending the request, be sure to check that the player has a registered email."/> 
+                                                <Run Text="&#xE915;"  Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="The user must have an email to recover the account."/> 
                                                   <LineBreak />
-                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text=" How to recover the account In the first step, send the recovery email, the second step is to follow the email by the player and click on the recovery link and display the account recovery page, and the third step is to fill in the required fields and finally the account recovery."/>
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="If you do not have an email, you will encounter an error"/>
+
+                                                </TextBlock>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!--Step2-->
+                                    <Border CornerRadius="5"   Margin="0,10" BorderBrush="Gray" BorderThickness="2">
+                                        <StackPanel>
+                                            <!--link-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <!--Link-->
+                                                    <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                        <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                    </Border>
+
+                                                    <!--Link-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/RecoveryStep2"/>
+                                                    </Border>
+
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Method-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <!--Method-->
+                                                    <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                    </Border>
+
+                                                    <!--Method-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Body Params-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Method-->
+                                                    <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                    </Border>
+
+                                                    <!--Method-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <StackPanel  Orientation="Horizontal">
+                                                            <!--Token-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                            </Border>
+
+                                                            <!--Studio-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                            </Border>
+
+                                                            <!--TokenPlayer-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                            </Border>
+
+                                                            <!--Email-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Email"/>
+                                                            </Border>
+
+                                                            <!--Code-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Code"/>
+                                                            </Border>
+
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Response-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Method-->
+                                                    <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                    </Border>
+                                                    <StackPanel>
+                                                        <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                        <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </Border>
+                                                    <!--Info Tips-->
+                                                    <StackPanel Margin="10">
+                                                <TextBlock TextWrapping="Wrap"  Text="Step 2:You can compare the code sent and the player code and verify the code. Change the password after checking the code."/>
+                                                    </StackPanel>
+
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!--Step3-->
+                                    <Border CornerRadius="5" BorderBrush="Gray" Margin="0,10" BorderThickness="2">
+                                        <StackPanel>
+                                            <!--link-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <!--Link-->
+                                                    <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                        <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                    </Border>
+
+                                                    <!--Link-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/ChangePassword"/>
+                                                    </Border>
+
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Method-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <!--Method-->
+                                                    <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                    </Border>
+
+                                                    <!--Method-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Body Params-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Method-->
+                                                    <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                    </Border>
+
+                                                    <!--Method-->
+                                                    <Border BorderBrush="Gray" >
+                                                        <StackPanel  Orientation="Horizontal">
+                                                            <!--Token-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                            </Border>
+
+                                                            <!--Studio-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                            </Border>
+
+                                                            <!--TokenPlayer-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                            </Border>
+
+
+                                                            <!--Password-->
+                                                            <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                                <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Password"/>
+                                                            </Border>
+
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Response-->
+                                            <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Method-->
+                                                    <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                        <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                    </Border>
+                                                    <StackPanel>
+                                                        <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                        <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--Info Tips-->
+                                            <StackPanel Margin="10">
+                                                <TextBlock TextWrapping="Wrap"  Text="Step 3:Notify the player before changing the password. The password sent will be replaced with the previous password."/>
+                                                <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  Foreground="Orange" FontFamily="Segoe MDL2 Assets"/> <Run Text="Password must be more than 6 characters."/> 
+                                                  <LineBreak />
+                                                <Run Text="&#xE915;" Foreground="Orange" FontFamily="Segoe MDL2 Assets"/> <Run Text="If the previous password is the same as the new password, an error will occur."/>
                                                 <LineBreak />
                                                 <Run Text="&#xE915;" Foreground="Tomato" FontFamily="Segoe MDL2 Assets"/> <Run Text="Player password is case sensitive."/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;" FontFamily="Segoe MDL2 Assets"/> <Run Text="Follow the previous 2 steps to increase product performance"/>
 
-                                            </TextBlock>
+
+                                                </TextBlock>
+                                            </StackPanel>
+
                                         </StackPanel>
+                                    </Border>
+                                </StackPanel>
 
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
+                            </ScrollViewer>
 
                         </TabItem>
 
@@ -2036,7 +2248,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/Ban"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/Ban"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2139,7 +2351,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/EditPlayer/Unban"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/EditPlayer/Unban"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2248,7 +2460,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/ReciveStatices"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ReciveStatices"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2343,7 +2555,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/ResetLeaderboard"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ResetLeaderboard"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2449,7 +2661,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/AddLog"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/AddLog"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2571,7 +2783,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/ReciveStatusServer"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ReciveStatusServer"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2654,7 +2866,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/ReciveStudioSetting"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ReciveStudioSetting"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2751,7 +2963,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/DeletePlayer"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/DeletePlayer"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2857,7 +3069,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/SearchPlayerToken"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/SearchPlayerToken"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -2960,7 +3172,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/SearchPlayerEmail"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/SearchPlayerEmail"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -3061,7 +3273,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/SearchPlayerUsername"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203//AdminAPI/SearchPlayerUsername"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -3163,7 +3375,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/ReciveBackups"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ReciveBackups"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -3264,7 +3476,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="https://localhost:44346/AdminAPI/ReciveBackups"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ReciveBackups"/>
                                                 </Border>
 
                                             </StackPanel>
@@ -3357,7 +3569,7 @@
                 <!--Admin -->
                 <TabItem Height="30" Background="LightGray"   Header="Achievements API">
                     <TabControl TabStripPlacement="Left">
-                      
+
                         <!--Achievements List-->
                         <TabItem  Background="LightGray"  Height="30" Header="Achievements List">
                             <Grid Margin="20">
@@ -3511,18 +3723,18 @@
                                                         <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
                                                             <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
                                                         </Border>
-                                                        
+
                                                         <!--TokenPlayer-->
                                                         <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
                                                             <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
                                                         </Border>
-                                                        
+
                                                         <!--Detail-->
                                                         <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
                                                             <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
                                                         </Border>
-                                                        
-                                                        
+
+
 
                                                     </StackPanel>
                                                 </Border>
@@ -3689,7 +3901,7 @@
                             </Grid>
 
                         </TabItem>
-                    
+
                         <!--Player achievements -->
                         <TabItem  Background="LightGray"  Height="30" Header=" Player Achievements">
                             <Grid Margin="20">

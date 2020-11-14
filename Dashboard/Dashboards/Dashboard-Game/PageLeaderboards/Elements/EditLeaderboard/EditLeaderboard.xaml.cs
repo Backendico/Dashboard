@@ -31,7 +31,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextLeaderboardName.Text = Detail["Name"].AsString;
             TextToken.Text = Detail["Token"].AsObjectId.ToString();
             TextName_Setting.Text = Detail["Name"].AsString;
-            TextStart.Text = Detail["Start"].ToUniversalTime().ToString();
+            TextStart.Text = DateTime.Parse( Detail["Start"].ToString()).ToString();
             TextMinValue.Text = Detail["Min"].ToString();
             TextMaxValue.Text = Detail["Max"].ToString();
 
@@ -115,6 +115,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
             ComboboxReset.SelectionChanged += (s, e) =>
             {
+                Detail["Reset"] = ComboboxReset.SelectedIndex;
                 ControlAmount();
             };
 

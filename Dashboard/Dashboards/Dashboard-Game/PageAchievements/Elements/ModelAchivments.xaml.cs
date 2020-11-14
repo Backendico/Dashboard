@@ -30,7 +30,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             InitializeComponent();
             TextName.Text = DetailAchievement["Name"].AsString;
             TextToken.Text = DetailAchievement["Token"].ToString();
-            TextCreated.Text = DetailAchievement["Created"].ToLocalTime().ToString();
+            TextCreated.Text =DateTime.Parse( DetailAchievement["Created"].ToString()).ToString();
             TextValue.Text = DetailAchievement["Value"].ToString();
           
             try
