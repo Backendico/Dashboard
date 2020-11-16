@@ -4021,7 +4021,7 @@
 
                                                 <!--Link-->
                                                 <Border BorderBrush="Gray" >
-                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/ReciveBackups"/>
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/AdminAPI/BackupLeaderboard"/>
                                                 </Border>
 
                                             </StackPanel>
