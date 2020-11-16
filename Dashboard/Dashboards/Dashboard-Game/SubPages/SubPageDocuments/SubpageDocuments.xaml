@@ -3266,7 +3266,7 @@
 
                                                         <!--TokenPlayer-->
                                                         <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
-                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="IsNotifaction"/>
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="IsNotification"/>
                                                         </Border>
 
                                                     </StackPanel>
