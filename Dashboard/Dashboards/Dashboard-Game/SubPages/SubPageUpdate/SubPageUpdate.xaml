@@ -60,7 +60,7 @@
                 </TextBlock>
                 
                 <!--BTN Download-->
-                <Border Cursor="Hand"  Width="80" Height="30" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Border x:Name="BTNDownload" Cursor="Hand"  Width="80" Height="30" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" >
                          <Run Text="&#xE896;" FontFamily="Segoe MDL2 Assets"/>
                         <Run Text="Download"/> 

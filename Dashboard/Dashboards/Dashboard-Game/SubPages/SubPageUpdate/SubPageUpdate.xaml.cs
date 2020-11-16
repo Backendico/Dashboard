@@ -1,6 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,6 +14,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate
             InitializeComponent();
 
             ControlUpdate();
+            
         }
 
 
@@ -21,7 +23,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate
             SDK.SDK_PageDashboards.DashboardGame.PageDashboard.CheackUpdate(
                 result =>
                 {
-                    
                     if (result.ElementCount >= 1)
                     {
                         TextWaiting.Visibility = Visibility.Collapsed;
@@ -35,6 +36,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate
                         TextDetail.Text = result["Detail"].AsString;
                         TextSize.Text = result["Size"].AsString;
                         TextLink.Text = result["URL"].AsString;
+                        
+                        BTNDownload.MouseDown += (s, e) =>
+                        {
+                            Process.Start(TextLink.Text);
+                        };
+
                         if (version == Application.ResourceAssembly.GetName().Version)
                         {
                             PanelUpdated.Visibility = Visibility.Visible;
