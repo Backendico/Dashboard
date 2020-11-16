@@ -82,6 +82,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                         if (Result)
                         {
                             DashboardGame.Notifaction("Token changed For more security please log in again", StatusMessage.Ok);
+                            
+                            DashboardGame.Dashboard.Root.Children.Remove(this);
                             DashboardGame.Dashboard.Root.Children.Add(new Login());
                         }
                         else
