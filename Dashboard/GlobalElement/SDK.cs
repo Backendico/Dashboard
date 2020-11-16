@@ -400,6 +400,25 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void GenerateNewToken(Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.GenerateNewToken);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
                 }
 
                 public sealed class PagePlayers
@@ -660,7 +679,7 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-                   
+
                     public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.RecivePlayerLogs);
@@ -727,7 +746,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void Recovery1(ObjectId TokenPlayer,MailAddress Email,Action<int> CodeRecovery)
+                    public static async void Recovery1(ObjectId TokenPlayer, MailAddress Email, Action<int> CodeRecovery)
                     {
 
                         var client = new RestClient(Links.Recovery1);
@@ -736,11 +755,11 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenPlayer",TokenPlayer.ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
                         request.AddParameter("Email", Email.Address);
-                        var response =await client.ExecuteAsync(request);
+                        var response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             CodeRecovery(int.Parse(response.Content));
                         }
@@ -751,7 +770,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Recovery2(ObjectId TokenPlayer, MailAddress Email,int Code, Action<bool> CodeRecovery)
+                    public static async void Recovery2(ObjectId TokenPlayer, MailAddress Email, int Code, Action<bool> CodeRecovery)
                     {
                         var client = new RestClient(Links.Recovery2);
                         client.Timeout = -1;
@@ -774,8 +793,8 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-                   
-                    public static async void ChangePassword(ObjectId TokenPlayer, string Password,  Action<bool> CodeRecovery)
+
+                    public static async void ChangePassword(ObjectId TokenPlayer, string Password, Action<bool> CodeRecovery)
                     {
                         var client = new RestClient(Links.ChangePassword);
                         client.Timeout = -1;
@@ -797,7 +816,7 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-               
+
                 }
 
                 public sealed class PageLeaderboard
@@ -829,7 +848,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Creat(string NameLeaderboard, int reset,int Amount, int Sort, int Min, int Max, Action<bool> Result)
+                    public static async void Creat(string NameLeaderboard, int reset, int Amount, int Sort, int Min, int Max, Action<bool> Result)
                     {
                         var SeriliseDetail = new BsonDocument
                         {
@@ -1395,17 +1414,17 @@ namespace Dashboard.GlobalElement
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Studio",SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         request.AddParameter("Token", SettingUser.Token);
-                        var response =await client.ExecuteAsync(request);
+                        var response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
                         }
                         else
                         {
-                            Result(false);  
+                            Result(false);
                         }
                     }
                 }
@@ -1649,6 +1668,8 @@ namespace Dashboard.GlobalElement
                 public string CheackPay => "https://api.idpay.ir/v1.1/payment/inquiry";
 
                 public string VerifiePay => BaseLink + "Payments/VerifiePay";
+
+                public string GenerateNewToken => BaseLink + "ChoiceStudioGame/GenerateToken";
             }
 
             public struct PagePlayers

@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
+using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
@@ -29,6 +30,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             CurentPage = PageSettings;
             CurentBTNHeader = BTNSetting;
 
+            #region PageSetting
             //fill frist Setting
             TextName.Text = SettingUser.CurentDetailStudio["Name"].ToString();
             TextType.Text = SettingUser.CurentDetailStudio["Type"].ToString();
@@ -37,36 +39,66 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             TextCreated.Text = SettingUser.CurentDetailStudio["Created"].ToLocalTime().ToString();
             TextDatabase.Text = SettingUser.CurentDetailStudio["Database"].ToString();
 
+            //copys
+            TextToken.MouseDown += GlobalEvents.CopyText;
+            TextDatabase.MouseDown += GlobalEvents.CopyText;
+            TextID.MouseDown += GlobalEvents.CopyText;
 
-            //page Setting
-
+            //action btn state
             BTNState.MouseDown += (s, e) =>
             {
-                    SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
-                        result =>
+                SDK.SDK_PageDashboards.DashboardGame.PageStudios.Status(
+                    result =>
+                    {
+                        var Text = "";
+                        foreach (var item in result)
                         {
-                            var Text = "";
-                            foreach (var item in result)
-                            {
-                                Text += item.Name + ": " + item.Value.ToString() + "\n";
-                            }
+                            Text += item.Name + ": " + item.Value.ToString() + "\n";
+                        }
 
-                            DashboardGame.Dialog(Text, "Server State");
-                        },
-                        () =>
-                        {
-                            DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
-                        });
-              
+                        DashboardGame.Dialog(Text, "Server State");
+                    },
+                    () =>
+                    {
+                        DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
+                    });
+
 
             };
-
+            //action btn update
             BTNUpdate.MouseDown += (s, e) =>
             {
                 DashboardGame.Dashboard.Root.Children.Add(new SubPageUpdate.SubPageUpdate());
             };
 
-            //Page Monetize
+            //action btn generateNew token
+            BTNGeneretNewToken.MouseDown += async (s, e) =>
+            {
+                if (await DashboardGame.DialogYesNo("Changing the current token causes a change in all studios \n are you sure ? ") == MessageBoxResult.Yes)
+                {
+
+                    SDK.SDK_PageDashboards.DashboardGame.PageStudios.GenerateNewToken(Result =>
+                    {
+                        if (Result)
+                        {
+                            DashboardGame.Notifaction("Token changed For more security please log in again", StatusMessage.Ok);
+                            DashboardGame.Dashboard.Root.Children.Add(new Login());
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Change", StatusMessage.Error);
+                        }
+
+                    });
+
+                }
+
+            };
+            #endregion
+
+
+            #region Page Monetize
+
             BTNPlayer.MouseDown += (s, obj) =>
             {
                 if (CurentMonetiz["Cash"].AsInt32 - 10000 >= 0)
@@ -412,11 +444,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                 }
             };
 
+            #endregion
 
-            //copys
-            TextToken.MouseDown += GlobalEvents.CopyText;
-            TextDatabase.MouseDown += GlobalEvents.CopyText;
-            TextID.MouseDown += GlobalEvents.CopyText;
 
         }
 
