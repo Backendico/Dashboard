@@ -107,6 +107,7 @@
                         <TextBlock ToolTip="Players" x:Name="BTNPlayers" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xE902;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets" MouseDown="ChangePage"  />
                         <TextBlock ToolTip="Leaderboards" x:Name="BTNLeaderboards" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xECA7;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                         <TextBlock ToolTip="Achievements" x:Name="BTNAchievements" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
+                        <TextBlock ToolTip="Shop" x:Name="BTNShop" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xE719;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                     </StackPanel>
 
                     <!--Texts-->
@@ -116,6 +117,7 @@
                         <TextBlock Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Players"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                         <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Leaderboards"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                         <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Achievements"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
+                        <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Shop"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                     </StackPanel>
 
                     <!--Content-->

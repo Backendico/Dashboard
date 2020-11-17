@@ -90,6 +90,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
 
             };
 
+
             //actionBTnSetting
             BTNSetting.MouseDown += (s, e) =>
             {
@@ -448,6 +449,10 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 case "BTNAchievements":
                     CurentPage = new PageAchievements.PageAchievements();
                     CurentTab = BTNAchievements;
+                    break;
+                case "BTNShop":
+                    CurentPage = new PageShop.PageShop();
+                    CurentTab = BTNShop;
                     break;
                 default:
                     Debug.WriteLine("Not set");
