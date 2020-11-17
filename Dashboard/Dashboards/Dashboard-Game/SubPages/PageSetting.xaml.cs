@@ -74,6 +74,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             //action btn generateNew token
             BTNGeneretNewToken.MouseDown += async (s, e) =>
             {
+                BTNGeneretNewToken.IsEnabled = false;   
+
                 if (await DashboardGame.DialogYesNo("Changing the current token causes a change in all studios \n are you sure ? ") == MessageBoxResult.Yes)
                 {
 
@@ -89,10 +91,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                         else
                         {
                             DashboardGame.Notifaction("Faild Change", StatusMessage.Error);
+                            BTNGeneretNewToken.IsEnabled = true;
                         }
 
                     });
 
+                }
+                else
+                {
+                    BTNGeneretNewToken.IsEnabled = true;
                 }
 
             };
