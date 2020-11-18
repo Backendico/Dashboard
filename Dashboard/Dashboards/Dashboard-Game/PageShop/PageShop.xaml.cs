@@ -168,7 +168,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-
+            
         }
 
 
