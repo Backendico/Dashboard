@@ -1626,6 +1626,33 @@ namespace Dashboard.GlobalElement
 
                 }
 
+                public sealed class PageStore
+                {
+                    public static ModelLinks.DashboardGame.PageStore Links;
+
+                    public static async void AddStore(BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddStore);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Detail", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+
+                }
 
             }
         }
@@ -1754,6 +1781,14 @@ namespace Dashboard.GlobalElement
                 public string AddMessage => BaseLink + "PageSupport/AddMessage";
                 public string CloseSupport => BaseLink + "PageSupport/CloseSupport";
                 public string AddReportBug => BaseLink + "PageSupport/AddReportBug";
+            }
+
+            public struct PageStore
+            {
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string AddStore => BaseLink + "PageStore/AddStore";
+
             }
         }
     }

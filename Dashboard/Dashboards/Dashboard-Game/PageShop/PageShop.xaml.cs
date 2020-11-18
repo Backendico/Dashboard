@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,6 +29,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
             {"AvatarLink","" },
             {"Tags",new BsonArray() },
             {"Products" ,new BsonArray()},
+
         };
 
 
@@ -75,6 +77,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                     }
 
 
+                    SDK.SDK_PageDashboards.DashboardGame.PageStore.AddStore(Detail, result =>
+                    {
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Store Added", Notifaction.StatusMessage.Ok);
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
+                        }
+                    });
+
                 }
                 catch (Exception ex)
                 {
@@ -100,7 +114,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                             if (Detail["Tags"].AsBsonArray[i].AsString != TextBoxTag.Text)
                             {
                                 Count = 0;
-
                             }
                             else
                             {
@@ -168,7 +181,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-            
         }
 
 
