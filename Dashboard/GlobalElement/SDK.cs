@@ -1652,6 +1652,27 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void ReciveStore(Action<BsonDocument> Result)
+                    {
+
+                        var client = new RestClient(Links.ReciveStore);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
                 }
 
             }
@@ -1788,6 +1809,7 @@ namespace Dashboard.GlobalElement
                 public string BaseLink => "http://193.141.64.203/";
 
                 public string AddStore => BaseLink + "PageStore/AddStore";
+                public string ReciveStore => BaseLink + "PageStore/ReciveStores";
 
             }
         }

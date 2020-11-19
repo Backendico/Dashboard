@@ -1,4 +1,5 @@
-﻿using Dashboard.GlobalElement;
+﻿using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements;
+using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
             {"AvatarLink","" },
             {"Tags",new BsonArray() },
             {"Products" ,new BsonArray()},
+            {"IsActive",true }
 
         };
 
@@ -37,6 +39,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
         {
             InitializeComponent();
 
+            ReciveStores();
 
             //acaton add Store
             BTNaddStore.MouseDown += (s, e) =>
@@ -77,11 +80,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                     }
 
 
+                    Detail["Name"] = TextboxName.Text;
+                    Detail["Description"] = TextBoxDescription.Text;
+                    Detail["MarketLink"] = TextBoxMarketLink.Text;
+                    Detail["AvatarLink"] = TextBoxAvatar.Text;
+                    Detail["IsActive"] = CheackboxActivity.IsChecked.Value;
+
                     SDK.SDK_PageDashboards.DashboardGame.PageStore.AddStore(Detail, result =>
                     {
                         if (result)
                         {
                             DashboardGame.Notifaction("Store Added", Notifaction.StatusMessage.Ok);
+                            ReciveStores();
+                            ShowOffSubpageAddStore();
                         }
                         else
                         {
@@ -152,16 +163,46 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
 
                 if (e.Source.GetType() == typeof(Grid))
                 {
-                    ShowOffSubpageAddLeaderboard();
+                    ShowOffSubpageAddStore();
                 }
             };
 
             //btn show panel add store
             BTNShowPanelStore.MouseDown += (s, e) =>
             {
-                ShowSubpageAddLeaderboard();
+                ShowSubpageAddStore();
 
             };
+        }
+
+        void ReciveStores()
+        {
+            PlaceStore.Children.Clear();
+
+            SDK.SDK_PageDashboards.DashboardGame.PageStore.ReciveStore(result =>
+            {
+                try
+                {
+
+                    if (result["Store"].AsBsonArray.Count >= 1)
+                    {
+                        foreach (var item in result["Store"].AsBsonArray)
+                        {
+                            PlaceStore.Children.Add(new ModelStore(item.AsBsonDocument));
+                        }
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                        ShowSubpageAddStore();
+                    }
+                }
+                catch (Exception)
+                {
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                    ShowSubpageAddStore();
+                }
+            });
         }
 
 
@@ -170,7 +211,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ShowSubpageAddLeaderboard()
+        void ShowSubpageAddStore()
         {
             PanelAddStore.Visibility = Visibility.Visible;
 
@@ -189,7 +230,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ShowOffSubpageAddLeaderboard()
+        void ShowOffSubpageAddStore()
         {
 
             DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
@@ -201,6 +242,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                 TextBoxMarketLink.Text = "";
                 TextBoxAvatar.Text = "";
                 TextBoxTag.Text = "";
+                CheackboxActivity.IsChecked = false;
+
                 Detail = new BsonDocument
                 {
                     {"Name","" },
@@ -209,6 +252,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                     {"AvatarLink","" },
                     {"Tags",new BsonArray() },
                     {"Products" ,new BsonArray()},
+                    {"IsActive",true }
                 };
 
                 PlaceTags.Children.Clear();
@@ -228,7 +272,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
 
             if (Detail["Tags"].AsBsonArray.Count == 1)
             {
-                PlaceTags.Children.Add(new ModelTag(Detail["Tags"][0].AsString, Detail["Tags"].AsBsonArray, RefreshTags, PlaceTags));
+                PlaceTags.Children.Add(new ModelTag(Detail["Tags"][0].AsString, Detail["Tags"].AsBsonArray, RefreshTags));
             }
             else
             {
@@ -236,12 +280,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                 {
                     if (i + 1 == Detail["Tags"].AsBsonArray.Count)
                     {
-                        PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString, Detail["Tags"].AsBsonArray, RefreshTags, PlaceTags));
+                        PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString, Detail["Tags"].AsBsonArray, RefreshTags));
                     }
                     else
                     {
 
-                        PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString, Detail["Tags"].AsBsonArray, RefreshTags, PlaceTags));
+                        PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString, Detail["Tags"].AsBsonArray, RefreshTags));
                         PlaceTags.Children.Add(new TextBlock()
                         {
                             Text = " | ",
@@ -258,30 +302,46 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
         }
 
 
-        class ModelTag : TextBlock
+    }
+    class ModelTag : TextBlock
+    {
+        public ModelTag(string NameTag, BsonArray TagList, Action RefreshTags)
         {
-            public ModelTag(string NameTag, BsonArray TagList, Action RefreshTags, WrapPanel PlaceTags)
+            Text = NameTag;
+            Foreground = new SolidColorBrush(Colors.Black);
+            FontWeight = FontWeights.Bold;
+            Cursor = Cursors.Hand;
+            MouseEnter += (s, e) =>
             {
-                Text = NameTag;
+                Foreground = new SolidColorBrush(Colors.Tomato);
+            };
+
+            MouseLeave += (s, e) =>
+            {
                 Foreground = new SolidColorBrush(Colors.Black);
-                FontWeight = FontWeights.Bold;
-                Cursor = Cursors.Hand;
-                MouseEnter += (s, e) =>
-                {
-                    Foreground = new SolidColorBrush(Colors.Tomato);
-                };
+            };
 
-                MouseLeave += (s, e) =>
-                {
-                    Foreground = new SolidColorBrush(Colors.Black);
-                };
+            MouseDown += (s, e) =>
+            {
+                TagList.Remove(NameTag);
+                RefreshTags();
+            };
+        }
 
-                MouseDown += (s, e) =>
-                {
-                    TagList.Remove(NameTag);
-                    RefreshTags();
-                };
-            }
+        public ModelTag(string NameTag)
+        {
+            Text = NameTag;
+            Foreground = new SolidColorBrush(Colors.Black);
+
+            MouseEnter += (s, e) =>
+            {
+                Foreground = new SolidColorBrush(Colors.Tomato);
+            };
+
+            MouseLeave += (s, e) =>
+            {
+                Foreground = new SolidColorBrush(Colors.Black);
+            };
 
         }
     }
