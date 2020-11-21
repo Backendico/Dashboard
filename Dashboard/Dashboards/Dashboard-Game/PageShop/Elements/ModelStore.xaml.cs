@@ -1,4 +1,6 @@
-﻿using Dashboard.GlobalElement;
+﻿using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements;
+using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop;
+using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using RestSharp;
 using System;
@@ -56,23 +58,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
                 bitmap.EndInit();
 
                 image.Source = bitmap;
-                PlaceAvatar.Child=image;
+                PlaceAvatar.Child = image;
             }
             else
             {
                 PlaceAvatar.Child = new TextBlock()
                 {
                     Text = "\xEB9F",
-                    TextAlignment=TextAlignment.Center,
-                    VerticalAlignment=VerticalAlignment.Center,
-                    HorizontalAlignment=HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                     Foreground = new SolidColorBrush(Colors.Black),
                     FontFamily = new FontFamily("Segoe MDL2 Assets"),
-                    FontSize=30,
-                    ToolTip="No Avatar"
+                    FontSize = 30,
+                    ToolTip = "No Avatar"
                 };
             }
 
+            //action btn edit 
+            BTNEdit.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new EditShop.EditShop());
+            };
 
             RefreshTags();
 
