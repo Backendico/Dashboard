@@ -78,7 +78,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
             //action btn edit 
             BTNEdit.MouseDown += (s, e) =>
             {
-                DashboardGame.Dashboard.Root.Children.Add(new EditShop.EditShop());
+                DashboardGame.Dashboard.Root.Children.Add(new EditShop.EditShop(Detail));
             };
 
             RefreshTags();

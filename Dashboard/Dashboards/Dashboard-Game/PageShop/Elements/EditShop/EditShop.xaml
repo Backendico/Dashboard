@@ -67,47 +67,55 @@
 
                 <!--Link Avatar-->
                 <StackPanel>
-                <TextBlock FontWeight="Bold" Text="Avatar Link:"/>
-                <TextBox Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    <TextBlock>
+                        <Run Text="Avatar Link:" FontWeight="Bold"/>
+                        <LineBreak/>
+                        <Run Foreground="Gray" Text="Acceptable formats: png | jpg | gif "/>
+                    </TextBlock>
+                    <TextBox x:Name="TextAvatar" Margin="0,0,10,0" MinWidth="300" Height="30"/>
                 </StackPanel>
-                
-                
+
+
                 <!--Name-->
                 <StackPanel>
                     <TextBlock FontWeight="Bold" Text="Name :"/>
-                    <TextBox Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    <TextBox x:Name="TextName" Margin="0,0,10,0" MinWidth="300" Height="30"/>
                 </StackPanel>
 
                 <!--Description-->
                 <StackPanel>
                     <TextBlock FontWeight="Bold" Text="Description :"/>
-                    <TextBox AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" MinHeight="60" Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    <TextBox x:Name="TextDescription" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" MinHeight="60" Margin="0,0,10,0" MinWidth="300" Height="30"/>
                 </StackPanel>
-                
+
                 <!--Market Link-->
                 <StackPanel>
                     <TextBlock FontWeight="Bold" Text="Market Link :"/>
-                    <TextBox Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    <TextBox x:Name="TextMarketLink" Margin="0,0,10,0" MinWidth="300" Height="30"/>
                 </StackPanel>
 
-                <!--Token-->
-                <TextBlock>
-                    <Run Text="Token:" FontWeight="Bold" />
-                    <Run Text="XXX"/>
-                </TextBlock>
+                <!--Activity-->
+                <CheckBox Margin="0,10" FontWeight="Bold" Content="Active" x:Name="IsActive"/>
                 
                 <!--Purdoct-->
                 <TextBlock>
                     <Run Text="Prudoct:" FontWeight="Bold" />
-                    <Run Text="XXX"/>
+                    <Run Name="TextPurdocts" Text="XXX"/>
                 </TextBlock>
                 
+                <!--Token-->
+                <TextBlock>
+                    <Run Text="Token:" FontWeight="Bold" />
+                    <Run Name="TextToken" Text="XXX"/>
+                </TextBlock>
+
+
                 <!--Created-->
                 <TextBlock>
                     <Run Text="Created:" FontWeight="Bold" />
-                    <Run Text="XXX"/>
+                    <Run Name="TextCreated" Text="XXX"/>
                 </TextBlock>
-                
+
 
                 <!--BTNSave-->
                 <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="Orange" >
