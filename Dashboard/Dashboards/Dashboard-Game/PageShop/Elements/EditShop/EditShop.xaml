@@ -49,8 +49,8 @@
 
                 <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
                     <Button Cursor="Hand" x:Name="BTNSetting"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Setting" Click="ChangePage" />
-                    <Button Cursor="Hand" x:Name="BTNPrudoct"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Prudocts" Click="ChangePage" />
-                    <Button Cursor="Hand" x:Name="BTNHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Payments" Click="ChangePage" />
+                    <Button Cursor="Hand" x:Name="BTNProduct"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Product" Click="ChangePage" />
+                    <Button Cursor="Hand" x:Name="BTNPayments"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Payments" Click="ChangePage" />
                 </StackPanel>
 
             </Grid>
@@ -60,7 +60,8 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <StackPanel x:Name="ContentSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
+            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
+            <StackPanel >
 
                 <!--Avatar-->
                 <Border x:Name="PlaceAvatar" BorderBrush="Gray" BorderThickness="2"  HorizontalAlignment="Center" Width="80" Height="80" CornerRadius="5" Margin="0,10" Background="White"   />
@@ -106,7 +107,7 @@
                 <!--Token-->
                 <TextBlock>
                     <Run Text="Token:" FontWeight="Bold" />
-                    <Run Name="TextToken" Text="XXX"/>
+                    <Run Cursor="Hand" Name="TextToken" Text="XXX"/>
                 </TextBlock>
 
 
@@ -123,9 +124,11 @@
                 </Border>
 
             </StackPanel>
+                
+            </Grid>
 
-            <!--Leaderboard-->
-            <Grid  x:Name="ContentLeaderboard"  Visibility="Collapsed"  Grid.Row="2" >
+            <!--product-->
+            <Grid  x:Name="PanelProduct"  Visibility="Collapsed"  Grid.Row="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
@@ -267,7 +270,7 @@
 
 
             <!--Payments-->
-            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" >
+            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="PanelPayments" >
                 <Border  CornerRadius="5"  BorderBrush="Gray"  BorderThickness="2"   >
                     <Grid>
                         <Grid.RowDefinitions>

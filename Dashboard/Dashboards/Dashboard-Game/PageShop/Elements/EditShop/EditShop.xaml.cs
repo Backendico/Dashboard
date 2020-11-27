@@ -1,21 +1,11 @@
-﻿using MongoDB.Bson;
+﻿using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 {
@@ -24,6 +14,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
     /// </summary>
     public partial class EditShop : UserControl
     {
+        Button BTNCurent;
+        Grid PageCurent;
+
+
+
         public EditShop(BsonDocument Detail)
         {
             InitializeComponent();
@@ -37,6 +32,38 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             TextPurdocts.Text = Detail["Products"].AsBsonArray.Count.ToString();
             TextCreated.Text = Detail["Created"].ToLocalTime().ToString();
 
+            if (Detail["AvatarLink"].AsString.Length >= 1)
+            {
+                var image = new Image();
+                var fullFilePath = Detail["AvatarLink"].ToString();
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+                bitmap.EndInit();
+
+                image.Source = bitmap;
+                PlaceAvatar.Child = image;
+            }
+            else
+            {
+                PlaceAvatar.Child = new TextBlock()
+                {
+                    Text = "\xEB9F",
+                    TextAlignment = TextAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                    FontSize = 30,
+                    ToolTip = "No Avatar"
+                };
+            }
+
+            PageCurent = PanelSetting;
+            BTNCurent = BTNSetting;
+
+            //acaton SaveSetting
             BTNSaveSetting.MouseDown += (s, e) =>
             {
                 try
@@ -68,7 +95,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                     }
 
                     //valid name
-                    if (TextName.Text.Length>=1)
+                    if (TextName.Text.Length >= 1)
                     {
                         Detail["Name"] = TextName.Text;
                     }
@@ -78,7 +105,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                     }
 
                     //valid market
-                    if (TextMarketLink.Text.Length>=1)
+                    if (TextMarketLink.Text.Length >= 1)
                     {
                         new Uri(TextMarketLink.Text);
 
@@ -99,34 +126,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 }
             };
 
-            if (Detail["AvatarLink"].AsString.Length >= 1)
-            {
-                var image = new Image();
-                var fullFilePath = Detail["AvatarLink"].ToString();
-
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-                bitmap.EndInit();
-
-                image.Source = bitmap;
-                PlaceAvatar.Child = image;
-            }
-            else
-            {
-                PlaceAvatar.Child = new TextBlock()
-                {
-                    Text = "\xEB9F",
-                    TextAlignment = TextAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = new SolidColorBrush(Colors.Black),
-                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
-                    FontSize = 30,
-                    ToolTip = "No Avatar"
-                };
-            }
-
+            TextToken.MouseDown += Dashboard.GlobalElement.GlobalEvents.CopyText;
 
         }
 
@@ -137,6 +137,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         internal void ChangePage(object s, RoutedEventArgs eventArgs)
         {
+            var SelectedBTN = s as Button;
+
+            BTNCurent.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            PageCurent.Visibility = Visibility.Collapsed;
+
+            if (SelectedBTN.Name==BTNSetting.Name)
+            {
+                BTNCurent = BTNSetting;
+                PageCurent = PanelSetting;
+            }
+            else if(SelectedBTN.Name==BTNProduct.Name)
+            {
+                BTNCurent = BTNProduct;
+                PageCurent = PanelProduct;
+            }
+            else if (SelectedBTN.Name==BTNPayments.Name)
+            {
+                BTNCurent = BTNPayments;
+                PageCurent = PanelPayments;
+            }
+
+            PageCurent.Visibility = Visibility.Visible;
+            BTNCurent.BorderBrush = new SolidColorBrush(Colors.Orange);
 
         }
     }
