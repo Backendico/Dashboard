@@ -48,5 +48,45 @@ namespace Dashboard.GlobalElement
 
         }
 
+        public static void ControllLinks(object Sender, TextChangedEventArgs Event)
+        {
+            var Text = Sender as TextBox;
+            try
+            {
+                new Uri(Text.Text);
+            }
+            catch (Exception ex)
+            {
+                Text.Text = "";
+            }
+
+        }
+
+        public static void ControllLinkImages(object Sender)
+        {
+            var Text = Sender as TextBox;
+
+            try
+            {
+                if (Text.Text.Contains(".png"))
+                {
+
+                }
+                else if (Text.Text.Contains(".PNG"))
+                {
+
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch (Exception)
+            {
+                Text.Text = "";
+            }
+        }
+
     }
 }

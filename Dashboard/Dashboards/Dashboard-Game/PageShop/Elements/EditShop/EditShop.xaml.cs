@@ -130,8 +130,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             };
 
             TextToken.MouseDown += GlobalEvents.CopyText;
-
-            TextPrice.TextChanged += GlobalEvents.ControllNumberFilde;
         }
 
         public void Close(object S, RoutedEventArgs Event)
@@ -166,6 +164,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             BTNCurent.BorderBrush = new SolidColorBrush(Colors.Orange);
 
         }
+  
+    
+        //PageProduct
+        public void ReciveProduct()
+        {
+
+        }
+
+
     }
 
 
