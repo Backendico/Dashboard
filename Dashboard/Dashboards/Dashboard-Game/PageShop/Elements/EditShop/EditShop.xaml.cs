@@ -15,6 +15,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
     /// </summary>
     public partial class EditShop : UserControl
     {
+        BsonDocument DetailStore;
+
         Button BTNCurent;
         Grid PageCurent;
 
@@ -23,6 +25,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
         public EditShop(BsonDocument Detail)
         {
             InitializeComponent();
+
+            DetailStore = Detail;
+
 
             TextAvatar.Text = Detail["AvatarLink"].AsString;
             TextName.Text = Detail["Name"].AsString;
@@ -144,17 +149,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             BTNCurent.BorderBrush = new SolidColorBrush(Colors.Transparent);
             PageCurent.Visibility = Visibility.Collapsed;
 
-            if (SelectedBTN.Name==BTNSetting.Name)
+            if (SelectedBTN.Name == BTNSetting.Name)
             {
                 BTNCurent = BTNSetting;
                 PageCurent = PanelSetting;
             }
-            else if(SelectedBTN.Name==BTNProduct.Name)
+            else if (SelectedBTN.Name == BTNProduct.Name)
             {
                 BTNCurent = BTNProduct;
                 PageCurent = PanelProduct;
+                ReciveProduct();
             }
-            else if (SelectedBTN.Name==BTNPayments.Name)
+            else if (SelectedBTN.Name == BTNPayments.Name)
             {
                 BTNCurent = BTNPayments;
                 PageCurent = PanelPayments;
@@ -164,12 +170,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             BTNCurent.BorderBrush = new SolidColorBrush(Colors.Orange);
 
         }
-  
-    
+
+
         //PageProduct
         public void ReciveProduct()
         {
-
+            SDK.SDK_PageDashboards.DashboardGame.PageStore.ReciveProduct(DetailStore["Token"].AsObjectId, result =>
+            {
+                Debug.WriteLine(result);
+            });
         }
 
 

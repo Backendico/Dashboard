@@ -12,6 +12,7 @@ using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -1673,6 +1674,27 @@ namespace Dashboard.GlobalElement
                             Result(new BsonDocument());
                         }
                     }
+                    public static async void ReciveProduct(ObjectId TokenStore, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.ReciveProduct);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenStore", TokenStore.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
                 }
 
             }
@@ -1810,6 +1832,8 @@ namespace Dashboard.GlobalElement
 
                 public string AddStore => BaseLink + "PageStore/AddStore";
                 public string ReciveStore => BaseLink + "PageStore/ReciveStores";
+
+                public string ReciveProduct => BaseLink + "PageStore/ReciveProduct";
 
             }
         }
