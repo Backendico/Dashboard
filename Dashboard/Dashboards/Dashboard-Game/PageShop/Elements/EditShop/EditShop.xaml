@@ -60,75 +60,75 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
-            <StackPanel >
+            <Grid  x:Name="PanelSetting" Visibility="Collapsed" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
+                <StackPanel >
 
-                <!--Avatar-->
-                <Border x:Name="PlaceAvatar" BorderBrush="Gray" BorderThickness="2"  HorizontalAlignment="Center" Width="80" Height="80" CornerRadius="5" Margin="0,10" Background="White"   />
+                    <!--Avatar-->
+                    <Border x:Name="PlaceAvatar" BorderBrush="Gray" BorderThickness="2"  HorizontalAlignment="Center" Width="80" Height="80" CornerRadius="5" Margin="0,10" Background="White"   />
 
-                <!--Link Avatar-->
-                <StackPanel>
-                    <TextBlock>
+                    <!--Link Avatar-->
+                    <StackPanel>
+                        <TextBlock>
                         <Run Text="Avatar Link:" FontWeight="Bold"/>
                         <LineBreak/>
                         <Run Foreground="Gray" Text="Acceptable formats: png | jpg | gif "/>
-                    </TextBlock>
-                    <TextBox x:Name="TextAvatar" Margin="0,0,10,0" MinWidth="300" Height="30"/>
-                </StackPanel>
+                        </TextBlock>
+                        <TextBox x:Name="TextAvatar" Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    </StackPanel>
 
 
-                <!--Name-->
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="Name :"/>
-                    <TextBox x:Name="TextName" Margin="0,0,10,0" MinWidth="300" Height="30"/>
-                </StackPanel>
+                    <!--Name-->
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Name :"/>
+                        <TextBox x:Name="TextName" Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    </StackPanel>
 
-                <!--Description-->
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="Description :"/>
-                    <TextBox x:Name="TextDescription" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" MinHeight="60" Margin="0,0,10,0" MinWidth="300" Height="30"/>
-                </StackPanel>
+                    <!--Description-->
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Description :"/>
+                        <TextBox x:Name="TextDescription" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" MinHeight="60" Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    </StackPanel>
 
-                <!--Market Link-->
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="Market Link :"/>
-                    <TextBox x:Name="TextMarketLink" Margin="0,0,10,0" MinWidth="300" Height="30"/>
-                </StackPanel>
+                    <!--Market Link-->
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Market Link :"/>
+                        <TextBox x:Name="TextMarketLink" Margin="0,0,10,0" MinWidth="300" Height="30"/>
+                    </StackPanel>
 
-                <!--Activity-->
-                <CheckBox Margin="0,10" FontWeight="Bold" Content="Active" x:Name="IsActive"/>
-                
-                <!--Purdoct-->
-                <TextBlock>
+                    <!--Activity-->
+                    <CheckBox Margin="0,10" FontWeight="Bold" Content="Active" x:Name="IsActive"/>
+
+                    <!--Purdoct-->
+                    <TextBlock>
                     <Run Text="Prudoct:" FontWeight="Bold" />
                     <Run Name="TextPurdocts" Text="XXX"/>
-                </TextBlock>
-                
-                <!--Token-->
-                <TextBlock>
+                    </TextBlock>
+
+                    <!--Token-->
+                    <TextBlock>
                     <Run Text="Token:" FontWeight="Bold" />
                     <Run Cursor="Hand" Name="TextToken" Text="XXX"/>
-                </TextBlock>
+                    </TextBlock>
 
 
-                <!--Created-->
-                <TextBlock>
+                    <!--Created-->
+                    <TextBlock>
                     <Run Text="Created:" FontWeight="Bold" />
                     <Run Name="TextCreated" Text="XXX"/>
-                </TextBlock>
+                    </TextBlock>
 
 
-                <!--BTNSave-->
-                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="Orange" >
-                    <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
-                </Border>
+                    <!--BTNSave-->
+                    <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="Orange" >
+                        <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
+                    </Border>
 
-            </StackPanel>
-                
+                </StackPanel>
+
             </Grid>
 
             <!--product-->
-            <Grid  x:Name="PanelProduct"  Visibility="Collapsed"  Grid.Row="2" >
+            <Grid  x:Name="PanelProduct"  Visibility="Visible"  Grid.Row="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
@@ -140,79 +140,116 @@
                         <!--Add player-->
                         <Border  x:Name="BTNShowPanelAdd"  Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
-                                <TextBlock TextAlignment="Center" Text="&#xE8FA;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
+                                <TextBlock TextAlignment="Center" Text="&#xF133;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
                             </StackPanel>
                         </Border>
-
-                        <!--Reset List-->
-                        <Border x:Name="BTNReset"  Cursor="Hand" ToolTip="Reload List" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
-                            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
-                                <TextBlock  TextAlignment="Center" Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
-                            </StackPanel>
-                        </Border>
-
-                        <!--Save List-->
-                        <Border x:Name="BTNBackup"  Cursor="Hand" ToolTip="Save leaderboard to (Backups)"  Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
-                            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"  Orientation="Horizontal">
-                                <TextBlock  TextAlignment="Center" Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
-                            </StackPanel>
-                        </Border>
-
-                        <!--BTN Seemore-->
-                        <StackPanel x:Name="BTNSeeMore" VerticalAlignment="Center"  Cursor="Hand" ToolTip="See More"  Margin="10,0"   >
-                            <StackPanel Orientation="Horizontal">
-                                <Border CornerRadius="5,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Background="Gainsboro" >
-                                    <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets"  />
-                                </Border>
-                                <Border Margin="2,0" CornerRadius="0,5,5,0" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Background="Gainsboro" >
-                                    <TextBlock x:Name="TextSeeMore" Margin="10,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="100"  />
-                                </Border>
-
-                            </StackPanel>
-                        </StackPanel>
-
                     </StackPanel>
 
                     <!--ListPlayer-->
-                    <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2" Margin="20"  Grid.Row="1">
-                        <Grid>
-                            <Grid Grid.Row="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                    <WrapPanel Orientation="Horizontal" Margin="10" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+                        <Border BorderBrush="Gray" BorderThickness="1" MaxWidth="900"  CornerRadius="5">
+
+                            <StackPanel >
+                                <Border >
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--Panel1-->
+                                        <StackPanel Margin="10" Orientation="Vertical">
+                                            <!--Image-->
+                                            <Border Margin="0,10" BorderThickness="1" CornerRadius="5" BorderBrush="Gray" Height="50" Width="50">
+                                                <Image x:Name="ProductImage" ></Image>
+                                            </Border>
+
+                                            <!--Created-->
+                                            <TextBlock Text="Created:" MinWidth="100">
+                                                <Run FontWeight="Bold"  Text="Created: "/><Run  Text="XXX"/>
+                                            </TextBlock>
+
+                                            <!--Token-->
+                                            <TextBlock  MinWidth="100">
+                                                <Run  FontWeight="Bold"  Text="Token: "/><Run  Text="XXX"/>
+                                            </TextBlock>
 
 
-                                <!-- Head row-->
-                                <Grid  Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="17"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border CornerRadius="4,0,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,2,2" Grid.Column="0"/>
-                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2"  Background="Gainsboro" Grid.Column="1" />
-                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="2" />
-                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="3" />
-                                    <Border CornerRadius="0,4,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,0,2" Grid.Column="4" />
+                                        </StackPanel>
 
-                                    <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
-                                </Grid>
+                                        <!--Panel2-->
+                                        <StackPanel MaxHeight="200" MaxWidth="400" Margin="10" >
 
-                                <!--Content-->
-                                <ScrollViewer Margin="0,0,0,5" Grid.Row="1" Name="ContentPlaceLeaderboard"/>
+                                            <!--LinkAvatar-->
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold" Text="LinkAvatar :"/>
+                                                <TextBox MinWidth="150"/>
+                                            </StackPanel>
 
+                                            <!--Name-->
+                                            <StackPanel>
+                                                <TextBlock  FontWeight="Bold" Text="Name :"/>
+                                                <TextBox/>
+                                            </StackPanel>
 
-                            </Grid>
+                                            <!--Description-->
+                                            <StackPanel   >
+                                                <TextBlock  FontWeight="Bold" Text="Description :"/>
+                                                    
+                                                <TextBox MaxHeight="100" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" MinHeight="50"/>
+                                            </StackPanel>
 
+                                            
 
-                        </Grid>
-                    </Border>
+                                        </StackPanel>
+
+                                        <!--Panel3-->
+                                        <StackPanel MaxWidth="300" MinWidth="150" Margin="10" >
+
+                                            <!--Count-->
+                                            <StackPanel>
+                                                <TextBlock  FontWeight="Bold" Text="Count :"/>
+                                                <TextBox />
+                                            </StackPanel>
+                                            
+                                            <!--Amount-->
+                                            <StackPanel>
+                                                <TextBlock  FontWeight="Bold" Text="Amount :"/>
+                                                <TextBox/>
+                                            </StackPanel>
+                                            
+                                            <!--Name-->
+                                            <StackPanel>
+                                                <TextBlock  FontWeight="Bold" Text="Price :"/>
+                                                <TextBox x:Name="TextPrice"/>
+                                            </StackPanel>
+
+                                            <!--Description-->
+                                            <StackPanel>
+                                                <TextBlock  FontWeight="Bold" Text="Tags :"/>
+                                                <WrapPanel>
+                                                    <StackPanel/>
+                                                </WrapPanel>
+                                            </StackPanel>
+
+                                            <!--ExpireTime-->
+                                            <StackPanel>
+                                                <TextBlock >
+                                                    <Run Text="Ex Time :" FontWeight="Bold"/>
+                                                    <LineBreak/>
+                                                    <Run Text="XXX"/>
+                                                </TextBlock>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                <Border HorizontalAlignment="Right" Margin="10" Height="30" Width="80" Background="Orange" CornerRadius="5" >
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="Save"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                    </WrapPanel>
+
                 </Grid>
+
 
                 <!--SubPages-->
                 <!--SubPageAdd-->

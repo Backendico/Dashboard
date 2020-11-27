@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages;
+using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
@@ -63,6 +64,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             PageCurent = PanelSetting;
             BTNCurent = BTNSetting;
 
+
+
             //acaton SaveSetting
             BTNSaveSetting.MouseDown += (s, e) =>
             {
@@ -126,8 +129,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 }
             };
 
-            TextToken.MouseDown += Dashboard.GlobalElement.GlobalEvents.CopyText;
+            TextToken.MouseDown += GlobalEvents.CopyText;
 
+            TextPrice.TextChanged += GlobalEvents.ControllNumberFilde;
         }
 
         public void Close(object S, RoutedEventArgs Event)

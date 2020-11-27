@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -30,6 +31,21 @@ namespace Dashboard.GlobalElement
             }
 
             DashboardGame.Notifaction("Copyed !", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Ok);
+        }
+
+        public static void ControllNumberFilde(object Sender, TextChangedEventArgs Event)
+        {
+            var Textbox = Sender as TextBox;
+
+            try
+            {
+                int.Parse(Textbox.Text);
+            }
+            catch (Exception ex)
+            {
+                Textbox.Text = "";
+            }
+
         }
 
     }
