@@ -146,9 +146,10 @@
                     </StackPanel>
 
                     <!--ListPlayer-->
-                    <WrapPanel Orientation="Horizontal" Margin="10" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
-                       
+                    <WrapPanel  Orientation="Horizontal" Margin="10" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <StackPanel x:Name="PlaceProducts">
+                            
+                        </StackPanel>
 
                     </WrapPanel>
 

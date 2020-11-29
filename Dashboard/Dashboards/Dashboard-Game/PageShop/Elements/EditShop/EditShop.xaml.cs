@@ -1,7 +1,9 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.SubPages;
+﻿using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelProduct;
+using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +15,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
     /// <summary>
     /// Interaction logic for EditShop.xaml
     /// </summary>
-    public partial class EditShop : UserControl
+    public partial class EditShop : UserControl, EditProducts
     {
         BsonDocument DetailStore;
 
@@ -169,20 +171,38 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             PageCurent.Visibility = Visibility.Visible;
             BTNCurent.BorderBrush = new SolidColorBrush(Colors.Orange);
 
+
         }
 
 
         //PageProduct
         public void ReciveProduct()
         {
-            SDK.SDK_PageDashboards.DashboardGame.PageStore.ReciveProduct(DetailStore["Token"].AsObjectId, result =>
+            Debug.WriteLine(DetailStore["Products"]);
+            foreach (var item in DetailStore["Products"].AsBsonArray)
             {
-                Debug.WriteLine(result);
-            });
+                PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, this));
+            }
         }
 
 
+        public void Save(BsonDocument Detail)
+        {
+            Debug.WriteLine("hi");
+        }
+
+        public void Delete(ObjectId Token)
+        {
+            foreach (var item in DetailStore["Products"].AsBsonArray)
+            {
+                DetailStore["Products"].AsBsonArray.Remove(Token);
+            }
+        }
     }
 
-
+    public interface EditProducts
+    {
+        void Save(BsonDocument Detail);
+        void Delete(ObjectId Token);
+    }
 }

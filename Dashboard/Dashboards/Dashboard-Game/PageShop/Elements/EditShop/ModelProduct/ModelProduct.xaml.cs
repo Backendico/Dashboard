@@ -1,4 +1,5 @@
 ﻿using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
     /// </summary>
     public partial class ModelProduct : UserControl
     {
-        public ModelProduct()
+        public ModelProduct(BsonDocument Detail,EditProducts Edit)
         {
             InitializeComponent();
 
-
+            TextName.Text = Detail["Name"].AsString;
 
             //Controlls
             TextAvatarLink.FocusableChanged += (s, e) =>
@@ -33,6 +34,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
                 GlobalEvents.ControllLinkImages(s);
             };
 
+            Edit.Save(null);
         }
 
 
