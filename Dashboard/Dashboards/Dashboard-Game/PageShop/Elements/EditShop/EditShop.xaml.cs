@@ -137,6 +137,31 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             };
 
             TextToken.MouseDown += GlobalEvents.CopyText;
+
+            #region SubPage
+
+            // expire cheack
+            IsExpiraton.Checked += (s, e) =>
+            {
+                Calendar_Expire_AddProducts.Visibility = Visibility.Visible;
+            };
+            IsExpiraton.Unchecked += (s, e) =>
+            {
+                Calendar_Expire_AddProducts.Visibility = Visibility.Collapsed;
+            };
+
+            //cheack count int
+            TextCount_AddProducts.TextChanged += GlobalEvents.ControllNumberFilde;
+            TextAmount_AddProducts.TextChanged += GlobalEvents.ControllNumberFilde;
+            TextPrice_AddProduct.TextChanged += GlobalEvents.ControllNumberFilde;
+            //cheack Image
+            TextAvatar_AddProduct.LostFocus += (s, e) =>
+            {
+                GlobalEvents.ControllLinkImages(s);
+            };
+
+            #endregion
+
         }
 
         public void Close(object S, RoutedEventArgs Event)
@@ -188,15 +213,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         public void Save(BsonDocument Detail)
         {
-            Debug.WriteLine("hi");
+
         }
 
         public void Delete(ObjectId Token)
         {
-            foreach (var item in DetailStore["Products"].AsBsonArray)
-            {
-                DetailStore["Products"].AsBsonArray.Remove(Token);
-            }
+
         }
     }
 

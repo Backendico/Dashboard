@@ -84,6 +84,7 @@ namespace Dashboard.GlobalElement
             }
             catch (Exception)
             {
+                DashboardGame.Notifaction("Enter a direct link to the avatar", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
                 Text.Text = "";
             }
         }

@@ -27,6 +27,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
             InitializeComponent();
 
             TextName.Text = Detail["Name"].AsString;
+            TextCreated.Text = Detail["Created"].ToString();
 
             //Controlls
             TextAvatarLink.FocusableChanged += (s, e) =>
