@@ -327,9 +327,14 @@
 
                             <!--Cloum2-->
                             <StackPanel MaxWidth="300" MinWidth="200" >
-                              
+
+                                    <!--TextAvatar-->
+                                    <StackPanel Margin="0,5">
+                                        <TextBlock Text="Market Link :"/>
+                                        <TextBox x:Name="TextMarketLink_AddProduct"  Height="30"/>
+                                    </StackPanel>
                                 
-                                <!--Description-->
+                                    <!--Description-->
                                 <StackPanel Margin="0,5">
                                     <TextBlock Text="Description :"/>
                                     <TextBox MaxHeight="80" MinHeight="50"   x:Name="TextDescription_AddDescription"  AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" />

@@ -33,17 +33,17 @@ namespace Dashboard.GlobalElement
             DashboardGame.Notifaction("Copyed !", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Ok);
         }
 
-        public static void ControllNumberFilde(object Sender, TextChangedEventArgs Event)
+        public static void ControllNumberFilde(TextBox Sender)
         {
-            var Textbox = Sender as TextBox;
-
             try
             {
-                int.Parse(Textbox.Text);
+                if (Sender.Text.Length >= 1)
+                    int.Parse(Sender.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Textbox.Text = "";
+                Sender.Text = "";
+                DashboardGame.Notifaction("Field is Number", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
             }
 
         }
@@ -53,11 +53,13 @@ namespace Dashboard.GlobalElement
             var Text = Sender as TextBox;
             try
             {
-                new Uri(Text.Text);
+                if (Text.Text.Length >= 1)
+                    new Uri(Text.Text);
             }
             catch (Exception ex)
             {
                 Text.Text = "";
+                DashboardGame.Notifaction("Field is Link", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
             }
 
         }
@@ -68,23 +70,18 @@ namespace Dashboard.GlobalElement
 
             try
             {
-                if (Text.Text.Contains(".png"))
+                if (Text.Text.Contains(".png")||Text.Text.Contains(".PNG"))
                 {
 
                 }
-                else if (Text.Text.Contains(".PNG"))
-                {
-
-                }
-                else
+                else if(Text.Text.Length>=1)
                 {
                     throw new Exception();
                 }
-
             }
             catch (Exception)
             {
-                DashboardGame.Notifaction("Enter a direct link to the avatar", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
+                DashboardGame.Notifaction("Enter a direct link to Image", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
                 Text.Text = "";
             }
         }

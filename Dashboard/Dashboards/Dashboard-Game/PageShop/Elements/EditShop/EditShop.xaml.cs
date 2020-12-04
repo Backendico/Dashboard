@@ -151,15 +151,27 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             };
 
             //cheack count int
-            TextCount_AddProducts.TextChanged += GlobalEvents.ControllNumberFilde;
-            TextAmount_AddProducts.TextChanged += GlobalEvents.ControllNumberFilde;
-            TextPrice_AddProduct.TextChanged += GlobalEvents.ControllNumberFilde;
+            TextCount_AddProducts.LostFocus += (s, e) =>
+            {
+                GlobalEvents.ControllNumberFilde(s as TextBox);
+            };
+            TextAmount_AddProducts.LostFocus += (s, e) =>
+            {
+                GlobalEvents.ControllNumberFilde(s as TextBox);
+            };
+            TextPrice_AddProduct.LostFocus += (s, e) =>
+            {
+                GlobalEvents.ControllNumberFilde(s as TextBox);
+            };
             //cheack Image
             TextAvatar_AddProduct.LostFocus += (s, e) =>
             {
                 GlobalEvents.ControllLinkImages(s);
             };
-
+            TextMarketLink_AddProduct.LostFocus += (s, e) =>
+            {
+                GlobalEvents.ControllLinkImages(s);
+            };
             #endregion
 
         }
