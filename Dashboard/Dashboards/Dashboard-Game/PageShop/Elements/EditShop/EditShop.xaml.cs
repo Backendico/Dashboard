@@ -1,7 +1,9 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelProduct;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelProduct;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -24,12 +26,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
 
 
+
         public EditShop(BsonDocument Detail)
         {
             InitializeComponent();
 
             DetailStore = Detail;
-
 
             TextAvatar.Text = Detail["AvatarLink"].AsString;
             TextName.Text = Detail["Name"].AsString;
@@ -140,6 +142,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             #region SubPage
 
+            BsonDocument NewProduct = new BsonDocument
+            {
+                {"Name","" },
+                {"Tags",new BsonArray() }
+
+            };
+
             // expire cheack
             IsExpiraton.Checked += (s, e) =>
             {
@@ -171,6 +180,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             TextMarketLink_AddProduct.LostFocus += (s, e) =>
             {
                 GlobalEvents.ControllLinkImages(s);
+            };
+
+            //event open tag system
+            TagSystem.MouseDown += (s, e) =>
+            {
+                new TagsSystem(NewProduct["Tags"].AsBsonArray);
             };
             #endregion
 

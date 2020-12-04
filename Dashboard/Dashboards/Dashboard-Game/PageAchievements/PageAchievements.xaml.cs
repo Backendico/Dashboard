@@ -185,7 +185,5 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
 
             TextBoxName.BorderBrush = new SolidColorBrush(Colors.Gainsboro);
         }
-
-
     }
 }

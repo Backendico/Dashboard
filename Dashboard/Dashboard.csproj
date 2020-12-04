@@ -211,6 +211,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\TagsSystem.xaml.cs">
+      <DependentUpon>TagsSystem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\DashboardGame.xaml.cs">
       <DependentUpon>DashboardGame.xaml</DependentUpon>
     </Compile>
@@ -310,6 +313,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\TagsSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\DashboardGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -565,5 +572,6 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
