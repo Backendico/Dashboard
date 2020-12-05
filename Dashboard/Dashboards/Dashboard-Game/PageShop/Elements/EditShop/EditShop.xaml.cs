@@ -5,6 +5,7 @@ using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows;
@@ -186,6 +187,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             TagSystem.MouseDown += (s, e) =>
             {
                 new TagsSystem(NewProduct["Tags"].AsBsonArray);
+            };
+
+            //action btn add tag
+            BTNAddProduct.MouseDown += (s, e) =>
+            {
+                Debug.WriteLine(NewProduct);
             };
             #endregion
 

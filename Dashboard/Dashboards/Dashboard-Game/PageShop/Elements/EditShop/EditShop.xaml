@@ -356,7 +356,7 @@
                             </StackPanel>
 
                             <!--Add-->
-                            <Border ToolTip="Add" x:Name="BTNAddLeaderboard" Cursor="Hand" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10" Height="30" Width="80">
+                            <Border ToolTip="Add" x:Name="BTNAddProduct" Cursor="Hand" Background="Orange" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10" Height="30" Width="80">
                                 <TextBlock Text="Add" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
 

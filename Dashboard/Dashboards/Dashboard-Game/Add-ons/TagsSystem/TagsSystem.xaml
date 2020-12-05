@@ -9,7 +9,7 @@
              
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="Root"  Background="#33000000">
-        <Border x:Name="Content" CornerRadius="20"  MinWidth="400" VerticalAlignment="Center" Opacity="1" HorizontalAlignment="Center" Background="White">
+        <Border x:Name="Content" CornerRadius="20" MaxWidth="500"  MinWidth="400" MaxHeight="500" VerticalAlignment="Center" Opacity="1" HorizontalAlignment="Center" Background="White">
             
             <!--Animation-->
             <Border.Triggers>
@@ -29,7 +29,11 @@
 
             <StackPanel Margin="10">
                 <TextBlock Margin="0,10" Text="Tags :" FontWeight="Bold"/>
-                <WrapPanel Margin="0,20"/>
+                <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    
+                <WrapPanel MaxHeight="300"  Orientation="Vertical" Name="PlaceTags" Margin="0,20"/>
+                    
+                </ScrollViewer>
 
                 <Border Background="Gainsboro" BorderBrush="Gainsboro" BorderThickness="0.6"/>
 
@@ -37,7 +41,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
                     <!--Color-->
                     <StackPanel Orientation="Horizontal">
-                        <Border CornerRadius="20" Background="Black" Width="20" Height="20"/>
+                        <Border x:Name="SelectedColor" CornerRadius="20" Background="Black" Width="20" Height="20"/>
 
                         <!-- ColorsPallet-->
                         <StackPanel Visibility="Visible" Orientation="Horizontal" >
@@ -53,10 +57,10 @@
 
                     </StackPanel>
 
-                    <TextBox Margin="10,0" MinWidth="200"/>
+                    <TextBox MaxWidth="300" x:Name="TextNewTag" Margin="10,0" MinWidth="200"/>
 
                     <!--BTNAdd-->
-                    <Border CornerRadius="5" Background="Orange" Width="25" Height="25">
+                    <Border Cursor="Hand" x:Name="BTN_AddTag" CornerRadius="5" Background="Orange" Width="25" Height="25">
                         <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White"  Text="&#xE948;" FontFamily="Segoe MDL2 Assets"/>
                     </Border>
 
