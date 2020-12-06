@@ -48,7 +48,7 @@
 
         <!--SubPage-->
         <!--SubPage Add-->
-        <Grid  x:Name="PanelAddStore"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+        <Grid  x:Name="PanelAddStore"  Visibility="Visible" Background="#33000000" Opacity="1" >
 
             <Grid.Effect>
                 <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
@@ -106,21 +106,10 @@
                             <CheckBox x:Name="CheackboxActivity" Content="Active" IsChecked="True"/>
                         
                         <!--Tags-->
-                        <StackPanel   Margin="0,5" >
-                            <TextBlock Text="Tags :" />
+                        <TextBlock x:Name="Tags" Cursor="Hand" Margin="0,10">
+                            <Run  FontWeight="Bold" Text="Tags:"/> <Run Text="("/> <Run Name="TextTagCount" Text="0"/> <Run Text=")"/>
+                        </TextBlock>
 
-                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" MaxHeight="100" VerticalScrollBarVisibility="Auto">
-
-                                <WrapPanel x:Name="PlaceTags" Orientation="Horizontal" Margin="10"/>
-                            </ScrollViewer>
-
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox   x:Name="TextBoxTag"  Margin="0,0,10,0" AcceptsReturn="True" AcceptsTab="True" MinWidth="300" MinHeight="30" MaxWidth="500" MaxHeight="200"/>
-                                <Border x:Name="BTNAddTag" Cursor="Hand" CornerRadius="5" TextBlock.Foreground="White" Height="30" Background="Orange" Width="30">
-                                    <TextBlock FontSize="15" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE710;" FontFamily="Segoe MDL2 Assets" />
-                                </Border>
-                            </StackPanel>
-                        </StackPanel>
 
                         <!--Footer-->
                         <!--BTN add Store-->

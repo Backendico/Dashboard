@@ -1,22 +1,11 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements;
-using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
 {
@@ -81,47 +70,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
                 DashboardGame.Dashboard.Root.Children.Add(new EditShop.EditShop(Detail));
             };
 
-            RefreshTags();
+            TagCount.Text = Detail["Tags"].AsBsonArray.Count.ToString();
 
-            void RefreshTags()
-            {
-                PlaceTags.Children.Clear();
-
-                if (Detail["Tags"].AsBsonArray.Count == 0)
-                {
-                    PlaceTags.Children.Add(new TextBlock() { Text = "No Tag", Foreground = new SolidColorBrush(Colors.Black) });
-                }
-                if (Detail["Tags"].AsBsonArray.Count == 1)
-                {
-                    PlaceTags.Children.Add(new ModelTag(Detail["Tags"][0].AsString));
-                }
-                else
-                {
-                    for (int i = 0; i < Detail["Tags"].AsBsonArray.Count; i++)
-                    {
-                        if (i + 1 == Detail["Tags"].AsBsonArray.Count)
-                        {
-                            PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString));
-                        }
-                        else
-                        {
-
-                            PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString));
-                            PlaceTags.Children.Add(new TextBlock()
-                            {
-                                Text = " | ",
-                                Foreground = new SolidColorBrush(Colors.Black)
-
-                            });
-                        }
-
-
-                    }
-
-                }
-
-            }
-
+            //action show tag view
+            Tags.MouseDown += (s, e) => {
+                new TagsSystem(Detail["Tags"].AsBsonArray);
+            };
         }
     }
 }

@@ -29,12 +29,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
         BsonArray List;
         public TagsSystem(BsonArray ListTag)
         {
+            DashboardGame.Dashboard.Root.Children.Add(this);
+
+            InitializeComponent();
             PanelAddTag.Visibility = Visibility.Collapsed;
 
             foreach (var item in ListTag)
             {
                 PlaceTags.Children.Add(new ModelTag(item.AsBsonDocument));
             }
+
+            Root.MouseDown += (s, e) =>
+            {
+                Close();
+            };
         }
 
         public TagsSystem(BsonArray ListTag, Action UpdateArray)

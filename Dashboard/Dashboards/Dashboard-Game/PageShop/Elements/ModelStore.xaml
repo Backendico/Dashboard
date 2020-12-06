@@ -94,16 +94,10 @@
             </TextBlock>
 
             <!--Tags-->
-            <StackPanel Margin="5" Orientation="Horizontal">
-
-                <TextBlock   FontWeight="Bold" Text="Tags: "/>
-                <ScrollViewer MaxHeight="100" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <WrapPanel Name="PlaceTags" Orientation="Horizontal" MaxWidth="220"/>
-                </ScrollViewer>
-
-
-            </StackPanel>
-
+            <TextBlock Cursor="Hand" x:Name="Tags" >
+                <Run  FontWeight="Bold" Text="Tags: "/> 
+                <Run Name="TagCount" Text="0"/>
+            </TextBlock>
 
             <!--Controller-->
             <StackPanel x:Name="Controller" Opacity="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">

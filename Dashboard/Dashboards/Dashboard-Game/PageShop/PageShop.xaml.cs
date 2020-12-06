@@ -1,22 +1,13 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageShop
 {
@@ -109,54 +100,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
 
             };
 
-            //action add tag
-            BTNAddTag.MouseDown += (s, e) =>
-            {
-                if (TextBoxTag.Text.Length >= 1)
-                {
-                    //cheack Dublicate
-                    if (Detail["Tags"].AsBsonArray.Count >= 1)
-                    {
-
-                        int Count = 0;
-                        for (int i = 0; i < Detail["Tags"].AsBsonArray.Count; i++)
-                        {
-
-                            if (Detail["Tags"].AsBsonArray[i].AsString != TextBoxTag.Text)
-                            {
-                                Count = 0;
-                            }
-                            else
-                            {
-                                Count = 1;
-                            }
-                        }
-                        if (Count == 1)
-                        {
-                            DashboardGame.Notifaction("Tags available", Notifaction.StatusMessage.Error);
-                        }
-                        else
-                        {
-                            Detail["Tags"].AsBsonArray.Add(TextBoxTag.Text);
-                            RefreshTags();
-                            TextBoxTag.Text = "";
-                            DashboardGame.Notifaction("Tag add", Notifaction.StatusMessage.Ok);
-                        }
-                    }
-                    else
-                    {
-                        Detail["Tags"].AsBsonArray.Add(TextBoxTag.Text);
-                        RefreshTags();
-                        TextBoxTag.Text = "";
-                        DashboardGame.Notifaction("Tag add", Notifaction.StatusMessage.Ok);
-                    }
-                }
-                else
-                {
-                    DashboardGame.Notifaction("Name Tag Short", Notifaction.StatusMessage.Error);
-                }
-            };
-
             //action close
             PanelAddStore.MouseDown += (s, e) =>
             {
@@ -167,12 +110,26 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                 }
             };
 
+
+            #region AddStore
+
             //btn show panel add store
             BTNShowPanelStore.MouseDown += (s, e) =>
             {
                 ShowSubpageAddStore();
 
             };
+
+            //action btn show tag system
+            Tags.MouseDown += (s, e) => {
+                new TagsSystem(Detail["Tags"].AsBsonArray, () => {
+                    TextTagCount.Text = Detail["Tags"].AsBsonArray.Count.ToString();
+                });
+            }; 
+            #endregion
+
+
+        
         }
 
         void ReciveStores()
@@ -241,7 +198,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                 TextBoxDescription.Text = "";
                 TextBoxMarketLink.Text = "";
                 TextBoxAvatar.Text = "";
-                TextBoxTag.Text = "";
                 CheackboxActivity.IsChecked = false;
 
                 Detail = new BsonDocument
@@ -255,7 +211,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                     {"IsActive",true }
                 };
 
-                PlaceTags.Children.Clear();
             };
             Storyboard.SetTargetName(Anim, PanelAddStore.Name);
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
@@ -266,83 +221,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
         }
 
 
-        void RefreshTags()
-        {
-            PlaceTags.Children.Clear();
-
-            if (Detail["Tags"].AsBsonArray.Count == 1)
-            {
-                PlaceTags.Children.Add(new ModelTag(Detail["Tags"][0].AsString, Detail["Tags"].AsBsonArray, RefreshTags));
-            }
-            else
-            {
-                for (int i = 0; i < Detail["Tags"].AsBsonArray.Count; i++)
-                {
-                    if (i + 1 == Detail["Tags"].AsBsonArray.Count)
-                    {
-                        PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString, Detail["Tags"].AsBsonArray, RefreshTags));
-                    }
-                    else
-                    {
-
-                        PlaceTags.Children.Add(new ModelTag(Detail["Tags"][i].AsString, Detail["Tags"].AsBsonArray, RefreshTags));
-                        PlaceTags.Children.Add(new TextBlock()
-                        {
-                            Text = " | ",
-                            Foreground = new SolidColorBrush(Colors.Black)
-
-                        });
-                    }
-
-
-                }
-
-            }
-
-        }
-
-
     }
-    class ModelTag : TextBlock
-    {
-        public ModelTag(string NameTag, BsonArray TagList, Action RefreshTags)
-        {
-            Text = NameTag;
-            Foreground = new SolidColorBrush(Colors.Black);
-            FontWeight = FontWeights.Bold;
-            Cursor = Cursors.Hand;
-            MouseEnter += (s, e) =>
-            {
-                Foreground = new SolidColorBrush(Colors.Tomato);
-            };
-
-            MouseLeave += (s, e) =>
-            {
-                Foreground = new SolidColorBrush(Colors.Black);
-            };
-
-            MouseDown += (s, e) =>
-            {
-                TagList.Remove(NameTag);
-                RefreshTags();
-            };
-        }
-
-        public ModelTag(string NameTag)
-        {
-            Text = NameTag;
-            Foreground = new SolidColorBrush(Colors.Black);
-
-            MouseEnter += (s, e) =>
-            {
-                Foreground = new SolidColorBrush(Colors.Tomato);
-            };
-
-            MouseLeave += (s, e) =>
-            {
-                Foreground = new SolidColorBrush(Colors.Black);
-            };
-
-        }
-    }
+    
 }
