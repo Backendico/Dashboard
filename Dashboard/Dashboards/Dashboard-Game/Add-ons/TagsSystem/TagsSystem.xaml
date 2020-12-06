@@ -41,18 +41,18 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
                     <!--Color-->
                     <StackPanel Orientation="Horizontal">
-                        <Border x:Name="SelectedColor" CornerRadius="20" Background="Black" Width="20" Height="20"/>
+                        <Border x:Name="SelectedColor" CornerRadius="20" Background="Khaki" Width="20" Height="20"/>
 
                         <!-- ColorsPallet-->
-                        <StackPanel Visibility="Visible" Orientation="Horizontal" >
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
-                            <Border Margin="2,0" CornerRadius="20" Background="Black" Width="10" Height="10"/>
+                        <StackPanel x:Name="ColorPallet" Visibility="Collapsed" Orientation="Horizontal" >
+                            <Border  Margin="2,0" CornerRadius="20" Background="CornflowerBlue" Width="10" Height="10" MouseDown="ChangeColor"/>
+                            <Border MouseDown="ChangeColor" Margin="2,0" CornerRadius="20" Background="Khaki" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Margin="2,0" CornerRadius="20" Background="Orange" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Margin="2,0" CornerRadius="20" Background="LightGreen" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor"  Margin="2,0" CornerRadius="20" Background="Tomato" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Margin="2,0" CornerRadius="20" Background="Orchid" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Margin="2,0" CornerRadius="20" Background="LightGray" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Margin="2,0" CornerRadius="20" Background="Yellow" Width="10" Height="10"/>
                         </StackPanel>
 
                     </StackPanel>

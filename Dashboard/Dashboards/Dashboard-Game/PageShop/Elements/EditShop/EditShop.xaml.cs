@@ -147,7 +147,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             {
                 {"Name","" },
                 {"Tags",new BsonArray() }
-
             };
 
             // expire cheack
@@ -186,7 +185,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //event open tag system
             TagSystem.MouseDown += (s, e) =>
             {
-                new TagsSystem(NewProduct["Tags"].AsBsonArray);
+                new TagsSystem(NewProduct["Tags"].AsBsonArray,()=> {
+                    TextTagsCount.Text = NewProduct["Tags"].AsBsonArray.Count.ToString();
+
+                });
             };
 
             //action btn add tag

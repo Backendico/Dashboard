@@ -28,7 +28,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
     {
         BsonArray List;
 
-        public TagsSystem(BsonArray ListTag)
+        public TagsSystem(BsonArray ListTag ,Action UpdateArray)
         {
             List = ListTag;
             DashboardGame.Dashboard.Root.Children.Add(this);
@@ -46,6 +46,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
                 if (e.Source.GetType() == typeof(Grid))
                 {
                     Close();
+                    UpdateArray();
                 }
             };
 
@@ -58,11 +59,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
                     {"Color",SelectedColor.Background.ToString() }
                 };
 
-                if (!ListTag.Contains(NewTag))
+                if (!ListTag.Contains(NewTag)&&TextNewTag.Text.Length>=1)
                 {
                     PlaceTags.Children.Add(new ModelTag(NewTag, this));
                     ListTag.Add(NewTag);
 
+                    UpdateArray();
                     TextNewTag.Text = "";
                 }
                 else
@@ -70,8 +72,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
                     DashboardGame.Notifaction("Tag Duplicated", Notifaction.StatusMessage.Warrning);
                 }
             };
-
+            //ation btn seleceted color
+            SelectedColor.MouseDown += (s, e) =>
+            {
+                ColorPallet.Visibility = Visibility.Visible;
+            };
         }
+
+        
 
         public void Delete(BsonValue value ,UserControl Element)
         {
@@ -102,6 +110,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
                 DashboardGame.Dashboard.Root.Children.Remove(this);
             }
         }
+
+        private void ChangeColor(object sender, MouseButtonEventArgs e)
+        {
+            SelectedColor.Background = (sender as Border).Background;
+            ColorPallet.Visibility = Visibility.Collapsed;
+        }
+   
     }
 
     public interface IControlTag

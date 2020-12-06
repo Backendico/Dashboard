@@ -343,7 +343,7 @@
                                     <!--Tags-->
                                     <TextBlock x:Name="TagSystem" Cursor="Hand" Margin="0,5" >
                                         <Run FontWeight="Bold" Text="Tags"/>
-                                        <Run Text="("/><Run Text=""/><Run Text=")"/>
+                                        <Run Text="("/><Run Name="TextTagsCount" Text="0"/><Run Text=")"/>
                                     </TextBlock>
 
 
