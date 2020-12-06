@@ -22,6 +22,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem.Elements
     /// </summary>
     public partial class ModelTag : UserControl
     {
+        /// <summary>
+        /// for view
+        /// </summary>
+        /// <param name="Detail"></param>
+        public ModelTag(BsonDocument Detail)
+        {
+            InitializeComponent();
+
+            TextNameTag.Text = Detail["Name"].ToString();
+            Color1.Background = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(Detail["Color"].AsString);
+            Color2.Background = Color1.Background;
+        }
+
+        /// <summary>
+        /// for editor
+        /// </summary>
+        /// <param name="Detail"></param>
+        /// <param name="Controler"></param>
         public ModelTag(BsonDocument Detail, IControlTag Controler)
         {
             InitializeComponent();

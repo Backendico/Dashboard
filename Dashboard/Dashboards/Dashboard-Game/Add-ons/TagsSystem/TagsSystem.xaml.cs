@@ -27,8 +27,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
     public partial class TagsSystem : UserControl, IControlTag
     {
         BsonArray List;
+        public TagsSystem(BsonArray ListTag)
+        {
+            PanelAddTag.Visibility = Visibility.Collapsed;
 
-        public TagsSystem(BsonArray ListTag ,Action UpdateArray)
+            foreach (var item in ListTag)
+            {
+                PlaceTags.Children.Add(new ModelTag(item.AsBsonDocument));
+            }
+        }
+
+        public TagsSystem(BsonArray ListTag, Action UpdateArray)
         {
             List = ListTag;
             DashboardGame.Dashboard.Root.Children.Add(this);
@@ -59,7 +68,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
                     {"Color",SelectedColor.Background.ToString() }
                 };
 
-                if (!ListTag.Contains(NewTag)&&TextNewTag.Text.Length>=1)
+                if (!ListTag.Contains(NewTag) && TextNewTag.Text.Length >= 1)
                 {
                     PlaceTags.Children.Add(new ModelTag(NewTag, this));
                     ListTag.Add(NewTag);
@@ -79,9 +88,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
             };
         }
 
-        
 
-        public void Delete(BsonValue value ,UserControl Element)
+
+        public void Delete(BsonValue value, UserControl Element)
         {
             List.Remove(value);
             PlaceTags.Children.Remove(Element);
@@ -116,7 +125,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
             SelectedColor.Background = (sender as Border).Background;
             ColorPallet.Visibility = Visibility.Collapsed;
         }
-   
+
     }
 
     public interface IControlTag
