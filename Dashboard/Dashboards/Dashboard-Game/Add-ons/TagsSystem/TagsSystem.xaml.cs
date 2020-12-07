@@ -43,6 +43,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem
             {
                 Close();
             };
+
         }
 
         public TagsSystem(BsonArray ListTag, Action UpdateArray)

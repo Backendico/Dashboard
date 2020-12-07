@@ -1674,6 +1674,7 @@ namespace Dashboard.GlobalElement
                             Result(new BsonDocument());
                         }
                     }
+
                     public static async void ReciveProduct(ObjectId TokenStore, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveProduct);
@@ -1695,6 +1696,27 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public static async void AddProduct(BsonDocument Detail,Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddProduct);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenStore", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);  
+                        }
+                    }
                 }
 
             }
@@ -1834,6 +1856,8 @@ namespace Dashboard.GlobalElement
                 public string ReciveStore => BaseLink + "PageStore/ReciveStores";
 
                 public string ReciveProduct => BaseLink + "PageStore/ReciveProduct";
+
+                public string AddProduct => BaseLink + "PageStore/AddProduct";
 
             }
         }

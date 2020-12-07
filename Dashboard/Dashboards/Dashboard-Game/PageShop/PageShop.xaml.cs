@@ -127,8 +127,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                 });
             }; 
             #endregion
-
-
         
         }
 
@@ -198,6 +196,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
                 TextBoxDescription.Text = "";
                 TextBoxMarketLink.Text = "";
                 TextBoxAvatar.Text = "";
+                TextTagCount.Text = "0";
                 CheackboxActivity.IsChecked = false;
 
                 Detail = new BsonDocument

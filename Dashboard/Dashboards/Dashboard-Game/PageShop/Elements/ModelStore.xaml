@@ -94,7 +94,7 @@
             </TextBlock>
 
             <!--Tags-->
-            <TextBlock Cursor="Hand" x:Name="Tags" >
+            <TextBlock Margin="5" Cursor="Hand" x:Name="Tags" >
                 <Run  FontWeight="Bold" Text="Tags: "/> 
                 <Run Name="TagCount" Text="0"/>
             </TextBlock>

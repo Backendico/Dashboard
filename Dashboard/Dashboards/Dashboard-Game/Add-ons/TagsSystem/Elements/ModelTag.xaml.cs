@@ -22,17 +22,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem.Elements
     /// </summary>
     public partial class ModelTag : UserControl
     {
+        BsonDocument Detail;
+
+
         /// <summary>
         /// for view
         /// </summary>
         /// <param name="Detail"></param>
         public ModelTag(BsonDocument Detail)
         {
+            this.Detail = Detail;
             InitializeComponent();
+            InitModelTag();
 
-            TextNameTag.Text = Detail["Name"].ToString();
-            Color1.Background = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(Detail["Color"].AsString);
-            Color2.Background = Color1.Background;
+            Cursor = Cursors.Arrow;
         }
 
         /// <summary>
@@ -42,15 +45,25 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem.Elements
         /// <param name="Controler"></param>
         public ModelTag(BsonDocument Detail, IControlTag Controler)
         {
-            InitializeComponent();
+            this.Detail = Detail;
 
-            TextNameTag.Text = Detail["Name"].ToString();
-            Color1.Background = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(Detail["Color"].AsString);
-                Color2.Background = Color1.Background;
+            InitializeComponent();
+            InitModelTag();
+
             MouseDown += (s, e) =>
             {
                 Controler.Delete(Detail, this);
             };
+        }
+
+        void InitModelTag()
+        {
+            TextNameTag.Text = Detail["Name"].ToString();
+            ToolTip = TextNameTag.Text;
+
+            Color1.Background = (Brush)new BrushConverter().ConvertFromString(Detail["Color"].AsString);
+            Color2.Background = Color1.Background;
+
         }
     }
 }

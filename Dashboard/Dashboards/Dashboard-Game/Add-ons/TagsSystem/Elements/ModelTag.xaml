@@ -7,9 +7,10 @@
              mc:Ignorable="d"
              Margin="10,2"
              Opacity="1"
+             Cursor="Hand"
              >
 
-    <StackPanel Cursor="Hand"  Orientation="Horizontal" >
+    <StackPanel   Orientation="Horizontal" >
         <Border x:Name="Color1"  CornerRadius="5,0,0,5" Background="Tomato" >
             <TextBlock Margin="5" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="&#xE8EC;" FontFamily="Segoe MDL2 Assets"/>
         </Border>

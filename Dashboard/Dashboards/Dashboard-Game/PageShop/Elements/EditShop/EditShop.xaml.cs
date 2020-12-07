@@ -42,6 +42,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             TextToken.Text = Detail["Token"].ToString();
             TextPurdocts.Text = Detail["Products"].AsBsonArray.Count.ToString();
             TextCreated.Text = Detail["Created"].ToLocalTime().ToString();
+            TextTagCount_Setting.Text = Detail["Tags"].AsBsonArray.Count.ToString();
+            Tag_Setting.MouseDown += (s, e) =>
+            {
+                new TagsSystem(Detail["Tags"].AsBsonArray, () =>
+                {
+                    TextTagCount_Setting.Text = Detail["Tags"].AsBsonArray.Count.ToString();
+                });
+            };
+
+
 
             if (Detail["AvatarLink"].AsString.Length >= 1)
             {
@@ -132,6 +142,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                     Detail["IsActive"] = IsActive.IsChecked.Value;
 
                     Debug.WriteLine(Detail);
+
                 }
                 catch (Exception ex)
                 {
@@ -141,12 +152,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             TextToken.MouseDown += GlobalEvents.CopyText;
 
-            #region SubPage
+            #region SubPage AddTag
 
             BsonDocument NewProduct = new BsonDocument
             {
                 {"Name","" },
-                {"Tags",new BsonArray() }
+                {"Count",0 },
+                {"Amount",0 },
+                {"Price",0 },
+                {"Avatar","" },
+                {"Market","" },
+                {"Description" ,""},
+                {"Tags",new BsonArray() },
+                {"IsExpiraton",false },
+                {"Expiraton",DateTime.Now }
             };
 
             // expire cheack
@@ -185,16 +204,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //event open tag system
             TagSystem.MouseDown += (s, e) =>
             {
-                new TagsSystem(NewProduct["Tags"].AsBsonArray,()=> {
+                new TagsSystem(NewProduct["Tags"].AsBsonArray, () =>
+                {
                     TextTagsCount.Text = NewProduct["Tags"].AsBsonArray.Count.ToString();
-
                 });
             };
 
             //action btn add tag
             BTNAddProduct.MouseDown += (s, e) =>
             {
-                Debug.WriteLine(NewProduct);
+                SDK.SDK_PageDashboards.DashboardGame.PageStore.AddProduct(NewProduct, result =>
+                {
+
+
+
+                });
             };
             #endregion
 
