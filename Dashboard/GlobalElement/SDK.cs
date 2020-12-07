@@ -1696,7 +1696,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void AddProduct(BsonDocument Detail,Action<bool> Result)
+                    public static async void AddProduct(ObjectId TokenStore,BsonDocument Detail,Action<bool> Result)
                     {
                         var client = new RestClient(Links.AddProduct);
                         client.Timeout = -1;
@@ -1705,7 +1705,9 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenStore", Detail.ToString());
+                        request.AddParameter("TokenStore", TokenStore.ToString());
+                        request.AddParameter("Detail", Detail.ToString());
+
                         var response = await client.ExecuteAsync(request);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)

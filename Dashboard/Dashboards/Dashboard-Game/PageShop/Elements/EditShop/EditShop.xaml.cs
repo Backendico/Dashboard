@@ -213,12 +213,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //action btn add tag
             BTNAddProduct.MouseDown += (s, e) =>
             {
-                SDK.SDK_PageDashboards.DashboardGame.PageStore.AddProduct(NewProduct, result =>
-                {
-
-
-
-                });
+                SDK.SDK_PageDashboards.DashboardGame.PageStore.AddProduct(Detail["Token"].AsObjectId, NewProduct, result =>
+                 {
+                     Debug.WriteLine(result);
+                 });
             };
             #endregion
 
