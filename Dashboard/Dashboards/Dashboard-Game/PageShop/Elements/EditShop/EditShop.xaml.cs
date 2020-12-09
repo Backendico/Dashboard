@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
@@ -24,8 +25,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         Button BTNCurent;
         Grid PageCurent;
-
-
 
 
         public EditShop(BsonDocument Detail)
@@ -152,6 +151,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             TextToken.MouseDown += GlobalEvents.CopyText;
 
+
+            //action show panel add product
+            BTNShowPanelAdd.MouseDown += (s, e) =>
+            {
+                ShowPanelAddProduct();
+            };
+
+            PanelAddProduct.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowoffPanelAddProduct();
+                }
+            };
+
+
             #region SubPage AddTag
 
             BsonDocument NewProduct = new BsonDocument
@@ -167,6 +182,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 {"IsExpiraton",false },
                 {"Expiraton",DateTime.Now }
             };
+
 
             // expire cheack
             IsExpiraton.Checked += (s, e) =>
@@ -257,17 +273,45 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         }
 
+        void ShowPanelAddProduct()
+        {
+            PanelAddProduct.Visibility = Visibility.Visible;
+
+            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, PanelAddProduct.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
+        }
+
+        void ShowoffPanelAddProduct()
+        {
+
+            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelAddProduct.Visibility = Visibility.Collapsed;
+            };
+
+            Storyboard.SetTargetName(Anim, PanelAddProduct.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
+        }
+        #region Product
 
         //PageProduct
         public void ReciveProduct()
         {
-            Debug.WriteLine(DetailStore["Products"]);
             foreach (var item in DetailStore["Products"].AsBsonArray)
             {
                 PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, this));
             }
         }
 
+        #endregion
 
         public void Save(BsonDocument Detail)
         {

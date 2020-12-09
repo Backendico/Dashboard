@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,18 +23,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
     /// </summary>
     public partial class ModelProduct : UserControl
     {
-        public ModelProduct(BsonDocument Detail,EditProducts Edit)
+        public ModelProduct(BsonDocument Detail, EditProducts Edit)
         {
             InitializeComponent();
 
-            TextName.Text = Detail["Name"].AsString;
-            TextCreated.Text = Detail["Created"].ToString();
+            Debug.WriteLine(Detail);
+            TextName.Text = Detail["Name"].ToString();
+            TextAvatarLink.Text = Detail["Avatar"].ToString();
 
-            //Controlls
-            TextAvatarLink.FocusableChanged += (s, e) =>
-            {
-                GlobalEvents.ControllLinkImages(s);
-            };
+
+      
 
             Edit.Save(null);
         }

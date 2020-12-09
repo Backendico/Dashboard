@@ -146,7 +146,7 @@
                     <!--Header-->
                     <StackPanel Margin="0,0,0,10" Orientation="Horizontal" Background="WhiteSmoke">
                         <!--Add player-->
-                        <Border  x:Name="BTNShowPanelAdd"  Cursor="Hand" ToolTip="Add Player to leaderboard" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
+                        <Border  x:Name="BTNShowPanelAdd"  Cursor="Hand" ToolTip="Add Product" Width="30" Margin="10,0"  Height="30" CornerRadius="5" Background="Gainsboro">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
                                 <TextBlock TextAlignment="Center" Text="&#xF133;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="White" />
                             </StackPanel>
@@ -154,19 +154,20 @@
                     </StackPanel>
 
                     <!--ListPlayer-->
-                    <WrapPanel  Orientation="Horizontal" Margin="10" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ScrollViewer Grid.Row="3">
+                        
                         <StackPanel x:Name="PlaceProducts">
 
                         </StackPanel>
+                    </ScrollViewer>
 
-                    </WrapPanel>
 
                 </Grid>
 
 
                 <!--SubPages-->
                 <!--SubPage Add-->
-                <Grid  x:Name="PanelAddProduct"  Visibility="Visible" Background="#33000000" Opacity="1" Grid.Row="2" >
+                <Grid  x:Name="PanelAddProduct"  Visibility="Collapsed" Background="#33000000" Opacity="0" Grid.Row="2" >
 
                     <Grid.Effect>
                         <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
