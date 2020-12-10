@@ -60,7 +60,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <Grid  x:Name="PanelSetting" Visibility="Collapsed" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
+            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
                 <StackPanel >
 
                     <!--Avatar-->
@@ -136,7 +136,7 @@
             </Grid>
 
             <!--product-->
-            <Grid  x:Name="PanelProduct"  Visibility="Visible"  Grid.Row="2" >
+            <Grid  x:Name="PanelProduct"  Visibility="Collapsed"  Grid.Row="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>

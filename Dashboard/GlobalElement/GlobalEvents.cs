@@ -48,23 +48,25 @@ namespace Dashboard.GlobalElement
 
         }
 
-        public static void ControllLinks(object Sender, TextChangedEventArgs Event)
+        public static bool ControllLinks(object Sender)
         {
             var Text = Sender as TextBox;
             try
             {
                 if (Text.Text.Length >= 1)
                     new Uri(Text.Text);
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Text.Text = "";
                 DashboardGame.Notifaction("Field is Link", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
+                return false;   
             }
 
         }
 
-        public static void ControllLinkImages(object Sender)
+        public static bool ControllLinkImages(object Sender)
         {
             var Text = Sender as TextBox;
 
@@ -72,19 +74,28 @@ namespace Dashboard.GlobalElement
             {
                 if (Text.Text.Contains(".png")||Text.Text.Contains(".PNG"))
                 {
-
+                    return true;
                 }
                 else if(Text.Text.Length>=1)
+                {
+                    throw new Exception();
+                }
+                else
                 {
                     throw new Exception();
                 }
             }
             catch (Exception)
             {
+                if (Text.Text.Length>=1)
+                {
                 DashboardGame.Notifaction("Enter a direct link to Image", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
+                }
                 Text.Text = "";
+                return false;   
             }
         }
+
 
     }
 }

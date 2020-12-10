@@ -1719,6 +1719,32 @@ namespace Dashboard.GlobalElement
                             Result(false);  
                         }
                     }
+             
+                public static async void SaveStore(ObjectId TokenStore,BsonDocument Detail,Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.SaveStore);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenStore", TokenStore.ToString());
+                        request.AddParameter("DetailStore", Detail.ToString());
+
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+                
                 }
 
             }
@@ -1860,6 +1886,7 @@ namespace Dashboard.GlobalElement
                 public string ReciveProduct => BaseLink + "PageStore/ReciveProduct";
 
                 public string AddProduct => BaseLink + "PageStore/AddProduct";
+                public string SaveStore => BaseLink + "PageStore/SaveStore";
 
             }
         }

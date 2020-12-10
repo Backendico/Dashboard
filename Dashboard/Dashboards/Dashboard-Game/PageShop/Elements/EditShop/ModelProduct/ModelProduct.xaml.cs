@@ -23,18 +23,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
     /// </summary>
     public partial class ModelProduct : UserControl
     {
-        public ModelProduct(BsonDocument Detail, EditProducts Edit)
+        public ModelProduct(BsonDocument DetailProduct, EditProducts Edit)
         {
             InitializeComponent();
 
-            Debug.WriteLine(Detail);
-            TextName.Text = Detail["Name"].ToString();
-            TextAvatarLink.Text = Detail["Avatar"].ToString();
+            Debug.WriteLine(DetailProduct);
+            TextName.Text = DetailProduct["Name"].ToString();
+            TextAvatarLink.Text = DetailProduct["Avatar"].ToString();
 
 
       
 
-            Edit.Save(null);
+            Edit.Save();
         }
 
 
