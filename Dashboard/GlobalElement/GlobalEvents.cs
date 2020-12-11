@@ -33,19 +33,29 @@ namespace Dashboard.GlobalElement
             DashboardGame.Notifaction("Copyed !", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Ok);
         }
 
-        public static void ControllNumberFilde(TextBox Sender)
+        public static bool ControllNumberFilde(TextBox Sender)
         {
-            try
+            if (Sender.Text.Length >= 1)
             {
-                if (Sender.Text.Length >= 1)
-                    int.Parse(Sender.Text);
-            }
-            catch (Exception)
-            {
-                Sender.Text = "";
-                DashboardGame.Notifaction("Field is Number", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
-            }
 
+                try
+                {
+                    int.Parse(Sender.Text);
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Sender.Text = "";
+                    DashboardGame.Notifaction("Field is Number", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
+                    return false;
+                }
+
+            }
+            else
+            {
+               return false;
+            }
         }
 
         public static bool ControllLinks(object Sender)
@@ -57,11 +67,11 @@ namespace Dashboard.GlobalElement
                     new Uri(Text.Text);
                 return true;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 Text.Text = "";
                 DashboardGame.Notifaction("Field is Link", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
-                return false;   
+                return false;
             }
 
         }
@@ -72,11 +82,11 @@ namespace Dashboard.GlobalElement
 
             try
             {
-                if (Text.Text.Contains(".png")||Text.Text.Contains(".PNG")||Text.Text.Contains(".Gif")||Text.Text.Contains(".gif")||Text.Text.Contains("JPG")||Text.Text.Contains(".jpg"))
+                if (Text.Text.Contains(".png") || Text.Text.Contains(".PNG") || Text.Text.Contains(".Gif") || Text.Text.Contains(".gif") || Text.Text.Contains("JPG") || Text.Text.Contains(".jpg"))
                 {
                     return true;
                 }
-                else if(Text.Text.Length>=1)
+                else if (Text.Text.Length >= 1)
                 {
                     throw new Exception();
                 }
@@ -87,12 +97,12 @@ namespace Dashboard.GlobalElement
             }
             catch (Exception)
             {
-                if (Text.Text.Length>=1)
+                if (Text.Text.Length >= 1)
                 {
-                DashboardGame.Notifaction("Enter a direct link to Image", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
+                    DashboardGame.Notifaction("Enter a direct link to Image", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
                 }
                 Text.Text = "";
-                return false;   
+                return false;
             }
         }
 

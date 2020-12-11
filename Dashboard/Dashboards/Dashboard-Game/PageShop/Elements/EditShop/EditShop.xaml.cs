@@ -177,8 +177,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 {"Market","" },
                 {"Description" ,""},
                 {"Tags",new BsonArray() },
-                {"IsExpiraton",false },
-                {"Expiraton",DateTime.Now }
+                {"IsExpiration",false },
+                {"Expiration",DateTime.Now }
             };
 
             //action show panel add product
@@ -195,8 +195,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                     ShowoffPanelAddProduct();
                 }
             };
-
-
 
             // expire cheack
             IsExpiraton.Checked += (s, e) =>
