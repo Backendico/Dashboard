@@ -74,10 +74,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
             //change avatar
             TextAvatarLink.LostFocus += (s, e) =>
             {
+                if (GlobalEvents.ControllLinkImages(s))
+                {
+                   this. DetailProduct["Avatar"] = TextAvatarLink.Text;
+                }
 
-
+                UpdateProduct();
             };
 
+
+            //action save Setting
             BTNSave.MouseDown += (s, e) =>
             {
                 setting.Save();

@@ -34,17 +34,18 @@
                     <!--Panel2-->
                     <StackPanel MaxHeight="200" MaxWidth="400" Margin="10" >
 
+                        <!--Name-->
+                        <StackPanel>
+                            <TextBlock  FontWeight="Bold" Text="Name :"/>
+                            <TextBox x:Name="TextName"/>
+                        </StackPanel>
+                        
                         <!--LinkAvatar-->
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="LinkAvatar :"/>
                             <TextBox x:Name="TextAvatarLink" MinWidth="150"/>
                         </StackPanel>
 
-                        <!--Name-->
-                        <StackPanel>
-                            <TextBlock  FontWeight="Bold" Text="Name :"/>
-                            <TextBox x:Name="TextName"/>
-                        </StackPanel>
 
                         <!--Description-->
                         <StackPanel   >
