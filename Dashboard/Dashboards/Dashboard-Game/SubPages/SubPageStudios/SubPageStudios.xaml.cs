@@ -67,6 +67,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
             SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
                 result =>
                 {
+                    SettingUser.ServerTime =new DateTime(result["ServerTime"].AsInt64);
+                    
                     PlaceContentStudios.Children.Clear();
                     if (result["Settings"].AsBsonArray.Count <= 0)
                     {

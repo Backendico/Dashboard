@@ -30,38 +30,70 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
         public ModelProduct(BsonDocument DetailProduct, IStoreSetting setting)
         {
             InitializeComponent();
+            
             MainSetting = setting;
             this.DetailProduct = DetailProduct;
+
+            TextCreated.Text = this.DetailProduct["Created"].ToLocalTime().ToString();
+            
+            TextToken.Text = this.DetailProduct["Token"].ToString();
+            TextToken.MouseDown += GlobalEvents.CopyText;
 
             TextName.Text = this.DetailProduct["Name"].ToString();
             TextAvatarLink.Text = this.DetailProduct["Avatar"].ToString();
 
+
+            //action expiration
             IsExpiration.Checked += (s, e) =>
             {
                 Calender.Visibility = Visibility.Visible;
+                this.DetailProduct["IsExpiraton"] = true;
                 UpdateProduct();
             };
             IsExpiration.Unchecked += (s, e) =>
             {
                 Calender.Visibility = Visibility.Collapsed;
+                this.DetailProduct["IsExpiraton"] = false;
                 UpdateProduct();
             };
 
+            //change name
+            TextName.TextChanged += (s, e) =>
+            {
+                if (TextName.Text.Length>=1)
+                {
+                    this.DetailProduct["Name"] = TextName.Text;
+                    UpdateProduct();
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Name Is Short", Notifaction.StatusMessage.Error);
+                }
+            };
 
+            //change avatar
+            TextAvatarLink.LostFocus += (s, e) =>
+            {
+
+
+            };
+
+            BTNSave.MouseDown += (s, e) =>
+            {
+                setting.Save();
+            };
         }
 
         void UpdateProduct()
         {
 
-            foreach (var item in MainSetting.DetailStore["Products"].AsBsonArray)
+            for (int i = 0; i < MainSetting.DetailStore["Products"].AsBsonArray.Count; i++)
             {
-                if (item.AsBsonDocument["Token"].AsObjectId==DetailProduct["Token"])
+                if (MainSetting.DetailStore["Products"].AsBsonArray[i].AsBsonDocument["Token"].AsObjectId == DetailProduct["Token"])
                 {
-                    Debug.WriteLine("hi");
+                    MainSetting.DetailStore["Products"].AsBsonArray[i] = DetailProduct;
                 }
             }
         }
-
-
     }
 }

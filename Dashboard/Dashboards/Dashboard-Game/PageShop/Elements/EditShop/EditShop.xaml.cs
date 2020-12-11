@@ -35,52 +35,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             this.Settings = Settings;
 
-            TextAvatar.Text = Settings.DetailStore["AvatarLink"].AsString;
-            TextName.Text = Settings.DetailStore["Name"].AsString;
-            TextDescription.Text = Settings.DetailStore["Description"].AsString;
-            TextMarketLink.Text = Settings.DetailStore["MarketLink"].AsString;
-            IsActive.IsChecked = Settings.DetailStore["IsActive"].AsBoolean;
-            TextToken.Text = Settings.DetailStore["Token"].ToString();
-            TextPurdocts.Text = Settings.DetailStore["Products"].AsBsonArray.Count.ToString();
-            TextCreated.Text = Settings.DetailStore["Created"].ToLocalTime().ToString();
-            TextTagCount_Setting.Text = Settings.DetailStore["Tags"].AsBsonArray.Count.ToString();
-            Tag_Setting.MouseDown += (s, e) =>
-            {
-                new TagsSystem(Settings.DetailStore["Tags"].AsBsonArray, () =>
-                {
-                    TextTagCount_Setting.Text = Settings.DetailStore["Tags"].AsBsonArray.Count.ToString();
-                });
-            };
-
-
-
-            if (Settings.DetailStore["AvatarLink"].AsString.Length >= 1)
-            {
-                var image = new Image();
-                var fullFilePath = Settings.DetailStore["AvatarLink"].ToString();
-
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-                bitmap.EndInit();
-
-                image.Source = bitmap;
-                PlaceAvatar.Child = image;
-            }
-            else
-            {
-                PlaceAvatar.Child = new TextBlock()
-                {
-                    Text = "\xEB9F",
-                    TextAlignment = TextAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = new SolidColorBrush(Colors.Black),
-                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
-                    FontSize = 30,
-                    ToolTip = "No Avatar"
-                };
-            }
+           
 
             PageCurent = PanelSetting;
             BTNCurent = BTNSetting;
@@ -92,8 +47,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             #endregion
 
 
-
             #region Setting
+ 
+            InitSetting();
             //controll and inject avatar
             TextAvatar.LostFocus += (s, e) =>
             {
@@ -209,7 +165,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             #endregion
 
 
-            #region SubPage AddTag
+            #region SubPage AddProducts
 
             BsonDocument NewProduct = new BsonDocument
             {
@@ -288,15 +244,72 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             BTNAddProduct.MouseDown += (s, e) =>
             {
                 NewProduct.Add("Token", ObjectId.GenerateNewId());
+                NewProduct.Add("Created", SettingUser.ServerTime);
 
-                SDK.SDK_PageDashboards.DashboardGame.PageStore.AddProduct(Settings.DetailStore["Token"].AsObjectId, NewProduct, result =>
-                 {
-                     Debug.WriteLine(result);
-                 });
+                Settings.DetailStore["Products"].AsBsonArray.Add(NewProduct);
+                Settings.Save();
+                ReciveProduct();
+                ShowoffPanelAddProduct();
+                InitSetting();
             };
             #endregion
 
         }
+
+        #region Setting
+        void InitSetting()
+        {
+            TextAvatar.Text = Settings.DetailStore["AvatarLink"].AsString;
+            TextName.Text = Settings.DetailStore["Name"].AsString;
+            TextDescription.Text = Settings.DetailStore["Description"].AsString;
+            TextMarketLink.Text = Settings.DetailStore["MarketLink"].AsString;
+            IsActive.IsChecked = Settings.DetailStore["IsActive"].AsBoolean;
+            TextToken.Text = Settings.DetailStore["Token"].ToString();
+            TextPurdocts.Text = Settings.DetailStore["Products"].AsBsonArray.Count.ToString();
+            TextCreated.Text = Settings.DetailStore["Created"].ToLocalTime().ToString();
+            TextTagCount_Setting.Text = Settings.DetailStore["Tags"].AsBsonArray.Count.ToString();
+            Tag_Setting.MouseDown += (s, e) =>
+            {
+                new TagsSystem(Settings.DetailStore["Tags"].AsBsonArray, () =>
+                {
+                    TextTagCount_Setting.Text = Settings.DetailStore["Tags"].AsBsonArray.Count.ToString();
+                });
+            };
+
+
+
+            if (Settings.DetailStore["AvatarLink"].AsString.Length >= 1)
+            {
+                var image = new Image();
+                var fullFilePath = Settings.DetailStore["AvatarLink"].ToString();
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+                bitmap.EndInit();
+
+                image.Source = bitmap;
+                PlaceAvatar.Child = image;
+            }
+            else
+            {
+                PlaceAvatar.Child = new TextBlock()
+                {
+                    Text = "\xEB9F",
+                    TextAlignment = TextAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                    FontSize = 30,
+                    ToolTip = "No Avatar"
+                };
+            }
+
+
+        }
+
+        #endregion
 
 
         #region Product
@@ -314,7 +327,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
         void ShowoffPanelAddProduct()
         {
 
-            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            var Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
             Anim.Completed += (s, e) =>
             {
                 PanelAddProduct.Visibility = Visibility.Collapsed;
@@ -331,9 +344,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
         public void ReciveProduct()
         {
             PlaceProducts.Children.Clear();
+            if (Settings.DetailStore["Products"].AsBsonArray.Count>=1)
+            {
+
             foreach (var item in Settings.DetailStore["Products"].AsBsonArray)
             {
                 PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, Settings));
+            }
+            }
+            else
+            {
+                ShowPanelAddProduct();
             }
         }
 

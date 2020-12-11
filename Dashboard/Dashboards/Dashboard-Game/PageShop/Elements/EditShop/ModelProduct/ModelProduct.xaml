@@ -24,7 +24,7 @@
                         </TextBlock>
 
                         <!--Token-->
-                        <TextBlock  MinWidth="100">
+                        <TextBlock  Cursor="Hand" MinWidth="100">
                                                 <Run  FontWeight="Bold"  Text="Token: "/><Run Name="TextToken" Text="XXX"/>
                         </TextBlock>
 
@@ -101,7 +101,7 @@
                 </StackPanel>
             </Border>
             <!--BTNSave-->
-            <Border Cursor="Hand" HorizontalAlignment="Right" Margin="10" Height="30" Width="80" Background="Orange" CornerRadius="5" >
+            <Border x:Name="BTNSave" Cursor="Hand" HorizontalAlignment="Right" Margin="10" Height="30" Width="80" Background="Orange" CornerRadius="5" >
                 <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="Save"/>
             </Border>
         </StackPanel>
