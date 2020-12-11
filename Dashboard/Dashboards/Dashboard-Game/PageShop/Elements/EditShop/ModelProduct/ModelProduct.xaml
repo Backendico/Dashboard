@@ -72,7 +72,7 @@
                             <TextBox x:Name="TextAmount"/>
                         </StackPanel>
 
-                        <!--Name-->
+                        <!--Price-->
                         <StackPanel>
                             <TextBlock  FontWeight="Bold" Text="Price :"/>
                             <TextBox  x:Name="TextPrice"/>
@@ -88,13 +88,13 @@
                     </StackPanel>
                     <!--Panel4-->
                     <StackPanel Margin="10">
-                        <CheckBox Content="IsExpiraton"/>
+                        <CheckBox x:Name="IsExpiration" Content="IsExpiration"/>
                         <!--ExpireTime-->
                         <TextBlock >
                                 <Run Text="Ex Time :" FontWeight="Bold"/>
                                 <Run Text="XXX"/>
                         </TextBlock>
-                        <Calendar Visibility="Collapsed"/>
+                        <Calendar x:Name="Calender" Visibility="Collapsed"/>
                         
                     </StackPanel>
                     

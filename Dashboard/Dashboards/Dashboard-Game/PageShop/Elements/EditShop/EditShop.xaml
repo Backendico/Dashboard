@@ -60,7 +60,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" HorizontalAlignment="Center"  Grid.Row="2">
+            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" MaxWidth="600" HorizontalAlignment="Center"  Grid.Row="2">
                 <StackPanel >
 
                     <!--Avatar-->

@@ -19,45 +19,45 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
     /// <summary>
     /// Interaction logic for EditShop.xaml
     /// </summary>
-    public partial class EditShop : UserControl, EditProducts
+    public partial class EditShop : UserControl
     {
-        BsonDocument DetailStore;
+        IStoreSetting Settings;
 
         Button BTNCurent;
         Grid PageCurent;
 
 
-        public EditShop(BsonDocument Detail)
+        public EditShop(IStoreSetting Settings)
         {
             #region Global
 
             InitializeComponent();
 
-            DetailStore = Detail;
+            this.Settings = Settings;
 
-            TextAvatar.Text = DetailStore["AvatarLink"].AsString;
-            TextName.Text = DetailStore["Name"].AsString;
-            TextDescription.Text = DetailStore["Description"].AsString;
-            TextMarketLink.Text = DetailStore["MarketLink"].AsString;
-            IsActive.IsChecked = DetailStore["IsActive"].AsBoolean;
-            TextToken.Text = DetailStore["Token"].ToString();
-            TextPurdocts.Text = DetailStore["Products"].AsBsonArray.Count.ToString();
-            TextCreated.Text = DetailStore["Created"].ToLocalTime().ToString();
-            TextTagCount_Setting.Text = DetailStore["Tags"].AsBsonArray.Count.ToString();
+            TextAvatar.Text = Settings.DetailStore["AvatarLink"].AsString;
+            TextName.Text = Settings.DetailStore["Name"].AsString;
+            TextDescription.Text = Settings.DetailStore["Description"].AsString;
+            TextMarketLink.Text = Settings.DetailStore["MarketLink"].AsString;
+            IsActive.IsChecked = Settings.DetailStore["IsActive"].AsBoolean;
+            TextToken.Text = Settings.DetailStore["Token"].ToString();
+            TextPurdocts.Text = Settings.DetailStore["Products"].AsBsonArray.Count.ToString();
+            TextCreated.Text = Settings.DetailStore["Created"].ToLocalTime().ToString();
+            TextTagCount_Setting.Text = Settings.DetailStore["Tags"].AsBsonArray.Count.ToString();
             Tag_Setting.MouseDown += (s, e) =>
             {
-                new TagsSystem(DetailStore["Tags"].AsBsonArray, () =>
+                new TagsSystem(Settings.DetailStore["Tags"].AsBsonArray, () =>
                 {
-                    TextTagCount_Setting.Text = DetailStore["Tags"].AsBsonArray.Count.ToString();
+                    TextTagCount_Setting.Text = Settings.DetailStore["Tags"].AsBsonArray.Count.ToString();
                 });
             };
 
 
 
-            if (DetailStore["AvatarLink"].AsString.Length >= 1)
+            if (Settings.DetailStore["AvatarLink"].AsString.Length >= 1)
             {
                 var image = new Image();
-                var fullFilePath = Detail["AvatarLink"].ToString();
+                var fullFilePath = Settings.DetailStore["AvatarLink"].ToString();
 
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
@@ -99,13 +99,50 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             {
                 if (GlobalEvents.ControllLinkImages(s)&&TextAvatar.Text.Length>=1)
                 {
-                    DetailStore["AvatarLink"] = TextAvatar.Text;
+                    var Photo = new Image();
+
+                    var ImageBit = new BitmapImage();
+
+                    ImageBit.DownloadFailed += ( s1,e1) =>
+                    {
+                        Settings.DetailStore["AvatarLink"] ="";
+                        TextAvatar.Text = "";
+                        DashboardGame.Notifaction("Image not found", Notifaction.StatusMessage.Error);
+                    
+                        PlaceAvatar.Child = null;
+                        PlaceAvatar.Child = new TextBlock()
+                        {
+                            Text = "\xEB9F",
+                            TextAlignment = TextAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Foreground = new SolidColorBrush(Colors.Black),
+                            FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                            FontSize = 30,
+                            ToolTip = "No Avatar"
+                        };
+
+                    };
+
+                    ImageBit.DownloadCompleted += (s2, e2) =>
+                    {
+                        Settings.DetailStore["AvatarLink"] = TextAvatar.Text;
+                        PlaceAvatar.Child = null;   
+                        PlaceAvatar.Child = Photo;
+                    };
+
+                    ImageBit.BeginInit();
+                    ImageBit.UriSource = new Uri(TextAvatar.Text, UriKind.Absolute);
+                    Photo.Source = ImageBit;
+                   
+                    ImageBit.EndInit();
+
                 }
                 else
                 {
                     if (TextAvatar.Text.Length==0)
                     {
-                        DetailStore["AvatarLink"] = TextAvatar.Text;
+                        Settings.DetailStore["AvatarLink"] = TextAvatar.Text;
                     }
                 }
             };
@@ -114,11 +151,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             {
                 if (TextName.Text.Length>=1)
                 {
-                    DetailStore["Name"] = TextName.Text;
+                    Settings.DetailStore["Name"] = TextName.Text;
                 }
                 else
                 {
-                    TextName.Text = DetailStore["Name"].AsString;
+                    TextName.Text = Settings.DetailStore["Name"].AsString;
                     DashboardGame.Notifaction("Name is Short", Notifaction.StatusMessage.Error);
                 }
             };
@@ -127,18 +164,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             {
                 if (GlobalEvents.ControllLinks(s))
                 {
-                    DetailStore["MarketLink"] = TextMarketLink.Text;
+                    Settings.DetailStore["MarketLink"] = TextMarketLink.Text;
                 }
             };
            //change Description
             TextDescription.TextChanged += (sender, e) =>
             {
-                DetailStore["Description"] = TextDescription.Text;
+                Settings.DetailStore["Description"] = TextDescription.Text;
             };
             //Active Control 
             IsActive.Checked += (s, e) =>
             {
-                DetailStore["IsActive"] = IsActive.IsChecked.Value;
+                Settings.DetailStore["IsActive"] = IsActive.IsChecked.Value;
             };
 
             //acaton SaveSetting
@@ -147,13 +184,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 //control avatar
                 if (GlobalEvents.ControllLinkImages(TextAvatar) && TextAvatar.Text.Length >= 1)
                 {
-                    DetailStore["AvatarLink"] = TextAvatar.Text;
+                    Settings.DetailStore["AvatarLink"] = TextAvatar.Text;
                 }
                 else
                 {
                     if (TextAvatar.Text.Length == 0)
                     {
-                        DetailStore["AvatarLink"] = TextAvatar.Text;
+                        Settings.DetailStore["AvatarLink"] = TextAvatar.Text;
                     }
                 }
 
@@ -161,10 +198,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 //control link market
                 if (GlobalEvents.ControllLinks(TextMarketLink))
                 {
-                    DetailStore["MarketLink"] = TextMarketLink.Text;
+                    Settings.DetailStore["MarketLink"] = TextMarketLink.Text;
                 }
 
-                Save();
+                Settings.Save();
             };
 
             TextToken.MouseDown += GlobalEvents.CopyText;
@@ -250,7 +287,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //action btn add tag
             BTNAddProduct.MouseDown += (s, e) =>
             {
-                SDK.SDK_PageDashboards.DashboardGame.PageStore.AddProduct(DetailStore["Token"].AsObjectId, NewProduct, result =>
+                NewProduct.Add("Token", ObjectId.GenerateNewId());
+
+                SDK.SDK_PageDashboards.DashboardGame.PageStore.AddProduct(Settings.DetailStore["Token"].AsObjectId, NewProduct, result =>
                  {
                      Debug.WriteLine(result);
                  });
@@ -259,10 +298,46 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         }
 
-        public void Close(object S, RoutedEventArgs Event)
+
+        #region Product
+        void ShowPanelAddProduct()
         {
-            DashboardGame.Dashboard.Root.Children.Remove(this);
+            PanelAddProduct.Visibility = Visibility.Visible;
+
+            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, PanelAddProduct.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
         }
+        void ShowoffPanelAddProduct()
+        {
+
+            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelAddProduct.Visibility = Visibility.Collapsed;
+            };
+
+            Storyboard.SetTargetName(Anim, PanelAddProduct.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
+        }
+
+        //PageProduct
+        public void ReciveProduct()
+        {
+            PlaceProducts.Children.Clear();
+            foreach (var item in Settings.DetailStore["Products"].AsBsonArray)
+            {
+                PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, Settings));
+            }
+        }
+
+        #endregion
 
         internal void ChangePage(object s, RoutedEventArgs eventArgs)
         {
@@ -294,73 +369,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         }
 
-        void ShowPanelAddProduct()
+        public void Close(object S, RoutedEventArgs Event)
         {
-            PanelAddProduct.Visibility = Visibility.Visible;
-
-            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
-            Storyboard.SetTargetName(Anim, PanelAddProduct.Name);
-            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard Story = new Storyboard();
-            Story.Children.Add(Anim);
-            Story.Begin(this);
+            DashboardGame.Dashboard.Root.Children.Remove(this);
         }
 
-        void ShowoffPanelAddProduct()
-        {
-
-            var Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
-            Anim.Completed += (s, e) =>
-            {
-                PanelAddProduct.Visibility = Visibility.Collapsed;
-            };
-
-            Storyboard.SetTargetName(Anim, PanelAddProduct.Name);
-            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard Story = new Storyboard();
-            Story.Children.Add(Anim);
-            Story.Begin(this);
-        }
-        #region Product
-
-        //PageProduct
-        public void ReciveProduct()
-        {
-            foreach (var item in DetailStore["Products"].AsBsonArray)
-            {
-                PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, this));
-            }
-        }
-
-        #endregion
-
-
-
-        public void Save()
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageStore.SaveStore(DetailStore["Token"].AsObjectId, DetailStore, result =>
-            {
-                if (result)
-                {
-
-                    DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
-                }
-                else
-                {
-                    DashboardGame.Notifaction("Not Save", Notifaction.StatusMessage.Error);
-                }
-            });
-        }
-
-        public void Delete(ObjectId Token)
-        {
-
-        }
     }
 
-    public interface EditProducts
-    {
-        void Save();
-        void Delete(ObjectId Token);
-    }
 }

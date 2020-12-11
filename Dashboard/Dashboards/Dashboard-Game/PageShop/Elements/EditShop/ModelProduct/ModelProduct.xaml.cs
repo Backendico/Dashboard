@@ -1,5 +1,6 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,18 +24,42 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
     /// </summary>
     public partial class ModelProduct : UserControl
     {
-        public ModelProduct(BsonDocument DetailProduct, EditProducts Edit)
+        IStoreSetting MainSetting;
+        BsonDocument DetailProduct;
+
+        public ModelProduct(BsonDocument DetailProduct, IStoreSetting setting)
         {
             InitializeComponent();
+            MainSetting = setting;
+            this.DetailProduct = DetailProduct;
 
-            Debug.WriteLine(DetailProduct);
-            TextName.Text = DetailProduct["Name"].ToString();
-            TextAvatarLink.Text = DetailProduct["Avatar"].ToString();
+            TextName.Text = this.DetailProduct["Name"].ToString();
+            TextAvatarLink.Text = this.DetailProduct["Avatar"].ToString();
+
+            IsExpiration.Checked += (s, e) =>
+            {
+                Calender.Visibility = Visibility.Visible;
+                UpdateProduct();
+            };
+            IsExpiration.Unchecked += (s, e) =>
+            {
+                Calender.Visibility = Visibility.Collapsed;
+                UpdateProduct();
+            };
 
 
-      
+        }
 
-            Edit.Save();
+        void UpdateProduct()
+        {
+
+            foreach (var item in MainSetting.DetailStore["Products"].AsBsonArray)
+            {
+                if (item.AsBsonDocument["Token"].AsObjectId==DetailProduct["Token"])
+                {
+                    Debug.WriteLine("hi");
+                }
+            }
         }
 
 

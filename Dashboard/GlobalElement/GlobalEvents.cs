@@ -72,7 +72,7 @@ namespace Dashboard.GlobalElement
 
             try
             {
-                if (Text.Text.Contains(".png")||Text.Text.Contains(".PNG"))
+                if (Text.Text.Contains(".png")||Text.Text.Contains(".PNG")||Text.Text.Contains(".Gif")||Text.Text.Contains(".gif")||Text.Text.Contains("JPG")||Text.Text.Contains(".jpg"))
                 {
                     return true;
                 }

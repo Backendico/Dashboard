@@ -9,23 +9,66 @@ using System.Windows.Media.Imaging;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
 {
-    /// <summary>
-    /// Interaction logic for ModelStore.xaml
-    /// </summary>
-    public partial class ModelStore : UserControl
+    public partial class ModelStore : UserControl, IStoreSetting
     {
+
         public ModelStore(BsonDocument Detail)
         {
             InitializeComponent();
-            TextName.Text = Detail["Name"].AsString;
-            TextDescription.Text = Detail["Description"].AsString.Length >= 1 ? Detail["Description"].AsString : "No Description";
-            TextProduct.Text = Detail["Products"].AsBsonArray.Count.ToString();
-            TextCreated.Text = Detail["Created"].ToLocalTime().ToString();
+            DetailStore = Detail;
 
-            TextToken.Text = Detail["Token"].ToString();
+            Update();
+
+            //action btn edit 
+            BTNEdit.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new EditShop.EditShop(this));
+            };
+
+            //action show tag view
+            Tags.MouseDown += (s, e) =>
+            {
+                new TagsSystem(Detail["Tags"].AsBsonArray);
+            };
+        }
+
+        public BsonDocument DetailStore { get; set; }
+
+        public void Delete()
+        {
+
+        }
+
+        public void Save()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageStore.SaveStore(DetailStore["Token"].AsObjectId, DetailStore, result =>
+            {
+                if (result)
+                {
+
+                    DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
+                    Update();
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Not Save", Notifaction.StatusMessage.Error);
+                    Update();
+                }
+            });
+        }
+
+        public void Update()
+        {
+
+            TextName.Text = DetailStore["Name"].AsString;
+            TextDescription.Text = DetailStore["Description"].AsString.Length >= 1 ? DetailStore["Description"].AsString : "No Description";
+            TextProduct.Text = DetailStore["Products"].AsBsonArray.Count.ToString();
+            TextCreated.Text = DetailStore["Created"].ToLocalTime().ToString();
+
+            TextToken.Text = DetailStore["Token"].ToString();
             TextToken.MouseDown += GlobalEvents.CopyText;
 
-            if (Detail["IsActive"].AsBoolean)
+            if (DetailStore["IsActive"].AsBoolean)
             {
                 IsActive1.BorderBrush = new SolidColorBrush(Colors.LightGreen);
                 IsActive2.Background = new SolidColorBrush(Colors.LightGreen);
@@ -36,10 +79,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
                 IsActive2.Background = new SolidColorBrush(Colors.Tomato);
             }
 
-            if (Detail["AvatarLink"].AsString.Length >= 1)
+            if (DetailStore["AvatarLink"].AsString.Length >= 1)
             {
                 var image = new Image();
-                var fullFilePath = Detail["AvatarLink"].ToString();
+                var fullFilePath = DetailStore["AvatarLink"].ToString();
 
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
@@ -64,18 +107,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
                 };
             }
 
-            //action btn edit 
-            BTNEdit.MouseDown += (s, e) =>
-            {
-                DashboardGame.Dashboard.Root.Children.Add(new EditShop.EditShop(Detail));
-            };
-
-            TagCount.Text = Detail["Tags"].AsBsonArray.Count.ToString();
-
-            //action show tag view
-            Tags.MouseDown += (s, e) => {
-                new TagsSystem(Detail["Tags"].AsBsonArray);
-            };
+            TagCount.Text = DetailStore["Tags"].AsBsonArray.Count.ToString();
         }
+
+    }
+
+    public interface IStoreSetting
+    {
+        void Save();
+        void Delete();
+        void Update();
+        BsonDocument DetailStore { get; set; }
+
     }
 }
