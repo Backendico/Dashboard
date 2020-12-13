@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,12 +21,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
     /// <summary>
     /// Interaction logic for EditShop.xaml
     /// </summary>
-    public partial class EditShop : UserControl
+    public partial class EditShop : UserControl, IEditStore
     {
         IStoreSetting Settings;
 
         Button BTNCurent;
         Grid PageCurent;
+
+        BsonDocument NewProduct = new BsonDocument
+            {
+                {"Name",""},
+                {"Count",0},
+                {"Amount",0 },
+                {"Price",0 },
+                {"Avatar","" },
+                {"Market","" },
+                {"Description" ,""},
+                {"Tags",new BsonArray() },
+                {"IsExpiration",false},
+                {"Expiration", SettingUser.ServerTime.AddDays(3)},
+                {"Token" ,""},
+                {"Created",SettingUser.ServerTime }
+            };
+
+        public BsonDocument DetailStore { get; set; }
 
 
         public EditShop(IStoreSetting Settings)
@@ -35,7 +54,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             InitializeComponent();
 
             this.Settings = Settings;
-
+            DetailStore = this.Settings.DetailStore;
 
 
             PageCurent = PanelSetting;
@@ -168,22 +187,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             #region SubPage AddProducts
 
-            BsonDocument NewProduct = new BsonDocument
-            {
-                {"Name",TextName.Text },
-                {"Count",0},
-                {"Amount",0 },
-                {"Price",0 },
-                {"Avatar","" },
-                {"Market","" },
-                {"Description" ,""},
-                {"Tags",new BsonArray() },
-                {"IsExpiration",false},
-                {"Expiration", ""},
-                {"Token" ,ObjectId.GenerateNewId()},
-                {"Created",SettingUser.ServerTime }
-            };
-
             //action show panel add product
             BTNShowPanelAdd.MouseDown += (s, e) =>
             {
@@ -202,7 +205,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //change name
             TextNameProduct_AddProduct.TextChanged += (s, e) =>
             {
-                NewProduct["Name"] = TextName.Text;
+                NewProduct["Name"] = TextNameProduct_AddProduct.Text;
             };
 
             //Change count int
@@ -308,18 +311,39 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //action btn add tag
             BTNAddProduct.MouseDown += (s, e) =>
             {
-                Settings.DetailStore["Products"].AsBsonArray.Add(NewProduct);
-                Settings.Save();
-                ReciveProduct();
+                NewProduct["Token"] = ObjectId.GenerateNewId();
+                NewProduct["Created"] = SettingUser.ServerTime;
+
+
+                BsonDocument NewProduct1 = new BsonDocument
+            {
+                {"Name",""},
+                {"Count",0},
+                {"Amount",0 },
+                {"Price",0 },
+                {"Avatar","" },
+                {"Market","" },
+                {"Description" ,""},
+                {"Tags",new BsonArray() },
+                {"IsExpiration",false},
+                {"Expiration", SettingUser.ServerTime.AddDays(3)},
+                {"Token" ,ObjectId.GenerateNewId()},
+                {"Created",SettingUser.ServerTime }
+            };
+
+                this.Settings.DetailStore["Products"].AsBsonArray.Add(NewProduct);
+                this.Settings.Save();
                 ShowoffPanelAddProduct();
                 InitSetting();
+                ReciveProduct();
+                NewProduct = NewProduct1;
             };
             #endregion
 
         }
 
         #region Setting
-        void InitSetting()
+        public void InitSetting()
         {
             TextAvatar.Text = Settings.DetailStore["AvatarLink"].AsString;
             TextName.Text = Settings.DetailStore["Name"].AsString;
@@ -408,10 +432,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             PlaceProducts.Children.Clear();
             if (Settings.DetailStore["Products"].AsBsonArray.Count >= 1)
             {
-
                 foreach (var item in Settings.DetailStore["Products"].AsBsonArray)
                 {
-                    PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, Settings));
+                    PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, this));
                 }
             }
             else
@@ -457,6 +480,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             DashboardGame.Dashboard.Root.Children.Remove(this);
         }
 
+        public void SaveSetting()
+        {
+            Settings.Save();
+            InitSetting();
+        }
     }
 
+    public interface IEditStore
+    {
+        BsonDocument DetailStore { get; set; }
+        void InitSetting();
+        void SaveSetting();
+
+    }
 }

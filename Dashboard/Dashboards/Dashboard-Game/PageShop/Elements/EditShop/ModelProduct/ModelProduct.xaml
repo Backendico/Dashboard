@@ -101,10 +101,17 @@
 
                 </StackPanel>
             </Border>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                
+            <!--BTNSave-->
+            <Border x:Name="BTNDelete" Cursor="Hand" HorizontalAlignment="Right" Margin="10" Height="30" Width="30" Background="Tomato" CornerRadius="5" >
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
+            </Border>
             <!--BTNSave-->
             <Border x:Name="BTNSave" Cursor="Hand" HorizontalAlignment="Right" Margin="10" Height="30" Width="80" Background="Orange" CornerRadius="5" >
                 <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Text="Save"/>
             </Border>
+            </StackPanel>
         </StackPanel>
     </Border>
 </UserControl>

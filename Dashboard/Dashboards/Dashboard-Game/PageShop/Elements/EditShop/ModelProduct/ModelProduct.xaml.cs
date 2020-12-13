@@ -22,10 +22,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
 {
     public partial class ModelProduct : UserControl
     {
-        IStoreSetting MainSetting;
+        IEditStore MainSetting;
         BsonDocument DetailProduct;
 
-        public ModelProduct(BsonDocument DetailProduct, IStoreSetting setting)
+        public ModelProduct(BsonDocument DetailProduct, IEditStore setting)
         {
             InitializeComponent();
 
@@ -135,7 +135,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.DownloadFailed += (s1, e1) =>
                     {
-                      this.DetailProduct["Avatar"] = "";
+                        this.DetailProduct["Avatar"] = "";
                         UpdateLayout();
 
                         PlaceAvatar.Child = null;
@@ -216,7 +216,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
             //action save Setting
             BTNSave.MouseDown += (s, e) =>
             {
-                setting.Save();
+                setting.SaveSetting();
+            };
+           
+            BTNDelete.MouseDown += (s, e) =>
+            {
+                setting.DetailStore["Products"].AsBsonArray.Remove(DetailProduct);
+                (Parent as StackPanel).Children.Remove(this);
+                setting.SaveSetting();
+                
             };
         }
 
@@ -225,7 +233,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelPr
 
             for (int i = 0; i < MainSetting.DetailStore["Products"].AsBsonArray.Count; i++)
             {
-                if (MainSetting.DetailStore["Products"].AsBsonArray[i].AsBsonDocument["Token"].AsObjectId == DetailProduct["Token"])
+                if (MainSetting.DetailStore["Products"].AsBsonArray[i].AsBsonDocument["Token"].AsObjectId == DetailProduct["Token"].AsObjectId)
                 {
                     MainSetting.DetailStore["Products"].AsBsonArray[i] = DetailProduct;
                 }

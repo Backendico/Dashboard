@@ -13,6 +13,5 @@ namespace Dashboard.GlobalElement
         public static string Token;
         public static BsonDocument CurentDetailStudio;
         public static DateTime ServerTime;
-
     }
 }
