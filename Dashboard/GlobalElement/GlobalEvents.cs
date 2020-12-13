@@ -46,7 +46,7 @@ namespace Dashboard.GlobalElement
                 }
                 catch (Exception)
                 {
-                    Sender.Text = "";
+                    Sender.Text = "0";
                     DashboardGame.Notifaction("Field is Number", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
                     return false;
                 }

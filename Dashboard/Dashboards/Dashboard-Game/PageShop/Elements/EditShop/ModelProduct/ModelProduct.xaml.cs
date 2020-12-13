@@ -20,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelProduct
 {
-    /// <summary>
-    /// Interaction logic for ModelProduct.xaml
-    /// </summary>
     public partial class ModelProduct : UserControl
     {
         IStoreSetting MainSetting;

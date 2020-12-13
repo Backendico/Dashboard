@@ -253,7 +253,7 @@
 
 
                                         <!--IsExpire-->
-                                        <CheckBox x:Name="IsExpiraton" Content="Expiration date"/>
+                                        <CheckBox x:Name="IsExpiraton_AddProducts" Content="Expiration date"/>
 
                                         <!--Expiration date-->
                                         <Calendar Visibility="Collapsed" x:Name="Calendar_Expire_AddProducts"/>

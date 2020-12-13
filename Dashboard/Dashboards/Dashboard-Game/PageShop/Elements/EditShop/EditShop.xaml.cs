@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,7 +36,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             this.Settings = Settings;
 
-           
+
 
             PageCurent = PanelSetting;
             BTNCurent = BTNSetting;
@@ -48,23 +49,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
 
             #region Setting
- 
+
             InitSetting();
             //controll and inject avatar
             TextAvatar.LostFocus += (s, e) =>
             {
-                if (GlobalEvents.ControllLinkImages(s)&&TextAvatar.Text.Length>=1)
+                if (GlobalEvents.ControllLinkImages(s) && TextAvatar.Text.Length >= 1)
                 {
                     var Photo = new Image();
 
                     var ImageBit = new BitmapImage();
 
-                    ImageBit.DownloadFailed += ( s1,e1) =>
+                    ImageBit.DownloadFailed += (s1, e1) =>
                     {
-                        Settings.DetailStore["AvatarLink"] ="";
+                        Settings.DetailStore["AvatarLink"] = "";
                         TextAvatar.Text = "";
                         DashboardGame.Notifaction("Image not found", Notifaction.StatusMessage.Error);
-                    
+
                         PlaceAvatar.Child = null;
                         PlaceAvatar.Child = new TextBlock()
                         {
@@ -83,20 +84,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                     ImageBit.DownloadCompleted += (s2, e2) =>
                     {
                         Settings.DetailStore["AvatarLink"] = TextAvatar.Text;
-                        PlaceAvatar.Child = null;   
+                        PlaceAvatar.Child = null;
                         PlaceAvatar.Child = Photo;
                     };
 
                     ImageBit.BeginInit();
                     ImageBit.UriSource = new Uri(TextAvatar.Text, UriKind.Absolute);
                     Photo.Source = ImageBit;
-                   
+
                     ImageBit.EndInit();
 
                 }
                 else
                 {
-                    if (TextAvatar.Text.Length==0)
+                    if (TextAvatar.Text.Length == 0)
                     {
                         Settings.DetailStore["AvatarLink"] = TextAvatar.Text;
                     }
@@ -105,7 +106,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             //controll and inject name
             TextName.TextChanged += (s, e) =>
             {
-                if (TextName.Text.Length>=1)
+                if (TextName.Text.Length >= 1)
                 {
                     Settings.DetailStore["Name"] = TextName.Text;
                 }
@@ -123,7 +124,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                     Settings.DetailStore["MarketLink"] = TextMarketLink.Text;
                 }
             };
-           //change Description
+            //change Description
             TextDescription.TextChanged += (sender, e) =>
             {
                 Settings.DetailStore["Description"] = TextDescription.Text;
@@ -169,16 +170,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
             BsonDocument NewProduct = new BsonDocument
             {
-                {"Name","" },
-                {"Count",0 },
+                {"Name",TextName.Text },
+                {"Count",0},
                 {"Amount",0 },
                 {"Price",0 },
                 {"Avatar","" },
                 {"Market","" },
                 {"Description" ,""},
                 {"Tags",new BsonArray() },
-                {"IsExpiration",false },
-                {"Expiration",DateTime.Now }
+                {"IsExpiration",false},
+                {"Expiration", ""},
+                {"Token" ,ObjectId.GenerateNewId()},
+                {"Created",SettingUser.ServerTime }
             };
 
             //action show panel add product
@@ -196,37 +199,87 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 }
             };
 
-            // expire cheack
-            IsExpiraton.Checked += (s, e) =>
+            //change name
+            TextNameProduct_AddProduct.TextChanged += (s, e) =>
             {
-                Calendar_Expire_AddProducts.Visibility = Visibility.Visible;
-            };
-            IsExpiraton.Unchecked += (s, e) =>
-            {
-                Calendar_Expire_AddProducts.Visibility = Visibility.Collapsed;
+                NewProduct["Name"] = TextName.Text;
             };
 
-            //cheack count int
+            //Change count int
             TextCount_AddProducts.LostFocus += (s, e) =>
             {
-                GlobalEvents.ControllNumberFilde(s as TextBox);
+                if (GlobalEvents.ControllNumberFilde(TextCount_AddProducts))
+                {
+                    NewProduct["Count"] = TextCount_AddProducts.Text;
+                }
+                else
+                {
+                    NewProduct["Count"] = 0;
+                }
             };
+
+            //change Amount
             TextAmount_AddProducts.LostFocus += (s, e) =>
             {
-                GlobalEvents.ControllNumberFilde(s as TextBox);
+                if (GlobalEvents.ControllNumberFilde(TextAmount_AddProducts))
+                {
+                    NewProduct["Amount"] = TextAmount_AddProducts.Text;
+                }
+                else
+                {
+                    NewProduct["Amount"] = 0;
+                }
             };
+
+            //Change Price
             TextPrice_AddProduct.LostFocus += (s, e) =>
             {
-                GlobalEvents.ControllNumberFilde(s as TextBox);
+                if (GlobalEvents.ControllNumberFilde(TextPrice_AddProduct))
+                {
+                    NewProduct["Price"] = TextPrice_AddProduct.Text;
+                }
+                else
+                {
+                    NewProduct["Price"] = 0;
+                }
+
             };
-            //cheack Image
+
+            //cheack Avatar
             TextAvatar_AddProduct.LostFocus += (s, e) =>
             {
-                GlobalEvents.ControllLinkImages(s);
+                if (GlobalEvents.ControllLinkImages(s))
+                {
+                    NewProduct["Avatar"] = TextAvatar_AddProduct.Text;
+                }
             };
+
+            //cheack market link
             TextMarketLink_AddProduct.LostFocus += (s, e) =>
             {
-                GlobalEvents.ControllLinkImages(s);
+                if (GlobalEvents.ControllLinks(s))
+                {
+                    NewProduct["Market"] = TextMarketLink_AddProduct.Text;
+                }
+            };
+
+            //change description
+            TextDescription_AddDescription.TextChanged += (s, e) =>
+            {
+                NewProduct["Description"] = TextDescription_AddDescription.Text;
+            };
+
+
+            // expire cheack
+            IsExpiraton_AddProducts.Checked += (s, e) =>
+            {
+                Calendar_Expire_AddProducts.Visibility = Visibility.Visible;
+                NewProduct["IsExpiration"] = true;
+            };
+            IsExpiraton_AddProducts.Unchecked += (s, e) =>
+            {
+                Calendar_Expire_AddProducts.Visibility = Visibility.Collapsed;
+                NewProduct["IsExpiration"] = false;
             };
 
             //event open tag system
@@ -238,12 +291,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 });
             };
 
+            //cheack calender
+            Calendar_Expire_AddProducts.SelectedDatesChanged += (s, e) =>
+            {
+                if (Calendar_Expire_AddProducts.SelectedDate > SettingUser.ServerTime)
+                {
+
+                    NewProduct["Expiration"] = Calendar_Expire_AddProducts.SelectedDate;
+                }
+                else
+                {
+                    NewProduct["Expiration"] = SettingUser.ServerTime.AddDays(3);
+                }
+            };
+
             //action btn add tag
             BTNAddProduct.MouseDown += (s, e) =>
             {
-                NewProduct.Add("Token", ObjectId.GenerateNewId());
-                NewProduct.Add("Created", SettingUser.ServerTime);
-
                 Settings.DetailStore["Products"].AsBsonArray.Add(NewProduct);
                 Settings.Save();
                 ReciveProduct();
@@ -342,13 +406,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
         public void ReciveProduct()
         {
             PlaceProducts.Children.Clear();
-            if (Settings.DetailStore["Products"].AsBsonArray.Count>=1)
+            if (Settings.DetailStore["Products"].AsBsonArray.Count >= 1)
             {
 
-            foreach (var item in Settings.DetailStore["Products"].AsBsonArray)
-            {
-                PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, Settings));
-            }
+                foreach (var item in Settings.DetailStore["Products"].AsBsonArray)
+                {
+                    PlaceProducts.Children.Add(new ModelProduct.ModelProduct(item.AsBsonDocument, Settings));
+                }
             }
             else
             {
