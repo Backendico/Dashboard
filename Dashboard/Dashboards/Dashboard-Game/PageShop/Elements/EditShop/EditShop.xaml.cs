@@ -56,7 +56,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             this.Settings = Settings;
             DetailStore = this.Settings.DetailStore;
 
-
             PageCurent = PanelSetting;
             BTNCurent = BTNSetting;
 
@@ -70,6 +69,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             #region Setting
 
             InitSetting();
+
             //controll and inject avatar
             TextAvatar.LostFocus += (s, e) =>
             {
@@ -148,10 +148,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             {
                 Settings.DetailStore["Description"] = TextDescription.Text;
             };
+
             //Active Control 
             IsActive.Checked += (s, e) =>
             {
-                Settings.DetailStore["IsActive"] = IsActive.IsChecked.Value;
+                this.Settings.DetailStore["IsActive"] = true;
+            };
+            IsActive.Unchecked += (s, e) =>
+            {
+                this.Settings.DetailStore["IsActive"] = false;
             };
 
             //acaton SaveSetting
@@ -178,12 +183,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 }
 
                 Settings.Save();
+                InitSetting();
             };
 
             TextToken.MouseDown += GlobalEvents.CopyText;
 
             #endregion
-
 
             #region SubPage AddProducts
 
@@ -345,6 +350,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
         #region Setting
         public void InitSetting()
         {
+            TextStoreName.Text = Settings.DetailStore["Name"].ToString();
             TextAvatar.Text = Settings.DetailStore["AvatarLink"].AsString;
             TextName.Text = Settings.DetailStore["Name"].AsString;
             TextDescription.Text = Settings.DetailStore["Description"].AsString;
@@ -362,7 +368,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 });
             };
 
-
+            if (Settings.DetailStore["IsActive"].AsBoolean)
+            {
+                IsActive.IsChecked = true;
+            }
+            else
+            {
+                IsActive.IsChecked = false;
+            }
 
             if (Settings.DetailStore["AvatarLink"].AsString.Length >= 1)
             {

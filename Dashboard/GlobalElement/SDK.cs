@@ -1675,52 +1675,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void ReciveProduct(ObjectId TokenStore, Action<BsonDocument> Result)
-                    {
-                        var client = new RestClient(Links.ReciveProduct);
-                        client.Timeout = -1;
-                        client.ClearHandlers();
-                        var request = new RestRequest(Method.POST);
-                        request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Token", SettingUser.Token);
-                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenStore", TokenStore.ToString());
-                        IRestResponse response = await client.ExecuteAsync(request);
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            Result(BsonDocument.Parse(response.Content));
-                        }
-                        else
-                        {
-                            Result(new BsonDocument());
-                        }
-                    }
-
-                    public static async void AddProduct(ObjectId TokenStore,BsonDocument Detail,Action<bool> Result)
-                    {
-                        var client = new RestClient(Links.AddProduct);
-                        client.Timeout = -1;
-                        client.ClearHandlers();
-                        var request = new RestRequest(Method.POST);
-                        request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Token", SettingUser.Token);
-                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenStore", TokenStore.ToString());
-                        request.AddParameter("Detail", Detail.ToString());
-
-                        var response = await client.ExecuteAsync(request);
-
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            Result(true);
-                        }
-                        else
-                        {
-                            Result(false);  
-                        }
-                    }
-             
-                public static async void SaveStore(ObjectId TokenStore,BsonDocument Detail,Action<bool> Result)
+                    public static async void SaveStore(ObjectId TokenStore, BsonDocument Detail, Action<bool> Result)
                     {
                         var client = new RestClient(Links.SaveStore);
                         client.Timeout = -1;
@@ -1742,9 +1697,8 @@ namespace Dashboard.GlobalElement
                         {
                             Result(false);
                         }
-
                     }
-                
+
                 }
 
             }

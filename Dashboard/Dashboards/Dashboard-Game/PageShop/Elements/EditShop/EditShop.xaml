@@ -45,7 +45,7 @@
 
                 <!--Header-->
                 <Border BorderBrush="Gainsboro" BorderThickness="0,0,1,0" Grid.Column="0"/>
-                <TextBlock Margin="10,0" x:Name="TextLeaderboardName" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Name " Grid.Column="0"/>
+                <TextBlock Margin="10,0" x:Name="TextStoreName" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Name " Grid.Column="0"/>
 
                 <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
                     <Button Cursor="Hand" x:Name="BTNSetting"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Setting" Click="ChangePage" />
