@@ -21,7 +21,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
             {"AvatarLink","" },
             {"Tags",new BsonArray() },
             {"Products" ,new BsonArray()},
-            {"IsActive",true }
+            {"IsActive",true },
+            {"Payments",new BsonArray() }
 
         };
 

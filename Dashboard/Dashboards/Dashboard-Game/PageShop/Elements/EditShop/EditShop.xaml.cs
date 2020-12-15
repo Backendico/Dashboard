@@ -41,7 +41,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
                 {"IsExpiration",false},
                 {"Expiration", SettingUser.ServerTime.AddDays(3)},
                 {"Token" ,""},
-                {"Created",SettingUser.ServerTime }
+                {"Created",SettingUser.ServerTime },
             };
 
         public BsonDocument DetailStore { get; set; }
