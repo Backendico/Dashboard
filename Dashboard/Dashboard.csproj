@@ -265,6 +265,9 @@
     <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\ModelProduct\ModelProduct.xaml.cs">
       <DependentUpon>ModelProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\Payments\ModelPayments.xaml.cs">
+      <DependentUpon>ModelPayments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\ModelStore.xaml.cs">
       <DependentUpon>ModelStore.xaml</DependentUpon>
     </Compile>
@@ -429,6 +432,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\ModelProduct\ModelProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\Payments\ModelPayments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

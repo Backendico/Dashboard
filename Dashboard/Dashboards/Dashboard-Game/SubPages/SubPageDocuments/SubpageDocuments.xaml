@@ -3182,7 +3182,120 @@
                             </Grid>
 
                         </TabItem>
-                        
+
+                        <!--add  payments-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Add Payments">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Store/AddPayments"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--TokenStore-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenStore"/>
+                                                        </Border>
+                                                        
+                                                        <!--TokenPlayer-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+                                                        <!--Detail-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
+                                                        </Border>
+                                                        
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <StackPanel>
+                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="To retrieve and collect player payments"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The 'Detaile' section can be anything"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
                     </TabControl>
                 </TabItem>
                 

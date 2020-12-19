@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
 using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelProduct;
+using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.Payments;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
@@ -458,6 +459,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
 
         #endregion
 
+
+        #region Payments
+        void InitPayments()
+        {
+            if (DetailStore["Payments"].AsBsonArray.Count >= 1)
+            {
+
+                PlaceContentPayments.Children.Clear();
+
+                foreach (var item in DetailStore["Payments"].AsBsonArray)
+                {
+                    PlaceContentPayments.Children.Add(new ModelPayments(item.AsBsonDocument));
+                }
+            }
+            else
+            {
+                DashboardGame.Notifaction("No content", Notifaction.StatusMessage.Warrning);
+            }
+        }
+        #endregion
+
+
         internal void ChangePage(object s, RoutedEventArgs eventArgs)
         {
             var SelectedBTN = s as Button;
@@ -480,12 +503,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop
             {
                 BTNCurent = BTNPayments;
                 PageCurent = PanelPayments;
+                InitPayments();
             }
 
             PageCurent.Visibility = Visibility.Visible;
             BTNCurent.BorderBrush = new SolidColorBrush(Colors.Orange);
-
-
         }
 
         public void Close(object S, RoutedEventArgs Event)

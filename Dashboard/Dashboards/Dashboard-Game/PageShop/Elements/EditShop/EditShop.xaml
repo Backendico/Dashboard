@@ -60,7 +60,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" MaxWidth="600" HorizontalAlignment="Center"  Grid.Row="2">
+            <Grid  x:Name="PanelSetting" Visibility="Collapsed" VerticalAlignment="Center" MinWidth="300" MaxWidth="600" HorizontalAlignment="Center"  Grid.Row="2">
                 <StackPanel >
 
                     <!--Avatar-->
@@ -277,7 +277,7 @@
 
 
             <!--Payments-->
-            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="PanelPayments" >
+            <Grid Margin="10"  Grid.Row="2" Visibility="Visible" x:Name="PanelPayments" >
                 <Border  CornerRadius="5"  BorderBrush="Gray"  BorderThickness="2"   >
                     <Grid>
                         <Grid.RowDefinitions>
@@ -306,15 +306,16 @@
                                 <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="3" />
                                 <Border  CornerRadius="0,4,0,0" BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" Grid.Column="4" />
 
-                                <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Version" Grid.Column="0"/>
-                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Start" Grid.Column="1"/>
-                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="End" Grid.Column="2"/>
+                                <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="0"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Player" Grid.Column="1"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Detail" Grid.Column="2"/>
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Created" Grid.Column="3"/>
 
                             </Grid>
 
                             <!--Content-->
                             <ScrollViewer Grid.Row="2">
-                                <StackPanel   x:Name="PlaceContentBackups"/>
+                                <StackPanel   x:Name="PlaceContentPayments"/>
                             </ScrollViewer>
 
                         </Grid>

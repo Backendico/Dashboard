@@ -122,7 +122,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop
             };
 
             //action btn show tag system
-            Tags.MouseDown += (s, e) => {
+            Tags.MouseDown += (s, e) => 
+            {
                 new TagsSystem(Detail["Tags"].AsBsonArray, () => {
                     TextTagCount.Text = Detail["Tags"].AsBsonArray.Count.ToString();
                 });
