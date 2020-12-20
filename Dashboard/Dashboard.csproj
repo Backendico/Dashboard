@@ -211,6 +211,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dashboards\Dashboard-Game\Add-ons\JsonEditor\JsonEditor.xaml.cs">
+      <DependentUpon>JsonEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\Elements\ModelTag.xaml.cs">
       <DependentUpon>ModelTag.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Dashboards\Dashboard-Game\Add-ons\JsonEditor\JsonEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\Elements\ModelTag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

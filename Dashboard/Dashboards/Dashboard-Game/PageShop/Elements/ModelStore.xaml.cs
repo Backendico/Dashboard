@@ -1,4 +1,5 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor;
+using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
@@ -29,6 +30,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
             Tags.MouseDown += (s, e) =>
             {
                 new TagsSystem(Detail["Tags"].AsBsonArray);
+            };
+
+            //action btn delete
+            BTNDelete.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new JsonEditor(Detail));
             };
         }
 

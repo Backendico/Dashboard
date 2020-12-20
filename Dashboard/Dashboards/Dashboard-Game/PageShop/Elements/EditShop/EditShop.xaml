@@ -60,7 +60,7 @@
             <!--Bodys-->
 
             <!--Setting -->
-            <Grid  x:Name="PanelSetting" Visibility="Collapsed" VerticalAlignment="Center" MinWidth="300" MaxWidth="600" HorizontalAlignment="Center"  Grid.Row="2">
+            <Grid  x:Name="PanelSetting" Visibility="Visible" VerticalAlignment="Center" MinWidth="300" MaxWidth="600" HorizontalAlignment="Center"  Grid.Row="2">
                 <StackPanel >
 
                     <!--Avatar-->
@@ -277,7 +277,7 @@
 
 
             <!--Payments-->
-            <Grid Margin="10"  Grid.Row="2" Visibility="Visible" x:Name="PanelPayments" >
+            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="PanelPayments" >
                 <Border  CornerRadius="5"  BorderBrush="Gray"  BorderThickness="2"   >
                     <Grid>
                         <Grid.RowDefinitions>
