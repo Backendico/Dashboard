@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border x:Name="Root" Opacity="1"  MaxHeight="500" MaxWidth="500" Background="White" CornerRadius="10">
+    <Border x:Name="Root" Opacity="1"  MaxHeight="500" MaxWidth="600" Background="White" CornerRadius="10">
         <!--Animation-->
         <Border.Triggers>
             <EventTrigger RoutedEvent="Loaded">
