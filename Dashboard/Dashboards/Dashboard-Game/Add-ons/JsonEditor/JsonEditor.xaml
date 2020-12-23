@@ -65,11 +65,8 @@
             <!--Footer-->
             <Border BorderBrush="LightGray" BorderThickness="0,2,0,0" Grid.Row="2"/>
 
-            <Border Cursor="Hand"  HorizontalAlignment="Right" Margin="20,0" CornerRadius="5"  Background="Orange"  MinHeight="30" MinWidth="80"  Grid.Row="2" MaxHeight="30" MaxWidth="80" >
-
-
-
-                <TextBlock VerticalAlignment="Center" Foreground="White" TextAlignment="Center" Text="Ok"/>
+            <Border x:Name="BTNSave" Cursor="Hand"  HorizontalAlignment="Right" Margin="20,0" CornerRadius="5"  Background="Orange"  MinHeight="30" MinWidth="80"  Grid.Row="2" MaxHeight="30" MaxWidth="80" >
+                <TextBlock  VerticalAlignment="Center" Foreground="White" TextAlignment="Center" Text="Save"/>
             </Border>
 
         </Grid>
