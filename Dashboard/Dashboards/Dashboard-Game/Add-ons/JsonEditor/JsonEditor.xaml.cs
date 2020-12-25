@@ -84,6 +84,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 Visibility = Visibility.Collapsed;
             };
 
+
             //add
             var Add = new Border() { Margin = new Thickness(5, 0, 5, 0), Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.LightGreen), CornerRadius = new CornerRadius(5) };
             Add.Child = new TextBlock() { Cursor = Cursors.Hand, VerticalAlignment = VerticalAlignment.Center, TextAlignment = TextAlignment.Center, FontSize = 15, Text = "\xE710", FontFamily = new FontFamily("Segoe MDL2 Assets"), Foreground = new SolidColorBrush(Colors.White) };
@@ -213,27 +214,27 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Document:
                         {
-                            Children.Add(new ElementsDocument(item));
+                            Children.Add(new ElementsDocument(item, Data));
                         }
                         break;
                     case BsonType.Array:
                         {
-                            Children.Add(new ElementsArray(item));
+                            Children.Add(new ElementsArray(item, Data));
                         }
                         break;
                     case BsonType.Binary:
                         {
-                            Children.Add(new ElementsBinary(item));
+                            Children.Add(new ElementsBinary(item, Data));
                         }
                         break;
                     case BsonType.Undefined:
                         {
-                            Children.Add(new ElementUndifined(item));
+                            Children.Add(new ElementUndifined(item, Data));
                         }
                         break;
                     case BsonType.ObjectId:
                         {
-                            Children.Add(new ElementsObjectid(item));
+                            Children.Add(new ElementsObjectid(item, Data));
                         }
                         break;
                     case BsonType.Boolean:
@@ -249,12 +250,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Null:
                         {
-                            Children.Add(new ElementNull(item));
+                            Children.Add(new ElementNull(item, Data));
                         }
                         break;
                     case BsonType.RegularExpression:
                         {
-                            Children.Add(new ElementRegexpretion(item));
+                            Children.Add(new ElementRegexpretion(item, Data));
                         }
                         break;
                     case BsonType.JavaScript:
@@ -269,7 +270,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.JavaScriptWithScope:
                         {
-                            Children.Add(new ElementsCode(item));
+                            Children.Add(new ElementsCode(item, Data));
                         }
                         break;
                     case BsonType.Int32:
@@ -279,7 +280,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Timestamp:
                         {
-                            Children.Add(new ElementTimeStamp(item));
+                            Children.Add(new ElementTimeStamp(item, Data));
                         }
                         break;
                     case BsonType.Int64:
@@ -294,12 +295,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.MinKey:
                         {
-                            Children.Add(new ElementMinKey(item));
+                            Children.Add(new ElementMinKey(item, Data));
                         }
                         break;
                     case BsonType.MaxKey:
                         {
-                            Children.Add(new ElementMaxKey(item));
+                            Children.Add(new ElementMaxKey(item, Data));
                         }
                         break;
                 }
@@ -309,7 +310,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
     public class ElementsArray : Elements
     {
-        public ElementsArray(BsonElement Data)
+        public ElementsArray(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
 
@@ -401,6 +402,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 }
                 Count++;
             }
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
+
         }
 
         public class FElementArray : StackPanel
@@ -874,27 +904,27 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.Document:
                             {
-                                PlaceSubElements.Children.Add(new ElementsDocument(item));
+                                PlaceSubElements.Children.Add(new ElementsDocument(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Array:
                             {
-                                PlaceSubElements.Children.Add(new ElementsArray(item));
+                                PlaceSubElements.Children.Add(new ElementsArray(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Binary:
                             {
-                                PlaceSubElements.Children.Add(new ElementsBinary(item));
+                                PlaceSubElements.Children.Add(new ElementsBinary(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Undefined:
                             {
-                                PlaceSubElements.Children.Add(new ElementUndifined(item));
+                                PlaceSubElements.Children.Add(new ElementUndifined(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.ObjectId:
                             {
-                                PlaceSubElements.Children.Add(new ElementsObjectid(item));
+                                PlaceSubElements.Children.Add(new ElementsObjectid(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Boolean:
@@ -909,12 +939,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.Null:
                             {
-                                PlaceSubElements.Children.Add(new ElementNull(item));
+                                PlaceSubElements.Children.Add(new ElementNull(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.RegularExpression:
                             {
-                                PlaceSubElements.Children.Add(new ElementRegexpretion(item));
+                                PlaceSubElements.Children.Add(new ElementRegexpretion(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.JavaScript:
@@ -926,7 +956,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.JavaScriptWithScope:
                             {
-                                PlaceSubElements.Children.Add(new ElementsCode(item));
+                                PlaceSubElements.Children.Add(new ElementsCode(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Int32:
@@ -936,7 +966,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.Timestamp:
                             {
-                                PlaceSubElements.Children.Add(new ElementTimeStamp(item));
+                                PlaceSubElements.Children.Add(new ElementTimeStamp(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Int64:
@@ -951,12 +981,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.MinKey:
                             {
-                                PlaceSubElements.Children.Add(new ElementMinKey(item));
+                                PlaceSubElements.Children.Add(new ElementMinKey(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.MaxKey:
                             {
-                                PlaceSubElements.Children.Add(new ElementMaxKey(item));
+                                PlaceSubElements.Children.Add(new ElementMaxKey(item, Data.AsBsonDocument));
                             }
                             break;
 
@@ -1073,6 +1103,34 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainData.SetElement(Data);
                 }
             };
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1102,15 +1160,70 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
             };
 
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementsObjectid : Elements
     {
-        public ElementsObjectid(BsonElement Data)
+        public ElementsObjectid(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1139,13 +1252,40 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
             };
 
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
 
         }
     }
 
     public class ElementsDocument : Elements
     {
-        public ElementsDocument(BsonElement Data)
+        public ElementsDocument(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.Text = "Object";
@@ -1171,27 +1311,27 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Document:
                         {
-                            PlaceSubElements.Children.Add(new ElementsDocument(item));
+                            PlaceSubElements.Children.Add(new ElementsDocument(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Array:
                         {
-                            PlaceSubElements.Children.Add(new ElementsArray(item));
+                            PlaceSubElements.Children.Add(new ElementsArray(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Binary:
                         {
-                            PlaceSubElements.Children.Add(new ElementsBinary(item));
+                            PlaceSubElements.Children.Add(new ElementsBinary(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Undefined:
                         {
-                            PlaceSubElements.Children.Add(new ElementUndifined(item));
+                            PlaceSubElements.Children.Add(new ElementUndifined(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.ObjectId:
                         {
-                            PlaceSubElements.Children.Add(new ElementsObjectid(item));
+                            PlaceSubElements.Children.Add(new ElementsObjectid(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Boolean:
@@ -1206,12 +1346,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Null:
                         {
-                            PlaceSubElements.Children.Add(new ElementNull(item));
+                            PlaceSubElements.Children.Add(new ElementNull(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.RegularExpression:
                         {
-                            PlaceSubElements.Children.Add(new ElementRegexpretion(item));
+                            PlaceSubElements.Children.Add(new ElementRegexpretion(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.JavaScript:
@@ -1223,7 +1363,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.JavaScriptWithScope:
                         {
-                            PlaceSubElements.Children.Add(new ElementsCode(item));
+                            PlaceSubElements.Children.Add(new ElementsCode(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Int32:
@@ -1233,7 +1373,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Timestamp:
                         {
-                            PlaceSubElements.Children.Add(new ElementTimeStamp(item));
+                            PlaceSubElements.Children.Add(new ElementTimeStamp(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Int64:
@@ -1248,12 +1388,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.MinKey:
                         {
-                            PlaceSubElements.Children.Add(new ElementMinKey(item));
+                            PlaceSubElements.Children.Add(new ElementMinKey(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.MaxKey:
                         {
-                            PlaceSubElements.Children.Add(new ElementMaxKey(item));
+                            PlaceSubElements.Children.Add(new ElementMaxKey(item, Data.Value.AsBsonDocument));
                         }
                         break;
 
@@ -1267,6 +1407,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 PlaceSubElements.Children.Add(new ElementString(new BsonElement("Name", "Value"), Data.Value.AsBsonDocument));
             };
 
+
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1296,6 +1465,34 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
             };
 
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1324,24 +1521,107 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
             };
 
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementsBinary : Elements
     {
-        public ElementsBinary(BsonElement Data)
+        public ElementsBinary(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementsCode : Elements
     {
-        public ElementsCode(BsonElement Data)
+        public ElementsCode(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1370,6 +1650,33 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
             };
 
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1397,45 +1704,181 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 }
 
             };
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
 
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementMaxKey : Elements
     {
-        public ElementMaxKey(BsonElement Data)
+        public ElementMaxKey(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementMinKey : Elements
     {
-        public ElementMinKey(BsonElement Data)
+        public ElementMinKey(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementNull : Elements
     {
-        public ElementNull(BsonElement Data)
+        public ElementNull(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
             Value.Text = "Null";
 
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementRegexpretion : Elements
     {
-        public ElementRegexpretion(BsonElement Data)
+        public ElementRegexpretion(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
@@ -1464,25 +1907,109 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             };
 
 
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementTimeStamp : Elements
     {
-        public ElementTimeStamp(BsonElement Data)
+        public ElementTimeStamp(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 
     public class ElementUndifined : Elements
     {
-        public ElementUndifined(BsonElement Data)
+        public ElementUndifined(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
             Value.IsEnabled = false;
             Value.Text = "Undifined";
+
+
+            Name.LostFocus += (s, e) =>
+            {
+                if (Name.Text != Data.Name)
+                {
+                    if (Name.Text.Length >= 1)
+                    {
+                        try
+                        {
+                            _ = MainData[Name.Text];
+                            Name.Text = Data.Name;
+                            DashboardGame.Notifaction("Duplicate element", Notifaction.StatusMessage.Error);
+                        }
+                        catch (Exception)
+                        {
+                            var NewElement = new BsonElement(Name.Text, Data.Value);
+                            MainData.RemoveElement(Data);
+                            MainData.Add(new BsonElement(Name.Text, Data.Value));
+                            Data = NewElement;
+
+                        }
+                    }
+                    else
+                    {
+                        Name.Text = Data.Name;
+                    }
+                }
+            };
         }
     }
 }
