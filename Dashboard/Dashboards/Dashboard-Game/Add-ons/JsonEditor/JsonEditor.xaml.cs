@@ -27,7 +27,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
             PlaceElement.Children.Add(new ElementObject(JsonData));
 
-            BTNSave.MouseDown += (s, e) =>
+            BTNSave.Click += (s, e) =>
             {
                 Debug.WriteLine(JsonData);
 
@@ -160,20 +160,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             //actions
             MouseEnter += (s, e) =>
             {
-                
-                    Delete.Visibility = Visibility.Visible;
-                    Background = new SolidColorBrush(Colors.WhiteSmoke);
+
+                Delete.Visibility = Visibility.Visible;
+                Background = new SolidColorBrush(Colors.WhiteSmoke);
 
             };
 
             MouseLeave += (s, e) =>
             {
 
-                    Delete.Visibility = Visibility.Collapsed;
-                    if (!Show)
-                    {
-                        Background = new SolidColorBrush(Colors.Transparent);
-                    }
+                Delete.Visibility = Visibility.Collapsed;
+                if (!Show)
+                {
+                    Background = new SolidColorBrush(Colors.Transparent);
+                }
             };
 
             this.Name = Name;
@@ -203,7 +203,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Double:
                         {
-                            Children.Add(new ElementDouble(item));
+                            Children.Add(new ElementDouble(item, Data));
                         }
                         break;
                     case BsonType.String:
@@ -244,7 +244,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.DateTime:
                         {
-                            Children.Add(new ElementsDateTime(item));
+                            Children.Add(new ElementsDateTime(item, Data));
                         }
                         break;
                     case BsonType.Null:
@@ -264,7 +264,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Symbol:
                         {
-                            Children.Add(new ElementSymbol(item));
+                            Children.Add(new ElementSymbol(item, Data));
                         }
                         break;
                     case BsonType.JavaScriptWithScope:
@@ -284,12 +284,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Int64:
                         {
-                            Children.Add(new ElementsInt64(item));
+                            Children.Add(new ElementsInt64(item, Data));
                         }
                         break;
                     case BsonType.Decimal128:
                         {
-                            Children.Add(new ElementDecimal128(item));
+                            Children.Add(new ElementDecimal128(item, Data));
                         }
                         break;
                     case BsonType.MinKey:
@@ -327,11 +327,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         PlaceSubElements.Children.Add(new TextBlock() { Text = "AEnd" });
                         break;
                     case BsonType.Double:
-                        PlaceSubElements.Children.Add(new ElementDoubleArray(Count, item));
+                        PlaceSubElements.Children.Add(new ElementDoubleArray(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.String:
                         {
-                            PlaceSubElements.Children.Add(new ElementStringArray(Count, item));
+                            PlaceSubElements.Children.Add(new ElementStringArray(Count, item, Data.Value.AsBsonArray));
                         }
                         break;
                     case BsonType.Document:
@@ -346,7 +346,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Binary:
                         {
-
                             PlaceSubElements.Children.Add(new ElementBinaryArray(Count, item));
                         }
                         break;
@@ -357,20 +356,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         PlaceSubElements.Children.Add(new ElementObjectIDArray(Count, item));
                         break;
                     case BsonType.Boolean:
-                        PlaceSubElements.Children.Add(new ElementBooleanArray(Count, item));
+                        PlaceSubElements.Children.Add(new ElementBooleanArray(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.DateTime:
-                        PlaceSubElements.Children.Add(new ElementDateTimeArray(Count, item));
+                        PlaceSubElements.Children.Add(new ElementDateTimeArray(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.Null:
                         {
-
                             PlaceSubElements.Children.Add(new ElementNullArray(Count, item));
                         }
                         break;
                     case BsonType.RegularExpression:
                         {
-
                             PlaceSubElements.Children.Add(new ElementRegularExpresionArray(Count, item));
                         }
                         break;
@@ -378,22 +375,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         PlaceSubElements.Children.Add(new TextBlock() { Text = "AJavaScript" });
                         break;
                     case BsonType.Symbol:
-                        PlaceSubElements.Children.Add(new ElementSymbolArray(Count, item));
+                        PlaceSubElements.Children.Add(new ElementSymbolArray(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.JavaScriptWithScope:
                         PlaceSubElements.Children.Add(new ElementCodeArray(Count, item));
                         break;
                     case BsonType.Int32:
-                        PlaceSubElements.Children.Add(new ElementInt32Array(Count, item));
+                        PlaceSubElements.Children.Add(new ElementInt32Array(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.Timestamp:
                         PlaceSubElements.Children.Add(new ElementTimeStampArray(Count, item));
                         break;
                     case BsonType.Int64:
-                        PlaceSubElements.Children.Add(new ElementInt64Array(Count, item));
+                        PlaceSubElements.Children.Add(new ElementInt64Array(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.Decimal128:
-                        PlaceSubElements.Children.Add(new ElementDecimal128Array(Count, item));
+                        PlaceSubElements.Children.Add(new ElementDecimal128Array(Count, item, Data.Value.AsBsonArray));
                         break;
                     case BsonType.MinKey:
                         PlaceSubElements.Children.Add(new ElementMinKeyArray(Count, item));
@@ -437,7 +434,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
 
                 //Delete
-                var Delete = new Border() { CornerRadius = new CornerRadius(5), Margin = new Thickness(5, 0, 5, 0), Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.Tomato) };
+                var Delete = new Border() { CornerRadius = new CornerRadius(5), Margin = new Thickness(5, 0, 5, 0), HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.Tomato) };
                 Delete.Child = new TextBlock() { Cursor = Cursors.Hand, VerticalAlignment = VerticalAlignment.Center, TextAlignment = TextAlignment.Center, FontSize = 15, Text = "\xF78A", FontFamily = new FontFamily("Segoe MDL2 Assets"), Foreground = new SolidColorBrush(Colors.White) };
 
                 Grid.Children.Add(Delete);
@@ -480,7 +477,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
 
                 //Name
-                var Name = new TextBlock() { Margin = new Thickness(0, 0, 5, 0), MinWidth = 100, Text = Postion.ToString(), Foreground = new SolidColorBrush(Colors.Black) };
+                var Name = new TextBlock() { Margin = new Thickness(0, 0, 5, 0), TextAlignment = TextAlignment.Center, MinWidth = 100, Text = Postion.ToString(), Foreground = new SolidColorBrush(Colors.Black) };
                 Grid.Children.Add(Name);
                 Grid.SetColumn(Name, 3);
                 Grid.SetRow(Name, 0);
@@ -568,11 +565,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             PlaceSubElements.Children.Add(new TextBlock() { Text = "AEnd" });
                             break;
                         case BsonType.Double:
-                            PlaceSubElements.Children.Add(new ElementDoubleArray(Count, item));
+                            PlaceSubElements.Children.Add(new ElementDoubleArray(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.String:
                             {
-                                PlaceSubElements.Children.Add(new ElementStringArray(Count, item));
+                                PlaceSubElements.Children.Add(new ElementStringArray(Count, item, Data.AsBsonArray));
                             }
                             break;
                         case BsonType.Document:
@@ -598,10 +595,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             PlaceSubElements.Children.Add(new ElementObjectIDArray(Count, item));
                             break;
                         case BsonType.Boolean:
-                            PlaceSubElements.Children.Add(new ElementBooleanArray(Count, item));
+                            PlaceSubElements.Children.Add(new ElementBooleanArray(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.DateTime:
-                            PlaceSubElements.Children.Add(new ElementDateTimeArray(Count, item));
+                            PlaceSubElements.Children.Add(new ElementDateTimeArray(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.Null:
                             {
@@ -619,22 +616,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             PlaceSubElements.Children.Add(new TextBlock() { Text = "AJavaScript" });
                             break;
                         case BsonType.Symbol:
-                            PlaceSubElements.Children.Add(new ElementSymbolArray(Count, item));
+                            PlaceSubElements.Children.Add(new ElementSymbolArray(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.JavaScriptWithScope:
                             PlaceSubElements.Children.Add(new ElementCodeArray(Count, item));
                             break;
                         case BsonType.Int32:
-                            PlaceSubElements.Children.Add(new ElementInt32Array(Count, item));
+                            PlaceSubElements.Children.Add(new ElementInt32Array(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.Timestamp:
                             PlaceSubElements.Children.Add(new ElementTimeStampArray(Count, item));
                             break;
                         case BsonType.Int64:
-                            PlaceSubElements.Children.Add(new ElementInt64Array(Count, item));
+                            PlaceSubElements.Children.Add(new ElementInt64Array(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.Decimal128:
-                            PlaceSubElements.Children.Add(new ElementDecimal128Array(Count, item));
+                            PlaceSubElements.Children.Add(new ElementDecimal128Array(Count, item, Data.AsBsonArray));
                             break;
                         case BsonType.MinKey:
                             PlaceSubElements.Children.Add(new ElementMinKeyArray(Count, item));
@@ -653,17 +650,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         {
             public ElementBinaryArray(int Postion, BsonValue Data)
             {
-
                 Init(Postion, Data);
+                Value.IsEnabled = false;
             }
 
         }
 
         public class ElementBooleanArray : FElementArray
         {
-            public ElementBooleanArray(int Postion, BsonValue Data)
+            public ElementBooleanArray(int Postion, BsonValue Data, BsonArray MainArray)
             {
                 Init(Postion, Data);
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = Boolean.Parse(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
+
             }
         }
 
@@ -672,49 +687,135 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             public ElementCodeArray(int Postion, BsonValue Data)
             {
                 Init(Postion, Data);
+                Value.IsEnabled = false;
             }
         }
 
         public class ElementDateTimeArray : FElementArray
         {
-            public ElementDateTimeArray(int Postion, BsonValue Data)
+            public ElementDateTimeArray(int Postion, BsonValue Data, BsonArray MainArray)
             {
-
                 Init(Postion, Data);
-                Value.IsEnabled = false;
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = DateTime.Parse(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
+
+
             }
         }
 
         public class ElementDecimal128Array : FElementArray
         {
-            public ElementDecimal128Array(int Postion, BsonValue Data)
+            public ElementDecimal128Array(int Postion, BsonValue Data, BsonArray MainArray)
             {
                 Init(Postion, Data);
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = Decimal128.Parse(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
 
             }
         }
 
         public class ElementDoubleArray : FElementArray
         {
-            public ElementDoubleArray(int Postion, BsonValue Data)
+            public ElementDoubleArray(int Postion, BsonValue Data, BsonArray MainArray)
             {
                 Init(Postion, Data);
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = Double.Parse(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
             }
         }
 
         public class ElementInt32Array : FElementArray
         {
-            public ElementInt32Array(int Postion, BsonValue Data)
+            public ElementInt32Array(int Postion, BsonValue Data, BsonArray MainArray)
             {
                 Init(Postion, Data);
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = Int32.Parse(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
             }
         }
 
         public class ElementInt64Array : FElementArray
         {
-            public ElementInt64Array(int Postion, BsonValue Data)
+            public ElementInt64Array(int Postion, BsonValue Data, BsonArray MainArray)
             {
                 Init(Postion, Data);
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = Int64.Parse(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
             }
         }
 
@@ -723,6 +824,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             public ElementMinKeyArray(int Postion, BsonValue Data)
             {
                 Init(Postion, Data);
+                Value.IsEnabled = false;
             }
         }
 
@@ -731,6 +833,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             public ElementMaxKeyArray(int Postion, BsonValue Data)
             {
                 Init(Postion, Data);
+                Value.IsEnabled = false;
             }
         }
 
@@ -761,7 +864,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.Double:
                             {
-                                PlaceSubElements.Children.Add(new ElementDouble(item));
+                                PlaceSubElements.Children.Add(new ElementDouble(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.String:
@@ -801,7 +904,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.DateTime:
                             {
-                                PlaceSubElements.Children.Add(new ElementsDateTime(item));
+                                PlaceSubElements.Children.Add(new ElementsDateTime(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Null:
@@ -818,7 +921,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.Symbol:
                             {
-                                PlaceSubElements.Children.Add(new ElementSymbol(item));
+                                PlaceSubElements.Children.Add(new ElementSymbol(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.JavaScriptWithScope:
@@ -838,12 +941,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                             break;
                         case BsonType.Int64:
                             {
-                                PlaceSubElements.Children.Add(new ElementsInt64(item));
+                                PlaceSubElements.Children.Add(new ElementsInt64(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.Decimal128:
                             {
-                                PlaceSubElements.Children.Add(new ElementDecimal128(item));
+                                PlaceSubElements.Children.Add(new ElementDecimal128(item, Data.AsBsonDocument));
                             }
                             break;
                         case BsonType.MinKey:
@@ -876,27 +979,56 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             public ElementRegularExpresionArray(int Postion, BsonValue Data)
             {
                 Init(Postion, Data);
+                Value.IsEnabled = false;
             }
         }
 
         public class ElementStringArray : FElementArray
         {
-            public ElementStringArray(int Postion, BsonValue Data)
+            public ElementStringArray(int Postion, BsonValue Data, BsonArray MainArray)
             {
-
                 Init(Postion, Data);
 
+                Value.LostFocus += (ss, ee) =>
+                {
+                    if (Value.Text.Length >= 1)
+                    {
 
+                        MainArray[Postion] = Value.Text;
+                    }
+                    else
+                    {
+                        MainArray[Postion] = " ";
+                    }
+                };
             }
 
         }
 
         public class ElementSymbolArray : FElementArray
         {
-            public ElementSymbolArray(int Postion, BsonValue Data)
+            public ElementSymbolArray(int Postion, BsonValue Data, BsonArray MainArray)
             {
 
                 Init(Postion, Data);
+
+                Value.LostFocus += (ss, ee) =>
+                {
+                    try
+                    {
+                        MainArray[Postion] = BsonSymbol.Create(Value.Text);
+
+                        Background = new SolidColorBrush(Colors.Transparent);
+                    }
+                    catch (Exception ex)
+                    {
+                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        Background = new SolidColorBrush(Colors.Tomato);
+                        Value.Text = Data.ToString();
+                    }
+
+                };
+
             }
 
         }
@@ -906,6 +1038,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             public ElementTimeStampArray(int Postion, BsonValue Data)
             {
                 Init(Postion, Data);
+                Value.IsEnabled = false;
             }
 
         }
@@ -926,10 +1059,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementString(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
-            Value.TextChanged += (s, e) =>
+            Value.LostFocus += (s, e) =>
             {
-                Data = new BsonElement(Data.Name, Value.Text);
-                MainData.SetElement(Data);
+                if (Value.Text.Length >= 1)
+                {
+
+                    Data = new BsonElement(Data.Name, Value.Text);
+                    MainData.SetElement(Data);
+                }
+                else
+                {
+                    Data = new BsonElement(Data.Name, " ");
+                    MainData.SetElement(Data);
+                }
             };
         }
     }
@@ -940,26 +1082,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         {
             Init(Data);
 
-            Loaded += (s, e) =>
+
+            Value.LostFocus += (ss, ee) =>
             {
-
-                Value.TextChanged += (ss, ee) =>
+                try
                 {
-                    try
-                    {
-                        Data = new BsonElement(Data.Name, bool.Parse(Value.Text));
+                    Data = new BsonElement(Data.Name, bool.Parse(Value.Text));
 
-                        MainData.SetElement(Data);
-                        Background = new SolidColorBrush(Colors.Transparent);
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
 
-                    }
-                    catch (Exception)
-                    {
-                        Background = new SolidColorBrush(Colors.Tomato);
-                        Debug.WriteLine("Err" + Data);
-                    }
-
-                };
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
 
             };
 
@@ -973,17 +1112,34 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             Init(Data);
             Value.IsEnabled = false;
         }
-
-
     }
-
 
     public class ElementsDateTime : Elements
     {
-        public ElementsDateTime(BsonElement Data)
+        public ElementsDateTime(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
-            Value.IsEnabled = false;
+
+            Value.LostFocus += (s1, e1) =>
+            {
+
+                try
+                {
+                    Data = new BsonElement(Data.Name, DateTime.Parse(Value.Text));
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
+                    Debug.WriteLine("hi");
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
+
+            };
+
+
         }
     }
 
@@ -1005,7 +1161,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Double:
                         {
-                            PlaceSubElements.Children.Add(new ElementDouble(item));
+                            PlaceSubElements.Children.Add(new ElementDouble(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.String:
@@ -1045,7 +1201,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.DateTime:
                         {
-                            PlaceSubElements.Children.Add(new ElementsDateTime(item));
+                            PlaceSubElements.Children.Add(new ElementsDateTime(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Null:
@@ -1062,7 +1218,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Symbol:
                         {
-                            PlaceSubElements.Children.Add(new ElementSymbol(item));
+                            PlaceSubElements.Children.Add(new ElementSymbol(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.JavaScriptWithScope:
@@ -1082,12 +1238,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                         break;
                     case BsonType.Int64:
                         {
-                            PlaceSubElements.Children.Add(new ElementsInt64(item));
+                            PlaceSubElements.Children.Add(new ElementsInt64(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.Decimal128:
                         {
-                            PlaceSubElements.Children.Add(new ElementDecimal128(item));
+                            PlaceSubElements.Children.Add(new ElementDecimal128(item, Data.Value.AsBsonDocument));
                         }
                         break;
                     case BsonType.MinKey:
@@ -1120,27 +1276,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         {
             Init(Data);
 
-            Loaded += (s, e) =>
+
+            Value.LostFocus += (ss, ee) =>
             {
-
-                Value.TextChanged += (ss, ee) =>
+                try
                 {
-                    try
-                    {
-                        Data = new BsonElement(Data.Name, Int32.Parse(Value.Text));
+                    Data = new BsonElement(Data.Name, Int32.Parse(Value.Text));
 
-                        MainData.SetElement(Data);
-                        Background = new SolidColorBrush(Colors.Transparent);
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
 
-                    }
-                    catch (Exception ex)
-                    {
-                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
-                        Background = new SolidColorBrush(Colors.Tomato);
-                        Value.Text = Data.Value.ToString() ;
-                    }
-
-                };
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
 
             };
 
@@ -1149,9 +1301,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
     public class ElementsInt64 : Elements
     {
-        public ElementsInt64(BsonElement Data)
+        public ElementsInt64(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
+
+
+            Value.LostFocus += (s1, e1) =>
+            {
+                try
+                {
+                    Data = new BsonElement(Data.Name, Int64.Parse(Value.Text));
+
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
+
+            };
+
         }
     }
 
@@ -1160,7 +1332,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementsBinary(BsonElement Data)
         {
             Init(Data);
-
+            Value.IsEnabled = false;
         }
     }
 
@@ -1169,22 +1341,63 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementsCode(BsonElement Data)
         {
             Init(Data);
+            Value.IsEnabled = false;
         }
     }
 
     public class ElementDecimal128 : Elements
     {
-        public ElementDecimal128(BsonElement Data)
+        public ElementDecimal128(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
+
+            Value.LostFocus += (s1, e1) =>
+            {
+                try
+                {
+
+                    Data = new BsonElement(Data.Name, Decimal128.Parse(Value.Text));
+
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
+
+            };
+
         }
     }
 
     public class ElementDouble : Elements
     {
-        public ElementDouble(BsonElement Data)
+        public ElementDouble(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
+
+
+            Value.LostFocus += (s1, e1) =>
+            {
+                try
+                {
+                    Data = new BsonElement(Data.Name, Double.Parse(Value.Text));
+
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
+
+            };
+
         }
     }
 
@@ -1193,6 +1406,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementMaxKey(BsonElement Data)
         {
             Init(Data);
+            Value.IsEnabled = false;
         }
     }
 
@@ -1201,6 +1415,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementMinKey(BsonElement Data)
         {
             Init(Data);
+            Value.IsEnabled = false;
         }
     }
 
@@ -1220,14 +1435,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementRegexpretion(BsonElement Data)
         {
             Init(Data);
+            Value.IsEnabled = false;
         }
     }
 
     public class ElementSymbol : Elements
     {
-        public ElementSymbol(BsonElement Data)
+        public ElementSymbol(BsonElement Data, BsonDocument MainData)
         {
             Init(Data);
+
+            Value.LostFocus += (s1, e1) =>
+            {
+                try
+                {
+                    Data = new BsonElement(Data.Name, BsonSymbol.Create(Value.Text));
+
+                    MainData.SetElement(Data);
+                    Background = new SolidColorBrush(Colors.Transparent);
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Background = new SolidColorBrush(Colors.Tomato);
+                    Value.Text = Data.Value.ToString();
+                }
+
+            };
+
+
         }
     }
 
@@ -1236,6 +1472,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
         public ElementTimeStamp(BsonElement Data)
         {
             Init(Data);
+            Value.IsEnabled = false;
         }
     }
 
