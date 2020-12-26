@@ -56,7 +56,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             Children.Add(Grid);
 
 
-            var PlaceSubElements = new StackPanel() { Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.WhiteSmoke), Margin = new Thickness(20, 0, 0, 0) };
+            var PlaceSubElements = new StackPanel() { Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.WhiteSmoke), Margin = new Thickness(60, 0, 0, 0) };
             Children.Add(PlaceSubElements);
 
             Grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
@@ -413,7 +413,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 Children.Add(Grid);
 
 
-                var PlaceSubElements = new StackPanel() { Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.WhiteSmoke), Margin = new Thickness(20, 0, 0, 0) };
+                var PlaceSubElements = new StackPanel() { Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.WhiteSmoke), Margin = new Thickness(60, 0, 0, 0) };
                 Children.Add(PlaceSubElements);
 
 
