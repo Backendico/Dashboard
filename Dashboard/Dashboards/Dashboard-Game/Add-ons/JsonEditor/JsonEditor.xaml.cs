@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using Dashboard.GlobalElement;
+using Microsoft.Extensions.Logging.Abstractions;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Diagnostics;
@@ -388,7 +390,156 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 }
 
             }
+            Type.SelectionChanged += (s, e) =>
+            {
 
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
 
 
@@ -425,7 +576,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
 
                 //Delete
-                var Delete = new Border() { CornerRadius = new CornerRadius(5), Margin = new Thickness(5, 0, 5, 0),Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.Tomato) };
+                var Delete = new Border() { CornerRadius = new CornerRadius(5), Margin = new Thickness(5, 0, 5, 0), Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.Tomato) };
                 Delete.Child = new TextBlock() { Cursor = Cursors.Hand, VerticalAlignment = VerticalAlignment.Center, TextAlignment = TextAlignment.Center, FontSize = 15, Text = "\xF78A", FontFamily = new FontFamily("Segoe MDL2 Assets"), Foreground = new SolidColorBrush(Colors.White) };
 
                 Grid.Children.Add(Delete);
@@ -564,6 +715,162 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     UpdateMainArray();
                 };
 
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
+
+
+
                 void InitInternalArray()
                 {
                     PlaceSubElements.Children.Clear();
@@ -656,6 +963,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
 
         }
@@ -688,6 +1148,160 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
         }
 
@@ -702,6 +1316,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 {
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
+                };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 };
             }
         }
@@ -734,7 +1501,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
 
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
         }
 
@@ -766,6 +1685,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
         }
 
@@ -795,6 +1867,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 {
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
+                };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 };
             }
         }
@@ -827,6 +2052,160 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
         }
 
@@ -858,8 +2237,163 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
+
             }
         }
+
 
         public class ElementMinKeyArray : FElementArray
         {
@@ -871,6 +2405,160 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 {
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
+                };
+
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 };
             }
         }
@@ -886,6 +2574,160 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
+
             }
         }
 
@@ -902,6 +2744,160 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
+
             }
         }
 
@@ -931,7 +2927,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     UpdateMainArray();
                 };
 
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
 
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
                 void InitInternalObjects()
                 {
                     PlaceSubElements.Children.Clear();
@@ -1059,7 +3207,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
 
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
         }
 
@@ -1074,6 +3374,160 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
+
             }
         }
 
@@ -1092,6 +3546,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 {
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
+                };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 };
             }
         }
@@ -1125,6 +3732,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
+
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
 
         }
@@ -1141,7 +3901,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
 
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
 
         }
@@ -1159,7 +4071,159 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     MainArray.RemoveAt(Postion);
                     UpdateMainArray();
                 };
+                Type.SelectionChanged += (s, e) =>
+                {
+                    var MainParent = Parent as StackPanel;
 
+                    switch ((BsonType)Type.SelectedItem)
+                    {
+                        case BsonType.EndOfDocument:
+                            break;
+                        case BsonType.Double:
+                            {
+                                MainArray[Postion] = new BsonDouble(0.0);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDoubleArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.String:
+                            {
+                                MainArray[Postion] = "";
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementStringArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Document:
+                            {
+                                MainArray[Postion] = new BsonDocument();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Array:
+                            {
+                                MainArray[Postion] = new BsonArray();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementArrayArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Binary:
+                            {
+                                MainArray[Postion] = new BsonBinaryData(new byte[] { 0, 0, 0, 0 });
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBinaryArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Undefined:
+                            {
+                                MainArray[Postion] = BsonUndefined.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifineArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.ObjectId:
+                            {
+                                MainArray[Postion] = ObjectId.GenerateNewId();
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementObjectIDArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Boolean:
+                            {
+                                MainArray[Postion] = BsonBoolean.True;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementBooleanArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.DateTime:
+                            {
+                                MainArray[Postion] = new BsonDateTime(SettingUser.ServerTime);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDateTimeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Null:
+                            {
+                                MainArray[Postion] = BsonNull.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNullArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.RegularExpression:
+                            {
+                                MainArray[Postion] = BsonRegularExpression.Create("");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegularExpresionArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.JavaScript:
+                            break;
+                        case BsonType.Symbol:
+                            {
+                                MainArray[Postion] = BsonSymbol.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbolArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.JavaScriptWithScope:
+                            {
+                                MainArray[Postion] = BsonJavaScriptWithScope.Create("A");
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementCodeArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int32:
+                            {
+                                MainArray[Postion] = new BsonInt32(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt32Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Timestamp:
+                            {
+                                MainArray[Postion] = new BsonTimestamp(1);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStampArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.Int64:
+                            {
+                                MainArray[Postion] = new BsonInt64(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementInt64Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.Decimal128:
+                            {
+                                MainArray[Postion] = new BsonDecimal128(33);
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128Array(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        case BsonType.MinKey:
+                            {
+                                MainArray[Postion] = BsonMinKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+                            }
+                            break;
+                        case BsonType.MaxKey:
+                            {
+                                MainArray[Postion] = BsonMaxKey.Value;
+                                MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKeyArray(Postion, MainArray[Postion], MainArray, UpdateMainArray));
+                                MainParent.Children.Remove(this);
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
             }
         }
     }
@@ -1216,6 +4280,158 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             {
                 MainData.RemoveElement(Data);
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
+
         }
     }
 
@@ -1278,6 +4494,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             {
                 MainData.RemoveElement(Data);
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -1320,6 +4687,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             Delete.MouseDown += (s, e) =>
             {
                 MainData.RemoveElement(Data);
+            };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             };
         }
     }
@@ -1380,6 +4898,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             Delete.MouseDown += (s, e) =>
             {
                 MainData.RemoveElement(Data);
+            };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             };
         }
     }
@@ -1644,6 +5313,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -1701,6 +5521,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -1756,6 +5727,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -1793,6 +5915,158 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
+
         }
     }
 
@@ -1829,6 +6103,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     {
                         Name.Text = Data.Name;
                     }
+                }
+            };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             };
         }
@@ -1886,6 +6311,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -1940,6 +6516,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -1974,6 +6701,156 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     {
                         Name.Text = Data.Name;
                     }
+                }
+            };
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             };
         }
@@ -2011,6 +6888,156 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     {
                         Name.Text = Data.Name;
                     }
+                }
+            };
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             };
         }
@@ -2051,6 +7078,156 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
     }
 
@@ -2086,6 +7263,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     {
                         Name.Text = Data.Name;
                     }
+                }
+            };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             };
         }
@@ -2143,6 +7471,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     }
                 }
             };
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
+
         }
     }
 
@@ -2178,6 +7657,157 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     {
                         Name.Text = Data.Name;
                     }
+                }
+            };
+
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             };
         }
@@ -2216,6 +7846,156 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                     {
                         Name.Text = Data.Name;
                     }
+                }
+            };
+            Type.SelectionChanged += (s, e) =>
+            {
+
+                var MainParent = Parent as StackPanel;
+
+                switch ((BsonType)Type.SelectedItem)
+                {
+                    case BsonType.EndOfDocument:
+                        break;
+                    case BsonType.Double:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDouble(0.0));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDouble(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.String:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), "");
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementString(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Document:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDocument());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDocument(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Array:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonArray());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsArray(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Binary:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonBinaryData(new byte[] { 0, 0, 0, 0 }));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBinary(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Undefined:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonUndefined.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementUndifined(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.ObjectId:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), ObjectId.GenerateNewId());
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsObjectid(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Boolean:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonBoolean.True);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsBoolean(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.DateTime:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDateTime(SettingUser.ServerTime));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsDateTime(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Null:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonNull.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementNull(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.RegularExpression:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonRegularExpression.Create(""));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementRegexpretion(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+
+                        }
+                        break;
+                    case BsonType.JavaScript:
+                        break;
+                    case BsonType.Symbol:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonSymbol.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementSymbol(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.JavaScriptWithScope:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonJavaScriptWithScope.Create("A"));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsCode(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int32:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt32(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt32(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Timestamp:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonTimestamp(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementTimeStamp(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Int64:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonInt64(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementsInt64(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.Decimal128:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), new BsonDecimal128(33));
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementDecimal128(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MinKey:
+                        {
+
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMinKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMinKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    case BsonType.MaxKey:
+                        {
+                            MainData.Set(MainData.IndexOfName(Data.Name), BsonMaxKey.Value);
+                            MainParent.Children.Insert(MainParent.Children.IndexOf(this), new ElementMaxKey(MainData.GetElement(Data.Name), MainData));
+                            MainParent.Children.Remove(this);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             };
         }
