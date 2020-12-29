@@ -1,4 +1,5 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
@@ -50,12 +51,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
             try
             {
+                TextCountTags.Text = EditPlayer.DetailPlayer["Account"]["Tags"].AsBsonArray.Count.ToString();
 
             }
             catch (Exception)
             {
-
-
+                EditPlayer.DetailPlayer["Account"].AsBsonDocument.Add("Tags", new BsonArray());
+                EditPlayer.Save();
             }
 
 
@@ -171,6 +173,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 }
             };
 
+            //action tag
+            Tags.MouseDown += (s, e) =>
+            {
+                _ = new TagsSystem(EditPlayer.DetailPlayer["Account"]["Tags"].AsBsonArray, () =>
+                {
+                    TextCountTags.Text = EditPlayer.DetailPlayer["Account"]["Tags"].AsBsonArray.Count.ToString();
+                    EditPlayer.Save();
+                });
+            };
 
             //action btn Email Recovery
             BTNSendEmailRecovery.MouseDown += async (s, e) =>
@@ -380,7 +391,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             if ((sender as Button).Content != BTNAchievements.Content)
             {
                 ShowoffPaneladdAchievements();
-
             }
 
             CurentPage.Visibility = Visibility.Collapsed;

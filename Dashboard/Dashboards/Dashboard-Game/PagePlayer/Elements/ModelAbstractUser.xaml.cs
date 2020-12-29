@@ -45,7 +45,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 }
                 else
                 {
-                    DashboardGame.Notifaction("Faild Save", Notifaction.StatusMessage.Error);
+                    DashboardGame.Notifaction("Not Change", Notifaction.StatusMessage.Warrning);
                 }
 
             });
