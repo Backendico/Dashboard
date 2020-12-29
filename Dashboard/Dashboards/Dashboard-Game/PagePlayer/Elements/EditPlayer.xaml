@@ -75,40 +75,39 @@
                         <!--NickName-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Nickname: "/>
-                            <TextBox TextChanged="NicknameChange" x:Name="TextboxNickname" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Nick_namehere"/>
+                            <TextBox  x:Name="TextboxNickname" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Nick_namehere"/>
                         </StackPanel>
 
                         <!--AvatarURL-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Cursor="Hand"  Margin="10,0"  Text="&#xE946;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" MouseDown="AvatarHelp" />
                             <TextBlock  Text="Avatar(URL): "/>
-                            <TextBox x:Name="TextboxAvatar" MinWidth="150" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" TextChanged="AvatarChange"/>
+                            <TextBox x:Name="TextboxAvatar" MinWidth="150" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" />
                         </StackPanel>
 
                         <!--Language-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Cursor="Hand"  Margin="10,0"  Text="&#xE946;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" MouseDown="LanguageHelp" />
                             <TextBlock  Text="Language: "/>
                             <TextBlock  FontSize="10" FontWeight="Normal" Text="( Iso 639-1 ) "/>
-                            <TextBox x:Name="TextLanguage" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" TextChanged="LanguageChange"/>
+                            <TextBox x:Name="TextLanguage" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" />
                         </StackPanel>
 
                         <!--Country-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Cursor="Hand"  Margin="10,0"  Text="&#xE946;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" MouseDown="CountryHelp" />
                             <TextBlock  Text="Country: " />
                             <TextBlock  FontSize="10" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Text="( ISO 3166-ALPHA2 )" />
-                            <TextBox  Background="Transparent" BorderBrush="Transparent" x:Name="TextCountry" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" MinWidth="150" Text="" TextChanged="CountryChange"/>
+                            <TextBox  Background="Transparent" BorderBrush="Transparent" x:Name="TextCountry" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" MinWidth="150" Text=""  />
                         </StackPanel>
 
-
+                        <!--Tag System-->
+                        <TextBlock x:Name="Tags" Cursor="Hand" Margin="10">
+                            <Run Text="Tags"/> <Run Text="("/> <Run Name="TextCountTags" Text="0"/> <Run Text=")"/>
+                        </TextBlock>
+                        
                         <!--CreatedTime-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Created: "/>
                             <TextBlock x:Name="TextCreated" MinWidth="200" FontWeight="Normal"  Text="URLHERE"/>
                         </StackPanel>
-
-
 
 
 
@@ -123,7 +122,7 @@
                         <!--Username-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Username: "/>
-                            <TextBox  x:Name="TextboxUsername" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="UsernameHere" TextChanged="UsernameChange" />
+                            <TextBox  x:Name="TextboxUsername" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="UsernameHere"   />
                         </StackPanel>
 
                         <!--Password-->
@@ -147,13 +146,13 @@
                         <!--Email-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Email: "/>
-                            <TextBox x:Name="TextboxEmail" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Email here" TextChanged="EmailChange"/>
+                            <TextBox x:Name="TextboxEmail" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Email here" />
                         </StackPanel>
 
                         <!--Phone-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Phone: "/>
-                            <TextBox x:Name="Textboxphone" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="N/A" TextChanged="EmailChange"/>
+                            <TextBox x:Name="Textboxphone" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="N/A"  />
                         </StackPanel>
 
 
@@ -168,12 +167,8 @@
                         <!--Delete-->
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
                             <!--BTN Delete-->
-                            <Border ToolTip="Delete" MouseDown="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
+                            <Border x:Name="BTNDelete" ToolTip="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Delete"/>
-                            </Border>
-                            <!--BTN Save-->
-                            <Border ToolTip="Save Setting" MouseDown="SaveSetting" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" >
-                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Save"/>
                             </Border>
 
                         </StackPanel>

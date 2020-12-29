@@ -3,6 +3,9 @@ using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Resources;
+using System.Web.UI.WebControls.WebParts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,9 +14,6 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    /// <summary>
-    /// Interaction logic for EditPlayer.xaml
-    /// </summary>
     public partial class EditPlayer : UserControl
     {
 
@@ -21,78 +21,204 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         BsonDocument TotalLeaderboard;
 
 
-
         Grid CurentPage;
         Button CurentBTNHeader;
 
 
-        public EditPlayer(BsonDocument PlayerDetail, Action RefreshList)
+        public EditPlayer(IEditPlayer EditPlayer)
         {
             InitializeComponent();
+
             //frist init
             this.PlayerDetail = PlayerDetail;
             this.RefreshList = RefreshList;
+
             CurentPage = PageAccount;
             CurentBTNHeader = BTNAccount;
 
+            #region PageSetting
+
             //change frist
-            TextIDPlayer_Header.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
-            TextboxNickname.Text = this.PlayerDetail["Account"]["Name"].AsString;
-            TextboxAvatar.Text = this.PlayerDetail["Account"]["Avatar"].AsString;
-            TextLanguage.Text = this.PlayerDetail["Account"]["Language"].AsString;
-            TextCreated.Text = this.PlayerDetail["Account"]["Created"].ToUniversalTime().ToString();
-            TextCountry.Text = this.PlayerDetail["Account"]["Country"].AsString;
-            TextboxUsername.Text = this.PlayerDetail["Account"]["Username"].AsString;
-            TextboxEmail.Text = this.PlayerDetail["Account"]["Email"].AsString;
-            TextToken.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
-            Textboxphone.Text = this.PlayerDetail["Account"]["Phone"].ToString();
+            TextIDPlayer_Header.Text = EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId.ToString();
+            TextboxNickname.Text = EditPlayer.DetailPlayer["Account"]["Name"].AsString;
+            TextboxAvatar.Text = EditPlayer.DetailPlayer["Account"]["Avatar"].AsString;
+            TextLanguage.Text = EditPlayer.DetailPlayer["Account"]["Language"].AsString;
+            TextCreated.Text = EditPlayer.DetailPlayer["Account"]["Created"].ToUniversalTime().ToString();
+            TextCountry.Text = EditPlayer.DetailPlayer["Account"]["Country"].AsString;
+            TextboxUsername.Text = EditPlayer.DetailPlayer["Account"]["Username"].AsString;
+            TextboxEmail.Text = EditPlayer.DetailPlayer["Account"]["Email"].AsString;
+            TextToken.Text = EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId.ToString();
+            Textboxphone.Text = EditPlayer.DetailPlayer["Account"]["Phone"].ToString();
+
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+
+
+
 
             //cheak banplayer
-            CheackBoxBan.IsChecked = this.PlayerDetail["Account"]["IsBan"].AsBoolean;
+            CheackBoxBan.IsChecked = EditPlayer.DetailPlayer["Account"]["IsBan"].AsBoolean;
             CheackBoxBan.Checked += (s, e) =>
             {
-                this.PlayerDetail["Account"]["IsBan"] = true;
+                EditPlayer.DetailPlayer["Account"]["IsBan"] = true;
+                EditPlayer.Save();
             };
             CheackBoxBan.Unchecked += (s, e) =>
             {
-                this.PlayerDetail["Account"]["IsBan"] = false;
+                EditPlayer.DetailPlayer["Account"]["IsBan"] = false;
+                EditPlayer.Save();
             };
 
 
-            #region PageSetting
-            //action btn Email Recovery
-            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            //action  Change NickName
+            TextboxNickname.LostFocus += (s, e) =>
             {
-                if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{PlayerDetail["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
+                EditPlayer.DetailPlayer["Account"]["Name"] = TextboxNickname.Text;
+                EditPlayer.Save();
+            };
+
+            //action change nickname
+            TextboxAvatar.LostFocus += (s, e) =>
+            {
+                if (GlobalEvents.ControllLinkImages(TextboxAvatar))
                 {
-                    try
+                    EditPlayer.DetailPlayer["Account"]["Avatar"] = TextboxAvatar.Text;
+                    EditPlayer.Save();
+                }
+                else
+                {
+                    TextboxAvatar.Text = EditPlayer.DetailPlayer["Account"]["Avatar"].ToString();
+                }
+
+            };
+
+            //action change Language
+            TextLanguage.LostFocus += (s, e) =>
+            {
+                EditPlayer.DetailPlayer["Account"]["Language"] = TextLanguage.Text;
+                EditPlayer.Save();
+            };
+
+            //action change Cuntry
+            TextCountry.LostFocus += (s, e) =>
+            {
+                EditPlayer.DetailPlayer["Account"]["Country"] = TextCountry.Text;
+                EditPlayer.Save();
+            };
+
+            //action change Username
+            TextboxUsername.LostFocus += (s, e) =>
+            {
+                if (TextboxUsername.Text.Length >= 6)
+                {
+                    if (TextboxUsername.Text != EditPlayer.DetailPlayer["Account"]["Username"].ToString())
                     {
 
-                        SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Recovery1(PlayerDetail["Account"]["Token"].AsObjectId, new System.Net.Mail.MailAddress(PlayerDetail["Account"]["Email"].AsString),
-                            Code =>
+                        SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(TextboxUsername.Text, result =>
+                        {
+                            if (result)
                             {
-                                if (Code != 0)
-                                {
-                                    DashboardGame.Dialog(Code.ToString(), "Recovery Code");
-                                    PanelChangePassword.Visibility = Visibility.Visible;
-                                }
-                                else
-                                {
-                                    DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
-                                }
-
-                            });
-                    }
-                    catch (Exception ex)
-                    {
-
-                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                                DashboardGame.Notifaction("Username is duplicate ", Notifaction.StatusMessage.Error);
+                                TextboxUsername.Text = EditPlayer.DetailPlayer["Account"]["Username"].ToString();
+                            }
+                            else
+                            {
+                                EditPlayer.DetailPlayer["Account"]["Username"] = TextboxUsername.Text;
+                                EditPlayer.Save();
+                            }
+                        });
                     }
                 }
                 else
                 {
+                    DashboardGame.Notifaction("Username Short", Notifaction.StatusMessage.Error);
+                    TextboxUsername.Text = EditPlayer.DetailPlayer["Account"]["Username"].ToString();
+                }
 
-                    DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
+            };
+
+            //action change email
+            TextboxEmail.LostFocus += (s, e) =>
+            {
+                try
+                {
+                    new System.Net.Mail.MailAddress(TextboxEmail.Text);
+                    EditPlayer.DetailPlayer["Account"]["Email"] = TextboxEmail.Text;
+                    EditPlayer.Save();
+                }
+                catch (Exception)
+                {
+                    TextboxEmail.Text = EditPlayer.DetailPlayer["Account"]["Email"].ToString();
+                }
+
+            };
+
+            //action BTN control and change phone
+            Textboxphone.LostFocus += (s, e) =>
+            {
+                if (long.TryParse(Textboxphone.Text, out long Handle))
+                {
+                    EditPlayer.DetailPlayer["Account"]["Phone"] = Handle;
+                    EditPlayer.Save();
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Can't Conver to Phone number", Notifaction.StatusMessage.Error);
+                    Textboxphone.Text = EditPlayer.DetailPlayer["Account"]["Phone"].ToString();
+                }
+            };
+
+
+            //action btn Email Recovery
+            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            {
+                try
+                {
+                    new MailAddress(EditPlayer.DetailPlayer["Account"]["Email"].ToString());
+
+
+                    if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+
+                            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Recovery1(EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId, new System.Net.Mail.MailAddress(EditPlayer.DetailPlayer["Account"]["Email"].AsString),
+                                Code =>
+                                {
+                                    if (Code != 0)
+                                    {
+                                        DashboardGame.Dialog(Code.ToString(), "Recovery Code");
+                                        PanelChangePassword.Visibility = Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
+                                    }
+
+                                });
+                        }
+                        catch (Exception ex)
+                        {
+
+                            DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        }
+                    }
+                    else
+                    {
+
+                        DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    DashboardGame.Notifaction("The player does not have an email", Notifaction.StatusMessage.Error);
                 }
 
             };
@@ -102,9 +228,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 if (TextNewPassword.Text.Length >= 6)
                 {
-                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ChangePassword(PlayerDetail["Account"]["Token"].AsObjectId, TextNewPassword.Text, Result =>
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ChangePassword(EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId, TextNewPassword.Text, Result =>
                     {
-
                         if (Result)
                         {
                             DashboardGame.Notifaction("Password Changed", Notifaction.StatusMessage.Ok);
@@ -128,21 +253,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //copyToken
             TextToken.MouseDown += GlobalEvents.CopyText;
 
-            //action BTN control and change phone
-            Textboxphone.TextChanged += (s, e) =>
+            //action btn Delete
+            BTNDelete.MouseDown += (s, e) =>
             {
-                var Phone = s as TextBox;
+                EditPlayer.Delete(this);
 
-                if (long.TryParse(Phone.Text, out long Handle))
-                {
-                    PlayerDetail["Account"]["Phone"] = Handle;
-                }
-                else
-                {
-                    Phone.Text = "";
-                }
             };
-
 
             #endregion
 
@@ -152,13 +268,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //init pageLeaderboard
             try
             {
-                ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
+                ReciveLeaderboardPlayer(EditPlayer.DetailPlayer["Leaderboards"]["List"].AsBsonDocument);
             }
             catch (Exception)
             {
                 PlayerDetail.Add("Leaderboards", new BsonDocument { { "List", new BsonDocument { } } });
 
-                ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
+                ReciveLeaderboardPlayer(EditPlayer.DetailPlayer["Leaderboards"]["List"].AsBsonDocument);
             }
 
             #endregion
@@ -316,177 +432,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                     break;
             }
         }
-
-
-        //page Setting
-        private void NicknameChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                PlayerDetail["Account"]["Name"] = Textbox.Text;
-            }
-
-        }
-
-        private void AvatarChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                try
-                {
-                    Uri link = new Uri(Textbox.Text);
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                    PlayerDetail["Account"]["Avatar"] = Textbox.Text;
-                }
-                catch (Exception)
-                {
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Red);
-                }
-            }
-
-        }
-
-        private void LanguageChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                PlayerDetail["Account"]["Language"] = Textbox.Text;
-            }
-        }
-
-        private void CountryChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                PlayerDetail["Account"]["Country"] = Textbox.Text;
-
-            }
-
-        }
-
-        private void UsernameChange(object sender, TextChangedEventArgs e)
-        {
-            var textbox = sender as TextBox;
-
-            if (IsLoaded && textbox.Text.Length >= 6)
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(textbox.Text, result =>
-                {
-                    if (result)
-                    {
-                        textbox.BorderBrush = new SolidColorBrush(Colors.Tomato);
-                        textbox.Text += new Random().Next();
-                    }
-                    else
-                    {
-                        textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                        PlayerDetail["Account"]["Username"] = textbox.Text;
-                    }
-
-
-                });
-            }
-        }
-
-        private void EmailChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                try
-                {
-                    new System.Net.Mail.MailAddress(Textbox.Text);
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                    PlayerDetail["Account"]["Email"] = Textbox.Text;
-                }
-                catch (Exception)
-                {
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Red);
-                }
-
-            }
-        }
-
-
-        private void AvatarHelp(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dialog("Sample acceptable link\n\n https://example.com \n \n or\n \n http://example.com ", "Help Link");
-        }
-
-        private void LanguageHelp(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dialog("ISO is the language standard (ISO 639-1) \n for example:\n \n\n Persian : (fa) \n \n or\n \n English : (en) ", "Help Language");
-        }
-
-        private void CountryHelp(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dialog("ISO is the country  standard (ISO 3166 ALPHA3) \n for example:\n \n\n Iran : (IRN) \n \n or\n \n Belgien : (BEL) ", "Help Country");
-        }
-
-        private async void Delete(object sender, MouseButtonEventArgs e)
-        {
-            if (await DashboardGame.DialogYesNo("All user information is lost \n Are you sure") == MessageBoxResult.Yes)
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Delete(PlayerDetail["Account"]["Token"].ToString(), result =>
-                {
-                    if (result)
-                    {
-                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
-
-                        RefreshList();
-                        DashboardGame.Dashboard.Root.Children.Remove(this);
-
-                        //add log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Player", $"You have deleted player \" {PlayerDetail["Account"]["Username"]} \"", PlayerDetail, false, resul => { });
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Delete !", Notifaction.StatusMessage.Ok);
-                    }
-                });
-
-            }
-            else
-            {
-                DashboardGame.Notifaction("Delete Reject", Notifaction.StatusMessage.Ok);
-            }
-        }
-
-        private void SaveSetting(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save(PlayerDetail["Account"]["Token"].ToString(), PlayerDetail, result =>
-            {
-                if (result)
-                {
-                    RefreshList();
-
-                    TextboxNickname.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextboxAvatar.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextLanguage.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextCountry.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextboxUsername.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextboxEmail.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
-
-                    // add log
-                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Player", $"You have Edit player \" {PlayerDetail["Account"]["Username"]} \" ", PlayerDetail, false, resul => { });
-                }
-                else
-                {
-                    DashboardGame.Notifaction("Faild Save", Notifaction.StatusMessage.Error);
-                }
-
-            });
-
-        }
-
 
 
         //page Leaderboards

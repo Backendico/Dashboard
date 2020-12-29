@@ -1,36 +1,68 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup.Localizer;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    public partial class ModelAbstractUser : UserControl
+    public partial class ModelAbstractUser : UserControl, IEditPlayer
     {
 
-        BsonDocument DetailPlayer;
-        Grid _Parent;
+        public BsonDocument DetailPlayer { get; set; }
 
-        public ModelAbstractUser(BsonDocument DetailPlayer, Action Refreshlist, Grid Parent)
+        public ModelAbstractUser(BsonDocument DetailPlayer, Action Refreshlist)
         {
             InitializeComponent();
+
+            this.DetailPlayer = DetailPlayer;
+            this.Refreshlist = Refreshlist;
+
+
+            Update();
+
+            TextToken.MouseDown += GlobalEvents.CopyText;
+
+
+            BTNEdit.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(this));
+            };
+
+        }
+
+
+        public void Save()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save(DetailPlayer["Account"]["Token"].ToString(), DetailPlayer, result =>
+            {
+                if (result)
+                {
+                    DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
+
+                    // add log
+                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Player", $"You have Edit player \" {DetailPlayer["Account"]["Username"]} \" ", DetailPlayer, false, resul => { });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Faild Save", Notifaction.StatusMessage.Error);
+                }
+
+            });
+
+            Update();
+        }
+
+        public void RefreshMainList()
+        {
+            Refreshlist();
+        }
+
+        public void Update()
+        {
             TextToken.Text = DetailPlayer["Account"]["Token"].AsObjectId.ToString();
-            TextLastLogin.Text =DateTime.Parse( DetailPlayer["Account"]["LastLogin"].ToString()).ToString();
-            TextCreated.Text =DateTime.Parse( DetailPlayer["Account"]["Created"].ToString()).ToString();
+            TextLastLogin.Text = DetailPlayer["Account"]["LastLogin"].ToUniversalTime().ToString();
+            TextCreated.Text = DetailPlayer["Account"]["Created"].ToUniversalTime().ToString();
             TextCountry.Text = DetailPlayer["Account"]["Country"].AsString;
             TextUsername.Text = DetailPlayer["Account"]["Username"].AsString;
 
@@ -38,44 +70,54 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 StatusBan.BorderBrush = new SolidColorBrush(Colors.Tomato);
             }
-
-
-            this.DetailPlayer = DetailPlayer;
-            this.Refreshlist = Refreshlist;
-            _Parent = Parent;
-
-            TextToken.MouseDown += GlobalEvents.CopyText;
-         
+            else
+            {
+                StatusBan.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            }
         }
 
-        
-
-        /// <summary>
-        /// non refresh list
-        /// </summary>
-        /// <param name="DetailPlayer"></param>
-        public ModelAbstractUser(BsonDocument DetailPlayer)
+        public async void Delete(UserControl Editor)
         {
-            InitializeComponent();
-            TextToken.Text = DetailPlayer["Account"]["Token"].AsObjectId.ToString();
-            TextLastLogin.Text = DetailPlayer["Account"]["LastLogin"].ToUniversalTime().ToString();
-            TextCreated.Text = DetailPlayer["Account"]["Created"].ToUniversalTime().ToString();
-            TextCountry.Text = DetailPlayer["Account"]["Country"].AsString;
-            TextUsername.Text = DetailPlayer["Account"]["Username"].AsString;
+            if (await DashboardGame.DialogYesNo("All user information is lost \n Are you sure") == System.Windows.MessageBoxResult.Yes)
+            {
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Delete(DetailPlayer["Account"]["Token"].ToString(), result =>
+                {
+                    if (result)
+                    {
+                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
 
-            this.DetailPlayer = DetailPlayer;
-        }
+                        RefreshMainList();
+                        DashboardGame.Dashboard.Root.Children.Remove(this);
+                        DashboardGame.Dashboard.Root.Children.Remove(Editor);
 
 
+                        //add log
+                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Player", $"You have deleted player \" {DetailPlayer["Account"]["Username"]} \"", DetailPlayer, false, resul => { });
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Delete !", Notifaction.StatusMessage.Ok);
+                    }
+                });
 
-        private void OpenEdit(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(DetailPlayer, Refreshlist));
+            }
+            else
+            {
+                DashboardGame.Notifaction("Delete Reject", Notifaction.StatusMessage.Ok);
+            }
 
         }
 
 
         Action Refreshlist;
+    }
 
+    public interface IEditPlayer
+    {
+        void Save();
+        void RefreshMainList();
+        void Update();
+        void Delete(UserControl Editor);
+        BsonDocument DetailPlayer { get; set; }
     }
 }

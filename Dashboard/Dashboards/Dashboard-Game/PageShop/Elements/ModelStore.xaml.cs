@@ -4,6 +4,7 @@ using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,18 +35,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
             };
 
             //action btn delete
-            BTNDelete.MouseDown += (s, e) =>
+            BTNDelete.MouseDown += async (s, e) =>
             {
-                DashboardGame.Dashboard.Root.Children.Add(new JsonView(Detail));
+                Debug.WriteLine(Parent.GetType());
+                if (await DashboardGame.DialogYesNo("All information will be lost Are you sure ? ") == MessageBoxResult.Yes)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageStore.RemoveStore(Detail, Result =>
+                    {
+                        if (Result)
+                        {
+                            DashboardGame.Notifaction("Store Deleted", Notifaction.StatusMessage.Ok);
+                            (Parent as WrapPanel).Children.Remove(this);
+
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Delete", Notifaction.StatusMessage.Ok);
+                        }
+
+                    });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                }
             };
         }
 
         public BsonDocument DetailStore { get; set; }
 
-        public void Delete()
-        {
-
-        }
 
         public void Save()
         {
@@ -53,7 +71,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
             {
                 if (result)
                 {
-
                     DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
                     Update();
                 }
@@ -123,7 +140,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageShop.Elements
     public interface IStoreSetting
     {
         void Save();
-        void Delete();
         void Update();
         BsonDocument DetailStore { get; set; }
 

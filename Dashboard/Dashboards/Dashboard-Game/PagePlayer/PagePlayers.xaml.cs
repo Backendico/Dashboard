@@ -125,7 +125,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     {
                         foreach (var item in result["ListPlayers"].AsBsonArray)
                         {
-                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, RecivePlayersList, Parent as Grid));
+                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, RecivePlayersList));
                         }
                     }
                     else
@@ -331,8 +331,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         private void OpenEditPlayer(object sender, MouseButtonEventArgs e)
         {
             ShowOffPanelSearch();
-
-            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(CurentSearchResult, RecivePlayersList));
         }
 
 

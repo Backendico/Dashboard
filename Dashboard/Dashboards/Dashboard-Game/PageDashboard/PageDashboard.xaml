@@ -107,23 +107,10 @@
         </Grid>
 
         <!--Collom2-->
-        <Grid Margin="20" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <WrapPanel Margin="20" Grid.Column="1">
+            
             <!--Leaderboards-->
-            <Border CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2" Grid.Column="3" Grid.Row="0">
+            <Border Height="100" Width="200" CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -167,9 +154,9 @@
                     </Border>
                 </Grid>
             </Border>
-
+            
             <!--Players-->
-            <Border CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  Grid.Column="2"  Grid.Row="0">
+            <Border Height="100" Width="200" CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -214,8 +201,9 @@
                 </Grid>
             </Border>
 
+
             <!--Logs-->
-            <Border CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  Grid.Column="1"  Grid.Row="0">
+            <Border Height="100" Width="200" CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -261,7 +249,7 @@
             </Border>
 
             <!--APIs-->
-            <Border CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  Grid.Column="0"    Grid.Row="0">
+            <Border Height="100" Width="200" CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -305,10 +293,10 @@
                     </Border>
                 </Grid>
             </Border>
-           
-            
-            <!--APIs-->
-            <Border CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  Grid.Column="0"    Grid.Row="1">
+
+
+            <!--Achievements-->
+            <Border Height="100" Width="200" CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -352,7 +340,56 @@
                     </Border>
                 </Grid>
             </Border>
-        </Grid>
+            
+            <!--Store-->
+            <Border Height="100" Width="200" CornerRadius="5" Margin="10,0,0,10" BorderBrush="Gray" BorderThickness="2"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Header-->
+                    <Border CornerRadius="4,4,0,0" BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" >
+                        <TextBlock FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" Text="Store"/>
+                    </Border>
+                    <!--RowTable-->
+                    <Border Grid.Row="1" Background="Gainsboro">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,2"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0,0,0,2"/>
+
+                            <TextBlock Text="Used" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Totally" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <!--value-->
+                    <Border CornerRadius="0,0,4,4" Grid.Row="2" Background="WhiteSmoke">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+
+                            <TextBlock x:Name="TextCount_Store" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock x:Name="TextTotalCount_Store" Text="xxx" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+        </WrapPanel>
+        
+        
     </Grid>
 
 </UserControl>

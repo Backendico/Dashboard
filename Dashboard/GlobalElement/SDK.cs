@@ -1699,6 +1699,29 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+                    public static async void RemoveStore(BsonDocument DetailStore, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.RemoveStore);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Detail", DetailStore.ToString());
+
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
                 }
 
             }
@@ -1841,6 +1864,7 @@ namespace Dashboard.GlobalElement
 
                 public string AddProduct => BaseLink + "PageStore/AddProduct";
                 public string SaveStore => BaseLink + "PageStore/SaveStore";
+                public string RemoveStore => BaseLink + "PageStore/RemoveStore";
 
             }
         }
