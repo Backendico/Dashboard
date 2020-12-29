@@ -30,8 +30,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             InitializeComponent();
 
             //frist init
-            this.PlayerDetail = PlayerDetail;
-            this.RefreshList = RefreshList;
 
             CurentPage = PageAccount;
             CurentBTNHeader = BTNAccount;
@@ -59,8 +57,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
 
             }
-
-
 
 
             //cheak banplayer
@@ -279,6 +275,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
             #endregion
 
+
             #region PageAchievements
             //action show panel Add achievements
             BTNShowPanelAddAchievement.MouseDown += (s, e) =>
@@ -377,7 +374,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             if ((sender as Button).Content != BTNLogs.Content)
             {
                 ShowoffPaneladdLogs();
-
             }
 
 
@@ -442,7 +438,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         /// <param name="Leaderboards"></param>
         public void ReciveLeaderboardPlayer(BsonDocument Leaderboards)
         {
-
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
                 Resul =>
             {
