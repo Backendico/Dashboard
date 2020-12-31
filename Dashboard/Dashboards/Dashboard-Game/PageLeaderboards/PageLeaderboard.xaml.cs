@@ -3,6 +3,7 @@ using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -20,9 +21,7 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
 {
-    /// <summary>
-    /// Interaction logic for PageLeaderboard.xaml
-    /// </summary>
+   
     public partial class PageLeaderboard : UserControl
     {
         public PageLeaderboard()
@@ -51,7 +50,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                                     TextAmount.Text = 1.ToString();
 
 
-                                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextNameLeaderboard.Text, ComboboxReset.SelectedIndex, int.Parse(TextAmount.Text), ComboboxSort.SelectedIndex, int.Parse(TextMinValue.Text), int.Parse(TextMaxValue.Text), Result =>
+                                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextNameLeaderboard.Text, ComboboxReset.SelectedIndex, Int64.Parse(TextAmount.Text), ComboboxSort.SelectedIndex, int.Parse(TextMinValue.Text), Int64.Parse(TextMaxValue.Text), Result =>
                                    {
                                        if (Result)
                                        {
@@ -111,14 +110,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
         private void ReciveLeaderboards()
         {
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
-                resul =>
+                result =>
                 {
-                    if (resul.ElementCount >= 1)
+
+                    if (result.ElementCount >= 1)
                     {
                         PlaceLeaderboard.Children.Clear();
-                        foreach (var item in resul)
+                        foreach (var item in result[1].AsBsonArray)
                         {
-                            PlaceLeaderboard.Children.Add(new ModelLeaderboardAbstract(item.Value.AsBsonDocument, ReciveLeaderboards));
+                            PlaceLeaderboard.Children.Add(new ModelLeaderboardAbstract(item.AsBsonDocument, ReciveLeaderboards));
                         }
                     }
                     else

@@ -836,7 +836,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Token", SettingUser.Token);
                         var response = await client.ExecuteAsync(request);
 
-
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
@@ -849,7 +848,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Creat(string NameLeaderboard, int reset, int Amount, int Sort, int Min, int Max, Action<bool> Result)
+                    public static async void Creat(string NameLeaderboard, Int64 reset, Int64 Amount, Int64 Sort, Int64 Min, Int64 Max, Action<bool> Result)
                     {
                         var SeriliseDetail = new BsonDocument
                         {

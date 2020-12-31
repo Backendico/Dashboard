@@ -128,16 +128,10 @@
                     </ComboBox>
                 </StackPanel>
 
-                <!--BTNSave-->
-                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="Orange" >
-                    <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
-                </Border>
-
-
             </StackPanel>
 
             <!--Leaderboard-->
-            <Grid  x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Collapsed"  Grid.Row="2" >
+            <Grid  x:Name="ContentLeaderboard" Visibility="Collapsed"  Grid.Row="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
@@ -279,7 +273,7 @@
 
 
             <!--Backups-->
-            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" IsVisibleChanged="VisibilityChange">
+            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" >
                 <Border  CornerRadius="5"  BorderBrush="Gray"  BorderThickness="2"   >
                     <Grid>
                         <Grid.RowDefinitions>

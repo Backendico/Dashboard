@@ -272,20 +272,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             #region PageLeaderboard
 
 
-            //init pageLeaderboard
-            try
-            {
-                ReciveLeaderboardPlayer(EditPlayer.DetailPlayer["Leaderboards"]["List"].AsBsonDocument);
-            }
-            catch (Exception)
-            {
-                PlayerDetail.Add("Leaderboards", new BsonDocument { { "List", new BsonDocument { } } });
-
-                ReciveLeaderboardPlayer(EditPlayer.DetailPlayer["Leaderboards"]["List"].AsBsonDocument);
-            }
-
             #endregion
-
 
             #region PageAchievements
             //action show panel Add achievements
@@ -440,76 +427,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        //page Leaderboards
-
-        /// <summary>
-        /// if Player have a leaderboard
-        /// </summary>
-        /// <param name="Leaderboards"></param>
-        public void ReciveLeaderboardPlayer(BsonDocument Leaderboards)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
-                Resul =>
-            {
-                TotalLeaderboard = Resul;
-
-                PlaceContentLeaderboard.Children.Clear();
-
-                try
-                {
-                    foreach (var item in Leaderboards)
-                    {
-                        PlaceContentLeaderboard.Children.Add(new ModelLeaderboardPlayerEdit(TotalLeaderboard, Leaderboards, item.Name, item.Value.AsInt64));
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
-
-            },
-            () =>
-            {
-
-            });
-
-        }
-
-
-        private void Add(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                PlaceContentLeaderboard.Children.Add(new ModelLeaderboardPlayer_New(TotalLeaderboard, PlayerDetail["Leaderboards"]["List"].AsBsonDocument));
-            }
-            catch (Exception)
-            {
-                PlayerDetail.Add("Leaderboards", new BsonDocument { { "List", new BsonDocument { } } });
-
-                PlaceContentLeaderboard.Children.Add(new ModelLeaderboardPlayer_New(TotalLeaderboard, PlayerDetail["Leaderboards"]["List"].AsBsonDocument));
-            }
-        }
-
-        private void Save(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save_LeaderboardPlayer(PlayerDetail["Account"]["Token"].AsObjectId.ToString(), PlayerDetail["Leaderboards"]["List"].AsBsonDocument,
-                () =>
-                {
-                    DashboardGame.Notifaction("Leaderboards Saved", Notifaction.StatusMessage.Ok);
-                    ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
-
-                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("modifie Player Leaderboard", $"You have modifie player \" {PlayerDetail["Account"]["Username"]} \" ", PlayerDetail["Leaderboards"]["List"].AsBsonDocument, false, resul => { });
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Not Change", Notifaction.StatusMessage.Warrning);
-                });
-        }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             DashboardGame.Dashboard.Root.Children.Remove(this);
         }
+
 
         //page Log
         int CountLog = 100;
@@ -725,8 +648,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             storyboard.Begin(this);
 
         }
-
-
 
 
         Action RefreshList;

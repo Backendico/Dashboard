@@ -191,7 +191,7 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--Addleaderobard-->
-                                    <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Add">
+                                    <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
@@ -199,7 +199,7 @@
                                     </Border>
 
                                     <!--Save-->
-                                    <Border   Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Save Leaderboards " Background="LightGray" MouseDown="Save">
+                                    <Border   Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Save Leaderboards " Background="LightGray">
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE74E;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Save"/>
@@ -263,7 +263,7 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--AddLog-->
-                                    <Border  x:Name="BTNAddLog"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new log " Background="LightGray" MouseDown="Add">
+                                    <Border  x:Name="BTNAddLog"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new log " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
@@ -271,7 +271,7 @@
                                     </Border>
 
                                     <!--Clear all logs-->
-                                    <Border x:Name="BTNClearLogs"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Clear all log " Background="LightGray" MouseDown="Add">
+                                    <Border x:Name="BTNClearLogs"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Clear all log " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xEA99;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Clear"/>
@@ -347,7 +347,7 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--AddLog-->
-                                    <Border  x:Name="BTNShowPanelAddAchievement"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new achievement " Background="LightGray" MouseDown="Add">
+                                    <Border  x:Name="BTNShowPanelAddAchievement"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new achievement " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>

@@ -15,219 +15,136 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
     public partial class EditLeaderboard : UserControl
     {
-        BsonDocument Detail;
-        int Count;
-
-        public EditLeaderboard(BsonDocument Detail, Action RefreshList)
+        public EditLeaderboard(IEditorLeaderboard Editor)
         {
             InitializeComponent();
 
-            #region Frist Init
-
-            this.Detail = Detail;
-            this.RefreshList = RefreshList;
-
-
-            TextLeaderboardName.Text = Detail["Name"].AsString;
-            TextToken.Text = Detail["Token"].AsObjectId.ToString();
-            TextName_Setting.Text = Detail["Name"].AsString;
-            TextStart.Text = DateTime.Parse( Detail["Start"].ToString()).ToString();
-            TextMinValue.Text = Detail["Min"].ToString();
-            TextMaxValue.Text = Detail["Max"].ToString();
-
-            ComboboxReset.SelectedIndex = Detail["Reset"].AsInt32;
-            TextAmount.Text = Detail["Amount"].ToString();
-
-            
-            ComboboxSort.SelectedIndex = Detail["Sort"].AsInt32;
-
-            ControlAmount();
-
-            #endregion
-
-
             #region Page Setting
 
-            //action btn SaveSetting
-            BTNSaveSetting.MouseDown += (s, e) =>
+            TextToken.Text = Editor.DetailLeaderboard["Settings"]["Token"].AsObjectId.ToString();
+            TextStart.Text = DateTime.Parse(Editor.DetailLeaderboard["Settings"]["Start"].ToString()).ToString();
+            TextLeaderboardName.Text = Editor.DetailLeaderboard["Settings"]["Name"].AsString;
+            TextName_Setting.Text = Editor.DetailLeaderboard["Settings"]["Name"].AsString;
+            TextMinValue.Text = Editor.DetailLeaderboard["Settings"]["Min"].ToString();
+            TextMaxValue.Text = Editor.DetailLeaderboard["Settings"]["Max"].ToString();
+
+            ComboboxReset.SelectedIndex = Editor.DetailLeaderboard["Settings"]["Reset"].ToInt32();
+            TextAmount.Text = Editor.DetailLeaderboard["Settings"]["Amount"].ToString();
+
+            ComboboxSort.SelectedIndex = Editor.DetailLeaderboard["Settings"]["Sort"].ToInt32();
+
+            PanelAmount.Loaded += (s, e) =>
             {
-                try
+
+                if (Editor.DetailLeaderboard["Settings"]["Sort"].ToInt32() == 0)
                 {
-                    int.Parse(TextMinValue.Text);
-                    int.Parse(TextMaxValue.Text);
-
-                    Detail["Reset"] = ComboboxReset.SelectedIndex;
-                    Detail["Sort"] = ComboboxSort.SelectedIndex;
-                    Detail["Min"] = int.Parse(TextMinValue.Text);
-                    Detail["Max"] = int.Parse(TextMaxValue.Text);
-
-                    ControlAmount();
-
-                    Detail.Remove("Count");
-
-                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.EditLeaderboard(Detail, result =>
-                    {
-                        if (result)
-                        {
-                            DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
-                            RefreshList();
-
-
-                            //log
-                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Leaderboard", $"You have changed the \" {Detail["Name"]} \" leaderboard settings", Detail, false, resultlog => { });
-                        }
-                        else
-                        {
-
-                            DashboardGame.Notifaction("Faild Save !", Notifaction.StatusMessage.Error);
-                        }
-
-                    });
-
+                    PanelAmount.Visibility = Visibility.Collapsed;
                 }
-                catch (Exception ex)
+                else
                 {
-                    TextMinValue.Text = Detail["Min"].ToString();
-                    TextMaxValue.Text = Detail["Max"].ToString();
-
-                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    PanelAmount.Visibility = Visibility.Visible;
                 }
             };
 
-            //Control and Deploy amount
-            TextAmount.TextChanged += (s, e) =>
-            {
-                try
-                {
-                    Detail["Amount"] = int.Parse(TextAmount.Text);
-                }
-                catch (Exception ex)
-                {
-                    Detail["Amount"] = 1;
-                    TextAmount.Text = "1";
-
-                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
-                }
-            };
 
             //copy token
             TextToken.MouseDown += GlobalEvents.CopyText;
 
-            ComboboxReset.SelectionChanged += (s, e) =>
-            {
-                Detail["Reset"] = ComboboxReset.SelectedIndex;
-                ControlAmount();
-            };
-
-            #endregion
-
-            #region PageLeaderboards
-
-            //actions page 2 Leaderboards
-            //action btn SaveSetting
-            BTNSeeMore.MouseDown += (s, e) =>
-            {
-                Count += 100;
-                TextSeeMore.Text = Count.ToString();
-                ReciveLeaderboards();
-            };
-
-            //action btn resetleaderboard
-            BTNReset.MouseDown += async (s, e) =>
-            {
-                var Result = await DashboardGame.DialogYesNo("All records are lost\n Do you want to continue?");
-
-                if (Result == MessageBoxResult.Yes)
-                {
-                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reset(Detail["Name"].AsString,
-                        () =>
-                        {
-                            DashboardGame.Notifaction("Reseted !", Notifaction.StatusMessage.Ok);
-                            ReciveLeaderboards();
-                            TextStart.Text = DateTime.Now.ToString();
-
-                            //log
-                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Reset the leaderboard", $"You reset the \" {Detail["Name"]} \" leaderboard", new BsonDocument { }, false, result => { });
-                        },
-                        () =>
-                        {
-                            DashboardGame.Notifaction("Reset Faild !", Notifaction.StatusMessage.Error);
-                        });
-                }
-                else
-                {
-                    DashboardGame.Notifaction("Reset Reject !", Notifaction.StatusMessage.Error);
-                }
-            };
-
-            //action btn  backup leaderboard
-            BTNBackup.MouseDown += (s, e) =>
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Backup(Detail["Name"].AsString,
-               () =>
-               {
-                   DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
-
-
-                   //log
-                   SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Leaderboard Backup", $"You have backed up your \"{Detail["Name"]}\" leadboard", new BsonDocument { }, false, result => { });
-
-               },
-               () =>
-               {
-                   DashboardGame.Notifaction("Faild Save !", Notifaction.StatusMessage.Error);
-               });
-            };
-
-            //action btn Addplyer
-            BTNShowPanelAdd.MouseDown += (s, e) =>
-            {
-                ShowPanelAddPlayer();
-            };
-            BTNAddPlayer.MouseDown += (s, e) =>
+            //Control and Deploy amount
+            TextAmount.LostFocus += (s, e) =>
             {
                 try
                 {
-                    _ = int.Parse(TextboxValue.Text);
-                    _ = ObjectId.Parse(TextboxTokenPlayer.Text);
-
-                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.AddPlayer(Detail["Name"].ToString(), TextboxTokenPlayer.Text, int.Parse(TextboxValue.Text),
-                      () =>
-                      {
-                          DashboardGame.Notifaction("Added ! ", Notifaction.StatusMessage.Ok);
-                          ShowoffPaneladdPlayer();
-                          ReciveLeaderboards();
-
-                          //Addlog
-                          var detaillog = new BsonDocument { { "NameLeaderboard", Detail["Name"] }, { "TokenPlayer", TextboxTokenPlayer.Text }, { "Value", TextboxValue.Text } };
-                          SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add player to leaderboard", $"You have added player \" {TextboxTokenPlayer.Text} \" to the \" {Detail["Name"]} \" leaderboard", detaillog, false, resultlog => { });
-                      },
-                      () =>
-                      {
-                          DashboardGame.Notifaction("Faild Add ! ", Notifaction.StatusMessage.Error);
-                      });
-
+                    Editor.DetailLeaderboard["Settings"]["Amount"] = int.Parse(TextAmount.Text);
+                    Editor.Save();
                 }
                 catch (Exception ex)
                 {
-                    TextboxValue.Text = "";
-                    TextboxTokenPlayer.Text = "";
+                    Editor.DetailLeaderboard["Settings"]["Amount"] = 1;
+                    TextAmount.Text = "1";
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    Editor.Save();
+                }
+            };
+
+            //change Minvalue
+            TextMinValue.LostFocus += (s, e) =>
+            {
+                try
+                {
+                    Editor.DetailLeaderboard["Settings"]["Min"] = Int64.Parse(TextMinValue.Text);
+                    Editor.Save();
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                    TextMinValue.Text = Editor.DetailLeaderboard["Settings"]["Min"].ToString();
+                }
+            };
+
+            //change Max value
+            TextMaxValue.LostFocus += (s, e) =>
+            {
+                try
+                {
+                    Editor.DetailLeaderboard["Settings"]["Max"] = Int64.Parse(TextMaxValue.Text);
+                    Editor.Save();
+                }
+                catch (Exception ex)
+                {
+
+                    TextMaxValue.Text = Editor.DetailLeaderboard["Settings"]["Max"].ToString();
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                }
+
+            };
+
+
+            //change amount
+            TextAmount.LostFocus += (s, e) =>
+            {
+                try
+                {
+                    Editor.DetailLeaderboard["Settings"]["Amount"] = Int64.Parse(TextMinValue.Text);
+                    Editor.Save();
+                }
+                catch (Exception ex)
+                {
+                    TextAmount.Text = Editor.DetailLeaderboard["Settings"]["Amount"].ToString();
                     DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
                 }
             };
 
-            //close subpage add
-            PanelAddPlayer.MouseDown += (s, e) =>
+
+            //change reset
+            ComboboxReset.SelectionChanged += (s, e) =>
             {
-                if (e.Source.GetType() == typeof(Grid))
+                Editor.DetailLeaderboard["Settings"]["Reset"] = ComboboxReset.SelectedIndex;
+
+                if (Editor.DetailLeaderboard["Settings"]["Reset"].ToInt32() == 0)
                 {
-                    ShowoffPaneladdPlayer();
+                    PanelAmount.Visibility = Visibility.Collapsed;
                 }
+                else
+                {
+                    PanelAmount.Visibility = Visibility.Visible;
+                }
+                Editor.Save();
+            };
+
+            //change sort
+            ComboboxSort.SelectionChanged += (s, e) =>
+            {
+                Editor.DetailLeaderboard["Settings"]["Sort"] = ComboboxSort.SelectedIndex;
+                Editor.Save();
             };
 
             #endregion
 
+            #region Page Leaderboard
 
+
+            #endregion
         }
 
         //global method
@@ -258,7 +175,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                         BTNSetting.BorderBrush = new SolidColorBrush(Colors.Transparent);
                         BTNHistory.BorderBrush = new SolidColorBrush(Colors.Transparent);
                         BTNLeaderboard.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-
+                        
+                        ReciveLeaderboard();
                     }
                     break;
                 case "Backups":
@@ -286,80 +204,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             (Parent as Grid).Children.Remove(this);
         }
 
-
-        private void ControlAmount()
+        void ReciveLeaderboard()
         {
 
-            if (Detail["Reset"].ToInt32() == 0 || ComboboxReset.SelectedIndex == 0 )
-            {
-                PanelAmount.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                PanelAmount.Visibility = Visibility.Visible;
-            }
+            Debug.WriteLine("hi");
         }
 
-
-
-        //page2 leaderboard
-
-        private void VisibilityChange(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            switch ((sender as Grid).Name)
-            {
-                case "ContentHistory" when (sender as Grid).Visibility == Visibility.Visible:
-                    {
-                        ReciveBackup();
-                    }
-                    break;
-                case "ContentLeaderboard" when (sender as Grid).Visibility == Visibility.Visible:
-                    {
-                        Count = 100;
-                        ReciveLeaderboards();
-                    }
-                    break;
-
-            }
-
-        }
-
-        public void ReciveLeaderboards()
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Leaderboard(Count, Detail["Name"].ToString(),
-                Result =>
-                {
-                    var Place = (ContentPlaceLeaderboard.Content = new StackPanel()) as StackPanel;
-
-                    foreach (var item in Result.AsBsonDocument)
-                    {
-                        Place.Children.Add(new ContentValue(item.Value.AsBsonDocument.Add("NameLeaderboard", Detail["Name"]), ReciveLeaderboards));
-                    }
-                },
-                () =>
-                {
-                });
-
-        }
-
-        public void ReciveBackup()
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.BackupRecive(Detail["Name"].AsString,
-                Result =>
-                {
-                    PlaceContentBackups.Children.Clear();
-
-                    foreach (var item in Result)
-                    {
-                        item.Value.AsBsonDocument.Add("NameLeaderboard", Detail["Name"]);
-                        PlaceContentBackups.Children.Add(new ModelBackupAbstract(item.Value.AsBsonDocument, ReciveBackup));
-                    }
-                },
-                () =>
-                {
-
-                });
-        }
 
         private void ShowPanelAddPlayer()
         {
@@ -371,6 +221,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
+
         private void ShowoffPaneladdPlayer()
         {
             DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
@@ -387,8 +238,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
-
-        Action RefreshList;
 
     }
 }
