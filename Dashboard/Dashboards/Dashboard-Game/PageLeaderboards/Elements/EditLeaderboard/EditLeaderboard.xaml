@@ -49,7 +49,7 @@
                 <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
                     <Button Cursor="Hand" x:Name="BTNSetting"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Setting" Click="ChangePage" />
                     <Button Cursor="Hand" x:Name="BTNLeaderboard"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Leaderboard" Click="ChangePage" />
-                    <Button Cursor="Hand" x:Name="BTNHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Backups" Click="ChangePage" />
+                    <Button Cursor="Hand" x:Name="BTNBackupHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Backups" Click="ChangePage" />
                 </StackPanel>
 
             </Grid>
@@ -191,6 +191,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="40"/>
                                         <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="17"/>
@@ -199,15 +200,19 @@
                                     <Border BorderBrush="Gray" BorderThickness="0,0,2,2"  Background="Gainsboro" Grid.Column="1" />
                                     <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="2" />
                                     <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="3" />
-                                    <Border CornerRadius="0,4,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,0,2" Grid.Column="4" />
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="4" />
+                                    <Border CornerRadius="0,4,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,0,2" Grid.Column="5" />
 
                                     <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Username" Grid.Column="2"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="3"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="4"/>
                                 </Grid>
 
                                 <!--Content-->
-                                <ScrollViewer Margin="0,0,0,5" Grid.Row="1" Name="ContentPlaceLeaderboard"/>
+                                <ScrollViewer Margin="0,0,0,5" Grid.Row="1">
+                                    <StackPanel  Name="ContentPlaceLeaderboard" ></StackPanel>
+                                </ScrollViewer>
 
 
                             </Grid>

@@ -17,26 +17,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     public partial class ContentValue : UserControl
     {
         BsonDocument DetailValue;
-        public ContentValue(BsonDocument DetailValue, Action RefreshList)
+        public ContentValue(BsonDocument DetailValue)
         {
             InitializeComponent();
             this.DetailValue = DetailValue;
 
-            TextToken.Text = DetailValue["Token"].ToString();
-            TextValue.Text = DetailValue["Value"].ToString();
+            TextToken.Text = DetailValue["Leaderboards"]["Token"].ToString();
+            TextUsername.Text = DetailValue["Leaderboards"]["Username"].ToString();
+            TextValue.Text = DetailValue["Leaderboards"]["Score"].ToString();
             TextRank.Text = DetailValue["Rank"].ToString();
-            this.RefreshList = RefreshList;
+
+            TextToken.MouseDown += GlobalEvents.CopyText;
         }
 
         private async void Remove(object Sender, MouseButtonEventArgs e)
         {
+
             if (await DashboardGame.DialogYesNo("The value for the user is deleted \n Are you sure?")==MessageBoxResult.Yes)
             {
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Remove(DetailValue["Token"].ToString(), DetailValue["NameLeaderboard"].ToString(),
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Remove(DetailValue["Leaderboards"]["Token"].ToString(), DetailValue["Leaderboards"]["Leaderboard"].ToString(),
                     () =>
                     {
+                        Visibility = Visibility.Collapsed;
                         DashboardGame.Notifaction("Deleted", Notifaction.StatusMessage.Ok);
-                        RefreshList();
                     },
                     () =>
                     {
@@ -49,8 +52,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             }
         }
 
-
-        Action RefreshList;
 
     }
 }

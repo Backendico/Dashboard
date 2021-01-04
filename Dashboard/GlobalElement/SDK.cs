@@ -923,36 +923,27 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void AddPlayer(string NameLeaderboard, string TokenPlayer, int Value, Action Result, Action ERR)
+                    public static async void AddPlayer(string NameLeaderboard, ObjectId TokenPlayer, Int64 Value, Action<bool> Result)
                     {
-                        //cheack tokenplayer
-                        if (ObjectId.TryParse(TokenPlayer, out _))
+                        //send data
+                        var client = new RestClient(Links.Add);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("NameLeaderboard", NameLeaderboard);
+                        request.AddParameter("Value", Value);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            //send data
-                            var client = new RestClient(Links.Add);
-                            client.Timeout = -1;
-                            var request = new RestRequest(Method.POST);
-                            request.AlwaysMultipartFormData = true;
-                            request.AddParameter("Token", SettingUser.Token);
-                            request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                            request.AddParameter("TokenPlayer", TokenPlayer);
-                            request.AddParameter("NameLeaderboard", NameLeaderboard);
-                            request.AddParameter("Value", Value);
-                            var response = await client.ExecuteAsync(request);
-
-                            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                            {
-                                Result();
-                            }
-                            else
-                            {
-                                ERR();
-                            }
-
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
                     }
 
@@ -988,7 +979,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void Reset(string NameLeaderboard, Action Result, Action ERR)
+                    public static async void Reset(string NameLeaderboard, Action<bool> Result)
                     {
                         //send data
                         var client = new RestClient(Links.Reset);
@@ -1002,16 +993,16 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
 
-                    public static async void Leaderboard(int Count, string NameLeaderboard, Action<BsonDocument> Result, Action ERR)
+                    public static async void Leaderboard(int Count, string NameLeaderboard, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.Leaderboard);
                         client.Timeout = -1;
@@ -1031,11 +1022,11 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            ERR();
+                            Result(new BsonDocument());
                         }
                     }
 
-                    public static async void Backup(string NameLeaderboard, Action Result, Action ERR)
+                    public static async void Backup(string NameLeaderboard, Action<bool> Result)
                     {
                         var client = new RestClient(Links.Backup);
                         client.Timeout = -1;
@@ -1050,16 +1041,16 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
 
-                    public static async void BackupRecive(string NameLeaderboard, Action<BsonDocument> Result, Action ERR)
+                    public static async void BackupRecive(string NameLeaderboard, int Count,Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveBackup);
                         client.Timeout = -1;
@@ -1069,15 +1060,17 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         request.AddParameter("NameLeaderboard", NameLeaderboard);
+                        request.AddParameter("Count", Count.ToString());
                         var response = await client.ExecuteAsync(request);
 
+                        Debug.WriteLine(response.Content);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
                         }
                         else
                         {
-                            ERR();
+                            Result(new BsonDocument());
                         }
 
                     }

@@ -10,11 +10,14 @@ using System;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
     public partial class EditLeaderboard : UserControl
     {
+
         public EditLeaderboard(IEditorLeaderboard Editor)
         {
             InitializeComponent();
@@ -33,10 +36,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
             ComboboxSort.SelectedIndex = Editor.DetailLeaderboard["Settings"]["Sort"].ToInt32();
 
+
             PanelAmount.Loaded += (s, e) =>
             {
-
-                if (Editor.DetailLeaderboard["Settings"]["Sort"].ToInt32() == 0)
+                if (Editor.DetailLeaderboard["Settings"]["Reset"].ToInt32() == 0)
                 {
                     PanelAmount.Visibility = Visibility.Collapsed;
                 }
@@ -44,6 +47,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 {
                     PanelAmount.Visibility = Visibility.Visible;
                 }
+
             };
 
 
@@ -100,22 +104,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             };
 
 
-            //change amount
-            TextAmount.LostFocus += (s, e) =>
-            {
-                try
-                {
-                    Editor.DetailLeaderboard["Settings"]["Amount"] = Int64.Parse(TextMinValue.Text);
-                    Editor.Save();
-                }
-                catch (Exception ex)
-                {
-                    TextAmount.Text = Editor.DetailLeaderboard["Settings"]["Amount"].ToString();
-                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
-                }
-            };
-
-
             //change reset
             ComboboxReset.SelectionChanged += (s, e) =>
             {
@@ -143,6 +131,151 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
             #region Page Leaderboard
 
+            var Count = 100;
+            //action btn recive leaderboards
+            BTNLeaderboard.Click += (s, e) =>
+            {
+                Count = 100;
+                ReciveLeaderboardDetail();
+                TextSeeMore.Text = Count.ToString();
+            };
+
+            //action btn see more
+            BTNSeeMore.MouseDown += (s, e) =>
+            {
+                Count += 100;
+                ReciveLeaderboardDetail();
+                TextSeeMore.Text = Count.ToString();
+            };
+
+            //action btn Backups
+            BTNBackup.MouseDown += (s, e) =>
+            {
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Backup(Editor.DetailLeaderboard["Settings"]["Name"].ToString(), Result =>
+                {
+                    Debug.WriteLine(Result);
+                });
+
+            };
+
+            //action  btn reset leaderboard
+            BTNReset.MouseDown += async (s, e) =>
+            {
+                if (await DashboardGame.DialogYesNo("All information is lost.\n Are you sure ? ") == MessageBoxResult.Yes)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reset(Editor.DetailLeaderboard["Settings"]["Name"].ToString(), result =>
+                    {
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Leaderboard Reset", Notifaction.StatusMessage.Ok);
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild reset", Notifaction.StatusMessage.Warrning);
+                        }
+                    });
+
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                }
+            };
+
+            //action btn Show panel add 
+            BTNShowPanelAdd.MouseDown += (s, e) =>
+            {
+                ShowPanelAddPlayer();
+            };
+
+            //show off panel add
+            PanelAddPlayer.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowoffPaneladdPlayer();
+                }
+            };
+
+            //action btn add player
+            BTNAddPlayer.MouseDown += (s, e) =>
+            {
+                try
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.AddPlayer(Editor.DetailLeaderboard["Settings"]["Name"].ToString(), ObjectId.Parse(TextboxTokenPlayer.Text), long.Parse(TextboxValue.Text),
+                        result =>
+                        {
+                            if (result)
+                            {
+                                DashboardGame.Notifaction("Player Add", Notifaction.StatusMessage.Error);
+                                ReciveLeaderboardDetail();
+                                ShowoffPaneladdPlayer();
+                            }
+                            else
+                            {
+                                DashboardGame.Notifaction("Faild add", Notifaction.StatusMessage.Error);
+                            }
+                        });
+                }
+                catch (Exception ex)
+                {
+                    DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                }
+
+
+            };
+
+
+            void ReciveLeaderboardDetail()
+            {
+                ContentPlaceLeaderboard.Children.Clear();
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Leaderboard(Count, Editor.DetailLeaderboard["Settings"]["Name"].ToString(), result =>
+                {
+                    if (result.ElementCount >= 1)
+                    {
+                        var Conter = 0;
+                        foreach (var item in result["List"].AsBsonArray)
+                        {
+                            item.AsBsonDocument.Add("Rank", Conter);
+                            ContentPlaceLeaderboard.Children.Add(new ContentValue(item.AsBsonDocument));
+                            Conter++;
+                        }
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                        ShowPanelAddPlayer();
+                    }
+                });
+            }
+
+
+            #endregion
+
+            #region Backups
+
+            var CountBackups = 100;
+
+            //btn backups
+            BTNBackupHistory.Click += (s, e) => {
+
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.BackupRecive(Editor.DetailLeaderboard["Settings"]["Name"].ToString(),CountBackups, result =>
+                {
+                    if (result.ElementCount>=1)
+                    {
+                        foreach (var item in result["Leaderboards"].AsBsonArray)
+                        {
+                            PlaceContentBackups.Children.Add(new ModelBackupAbstract(item.AsBsonDocument));
+                        }
+
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                    }
+                
+                });
+            };
 
             #endregion
         }
@@ -162,7 +295,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
 
                         BTNSetting.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-                        BTNHistory.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                        BTNBackupHistory.BorderBrush = new SolidColorBrush(Colors.Transparent);
                         BTNLeaderboard.BorderBrush = new SolidColorBrush(Colors.Transparent);
                     }
                     break;
@@ -173,10 +306,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                         ContentHistory.Visibility = Visibility.Collapsed;
 
                         BTNSetting.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                        BTNHistory.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                        BTNBackupHistory.BorderBrush = new SolidColorBrush(Colors.Transparent);
                         BTNLeaderboard.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-                        
-                        ReciveLeaderboard();
                     }
                     break;
                 case "Backups":
@@ -188,7 +319,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
                         BTNSetting.BorderBrush = new SolidColorBrush(Colors.Transparent);
                         BTNLeaderboard.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                        BTNHistory.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
+                        BTNBackupHistory.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
                     }
                     break;
 
@@ -204,11 +335,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             (Parent as Grid).Children.Remove(this);
         }
 
-        void ReciveLeaderboard()
-        {
-
-            Debug.WriteLine("hi");
-        }
 
 
         private void ShowPanelAddPlayer()
@@ -221,6 +347,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
+
 
         private void ShowoffPaneladdPlayer()
         {

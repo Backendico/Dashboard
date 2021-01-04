@@ -16,16 +16,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     {
         BsonDocument Detail;
 
-        public ModelBackupAbstract(BsonDocument Detail, Action RefreshList)
+        public ModelBackupAbstract(BsonDocument Detail)
         {
             InitializeComponent();
             this.Detail = Detail;
-            this.RefreshList = RefreshList;
+            Debug.WriteLine(Detail);
 
-            TextVersion.Text = Detail["Name"].AsString;
-            TextStart.Text =DateTime.Parse( Detail["Start"].ToString()).ToString();
-            TextEnd.Text =DateTime.Parse( Detail["End"].ToString()).ToString();
-
+            TextVersion.Text = Detail["Settings"]["Token"].ToString();
+            TextStart.Text = Detail["Settings"]["Start"].ToLocalTime(). ToString();
+            TextEnd.Text = Detail["Settings"]["End"].ToLocalTime().ToString();
 
         }
 
@@ -37,7 +36,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     () =>
                     {
                         DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
-                        RefreshList();
 
                         //log
                         SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["NameLeaderboard"]}\" deleted", new BsonDocument { }, false, resultLog => { });
@@ -57,9 +55,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         {
             DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail["NameLeaderboard"].ToString(), Detail["Name"].ToString()));
         }
-
-
-        Action RefreshList;
 
 
     }

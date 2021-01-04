@@ -47,6 +47,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
@@ -54,15 +55,17 @@
         <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="1" />
         <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="2" />
         <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="3" />
-
+        <Border BorderBrush="Gray"  BorderThickness="0,0,2,2" Grid.Column="4" />
         
         <Border ToolTip="Delete" x:Name="BTNRemove"  CornerRadius="5" MouseDown="Remove" Grid.Column="0"  Opacity="0"   Background="Tomato" Width="30" Height="30" Cursor="Hand">
             <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE74D;"  FontSize="17"  FontFamily="Segoe MDL2 Assets"/>
         </Border>
         
         <TextBlock x:Name="TextRank" FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
-        <TextBlock Cursor="Hand" x:Name="TextToken"   TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
-        <TextBlock x:Name="TextValue"  TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
+        <TextBlock x:Name="TextUsername"  TextAlignment="Center" VerticalAlignment="Center" Text="Username" Grid.Column="2"/>
+        <TextBlock Cursor="Hand" x:Name="TextToken"   TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="3"/>
+        <TextBlock x:Name="TextValue"  TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="4"/>
+        
     </Grid>
 
 </UserControl>
