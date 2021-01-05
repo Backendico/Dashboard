@@ -56,19 +56,19 @@
         <Border BorderBrush="Gray" Grid.Column="2" BorderThickness="0,0,2,2"/>
         <Border BorderBrush="Gray" Grid.Column="3" BorderThickness="0,0,2,2"/>
 
-        <TextBlock x:Name="TextVersion" Text="Version" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextVersion"  Cursor="Hand" Text="Token" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextStart" Text="Start" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="TextEnd" Text="End" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
 
         <StackPanel x:Name="Controllers" Cursor="Hand" Opacity="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" Background="Transparent" Grid.Column="3" Margin="5">
 
             <!--BTNDownload-->
-            <Border ToolTip="Download"  CornerRadius="5,0,0,5" MouseDown="Download"  Background="Orange" Width="80" Height="30"  x:Name="BTNDownload"  >
+            <Border ToolTip="Download"  CornerRadius="5,0,0,5" Background="Orange" Width="80" Height="30"  x:Name="BTNDownload"  >
                 <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontSize="15"  FontFamily="Segoe MDL2 Assets" Text="&#xE896;"/>
             </Border>
 
             <!--BTN Remove-->
-            <Border ToolTip="Remove" Margin="2,0,0,0"  CornerRadius="0,5,5,0" MouseDown="RemoveBackup"  Background="Tomato" Width="30" Height="30"  >
+            <Border x:Name="BTNRemove" ToolTip="Remove" Margin="2,0,0,0"  CornerRadius="0,5,5,0" Background="Tomato" Width="30" Height="30"  >
                 <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Foreground="White" FontSize="15"  FontFamily="Segoe MDL2 Assets" Text="&#xE74D;"/>
             </Border>
         </StackPanel>

@@ -20,42 +20,47 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         {
             InitializeComponent();
             this.Detail = Detail;
-            Debug.WriteLine(Detail);
 
             TextVersion.Text = Detail["Settings"]["Token"].ToString();
-            TextStart.Text = Detail["Settings"]["Start"].ToLocalTime(). ToString();
+            TextStart.Text = Detail["Settings"]["Start"].ToLocalTime().ToString();
             TextEnd.Text = Detail["Settings"]["End"].ToLocalTime().ToString();
 
-        }
+            TextVersion.MouseDown += GlobalEvents.CopyText;
 
-        private async void RemoveBackup(object sender,MouseButtonEventArgs e)
-        {
-            if (await DashboardGame.DialogYesNo("Information can not be undone") == MessageBoxResult.Yes)
+            BTNRemove.MouseDown += async (s, e) =>
             {
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.RemoveBackup(Detail["NameLeaderboard"].AsString, Detail["Name"].AsString,
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
+                if (await DashboardGame.DialogYesNo("Information can not be undone") == MessageBoxResult.Yes)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.RemoveBackup(Detail["Settings"]["Token"].AsObjectId,
+                        (Result) =>
+                        {
+                            (Parent as StackPanel).Children.Remove(this);
 
-                        //log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["NameLeaderboard"]}\" deleted", new BsonDocument { }, false, resultLog => { });
-                    },
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Fail Delete", Notifaction.StatusMessage.Error);
-                    });
-            }
-            else
-            {
-                DashboardGame.Notifaction("Reject Delete", Notifaction.StatusMessage.Error);
-            }
+                            if (Result)
+                            {
+                                DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
+
+                            //log
+                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["Settings"]["Token"].AsObjectId}\" deleted", new BsonDocument { }, false, resultLog => { });
+                            }
+                            else
+                            {
+                                DashboardGame.Notifaction("Cant Delete !", Notifaction.StatusMessage.Error);
+                            }
+                        });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Reject Delete", Notifaction.StatusMessage.Error);
+                }
+            };
+
+            BTNDownload.MouseDown += (s, e) => { 
+            
+            DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail));
+            
+            };
         }
-
-        private void Download(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail["NameLeaderboard"].ToString(), Detail["Name"].ToString()));
-        }
-
 
     }
 

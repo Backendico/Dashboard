@@ -207,9 +207,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                         {
                             if (result)
                             {
-                                DashboardGame.Notifaction("Player Add", Notifaction.StatusMessage.Error);
+                                DashboardGame.Notifaction("Player Add", Notifaction.StatusMessage.Ok);
                                 ReciveLeaderboardDetail();
                                 ShowoffPaneladdPlayer();
+                                Editor.DetailLeaderboard["Settings"]["Count"] = Editor.DetailLeaderboard["Settings"]["Count"].ToInt32() + 1;
+                                Editor.Save();
                             }
                             else
                             {
@@ -237,7 +239,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                         foreach (var item in result["List"].AsBsonArray)
                         {
                             item.AsBsonDocument.Add("Rank", Conter);
-                            ContentPlaceLeaderboard.Children.Add(new ContentValue(item.AsBsonDocument));
+                            ContentPlaceLeaderboard.Children.Add(new ContentValue(item.AsBsonDocument, Editor));
                             Conter++;
                         }
                     }
@@ -257,24 +259,26 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             var CountBackups = 100;
 
             //btn backups
-            BTNBackupHistory.Click += (s, e) => {
+            BTNBackupHistory.Click += (s, e) =>
+            {
 
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.BackupRecive(Editor.DetailLeaderboard["Settings"]["Name"].ToString(),CountBackups, result =>
-                {
-                    if (result.ElementCount>=1)
-                    {
-                        foreach (var item in result["Leaderboards"].AsBsonArray)
-                        {
-                            PlaceContentBackups.Children.Add(new ModelBackupAbstract(item.AsBsonDocument));
-                        }
+                PlaceContentBackups.Children.Clear();
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.BackupRecive(Editor.DetailLeaderboard["Settings"]["Name"].ToString(), CountBackups, result =>
+                 {
+                     if (result.ElementCount >= 1)
+                     {
+                         foreach (var item in result["Leaderboards"].AsBsonArray)
+                         {
+                             PlaceContentBackups.Children.Add(new ModelBackupAbstract(item.AsBsonDocument));
+                         }
 
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
-                    }
-                
-                });
+                     }
+                     else
+                     {
+                         DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                     }
+
+                 });
             };
 
             #endregion
@@ -336,7 +340,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
         }
 
 
-
         private void ShowPanelAddPlayer()
         {
             PanelAddPlayer.Visibility = Visibility.Visible;
@@ -366,5 +369,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             storyboard.Begin(this);
         }
 
+
     }
+
+
 }

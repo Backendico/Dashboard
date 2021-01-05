@@ -15,7 +15,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     public partial class ModelLeaderboardAbstract : UserControl, IEditorLeaderboard
     {
 
-        public ModelLeaderboardAbstract(BsonDocument Detail, Action RefreshList)
+        public ModelLeaderboardAbstract(BsonDocument Detail)
         {
             InitializeComponent();
             DetailLeaderboard = Detail;
@@ -100,8 +100,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             }
 
 
-            //TextPlayers.Text = Detail["Count"].ToString();
-            Debug.WriteLine("Count Player add to " + GetType().Name);
+            TextPlayers.Text = DetailLeaderboard["Settings"]["Count"].ToString() ;
         }
 
         public void Delete()
@@ -112,7 +111,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 
         public void Save()
         {
+            TextPlayers.Text = DetailLeaderboard["Settings"]["Count"].ToString();
 
+            var Count = DetailLeaderboard["Settings"]["Count"].ToInt32();
+
+            DetailLeaderboard["Settings"].AsBsonDocument.Remove("Count");
 
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.EditLeaderboard(DetailLeaderboard["Settings"].AsBsonDocument, result =>
             {
@@ -121,16 +124,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
                     Init();
 
+
                     //log
                     SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Leaderboard", $"You have changed the \" {DetailLeaderboard["Settings"]["Name"]} \" leaderboard settings", DetailLeaderboard["Settings"].AsBsonDocument, false, resultlog => { });
                 }
                 else
                 {
-
                     DashboardGame.Notifaction("Not Change !", Notifaction.StatusMessage.Error);
                 }
 
             });
+                    DetailLeaderboard["Settings"].AsBsonDocument.Add("Count",Count);
 
         }
     }

@@ -112,13 +112,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
                 result =>
                 {
-
                     if (result.ElementCount >= 1)
                     {
                         PlaceLeaderboard.Children.Clear();
                         foreach (var item in result[1].AsBsonArray)
                         {
-                            PlaceLeaderboard.Children.Add(new ModelLeaderboardAbstract(item.AsBsonDocument, ReciveLeaderboards));
+                            PlaceLeaderboard.Children.Add(new ModelLeaderboardAbstract(item.AsBsonDocument));
                         }
                     }
                     else
@@ -126,9 +125,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                         DashboardGame.Notifaction("No content", Notifaction.StatusMessage.Warrning);
                         ShowSubpageAddLeaderboard();
                     }
-                },
-                () =>
-                {
                 });
         }
 

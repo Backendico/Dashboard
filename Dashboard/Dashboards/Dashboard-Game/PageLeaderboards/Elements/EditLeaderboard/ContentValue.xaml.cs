@@ -16,11 +16,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     /// </summary>
     public partial class ContentValue : UserControl
     {
-        BsonDocument DetailValue;
-        public ContentValue(BsonDocument DetailValue)
+        public ContentValue(BsonDocument DetailValue,IEditorLeaderboard Editor)
         {
             InitializeComponent();
-            this.DetailValue = DetailValue;
 
             TextToken.Text = DetailValue["Leaderboards"]["Token"].ToString();
             TextUsername.Text = DetailValue["Leaderboards"]["Username"].ToString();
@@ -28,28 +26,31 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             TextRank.Text = DetailValue["Rank"].ToString();
 
             TextToken.MouseDown += GlobalEvents.CopyText;
-        }
 
-        private async void Remove(object Sender, MouseButtonEventArgs e)
-        {
+            BTNRemove.MouseDown += async (s, e) =>
+            {
+                if (await DashboardGame.DialogYesNo("The value for the user is deleted \n Are you sure?") == MessageBoxResult.Yes)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Remove(DetailValue["Leaderboards"]["Token"].ToString(), DetailValue["Leaderboards"]["Leaderboard"].ToString(),
+                        () =>
+                        {
+                            Visibility = Visibility.Collapsed;
+                            DashboardGame.Notifaction("Deleted", Notifaction.StatusMessage.Ok);
 
-            if (await DashboardGame.DialogYesNo("The value for the user is deleted \n Are you sure?")==MessageBoxResult.Yes)
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Remove(DetailValue["Leaderboards"]["Token"].ToString(), DetailValue["Leaderboards"]["Leaderboard"].ToString(),
-                    () =>
-                    {
-                        Visibility = Visibility.Collapsed;
-                        DashboardGame.Notifaction("Deleted", Notifaction.StatusMessage.Ok);
-                    },
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Faild Delete",Notifaction.StatusMessage.Error);
-                    });
-            }
-            else
-            {
-                DashboardGame.Notifaction("Delete reject", Notifaction.StatusMessage.Error);
-            }
+                            Editor.DetailLeaderboard["Settings"]["Count"] =( Editor.DetailLeaderboard["Settings"]["Count"].ToInt32() - 1);
+                           
+                            Editor.Save();
+                        },
+                        () =>
+                        {
+                            DashboardGame.Notifaction("Faild Delete", Notifaction.StatusMessage.Error);
+                        });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Delete reject", Notifaction.StatusMessage.Error);
+                }
+            };
         }
 
 

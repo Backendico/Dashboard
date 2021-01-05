@@ -825,7 +825,7 @@ namespace Dashboard.GlobalElement
                     public static ModelLinks.DashboardGame.PageLeaderboard Links;
 
 
-                    public static async void Reciveleaderboards(Action<BsonDocument> Result, Action ERR)
+                    public static async void Reciveleaderboards(Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveLeaderboards);
                         client.Timeout = -1;
@@ -842,8 +842,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            Result(BsonDocument.Parse(response.Content));
-                            ERR();
+                            Result(new BsonDocument());
                         }
 
                     }
@@ -1063,7 +1062,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Count", Count.ToString());
                         var response = await client.ExecuteAsync(request);
 
-                        Debug.WriteLine(response.Content);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
@@ -1075,7 +1073,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void RemoveBackup(string NameLeaderboard, string Version, Action Result, Action ERR)
+                    public static async void RemoveBackup( ObjectId TokenBackup, Action<bool> Result)
                     {
                         var client = new RestClient(Links.RemoveBackup);
                         client.Timeout = -1;
@@ -1084,21 +1082,21 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("NameLeaderboard", NameLeaderboard);
-                        request.AddParameter("Version", Version);
+                        request.AddParameter("TokenBackups", TokenBackup.ToString());
                         var response = await client.ExecuteAsync(request);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
 
+                    [Obsolete("New version deleted",true)]
                     public static async void DownloadBackup(string NameLeaderboard, string Version, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.DownloadBackup);
@@ -1294,7 +1292,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Detail", DetailAchievements.ToString());
                         var response = await client.ExecuteAsync(request);
 
-                        Debug.WriteLine(response.Content);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
