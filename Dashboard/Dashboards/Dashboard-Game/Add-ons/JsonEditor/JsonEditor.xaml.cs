@@ -1,7 +1,5 @@
 ﻿using Dashboard.GlobalElement;
-using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Diagnostics;
 using System.Windows;

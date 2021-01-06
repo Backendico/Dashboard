@@ -1,6 +1,4 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor;
-using Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView;
-using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;

@@ -1,27 +1,14 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements;
 using Dashboard.GlobalElement;
-using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
 {
-   
+
     public partial class PageLeaderboard : UserControl
     {
         public PageLeaderboard()
@@ -84,12 +71,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                     DashboardGame.Notifaction("Leaderboard name short ", Notifaction.StatusMessage.Warrning);
                 }
             };
-           
+
             BTNShowPanelAddLeaderboards.MouseDown += (s, e) =>
             {
                 ShowSubpageAddLeaderboard();
             };
-           
+
             PanelAddLeaderboard.MouseDown += (s, e) =>
             {
                 if (e.Source.GetType() == typeof(Grid))
@@ -97,7 +84,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards
                     ShowOffSubpageAddLeaderboard();
                 }
             };
-          
+
             ComboboxReset.SelectionChanged += (s, e) =>
             {
                 ChangeAmount();

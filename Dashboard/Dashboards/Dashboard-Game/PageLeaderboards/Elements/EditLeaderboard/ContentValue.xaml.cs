@@ -1,13 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using RestSharp;
-using System;
-using System.Diagnostics;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -16,7 +10,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     /// </summary>
     public partial class ContentValue : UserControl
     {
-        public ContentValue(BsonDocument DetailValue,IEditorLeaderboard Editor)
+        public ContentValue(BsonDocument DetailValue, IEditorLeaderboard Editor)
         {
             InitializeComponent();
 
@@ -37,8 +31,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                             Visibility = Visibility.Collapsed;
                             DashboardGame.Notifaction("Deleted", Notifaction.StatusMessage.Ok);
 
-                            Editor.DetailLeaderboard["Settings"]["Count"] =( Editor.DetailLeaderboard["Settings"]["Count"].ToInt32() - 1);
-                           
+                            Editor.DetailLeaderboard["Settings"]["Count"] = (Editor.DetailLeaderboard["Settings"]["Count"].ToInt32() - 1);
+
                             Editor.Save();
                         },
                         () =>

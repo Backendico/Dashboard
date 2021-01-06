@@ -1,11 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction.Elements;
 using Dashboard.GlobalElement;
-using MongoDB.Bson;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifaction
@@ -103,7 +100,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageInternalNotifactio
                 }
                 else
                 {
-                   
+
                 }
             });
         }

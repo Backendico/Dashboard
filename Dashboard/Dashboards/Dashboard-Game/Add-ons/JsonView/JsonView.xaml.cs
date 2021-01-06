@@ -1,20 +1,10 @@
-﻿using Dashboard.GlobalElement;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
 {
@@ -59,7 +49,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
                 var PlaceSubElements = new StackPanel() { Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.WhiteSmoke), Margin = new Thickness(60, 0, 0, 0) };
                 Children.Add(PlaceSubElements);
 
-                Grid.ColumnDefinitions.Add(new ColumnDefinition() {  });
+                Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
                 Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
                 Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
                 Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
@@ -67,7 +57,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
 
 
                 //Show More
-                var ShowMore = new Border() { VerticalAlignment=VerticalAlignment.Center, HorizontalAlignment=HorizontalAlignment.Left , Height=20, Width=20, Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.LightGray), CornerRadius = new CornerRadius(5) }; ;
+                var ShowMore = new Border() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Left, Height = 20, Width = 20, Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.LightGray), CornerRadius = new CornerRadius(5) }; ;
                 ShowMore.Child = new TextBlock() { Cursor = Cursors.Hand, TextAlignment = TextAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 15, Text = "\xE974", FontFamily = new FontFamily("Segoe MDL2 Assets") };
                 var Show = false;
                 ShowMore.MouseDown += (s, e) =>
@@ -92,29 +82,31 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
 
 
                 //Name
-                var Name = new TextBlock() { Margin = new Thickness(0, 0, 5, 0),  MinWidth = 100, Text = Data.Name, Foreground = new SolidColorBrush(Colors.Black), TextAlignment = TextAlignment.Left };
+                var Name = new TextBlock() { Margin = new Thickness(0, 0, 5, 0), MinWidth = 100, Text = Data.Name, Foreground = new SolidColorBrush(Colors.Black), TextAlignment = TextAlignment.Left };
                 Grid.Children.Add(Name);
                 Grid.SetColumn(Name, 1);
                 Grid.SetRow(Name, 0);
 
                 //Value
-                var Value = new TextBlock() { Margin = new Thickness(0, 0, 5, 0),  TextAlignment=TextAlignment.Left, MinWidth = 100, Text = Data.Value.ToString(), Foreground = new SolidColorBrush(Colors.Black) };
+                var Value = new TextBlock() { Margin = new Thickness(0, 0, 5, 0), TextAlignment = TextAlignment.Left, MinWidth = 100, Text = Data.Value.ToString(), Foreground = new SolidColorBrush(Colors.Black) };
                 Grid.SetColumn(Value, 2);
                 Grid.Children.Add(Value);
                 Grid.SetRow(Value, 0);
 
                 //type
-                var Type = new TextBlock() {TextAlignment=TextAlignment.Right, Text= Data.Value.BsonType.ToString() };
+                var Type = new TextBlock() { TextAlignment = TextAlignment.Right, Text = Data.Value.BsonType.ToString() };
                 Grid.Children.Add(Type);
                 Grid.SetColumn(Type, 3);
                 Grid.SetRow(Type, 0);
 
 
                 //actions
-                MouseEnter += (s, e) => {
+                MouseEnter += (s, e) =>
+                {
                     Background = new SolidColorBrush(Colors.WhiteSmoke);
                 };
-                MouseLeave += (s, e) => {
+                MouseLeave += (s, e) =>
+                {
                     Background = new SolidColorBrush(Colors.Transparent);
                 };
 
@@ -359,7 +351,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
                     Grid.ColumnDefinitions.Add(new ColumnDefinition() { });
 
                     //Show More
-                    var ShowMore = new Border() { Height=20, Width=20, Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.LightGray), CornerRadius = new CornerRadius(5) }; ;
+                    var ShowMore = new Border() { Height = 20, Width = 20, Visibility = Visibility.Collapsed, Background = new SolidColorBrush(Colors.LightGray), CornerRadius = new CornerRadius(5) }; ;
                     ShowMore.Child = new TextBlock() { Cursor = Cursors.Hand, TextAlignment = TextAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 15, Text = "\xE974", FontFamily = new FontFamily("Segoe MDL2 Assets") };
                     var Show = false;
                     ShowMore.MouseDown += (s, e) =>
@@ -389,13 +381,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
                     Grid.SetRow(Name, 0);
 
                     //Value
-                    var Value = new TextBlock() { Margin = new Thickness(0, 0, 5, 0),  MinWidth = 100, Text = Data.ToString(), TextAlignment=TextAlignment.Left, Foreground = new SolidColorBrush(Colors.Black) };
+                    var Value = new TextBlock() { Margin = new Thickness(0, 0, 5, 0), MinWidth = 100, Text = Data.ToString(), TextAlignment = TextAlignment.Left, Foreground = new SolidColorBrush(Colors.Black) };
                     Grid.SetColumn(Value, 2);
                     Grid.Children.Add(Value);
                     Grid.SetRow(Value, 0);
 
                     //type
-                    var Type = new TextBlock() {Text=Data.BsonType.ToString() ,TextAlignment=TextAlignment.Right };
+                    var Type = new TextBlock() { Text = Data.BsonType.ToString(), TextAlignment = TextAlignment.Right };
                     Grid.Children.Add(Type);
                     Grid.SetColumn(Type, 3);
                     Grid.SetRow(Type, 0);

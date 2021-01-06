@@ -1,11 +1,6 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using System;
-using System.Diagnostics;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -100,7 +95,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             }
 
 
-            TextPlayers.Text = DetailLeaderboard["Settings"]["Count"].ToString() ;
+            TextPlayers.Text = DetailLeaderboard["Settings"]["Count"].ToString();
         }
 
         public void Delete()
@@ -134,7 +129,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 }
 
             });
-                    DetailLeaderboard["Settings"].AsBsonDocument.Add("Count",Count);
+            DetailLeaderboard["Settings"].AsBsonDocument.Add("Count", Count);
 
         }
     }

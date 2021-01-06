@@ -1,6 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -54,7 +53,7 @@ namespace Dashboard.GlobalElement
             }
             else
             {
-               return false;
+                return false;
             }
         }
 

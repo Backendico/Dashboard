@@ -6,7 +6,6 @@ using MongoDB.Bson;
 using System;
 using System.Diagnostics;
 using System.Net.Mail;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,7 +73,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
             //action btn generateNew token
             BTNGeneretNewToken.MouseDown += async (s, e) =>
             {
-                BTNGeneretNewToken.IsEnabled = false;   
+                BTNGeneretNewToken.IsEnabled = false;
 
                 if (await DashboardGame.DialogYesNo("Changing the current token causes a change in all studios \n are you sure ? ") == MessageBoxResult.Yes)
                 {
@@ -84,7 +83,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages
                         if (Result)
                         {
                             DashboardGame.Notifaction("Token changed For more security please log in again", StatusMessage.Ok);
-                            
+
                             DashboardGame.Dashboard.Root.Children.Remove(this);
                             DashboardGame.Dashboard.Root.Children.Add(new Login());
                         }

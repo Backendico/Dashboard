@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements"
         mc:Ignorable="d"
-             Background="#33000000" d:DesignWidth="1033.333"
+             Background="#33000000" d:DesignWidth="1033.333" d:DesignHeight="862.05"
     >
 
     <Border Margin="60,60" Background="White" CornerRadius="5" BorderBrush="Transparent" >
@@ -61,7 +61,7 @@
 
             <!--Bodys-->
             <!--Body Account-->
-            <Grid x:Name="PageAccount" Visibility="Visible" Grid.Row="2" >
+            <Grid x:Name="PageAccount" Visibility="Collapsed" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -102,7 +102,7 @@
                         <TextBlock x:Name="Tags" Cursor="Hand" Margin="10">
                             <Run Text="Tags"/> <Run Text="("/> <Run Name="TextCountTags" Text="0"/> <Run Text=")"/>
                         </TextBlock>
-                        
+
                         <!--CreatedTime-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Created: "/>
@@ -127,13 +127,13 @@
 
                         <!--Password-->
                         <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Password: "/>
-                            <Border ToolTip="Send Email Recovery" x:Name="BTNSendEmailRecovery" Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
-                                <TextBlock VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="Send Email Recovery"/>
-                            </Border>
-                        </StackPanel>
-                            
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Password: "/>
+                                <Border ToolTip="Send Email Recovery" x:Name="BTNSendEmailRecovery" Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
+                                    <TextBlock VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="Send Email Recovery"/>
+                                </Border>
+                            </StackPanel>
+
                             <StackPanel x:Name="PanelChangePassword" Orientation="Horizontal" Visibility="Collapsed" Margin="10">
                                 <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="New Password: "/>
                                 <TextBox  x:Name="TextNewPassword" Margin="10,0" MinWidth="200"/>
@@ -178,7 +178,7 @@
             </Grid>
 
             <!-- body Leaderboard-->
-            <Grid x:Name="PageLeaderboards" Visibility="Collapsed" Grid.Row="2">
+            <Grid x:Name="PageLeaderboards" Visibility="Visible" Grid.Row="2">
                 <Border  BorderBrush="Gray" BorderThickness="0,0,0,0" >
                     <Grid>
                         <Grid.RowDefinitions>
@@ -191,18 +191,10 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--Addleaderobard-->
-                                    <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
+                                    <Border Name="BTNAaddLeaderboardShow" Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
-                                        </TextBlock>
-                                    </Border>
-
-                                    <!--Save-->
-                                    <Border   Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Save Leaderboards " Background="LightGray">
-                                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                         <Run  Foreground="White"  Text="&#xE74E;   " FontFamily="Segoe MDL2 Assets"/>
-                                         <Run Foreground="White"  Text="Save"/>
                                         </TextBlock>
                                     </Border>
 
@@ -238,15 +230,42 @@
                                 <!--Place Content-->
                                 <ScrollViewer  Margin="0,0,0,5" BorderBrush="Gray" BorderThickness="2" Grid.Row="1">
                                     <StackPanel x:Name="PlaceContentLeaderboard"/>
+
                                 </ScrollViewer>
                             </Grid>
                         </Border>
 
 
-
                     </Grid>
 
                 </Border>
+                <!--SubPages-->
+                <!--SubPageAdd leaderboard-->
+                <Grid  x:Name="PanelAddLeaderboard" Grid.Row="1"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+                    <Grid.Effect>
+                        <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+                    </Grid.Effect>
+                    <!--Header-->
+                    <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="70,40,0,0"  >
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="45"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <!--Body-->
+                    <Border  Margin="5,51,0,0"  CornerRadius="10" Width="300"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+
+                        <StackPanel Name="PlaceLeaderboardStudio" Margin="10" Grid.Row="1"/>
+
+                    </Border>
+
+                </Grid>
             </Grid>
 
             <!-- body Logs-->
@@ -431,7 +450,6 @@
                             <TextBox  x:Name="TextboxHeader"/>
                         </StackPanel>
 
-
                         <!--Description-->
                         <StackPanel Margin="0,5">
                             <TextBlock Text="Description :"/>
@@ -484,9 +502,7 @@
                         </Grid.RowDefinitions>
 
                         <ScrollViewer  MaxHeight="500" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
-                            <StackPanel  x:Name="ListStudioAchievement" >
-
-                            </StackPanel>
+                            <StackPanel  x:Name="ListStudioAchievement" />
                         </ScrollViewer>
 
                     </Grid>

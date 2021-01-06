@@ -1,11 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -40,8 +36,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                             {
                                 DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
 
-                            //log
-                            SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["Settings"]["Token"].AsObjectId}\" deleted", new BsonDocument { }, false, resultLog => { });
+                                //log
+                                SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["Settings"]["Token"].AsObjectId}\" deleted", new BsonDocument { }, false, resultLog => { });
                             }
                             else
                             {
@@ -55,10 +51,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                 }
             };
 
-            BTNDownload.MouseDown += (s, e) => { 
-            
-            DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail));
-            
+            BTNDownload.MouseDown += (s, e) =>
+            {
+
+                DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail));
+
             };
         }
 

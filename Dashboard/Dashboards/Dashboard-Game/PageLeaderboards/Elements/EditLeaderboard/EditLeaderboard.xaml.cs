@@ -1,17 +1,11 @@
 ﻿using Dashboard.GlobalElement;
-using RestSharp;
+using MongoDB.Bson;
+using System;
 using System.Diagnostics;
-using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using MongoDB.Bson;
-using System;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Security.Cryptography.X509Certificates;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {

@@ -1,7 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard;
 using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
-using Dashboard.Dashboards.Dashboard_Game.PageAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
 using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;

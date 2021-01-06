@@ -86,7 +86,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAUT.Login
                              var _parent = Parent as Grid;
                              _parent.Children.Remove(this);
                              _parent.Children.Add(new Login());
-                             
+
                          }
                          else
                          {

@@ -1,10 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element.ModelMessage;
 using Dashboard.GlobalElement;
-using Microsoft.Win32;
 using MongoDB.Bson;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

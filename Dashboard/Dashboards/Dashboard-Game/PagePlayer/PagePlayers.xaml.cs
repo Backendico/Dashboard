@@ -3,7 +3,6 @@ using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +16,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
     /// </summary>
     public partial class PagePlayers : UserControl
     {
-         int PlayerCount =0;
+        int PlayerCount = 0;
         int ReciveCount = 100;
 
         public PagePlayers()

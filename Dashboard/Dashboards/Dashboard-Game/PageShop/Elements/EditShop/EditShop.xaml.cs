@@ -1,16 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
-using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.ModelProduct;
 using Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.Payments;
-using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Serializers;
 using System;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

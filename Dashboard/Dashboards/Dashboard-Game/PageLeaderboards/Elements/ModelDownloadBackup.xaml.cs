@@ -1,13 +1,10 @@
-﻿using Dashboard.GlobalElement;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Web.UI;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements

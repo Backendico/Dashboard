@@ -1,5 +1,4 @@
 ﻿using Dashboard.GlobalElement;
-using MongoDB.Bson;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -14,7 +13,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate
             InitializeComponent();
 
             ControlUpdate();
-            
+
         }
 
 
@@ -36,7 +35,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageUpdate
                         TextDetail.Text = result["Detail"].AsString;
                         TextSize.Text = result["Size"].AsString;
                         TextLink.Text = result["URL"].AsString;
-                        
+
                         BTNDownload.MouseDown += (s, e) =>
                         {
                             Process.Start(TextLink.Text);

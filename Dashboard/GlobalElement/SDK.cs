@@ -1,19 +1,7 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.SubPages;
-using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
-using Microsoft.Win32;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization.Conventions;
+﻿using MongoDB.Bson;
 using RestSharp;
-using RestSharp.Serialization.Json;
 using System;
-using System.Diagnostics;
 using System.Net.Mail;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Claims;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Dashboard.GlobalElement
@@ -1049,7 +1037,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void BackupRecive(string NameLeaderboard, int Count,Action<BsonDocument> Result)
+                    public static async void BackupRecive(string NameLeaderboard, int Count, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveBackup);
                         client.Timeout = -1;
@@ -1073,7 +1061,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void RemoveBackup( ObjectId TokenBackup, Action<bool> Result)
+                    public static async void RemoveBackup(ObjectId TokenBackup, Action<bool> Result)
                     {
                         var client = new RestClient(Links.RemoveBackup);
                         client.Timeout = -1;
@@ -1096,7 +1084,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    [Obsolete("New version deleted",true)]
+                    [Obsolete("New version deleted", true)]
                     public static async void DownloadBackup(string NameLeaderboard, string Version, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.DownloadBackup);

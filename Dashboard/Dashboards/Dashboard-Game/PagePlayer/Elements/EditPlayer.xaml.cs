@@ -1,12 +1,13 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboard;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Mail;
-using System.Resources;
-using System.Web.UI.WebControls.WebParts;
+using System.Security.AccessControl;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,11 +16,9 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    public partial class EditPlayer : UserControl
+    public partial class EditPlayer : UserControl,IEditLeaderboard
     {
-
-        BsonDocument PlayerDetail;
-        BsonDocument TotalLeaderboard;
+        IEditPlayer Editor;
 
 
         Grid CurentPage;
@@ -29,8 +28,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         public EditPlayer(IEditPlayer EditPlayer)
         {
             InitializeComponent();
-
             //frist init
+            Editor = EditPlayer;
+
 
             CurentPage = PageAccount;
             CurentBTNHeader = BTNAccount;
@@ -202,7 +202,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                                     if (Code != 0)
                                     {
                                         DashboardGame.Dialog(Code.ToString(), "Recovery Code");
-                                        PanelChangePassword.Visibility = Visibility.Visible;
+                                        PanelChangePassword.Visibility = System.Windows.Visibility.Visible;
                                     }
                                     else
                                     {
@@ -242,7 +242,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                             DashboardGame.Notifaction("Password Changed", Notifaction.StatusMessage.Ok);
 
                             TextNewPassword.Text = "";
-                            PanelChangePassword.Visibility = Visibility.Collapsed;
+                            PanelChangePassword.Visibility = System.Windows.Visibility.Collapsed;
                         }
                         else
                         {
@@ -270,6 +270,38 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             #endregion
 
             #region PageLeaderboard
+            //btn action leaderboards
+            BTNAaddLeaderboardShow.MouseDown += (s, e) =>
+            {
+                ShowpanelAddLeaderboard();
+                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards((Result) =>
+                {
+                    if (Result.ElementCount >= 1)
+                    {
+                        foreach (var item in Result["List"].AsBsonArray)
+                        {
+                            PlaceLeaderboardStudio.Children.Add(new ModelLeaderboards(item.AsBsonDocument, this));
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                });
+
+            };
+
+            //close panel leaderboard
+            PanelAddLeaderboard.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
+                {
+                    ShowOffPanelLeaderboard();
+                }
+            };
+
+
+
 
 
             #endregion
@@ -300,20 +332,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 if (TextboxHeader.Text.Length >= 1 && TextboxDescription.Text.Length >= 1)
                 {
-                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.AddLogPlayer(PlayerDetail["Account"]["Token"].AsObjectId, TextboxHeader.Text, TextboxDescription.Text, result =>
-                    {
-                        if (result)
-                        {
-                            DashboardGame.Notifaction("Log Added", Notifaction.StatusMessage.Ok);
-                            ShowoffPaneladdLogs();
-                            RecivePlayerLogs();
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
-                        }
-
-                    });
                 }
                 else
                 {
@@ -324,20 +342,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //action btn clear
             BTNClearLogs.MouseDown += (s, e) =>
             {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(PlayerDetail["Account"]["Token"].AsObjectId,
-                    result =>
-                    {
-                        if (result)
-                        {
-                            PlaceContentLogs.Children.Clear();
-                            DashboardGame.Notifaction("All Logs Deleted", Notifaction.StatusMessage.Ok);
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("Clear faild", Notifaction.StatusMessage.Error);
-                        }
-
-                    });
+              
             };
 
             //action btn ClosePaneladdlog
@@ -354,16 +359,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 ShowPanelAddLogs();
             };
+
             //action btn see more
             BTNSeeMoreLog.MouseDown += (s, e) =>
             {
-                CountLog += 100;
-                TextSeeMoreNumber.Text = CountLog.ToString();
-                RecivePlayerLogs();
+               
             };
 
             #endregion
 
+
+            InitLeaderboards();
         }
 
         //global
@@ -407,7 +413,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         PageLogs.Visibility = Visibility.Visible;
                         CurentBTNHeader = BTNLogs;
                         BTNLogs.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-                        RecivePlayerLogs();
                     }
                     break;
                 case "BTNAchievements":
@@ -416,8 +421,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         PageAchievements.Visibility = Visibility.Visible;
                         CurentBTNHeader = BTNAchievements;
                         BTNAchievements.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-
-                        RecivePlayerAchievements();
                     }
                     break;
                 default:
@@ -435,41 +438,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
 
         //page Log
-        int CountLog = 100;
-
-        public void RecivePlayerLogs()
-        {
-            PlaceContentLogs.Children.Clear();
-            CountLog = 100;
-            TextSeeMoreNumber.Text = CountLog.ToString();
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecivePlayerlog(PlayerDetail["Account"]["Token"].AsObjectId, CountLog,
-                Result =>
-                {
-                    try
-                    {
-                        if (Result["Logs"].AsBsonArray.Count >= 1)
-                        {
-                            foreach (var item in Result["Logs"].AsBsonArray)
-                            {
-                                PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
-                            }
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        DashboardGame.Notifaction("No logs Content", Notifaction.StatusMessage.Warrning);
-                    }
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
-                });
-        }
-
         private void ShowPanelAddLogs()
         {
             PanelAddLog.Visibility = Visibility.Visible;
@@ -480,6 +448,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
+
 
         private void ShowoffPaneladdLogs()
         {
@@ -498,41 +467,55 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             storyboard.Begin(this);
         }
 
+        #region PageLeaderboards
 
-        //page Achievements
-        public void RecivePlayerAchievements()
+        public void InitLeaderboards()
         {
-            PlaceContentAchievements.Children.Clear();
+            PlaceContentLeaderboard.Children.Clear();
 
-            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId,
-                result =>
-                {
-                    if (result.ElementCount >= 1)
-                    {
-                        if (result["Achievements"].AsBsonArray.Count >= 1)
-                        {
-
-                            ShowoffPaneladdAchievements();
-
-                            foreach (var item in result["Achievements"].AsBsonArray)
-                            {
-                                PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument, PlayerDetail["Account"]["Token"].AsObjectId, RecivePlayerAchievements));
-                            }
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("This player has no achievements", Notifaction.StatusMessage.Error);
-                            ShowPanelAddAchievements();
-                        }
-
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
-                    }
-                });
-
+            foreach (var item in Editor.DetailPlayer["Leaderboards"].AsBsonArray)
+            {
+                PlaceContentLeaderboard.Children.Add(new LeaderaboardPlayer());
+            }
         }
+
+        public void AddLeaderbord(BsonDocument DetailNewLeaderbord)
+        {
+            PlaceContentLeaderboard.Children.Add(new LeaderaboardPlayer());
+        }
+
+        //action show panel leaderboards 
+        private void ShowpanelAddLeaderboard()
+        {
+            PanelAddLeaderboard.Visibility = Visibility.Visible;
+
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
+        }
+
+        private void ShowOffPanelLeaderboard()
+        {
+            PanelAddLeaderboard.Visibility = Visibility.Visible;
+
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelAddLeaderboard.Visibility = Visibility.Collapsed;
+            };
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
+        }
+
+        #endregion
+
+
 
         private void ShowPanelAddAchievements()
         {
@@ -544,91 +527,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-
-
-            //recive achievement for fill list achievements
-            ListStudioAchievement.Children.Clear();
-            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(StudioAchievements =>
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId, AchievementPlayer =>
-                {
-                    if (StudioAchievements.ElementCount >= 1)
-                    {
-                        if (StudioAchievements["Achievements"].AsBsonArray.Count >= 1)
-                        {
-
-                            if (AchievementPlayer["Achievements"].AsBsonArray.Count >= 1)
-                            {
-
-                                var Mustdelte = new BsonArray();
-
-                                foreach (var STDAchievements in StudioAchievements["Achievements"].AsBsonArray)
-                                {
-                                    foreach (var PLYRAchievements in AchievementPlayer["Achievements"].AsBsonArray)
-                                    {
-                                        if (STDAchievements["Token"].AsObjectId == PLYRAchievements["Token"].AsObjectId)
-                                        {
-                                            AchievementPlayer["Achievements"].AsBsonArray.Remove(STDAchievements);
-                                            Mustdelte.Add(STDAchievements);
-                                        }
-                                    }
-                                }
-
-                                for (int i = 0; i < StudioAchievements["Achievements"].AsBsonArray.Count; i++)
-                                {
-                                    for (int a = 0; a < Mustdelte.Count; a++)
-                                    {
-                                        if (StudioAchievements["Achievements"].AsBsonArray[i]["Token"] == Mustdelte[a]["Token"])
-                                        {
-                                            StudioAchievements["Achievements"].AsBsonArray.RemoveAt(i);
-                                        }
-                                    }
-                                }
-
-
-                                //cheack player recive all achievements
-                                if (StudioAchievements["Achievements"].AsBsonArray.Count >= 1)
-                                {
-
-                                    foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
-                                    {
-                                        ListStudioAchievement.Children.Add(new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument, RecivePlayerAchievements, ListStudioAchievement));
-                                    }
-                                }
-                                else
-                                {
-                                    ListStudioAchievement.Children.Add(new TextBlock() { Margin = new Thickness(10), Text = "The player has collected all the achievements" });
-                                }
-                            }
-                            else
-                            {
-                                foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
-                                {
-                                    ListStudioAchievement.Children.Add(new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument, RecivePlayerAchievements, ListStudioAchievement));
-                                }
-                            }
-
-                        }
-                        else
-                        {
-                            ListStudioAchievement.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(10), Text = "The studio has not achieved!\nTo add an achievement,go to the achievements section and create one" });
-
-                            DashboardGame.Notifaction(" Studio No achievement", Notifaction.StatusMessage.Warrning);
-                        }
-
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Warrning);
-                    }
-
-
-
-                }
-                );
-            });
-
-
         }
 
         private void ShowoffPaneladdAchievements()
@@ -649,8 +547,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         }
 
-
-        Action RefreshList;
     }
 
     public class ModelFind : StackPanel
@@ -697,7 +593,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 Detail.Remove("Created");
                 Detail.Remove("Value");
 
-                Debug.WriteLine(Detail);
 
                 SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(TokenPlayer, Detail, result =>
                 {
@@ -728,4 +623,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
     }
+
+    public interface IEditLeaderboard
+    {
+        void InitLeaderboards();
+        void AddLeaderbord(BsonDocument DetailNewLeaderbord);
+
+    }
+
 }
