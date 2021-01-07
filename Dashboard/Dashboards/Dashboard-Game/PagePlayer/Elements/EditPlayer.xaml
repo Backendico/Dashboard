@@ -8,6 +8,7 @@
              Background="#33000000" d:DesignWidth="1033.333" d:DesignHeight="862.05"
     >
 
+
     <Border Margin="60,60" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
         <Border.Effect>
@@ -178,7 +179,7 @@
             </Grid>
 
             <!-- body Leaderboard-->
-            <Grid x:Name="PageLeaderboards" Visibility="Visible" Grid.Row="2">
+            <Grid x:Name="PageLeaderboards" Visibility="Collapsed" Grid.Row="2">
                 <Border  BorderBrush="Gray" BorderThickness="0,0,0,0" >
                     <Grid>
                         <Grid.RowDefinitions>
@@ -214,13 +215,11 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="17"/>
                                     </Grid.ColumnDefinitions>
                                     <Border CornerRadius="5,0,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
                                     <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1"/>
-                                    <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2"/>
-                                    <Border CornerRadius="0,5,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="3"/>
+                                    <Border CornerRadius="0,5,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="2"/>
 
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Name" Grid.Column="0"/>
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Value" Grid.Column="1"/>
@@ -239,33 +238,6 @@
                     </Grid>
 
                 </Border>
-                <!--SubPages-->
-                <!--SubPageAdd leaderboard-->
-                <Grid  x:Name="PanelAddLeaderboard" Grid.Row="1"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
-
-                    <Grid.Effect>
-                        <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
-                    </Grid.Effect>
-                    <!--Header-->
-                    <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="70,40,0,0"  >
-                        <Rectangle.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="45"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-
-                    <!--Body-->
-                    <Border  Margin="5,51,0,0"  CornerRadius="10" Width="300"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
-
-                        <StackPanel Name="PlaceLeaderboardStudio" Margin="10" Grid.Row="1"/>
-
-                    </Border>
-
-                </Grid>
             </Grid>
 
             <!-- body Logs-->
@@ -353,7 +325,7 @@
             </Grid>
 
             <!--Body Achievements-->
-            <Grid x:Name="PageAchievements" Visibility="Collapsed" Grid.Row="2">
+            <Grid x:Name="PageAchievements" Visibility="Visible" Grid.Row="2">
                 <Border  BorderBrush="Gray" BorderThickness="0,0,0,0" >
                     <Grid>
                         <Grid.RowDefinitions>
@@ -421,6 +393,36 @@
             </Grid>
 
             <!--SubPages-->
+            <!--SubPageAdd leaderboard-->
+            <Grid  x:Name="PanelAddLeaderboard" Grid.Row="2"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+                <Grid.Effect>
+                    <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+                </Grid.Effect>
+                <!--Header-->
+                <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="70,40,0,0"  >
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <!--Body-->
+                <Border  Margin="5,51,0,0"  CornerRadius="10" Width="300"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+
+                    <StackPanel>
+                        <TextBlock Margin="10,5" Text="The new value replaces the old value"/>
+                        <StackPanel Name="PlaceLeaderboardStudio" Margin="10" Grid.Row="1"/>
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
             <!--SubPageAdd Log-->
             <Grid  x:Name="PanelAddLog"  Visibility="Collapsed" Background="#33000000" Opacity="0" Grid.Row="2" >
 
@@ -470,8 +472,8 @@
 
             </Grid>
 
-            <!--SubPageAchievements Log-->
-            <Grid  x:Name="PanelAddAchievements"  Visibility="Collapsed" Background="#33000000" Opacity="0" Grid.Row="2" >
+            <!--SubPageAchievements -->
+            <Grid  x:Name="PanelAddAchievements"  Visibility="Visible" Background="#33000000" Opacity="1" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="672*"/>
                     <ColumnDefinition Width="241*"/>
@@ -502,7 +504,9 @@
                         </Grid.RowDefinitions>
 
                         <ScrollViewer  MaxHeight="500" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
-                            <StackPanel  x:Name="ListStudioAchievement" />
+                            <StackPanel  x:Name="ListStudioAchievement" >
+                             
+                            </StackPanel>
                         </ScrollViewer>
 
                     </Grid>

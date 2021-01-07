@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboa
     /// </summary>
     public partial class LeaderaboardPlayer : UserControl
     {
-        public LeaderaboardPlayer()
+        public LeaderaboardPlayer(string NameLeaderboard ,long Score)
         {
             InitializeComponent();
+            TextLeaderboard.Text = NameLeaderboard;
+            TextScore.Text = Score.ToString();
         }
+
     }
 }

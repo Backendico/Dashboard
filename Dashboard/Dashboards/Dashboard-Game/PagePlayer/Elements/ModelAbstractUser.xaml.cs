@@ -1,6 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -108,12 +109,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         }
 
+        public void AddLeaderboard(BsonDocument DetailLeaderboard)
+        {
+        }
 
         Action Refreshlist;
     }
 
     public interface IEditPlayer
     {
+        void AddLeaderboard(BsonDocument DetailLeaderboard);
         void Save();
         void RefreshMainList();
         void Update();

@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboard"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Height="30" Width="auto" MaxWidth="400">
+             >
+    <Grid Margin="10" Height="30" Width="auto" MaxWidth="400">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="Name_Leaderboard" FontSize="12"  VerticalAlignment="Center"  Name="TextLeaderboard"/>
-        <TextBox Name="TextScore" Grid.Column="1"/>
+        <TextBox Name="TextScore" Text="0" Grid.Column="1"/>
         <Border x:Name="BTNAdd" Cursor="Hand" Height="20" Width="20" Background="Orange" CornerRadius="5" Grid.Column="2">
             <TextBlock Foreground="White" Text="&#xE710;" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
         </Border>

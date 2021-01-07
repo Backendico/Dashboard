@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements.ModelAchievementStudio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements"
+             mc:Ignorable="d" 
+             d:DesignHeight="52.669" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Margin="10,0" VerticalAlignment="Center" >
+                                        <Run Name="TextAchievement" Text="Name Achievement" /> <Run Text="( Value :" /> <Run x:Name="TextValue" Text="0" /> <Run Text=")" />
+        </TextBlock>
+        <Border Cursor="Hand" Background="Orange" CornerRadius="5" x:Name="BTNAddAchievement" Grid.Column="1" Width="30" Height="30">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -18,30 +18,29 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboard
 {
-    /// <summary>
-    /// Interaction logic for ModelLeaderboards.xaml
-    /// </summary>
     public partial class ModelLeaderboards : UserControl
     {
-        public ModelLeaderboards(BsonDocument Detail ,IEditLeaderboard Editor)
+        public ModelLeaderboards(BsonDocument Detail, IEditLeaderboard Editor)
         {
             InitializeComponent();
             TextLeaderboard.Text = Detail["Settings"]["Name"].ToString();
 
+
+            //action Textbox Score
             TextScore.TextChanged += (sk, e) =>
             {
-                if (GlobalEvents.ControllNumberFilde(TextScore))
+                if (!GlobalEvents.ControllNumberFilde(TextScore))
                 {
-
-
+                    TextScore.Text = 0.ToString();
                 }
             };
 
+            //Action btn add
             BTNAdd.MouseDown += (s, e) =>
             {
-                Editor.AddLeaderbord(new BsonDocument());
-                (Parent as StackPanel).Children.Remove(this);
-
+                Editor.AddLeaderbord(Detail["Settings"]["Name"].ToString(),long.Parse(TextScore.Text));
+                Editor.InitLeaderboards();
+                Debug.WriteLine(Parent);
             };
 
         }

@@ -806,6 +806,27 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void RecievePlayerLeaderboard(ObjectId TokenPlayer, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.RecivePlayerLeaderboards);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
                 }
 
                 public sealed class PageLeaderboard
@@ -1764,6 +1785,8 @@ namespace Dashboard.GlobalElement
                 public string Recovery1 => BaseLink + "PagePlayer/RecoveryStep1";
                 public string Recovery2 => BaseLink + "PagePlayer/RecoveryStep2";
                 public string ChangePassword => BaseLink + "PagePlayer/ChangePassword";
+
+                public string RecivePlayerLeaderboards => BaseLink + "Leaderboard/RecivePlayerLeaderboards";
             }
 
             public struct PageLeaderboard

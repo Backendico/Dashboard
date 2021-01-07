@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboard;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Security.AccessControl;
+using System.Web.UI.WebControls.WebParts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,10 +18,9 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    public partial class EditPlayer : UserControl,IEditLeaderboard
+    public partial class EditPlayer : UserControl, IEditLeaderboard
     {
         IEditPlayer Editor;
-
 
         Grid CurentPage;
         Button CurentBTNHeader;
@@ -30,7 +31,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             InitializeComponent();
             //frist init
             Editor = EditPlayer;
-
 
             CurentPage = PageAccount;
             CurentBTNHeader = BTNAccount;
@@ -274,21 +274,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             BTNAaddLeaderboardShow.MouseDown += (s, e) =>
             {
                 ShowpanelAddLeaderboard();
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards((Result) =>
-                {
-                    if (Result.ElementCount >= 1)
-                    {
-                        foreach (var item in Result["List"].AsBsonArray)
-                        {
-                            PlaceLeaderboardStudio.Children.Add(new ModelLeaderboards(item.AsBsonDocument, this));
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                });
-
             };
 
             //close panel leaderboard
@@ -302,11 +287,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
 
 
-
-
             #endregion
 
             #region PageAchievements
+            //action BTN Achievements
+            BTNAchievements.Click += (s, e) =>
+            {
+                IniAchievements();
+            };
+
             //action show panel Add achievements
             BTNShowPanelAddAchievement.MouseDown += (s, e) =>
             {
@@ -342,7 +331,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //action btn clear
             BTNClearLogs.MouseDown += (s, e) =>
             {
-              
+
             };
 
             //action btn ClosePaneladdlog
@@ -363,11 +352,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //action btn see more
             BTNSeeMoreLog.MouseDown += (s, e) =>
             {
-               
+
             };
 
             #endregion
-
 
             InitLeaderboards();
         }
@@ -437,7 +425,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        //page Log
+        #region PageLog
+
         private void ShowPanelAddLogs()
         {
             PanelAddLog.Visibility = Visibility.Visible;
@@ -467,26 +456,82 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             storyboard.Begin(this);
         }
 
+        #endregion
+
+
         #region PageLeaderboards
+
+
+        public void AddLeaderbord(string NameLeaderboard, long Score)
+        {
+            var Serilise = new BsonDocument {
+                {"Leaderboard",NameLeaderboard },
+                {"Score",Score }
+            };
+
+            for (int i = 0; i < Editor.DetailPlayer["Leaderboards"].AsBsonArray.Count; i++)
+            {
+                if (Editor.DetailPlayer["Leaderboards"].AsBsonArray[i]["Leaderboard"] == NameLeaderboard)
+                {
+                    Editor.DetailPlayer["Leaderboards"].AsBsonArray.RemoveAt(i);
+                }
+            }
+
+
+            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.AddPlayer(NameLeaderboard, Editor.DetailPlayer["Account"]["Token"].AsObjectId, Score, result =>
+            {
+                Editor.DetailPlayer["Leaderboards"].AsBsonArray.Add(Serilise);
+                InitLeaderboards();
+                ShowOffPanelLeaderboard();
+            });
+        }
 
         public void InitLeaderboards()
         {
             PlaceContentLeaderboard.Children.Clear();
 
-            foreach (var item in Editor.DetailPlayer["Leaderboards"].AsBsonArray)
+            //init Player leaderboards
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecievePlayerLeaderboard(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
             {
-                PlaceContentLeaderboard.Children.Add(new LeaderaboardPlayer());
-            }
-        }
+                if (result.ElementCount >= 1)
+                {
+                    foreach (var item in result["Leaderboards"].AsBsonArray)
+                    {
+                        PlaceContentLeaderboard.Children.Add(new LeaderaboardPlayer(item["Leaderboard"].ToString(), item["Score"].ToInt64()));
+                    }
+                }
+                else
+                {
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                }
+            });
 
-        public void AddLeaderbord(BsonDocument DetailNewLeaderbord)
-        {
-            PlaceContentLeaderboard.Children.Add(new LeaderaboardPlayer());
+            //ini Studio Leaderboard
+            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards((Result) =>
+            {
+                PlaceLeaderboardStudio.Children.Clear();
+
+                if (Result.ElementCount >= 1)
+                {
+                    foreach (var item in Result["List"].AsBsonArray)
+                    {
+                        PlaceLeaderboardStudio.Children.Add(new ModelLeaderboards(item.AsBsonDocument, this));
+                    }
+                }
+                else
+                {
+
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                }
+
+            });
         }
 
         //action show panel leaderboards 
         private void ShowpanelAddLeaderboard()
         {
+            InitLeaderboards();
+
             PanelAddLeaderboard.Visibility = Visibility.Visible;
 
             DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
@@ -505,6 +550,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             Anim.Completed += (s, e) =>
             {
                 PanelAddLeaderboard.Visibility = Visibility.Collapsed;
+
+                PlaceLeaderboardStudio.Children.Clear();
             };
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
             Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
@@ -516,6 +563,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         #endregion
 
 
+        #region Page Achivements
+
+        private void IniAchievements()
+        {
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result=> {
+
+                foreach (var item in result["Achievements"].AsBsonArray)
+                {
+                    ListStudioAchievement.Children.Add(new ModelAchievementStudio(item.AsBsonDocument));
+                }
+            
+            });
+        }
 
         private void ShowPanelAddAchievements()
         {
@@ -547,6 +607,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         }
 
+        #endregion
     }
 
     public class ModelFind : StackPanel
@@ -627,8 +688,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
     public interface IEditLeaderboard
     {
         void InitLeaderboards();
-        void AddLeaderbord(BsonDocument DetailNewLeaderbord);
-
+        void AddLeaderbord(string NameLeaderboard, long Score);
     }
 
 }

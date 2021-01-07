@@ -5,25 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboard"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="49" d:DesignWidth="800">
     <Grid Height="30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
 
         <Border CornerRadius="5,0,0,0"   BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
         <Border   BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1"/>
         <Border   BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2"/>
-        <Border CornerRadius="0,5,0,0"   BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="3"/>
 
-        <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Name" Grid.Column="0"/>
-        <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Value" Grid.Column="1"/>
+        <TextBlock x:Name="TextLeaderboard" TextAlignment="Center" VerticalAlignment="Center"  Text="Name" Grid.Column="0"/>
+        <TextBlock x:Name="TextScore" TextAlignment="Center" VerticalAlignment="Center"  Text="Value" Grid.Column="1"/>
 
-        <Border Cursor="Hand" Background="Orange" Grid.Column="2" Width="20" Height="20" CornerRadius="5">
-            <TextBlock Text="&#xE70F;" VerticalAlignment="Center" TextAlignment="Center" Foreground="White"  FontFamily="Segoe MDL2 Assets"/>
-        </Border>
+        
     </Grid>
 </UserControl>
