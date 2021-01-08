@@ -62,7 +62,7 @@
 
             <!--Bodys-->
             <!--Body Account-->
-            <Grid x:Name="PageAccount" Visibility="Collapsed" Grid.Row="2" >
+            <Grid x:Name="PageAccount" Visibility="Visible" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -325,7 +325,7 @@
             </Grid>
 
             <!--Body Achievements-->
-            <Grid x:Name="PageAchievements" Visibility="Visible" Grid.Row="2">
+            <Grid x:Name="PageAchievements" Visibility="Collapsed" Grid.Row="2">
                 <Border  BorderBrush="Gray" BorderThickness="0,0,0,0" >
                     <Grid>
                         <Grid.RowDefinitions>
@@ -473,7 +473,7 @@
             </Grid>
 
             <!--SubPageAchievements -->
-            <Grid  x:Name="PanelAddAchievements"  Visibility="Visible" Background="#33000000" Opacity="1" Grid.Row="2" >
+            <Grid  x:Name="PanelAddAchievements"  Visibility="Collapsed" Background="#33000000" Opacity="0" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="672*"/>
                     <ColumnDefinition Width="241*"/>

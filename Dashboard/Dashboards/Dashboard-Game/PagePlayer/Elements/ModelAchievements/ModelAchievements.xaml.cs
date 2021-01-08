@@ -10,7 +10,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
     /// </summary>
     public partial class ModelAchievements : UserControl
     {
-        public ModelAchievements(BsonDocument DetailAchievement, ObjectId TokenPlayer, Action Refreshlist)
+        public ModelAchievements(BsonDocument DetailAchievement,IEditAchievements Editor)
         {
             InitializeComponent();
 
@@ -24,21 +24,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
             {
                 DetailAchievement.Remove("Recive");
 
-                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(TokenPlayer, DetailAchievement, result =>
-                {
-                    if (result)
-                    {
-                        DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
-                        Refreshlist();
-
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
-                    }
-
-                });
-
+                Editor.RemoveAchievements(DetailAchievement);
             };
 
             //copy TOken

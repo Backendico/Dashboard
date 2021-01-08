@@ -22,19 +22,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
     /// </summary>
     public partial class ModelAchievementStudio : UserControl
     {
-        public ModelAchievementStudio(BsonDocument Detail)
+        public ModelAchievementStudio(BsonDocument Detail,IEditAchievements Editor)
         {
             InitializeComponent();
-            Debug.WriteLine(Detail);
             TextAchievement.Text = Detail["Name"].ToString();
             TextValue.Text = Detail["Value"].ToString();
 
 
             BTNAddAchievement.MouseDown += (s, e) =>
             {
-
-
-
+                Editor.AddAchievements(Detail);
             };
         }
     }

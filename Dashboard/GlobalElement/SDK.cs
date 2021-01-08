@@ -538,7 +538,7 @@ namespace Dashboard.GlobalElement
                     {
                         try
                         {
-                            new System.Net.Mail.MailAddress(Email);
+                            new  MailAddress(Email);
 
                             var client = new RestClient(Links.SearchEmail);
                             client.Timeout = -1;
@@ -827,6 +827,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
+              
                 }
 
                 public sealed class PageLeaderboard

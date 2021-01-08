@@ -1,4 +1,5 @@
-﻿using Dashboard.GlobalElement;
+﻿using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements;
+using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Windows.Controls;
@@ -10,13 +11,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
     /// </summary>
     public partial class ModelPlayersAchievements : UserControl
     {
-        public ModelPlayersAchievements(BsonDocument DetailPlayer, BsonDocument DetailAchievements, Action RefreshList)
+        public ModelPlayersAchievements( BsonDocument DetailAchievements,BsonDocument DetailPlayer,Action RefreshList)
         {
             //frist init
             InitializeComponent();
-            TextToken.Text = DetailPlayer["Token"].ToString();
-            TextUsername.Text = DetailPlayer["Username"].ToString() == "" ? "Not Set" : DetailPlayer["Username"].ToString();
-            TextRecive.Text = DetailPlayer["Recive"].ToLocalTime().ToString();
+            TextToken.Text = DetailAchievements["Token"].ToString();
+            TextUsername.Text = DetailAchievements["Username"].ToString() == "" ? "Not Set" : DetailAchievements["Username"].ToString();
+            TextRecive.Text = DetailAchievements["Recive"].ToLocalTime().ToString();
 
             //copy token
             TextToken.MouseDown += GlobalEvents.CopyText;

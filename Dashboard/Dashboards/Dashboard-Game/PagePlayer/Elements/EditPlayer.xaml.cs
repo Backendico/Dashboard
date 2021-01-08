@@ -1,15 +1,12 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
+using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements.Elements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
-using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLeaderboard;
-using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Mail;
-using System.Security.AccessControl;
-using System.Web.UI.WebControls.WebParts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,7 +15,7 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    public partial class EditPlayer : UserControl, IEditLeaderboard
+    public partial class EditPlayer : UserControl, IEditLeaderboard, IEditAchievements
     {
         IEditPlayer Editor;
 
@@ -360,6 +357,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             InitLeaderboards();
         }
 
+        #region Global
+
         //global
         private void ChangePage(object sender, RoutedEventArgs e)
         {
@@ -424,6 +423,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             DashboardGame.Dashboard.Root.Children.Remove(this);
         }
 
+        #endregion
 
         #region PageLog
 
@@ -491,13 +491,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             PlaceContentLeaderboard.Children.Clear();
 
             //init Player leaderboards
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecievePlayerLeaderboard(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
+         SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecievePlayerLeaderboard(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
             {
                 if (result.ElementCount >= 1)
                 {
                     foreach (var item in result["Leaderboards"].AsBsonArray)
                     {
-                        PlaceContentLeaderboard.Children.Add(new LeaderaboardPlayer(item["Leaderboard"].ToString(), item["Score"].ToInt64()));
+                        //PlaceContentLeaderboard.Children.Add(new ModelLeaderboard.LeaderaboardPlayer(item["Leaderboard"].ToString(), item["Score"].ToInt64()));
                     }
                 }
                 else
@@ -515,7 +515,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 {
                     foreach (var item in Result["List"].AsBsonArray)
                     {
-                        PlaceLeaderboardStudio.Children.Add(new ModelLeaderboards(item.AsBsonDocument, this));
+                        //PlaceLeaderboardStudio.Children.Add(new ModelLeaderboard.ModelLeaderboards(item.AsBsonDocument, this));
                     }
                 }
                 else
@@ -565,17 +565,80 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         #region Page Achivements
 
-        private void IniAchievements()
+        public void IniAchievements()
         {
-            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result=> {
+
+            //ini Studio achievements
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result =>
+            {
+            ListStudioAchievement.Children.Clear();
 
                 foreach (var item in result["Achievements"].AsBsonArray)
                 {
-                    ListStudioAchievement.Children.Add(new ModelAchievementStudio(item.AsBsonDocument));
+                    ListStudioAchievement.Children.Add(new ModelAchievementStudio(item.AsBsonDocument, this));
                 }
-            
+
+            });
+
+
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Result =>
+            {
+                PlaceContentAchievements.Children.Clear();
+
+
+                if (Result.ElementCount>=1)
+                {
+                    foreach (var item in Result["Achievements"].AsBsonArray)
+                    {
+                        PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument,this));
+                    }
+                }
+
             });
         }
+
+        public void AddAchievements(BsonDocument DetailNewachievements)
+        {
+            var Serilse = new BsonDocument
+            {
+                {"Token",DetailNewachievements["Token"] },
+                {"Name",DetailNewachievements["Name"] },
+            };
+
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Serilse, Result =>
+            {
+                if (Result)
+                {
+                    DashboardGame.Notifaction("Achievement Added", Notifaction.StatusMessage.Ok);
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Achievement already added", Notifaction.StatusMessage.Warrning);
+                }
+                IniAchievements();
+
+            });
+
+        }
+
+        public void RemoveAchievements(BsonDocument DetailAchievements)
+        {
+
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(Editor.DetailPlayer["Account"]["Token"].AsObjectId, DetailAchievements, result =>
+            {
+                if (result)
+                {
+                    DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
+                    IniAchievements();
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
+                }
+
+            });
+        }
+
 
         private void ShowPanelAddAchievements()
         {
@@ -689,6 +752,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
     {
         void InitLeaderboards();
         void AddLeaderbord(string NameLeaderboard, long Score);
+    }
+
+    public interface IEditAchievements
+    {
+        void IniAchievements();
+        void AddAchievements(BsonDocument DetailNewAchievement);
+        void RemoveAchievements(BsonDocument DetailAchievements);
     }
 
 }
