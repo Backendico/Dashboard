@@ -491,20 +491,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             PlaceContentLeaderboard.Children.Clear();
 
             //init Player leaderboards
-         SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecievePlayerLeaderboard(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
-            {
-                if (result.ElementCount >= 1)
-                {
-                    foreach (var item in result["Leaderboards"].AsBsonArray)
-                    {
-                        //PlaceContentLeaderboard.Children.Add(new ModelLeaderboard.LeaderaboardPlayer(item["Leaderboard"].ToString(), item["Score"].ToInt64()));
-                    }
-                }
-                else
-                {
-                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
-                }
-            });
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecievePlayerLeaderboard(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
+               {
+                   if (result.ElementCount >= 1)
+                   {
+                       foreach (var item in result["Leaderboards"].AsBsonArray)
+                       {
+                           PlaceContentLeaderboard.Children.Add(new ModelLeaderboard.LeaderaboardPlayer(item["Leaderboard"].ToString(), item["Score"].ToInt64()));
+                       }
+                   }
+                   else
+                   {
+                       DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                   }
+               });
 
             //ini Studio Leaderboard
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards((Result) =>
@@ -515,7 +515,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 {
                     foreach (var item in Result["List"].AsBsonArray)
                     {
-                        //PlaceLeaderboardStudio.Children.Add(new ModelLeaderboard.ModelLeaderboards(item.AsBsonDocument, this));
+                        PlaceLeaderboardStudio.Children.Add(new ModelLeaderboard.ModelLeaderboards(item.AsBsonDocument, this));
                     }
                 }
                 else
@@ -571,7 +571,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //ini Studio achievements
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result =>
             {
-            ListStudioAchievement.Children.Clear();
+                ListStudioAchievement.Children.Clear();
 
                 foreach (var item in result["Achievements"].AsBsonArray)
                 {
@@ -586,11 +586,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 PlaceContentAchievements.Children.Clear();
 
 
-                if (Result.ElementCount>=1)
+                if (Result.ElementCount >= 1)
                 {
                     foreach (var item in Result["Achievements"].AsBsonArray)
                     {
-                        PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument,this));
+                        PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument, this));
                     }
                 }
 
