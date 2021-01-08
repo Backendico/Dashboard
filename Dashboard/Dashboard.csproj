@@ -35,8 +35,8 @@
     <SuiteName>Chilligame</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -256,6 +256,9 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageContent\Elements\ModelContent\ModelContent.xaml.cs">
+      <DependentUpon>ModelContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageContent\PageContent.xaml.cs">
       <DependentUpon>PageContent.xaml</DependentUpon>
     </Compile>
@@ -397,6 +400,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageContent\Elements\ModelContent\ModelContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

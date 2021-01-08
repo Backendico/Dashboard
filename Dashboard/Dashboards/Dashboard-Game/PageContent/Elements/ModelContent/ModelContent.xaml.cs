@@ -13,30 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Dashboard.Dashboards.Dashboard_Game.PageContent
+namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.ModelContent
 {
     /// <summary>
-    /// Interaction logic for PageContent.xaml
+    /// Interaction logic for ModelContent.xaml
     /// </summary>
-    public partial class PageContent : UserControl
+    public partial class ModelContent : UserControl
     {
-        public PageContent()
+        public ModelContent()
         {
             InitializeComponent();
-            
-            InitPageContent();
-
-            BTNAddContent.MouseDown += (s, e) =>
-            {
-
-
-            };
-        }
-
-        void InitPageContent()
-        {
-
-
         }
     }
 }
