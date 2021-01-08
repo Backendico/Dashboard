@@ -2,6 +2,7 @@
 using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
+using Dashboard.Dashboards.Dashboard_Game.PageContent;
 using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageDocuments;
@@ -452,6 +453,12 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 case "BTNShop":
                     CurentPage = new PageShop.PageShop();
                     CurentTab = BTNShop;
+                    break;
+                case "BTNContent":
+                    {
+                        CurentPage = new PageContent.PageContent();
+                        CurentTab = BTNContent;
+                    }
                     break;
                 default:
                     Debug.WriteLine("Not set");

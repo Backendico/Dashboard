@@ -53,6 +53,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
                         //achievements
                         TextTotalCount_Achievements.Text = result["Achievements"]["Totall"].ToString();
                         TextCount_Achievements.Text = result["Achievements"]["Count"].ToString();
+
+                        //Store
+                        TextTotalCount_Store.Text = result["Store"]["Count"].ToString();
+                        TextCount_Store.Text = result["Store"]["Totall"].ToString();
                     },
                     () =>
                     {

@@ -48,13 +48,13 @@
                         <!--Username-->
                         <StackPanel Margin="0,5">
                             <TextBlock Text="Username : *"/>
-                            <TextBox Text="hossyn.koala" MinHeight="30" x:Name="TextUsername" />
+                            <TextBox Text="" MinHeight="30" x:Name="TextUsername" />
                         </StackPanel>
 
                         <!--Password-->
                         <StackPanel Margin="0,5">
                             <TextBlock Text="Password : *"/>
-                            <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
+                            <PasswordBox Password="" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
 
                     </StackPanel>
