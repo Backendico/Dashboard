@@ -669,7 +669,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result, Action ERR)
+                    public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.RecivePlayerLogs);
                         client.Timeout = -1;
@@ -688,7 +688,6 @@ namespace Dashboard.GlobalElement
                         else
                         {
                             Result(new BsonDocument());
-                            ERR();
                         }
                     }
 

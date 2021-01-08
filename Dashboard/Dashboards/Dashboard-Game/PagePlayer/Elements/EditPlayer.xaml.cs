@@ -2,6 +2,7 @@
 using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
 using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements.Elements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
@@ -15,12 +16,14 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    public partial class EditPlayer : UserControl, IEditLeaderboard, IEditAchievements
+    public partial class EditPlayer : UserControl, IEditLeaderboard, IEditAchievements, IEditLogs
     {
         IEditPlayer Editor;
 
         Grid CurentPage;
         Button CurentBTNHeader;
+
+
 
 
         public EditPlayer(IEditPlayer EditPlayer)
@@ -283,7 +286,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             };
 
 
-
             #endregion
 
             #region PageAchievements
@@ -311,6 +313,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             #endregion
 
             #region PageLogs
+         
+            //Init Logs
+            BTNLogs.Click += (s, e) =>
+            {
+                InitLogs();
+            };
 
 
             //action btn send log
@@ -318,6 +326,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 if (TextboxHeader.Text.Length >= 1 && TextboxDescription.Text.Length >= 1)
                 {
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.AddLogPlayer(Editor.DetailPlayer["Account"]["Token"].AsObjectId, TextboxHeader.Text, TextboxDescription.Text, result =>
+                    {
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Log Added", Notifaction.StatusMessage.Ok);
+                            InitLogs();
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Add", Notifaction.StatusMessage.Error);
+                        }
+
+                    });
                 }
                 else
                 {
@@ -326,9 +347,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             };
 
             //action btn clear
-            BTNClearLogs.MouseDown += (s, e) =>
+            BTNClearLogs.MouseDown +=async (s, e) =>
             {
+                if (await DashboardGame.DialogYesNo("All information will be lost.\nare you sure ? ")==MessageBoxResult.Yes)
+                {
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
+                {
+                    if (result)
+                    {
+                        DashboardGame.Notifaction("Logs Clear", Notifaction.StatusMessage.Ok);
+                        InitLogs();
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Clear", Notifaction.StatusMessage.Error);
+                    }
 
+                });
+
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                }
             };
 
             //action btn ClosePaneladdlog
@@ -349,10 +390,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //action btn see more
             BTNSeeMoreLog.MouseDown += (s, e) =>
             {
-
+                Count += 100;
+                TextSeeMoreNumber.Text = Count.ToString();
             };
 
             #endregion
+
 
             InitLeaderboards();
         }
@@ -425,38 +468,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         #endregion
 
-        #region PageLog
-
-        private void ShowPanelAddLogs()
-        {
-            PanelAddLog.Visibility = Visibility.Visible;
-            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
-            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
-            Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(Anim);
-            storyboard.Begin(this);
-        }
-
-
-        private void ShowoffPaneladdLogs()
-        {
-            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
-            Anim.Completed += (s, ee) =>
-            {
-                TextboxDescription.Text = "";
-                TextboxHeader.Text = "";
-
-                PanelAddLog.Visibility = Visibility.Collapsed;
-            };
-            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
-            Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(Anim);
-            storyboard.Begin(this);
-        }
-
-        #endregion
 
 
         #region PageLeaderboards
@@ -573,14 +584,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 ListStudioAchievement.Children.Clear();
 
-                foreach (var item in result["Achievements"].AsBsonArray)
+                if (result.ElementCount >= 1)
                 {
-                    ListStudioAchievement.Children.Add(new ModelAchievementStudio(item.AsBsonDocument, this));
-                }
 
+                    foreach (var item in result["Achievements"].AsBsonArray)
+                    {
+                        ListStudioAchievement.Children.Add(new ModelAchievementStudio(item.AsBsonDocument, this));
+                    }
+
+                }
+                else
+                {
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                    ShowPanelAddAchievements();
+                }
             });
 
-
+            //init Player Achievements
             SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Result =>
             {
                 PlaceContentAchievements.Children.Clear();
@@ -668,6 +688,68 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             storyboard.Children.Add(Anim1);
             storyboard.Begin(this);
 
+        }
+
+        #endregion
+
+
+        #region PageLog
+
+        int Count = 100;
+
+        private void ShowPanelAddLogs()
+        {
+            PanelAddLog.Visibility = Visibility.Visible;
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        private void ShowoffPaneladdLogs()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, ee) =>
+            {
+                TextboxDescription.Text = "";
+                TextboxHeader.Text = "";
+
+                PanelAddLog.Visibility = Visibility.Collapsed;
+            };
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        public void InitLogs()
+        {
+            Count = 100;
+            TextSeeMoreNumber.Text = Count.ToString();
+
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecivePlayerlog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Count, result =>
+            {
+
+                PlaceContentLogs.Children.Clear();
+
+                if (result.ElementCount >= 1)
+                {
+                    foreach (var item in result["Logs"].AsBsonArray)
+                    {
+                        PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
+                    }
+                }
+                else
+                {
+                    ShowPanelAddLogs();
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                }
+            });
         }
 
         #endregion
@@ -761,4 +843,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         void RemoveAchievements(BsonDocument DetailAchievements);
     }
 
+    public interface IEditLogs
+    {
+        void InitLogs();
+    }
 }
+

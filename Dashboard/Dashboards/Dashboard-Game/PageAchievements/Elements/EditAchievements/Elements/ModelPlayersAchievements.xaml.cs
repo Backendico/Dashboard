@@ -11,7 +11,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
     /// </summary>
     public partial class ModelPlayersAchievements : UserControl
     {
-        public ModelPlayersAchievements( BsonDocument DetailAchievements,BsonDocument DetailPlayer,Action RefreshList)
+        public ModelPlayersAchievements(BsonDocument DetailAchievements, BsonDocument DetailPlayer, Action RefreshList)
         {
             //frist init
             InitializeComponent();
@@ -25,12 +25,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchi
             //action remove
             BTNRemove.MouseDown += async (s, e) =>
              {
+                 System.Diagnostics.Debug.WriteLine(DetailPlayer);
+
                  var SerilseDetailachievements = new BsonDocument
                  {
                     {"Token",DetailAchievements["Token"] },
-                    {"Name",DetailAchievements["Name"] },
-                     {"Recive",DetailPlayer["Recive"] }
+                    {"Name",DetailPlayer["Name"] },
+                     {"Recive",DetailAchievements["Recive"] }
                  };
+
 
                  if (await DashboardGame.DialogYesNo("All information about this player achievement will be deleted \n Are you sure ? ") == System.Windows.MessageBoxResult.Yes)
                  {

@@ -10,7 +10,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
     /// </summary>
     public partial class ModelAchievements : UserControl
     {
-        public ModelAchievements(BsonDocument DetailAchievement,IEditAchievements Editor)
+        public ModelAchievements(BsonDocument DetailAchievement, IEditAchievements Editor)
         {
             InitializeComponent();
 
@@ -20,12 +20,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
             TextRecive.Text = DetailAchievement["Recive"].ToLocalTime().ToString();
 
             //action delete achievement
-            BTNRemove.MouseDown += (s, e) =>
-            {
-                DetailAchievement.Remove("Recive");
+            BTNRemove.MouseDown += async (s, e) =>
+             {
+                 if (await DashboardGame.DialogYesNo("All Value in this section will be lost.  are you sure? ") == System.Windows.MessageBoxResult.Yes)
+                 {
+                     DetailAchievement.Remove("Recive");
 
-                Editor.RemoveAchievements(DetailAchievement);
-            };
+                     Editor.RemoveAchievements(DetailAchievement);
+
+                 }
+                 else
+                 {
+                     DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                 }
+             };
+
 
             //copy TOken
             TextToken.MouseDown += GlobalEvents.CopyText;
