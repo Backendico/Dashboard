@@ -42,7 +42,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock  Margin="30,0" VerticalAlignment="Center" Foreground="Gray" >
-                    <Run x:Name="TextHeader" FontWeight="Bold" Text="JsonEditor"/>
+                    <Run x:Name="TextHeader" FontWeight="Bold" Text="JsonView"/>
                     </TextBlock>
                 </Grid>
             </Border>

@@ -32,7 +32,7 @@
             </Grid>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="2">
-                <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left" Name="PlaceContentAchievements"  Margin="30" >
+                <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left" Name="PlaceContent"  Margin="30" >
                 </WrapPanel>
             </ScrollViewer>
 
@@ -42,7 +42,7 @@
         <!--SubPage-->
 
         <!--SubPage Add-->
-        <Grid  x:Name="PanelAddContent"  Visibility="Visible" Background="#33000000" Opacity="1" >
+        <Grid  x:Name="PanelAddContent"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
 
             <Grid.Effect>
                 <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>

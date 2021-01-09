@@ -11,34 +11,29 @@
         <StackPanel Margin="10">
 
             <!--NameContent-->
-            <TextBlock FontWeight="Bold" FontSize="15" Text="Name Store"/>
+            <TextBlock x:Name="TextNameStore" FontWeight="Bold" FontSize="15" Text="Name Store"/>
             <!--Token-->
             <TextBlock>
                                 <LineBreak/>
-                                <Run Text="Token: "  FontWeight="Bold"/><Run Text="XXX"/>
+                                <Run Text="Token: "  FontWeight="Bold"/><Run x:Name="TextToken" Text="XXX"/>
                                 <LineBreak/>
             </TextBlock>
 
             <!--Element Count-->
             <TextBlock>
-                                <Run Text="ElementCount: " FontWeight="Bold"/><Run Text="XXX"/>
+                                <Run Text="ElementCount: " FontWeight="Bold"/><Run x:Name="TextElementCount" Text="XXX"/>
                                 <LineBreak/>
             </TextBlock>
 
-            <!--Size Doc-->
-            <TextBlock>
-                                <Run Text="Size Doc: " FontWeight="Bold"/><Run Text="XXX"/>
-                                <LineBreak/>
-            </TextBlock>
             <!--Index -->
             <TextBlock>
-                                <Run Text="Indexs: " FontWeight="Bold"/><Run Text="XXX"/>
+                                <Run Text="Indexs: " FontWeight="Bold"/><Run Name="TextIndex" Text="XXX"/>
                                 <LineBreak/>
             </TextBlock>
 
             <!--Created Doc-->
             <TextBlock>
-                                <Run Text="Created : " FontWeight="Bold"/><Run Text="XXX"/>
+                                <Run Text="Created : " FontWeight="Bold"/><Run Name="TextCreated" Text="XXX"/>
                                 <LineBreak/>
             </TextBlock>
 
@@ -46,14 +41,22 @@
             <StackPanel x:Name="Controller" Opacity="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
                 <!--Delete-->
-                <Border x:Name="BTNDelete" Cursor="Hand" Margin="3,0" CornerRadius="5,0,0,5" Background="Tomato" Width="30" Height="30">
+                <Border x:Name="BTNDelete" Cursor="Hand" Margin="1,0" CornerRadius="5,0,0,5" Background="Tomato" Width="30" Height="30">
                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
                 </Border>
 
+                <!--Delete-->
+                <Border x:Name="BTNView" Cursor="Hand" Margin="1,0"  Background="Orange" Width="30" Height="30">
+                    <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE7B3;" FontFamily="Segoe MDL2 Assets"/>
+                </Border>
+
+
                 <!--Edit-->
-                <Border x:Name="BTNEdit" Cursor="Hand" CornerRadius="0,5,5,0" Background="Orange" Width="80" Height="30">
+                <Border Margin="1,0" x:Name="BTNEdit" Cursor="Hand" CornerRadius="0,5,5,0" Background="Orange" Width="80" Height="30">
                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
                 </Border>
+
+
 
             </StackPanel>
 

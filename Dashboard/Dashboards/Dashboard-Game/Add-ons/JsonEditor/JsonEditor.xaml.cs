@@ -31,6 +31,26 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
                 JsonData.Add(NewElement);
                 PlaceElement.Children.Add(new ElementString(NewElement, JsonData));
             };
+        }
+
+        public JsonEditor(BsonDocument JsonData,Action Save)
+        {
+            InitializeComponent();
+
+            PlaceElement.Children.Add(new ElementObject(JsonData));
+
+            BTNSave.Click += (s, e) =>
+            {
+                Save();
+            };
+
+            BTNAddElement.MouseDown += (s, e) =>
+            {
+                var NewElement = new BsonElement(ObjectId.GenerateNewId().ToString(), "New Value");
+
+                JsonData.Add(NewElement);
+                PlaceElement.Children.Add(new ElementString(NewElement, JsonData));
+            };
 
         }
     }

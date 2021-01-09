@@ -1722,6 +1722,54 @@ namespace Dashboard.GlobalElement
 
                 }
 
+                public sealed class PageContent
+                {
+                    public static ModelLinks.DashboardGame.PageContent Links;
+                    public static  async void AddContent(string NameContent,Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddContent);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("NameContent", NameContent);
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);  
+                        }
+                    }
+
+                    public static async void RecieveContents(int Count, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.RecieveContents);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Count", Count.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -1865,6 +1913,14 @@ namespace Dashboard.GlobalElement
                 public string AddProduct => BaseLink + "PageStore/AddProduct";
                 public string SaveStore => BaseLink + "PageStore/SaveStore";
                 public string RemoveStore => BaseLink + "PageStore/RemoveStore";
+
+            }
+
+            public struct PageContent
+            {
+                public string BaseLink => "http://193.141.64.203/";
+                public string AddContent => BaseLink + "PageContent/AddContent";
+                public string RecieveContents=> BaseLink + "PageContent/RecieveContents";
 
             }
         }
