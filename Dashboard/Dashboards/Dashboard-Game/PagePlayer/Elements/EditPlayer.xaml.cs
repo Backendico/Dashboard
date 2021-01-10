@@ -1,8 +1,13 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
+﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
+using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
+using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements.Elements;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
+using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
 using System.Diagnostics;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,88 +16,216 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 {
-    /// <summary>
-    /// Interaction logic for EditPlayer.xaml
-    /// </summary>
-    public partial class EditPlayer : UserControl
+    public partial class EditPlayer : UserControl, IEditLeaderboard, IEditAchievements, IEditLogs
     {
-
-        BsonDocument PlayerDetail;
-        BsonDocument TotalLeaderboard;
-
-
+        IEditPlayer Editor;
 
         Grid CurentPage;
         Button CurentBTNHeader;
 
 
-        public EditPlayer(BsonDocument PlayerDetail, Action RefreshList)
+
+
+        public EditPlayer(IEditPlayer EditPlayer)
         {
             InitializeComponent();
             //frist init
-            this.PlayerDetail = PlayerDetail;
-            this.RefreshList = RefreshList;
+            Editor = EditPlayer;
+
             CurentPage = PageAccount;
             CurentBTNHeader = BTNAccount;
 
+            #region PageSetting
+
             //change frist
-            TextIDPlayer_Header.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
-            TextboxNickname.Text = this.PlayerDetail["Account"]["Name"].AsString;
-            TextboxAvatar.Text = this.PlayerDetail["Account"]["Avatar"].AsString;
-            TextLanguage.Text = this.PlayerDetail["Account"]["Language"].AsString;
-            TextCreated.Text = this.PlayerDetail["Account"]["Created"].ToUniversalTime().ToString();
-            TextCountry.Text = this.PlayerDetail["Account"]["Country"].AsString;
-            TextboxUsername.Text = this.PlayerDetail["Account"]["Username"].AsString;
-            TextboxEmail.Text = this.PlayerDetail["Account"]["Email"].AsString;
-            TextToken.Text = this.PlayerDetail["Account"]["Token"].AsObjectId.ToString();
-            Textboxphone.Text = this.PlayerDetail["Account"]["Phone"].ToString();
+            TextIDPlayer_Header.Text = EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId.ToString();
+            TextboxNickname.Text = EditPlayer.DetailPlayer["Account"]["Name"].AsString;
+            TextboxAvatar.Text = EditPlayer.DetailPlayer["Account"]["Avatar"].AsString;
+            TextLanguage.Text = EditPlayer.DetailPlayer["Account"]["Language"].AsString;
+            TextCreated.Text = EditPlayer.DetailPlayer["Account"]["Created"].ToUniversalTime().ToString();
+            TextCountry.Text = EditPlayer.DetailPlayer["Account"]["Country"].AsString;
+            TextboxUsername.Text = EditPlayer.DetailPlayer["Account"]["Username"].AsString;
+            TextboxEmail.Text = EditPlayer.DetailPlayer["Account"]["Email"].AsString;
+            TextToken.Text = EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId.ToString();
+            Textboxphone.Text = EditPlayer.DetailPlayer["Account"]["Phone"].ToString();
+
+            try
+            {
+                TextCountTags.Text = EditPlayer.DetailPlayer["Account"]["Tags"].AsBsonArray.Count.ToString();
+
+            }
+            catch (Exception)
+            {
+                EditPlayer.DetailPlayer["Account"].AsBsonDocument.Add("Tags", new BsonArray());
+                EditPlayer.Save();
+            }
+
 
             //cheak banplayer
-            CheackBoxBan.IsChecked = this.PlayerDetail["Account"]["IsBan"].AsBoolean;
+            CheackBoxBan.IsChecked = EditPlayer.DetailPlayer["Account"]["IsBan"].AsBoolean;
             CheackBoxBan.Checked += (s, e) =>
             {
-                this.PlayerDetail["Account"]["IsBan"] = true;
+                EditPlayer.DetailPlayer["Account"]["IsBan"] = true;
+                EditPlayer.Save();
             };
             CheackBoxBan.Unchecked += (s, e) =>
             {
-                this.PlayerDetail["Account"]["IsBan"] = false;
+                EditPlayer.DetailPlayer["Account"]["IsBan"] = false;
+                EditPlayer.Save();
             };
 
 
-            #region PageSetting
-            //action btn Email Recovery
-            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            //action  Change NickName
+            TextboxNickname.LostFocus += (s, e) =>
             {
-                if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{PlayerDetail["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
+                EditPlayer.DetailPlayer["Account"]["Name"] = TextboxNickname.Text;
+                EditPlayer.Save();
+            };
+
+            //action change nickname
+            TextboxAvatar.LostFocus += (s, e) =>
+            {
+                if (GlobalEvents.ControllLinkImages(TextboxAvatar))
                 {
-                    try
+                    EditPlayer.DetailPlayer["Account"]["Avatar"] = TextboxAvatar.Text;
+                    EditPlayer.Save();
+                }
+                else
+                {
+                    TextboxAvatar.Text = EditPlayer.DetailPlayer["Account"]["Avatar"].ToString();
+                }
+
+            };
+
+            //action change Language
+            TextLanguage.LostFocus += (s, e) =>
+            {
+                EditPlayer.DetailPlayer["Account"]["Language"] = TextLanguage.Text;
+                EditPlayer.Save();
+            };
+
+            //action change Cuntry
+            TextCountry.LostFocus += (s, e) =>
+            {
+                EditPlayer.DetailPlayer["Account"]["Country"] = TextCountry.Text;
+                EditPlayer.Save();
+            };
+
+            //action change Username
+            TextboxUsername.LostFocus += (s, e) =>
+            {
+                if (TextboxUsername.Text.Length >= 6)
+                {
+                    if (TextboxUsername.Text != EditPlayer.DetailPlayer["Account"]["Username"].ToString())
                     {
 
-                        SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Recovery1(PlayerDetail["Account"]["Token"].AsObjectId, new System.Net.Mail.MailAddress(PlayerDetail["Account"]["Email"].AsString),
-                            Code =>
+                        SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(TextboxUsername.Text, result =>
+                        {
+                            if (result)
                             {
-                                if (Code != 0)
-                                {
-                                    DashboardGame.Dialog(Code.ToString(), "Recovery Code");
-                                    PanelChangePassword.Visibility = Visibility.Visible;
-                                }
-                                else
-                                {
-                                    DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
-                                }
-
-                            });
-                    }
-                    catch (Exception ex)
-                    {
-
-                        DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                                DashboardGame.Notifaction("Username is duplicate ", Notifaction.StatusMessage.Error);
+                                TextboxUsername.Text = EditPlayer.DetailPlayer["Account"]["Username"].ToString();
+                            }
+                            else
+                            {
+                                EditPlayer.DetailPlayer["Account"]["Username"] = TextboxUsername.Text;
+                                EditPlayer.Save();
+                            }
+                        });
                     }
                 }
                 else
                 {
+                    DashboardGame.Notifaction("Username Short", Notifaction.StatusMessage.Error);
+                    TextboxUsername.Text = EditPlayer.DetailPlayer["Account"]["Username"].ToString();
+                }
 
-                    DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
+            };
+
+            //action change email
+            TextboxEmail.LostFocus += (s, e) =>
+            {
+                try
+                {
+                    new System.Net.Mail.MailAddress(TextboxEmail.Text);
+                    EditPlayer.DetailPlayer["Account"]["Email"] = TextboxEmail.Text;
+                    EditPlayer.Save();
+                }
+                catch (Exception)
+                {
+                    TextboxEmail.Text = EditPlayer.DetailPlayer["Account"]["Email"].ToString();
+                }
+
+            };
+
+            //action BTN control and change phone
+            Textboxphone.LostFocus += (s, e) =>
+            {
+                if (long.TryParse(Textboxphone.Text, out long Handle))
+                {
+                    EditPlayer.DetailPlayer["Account"]["Phone"] = Handle;
+                    EditPlayer.Save();
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Can't Conver to Phone number", Notifaction.StatusMessage.Error);
+                    Textboxphone.Text = EditPlayer.DetailPlayer["Account"]["Phone"].ToString();
+                }
+            };
+
+            //action tag
+            Tags.MouseDown += (s, e) =>
+            {
+                _ = new TagsSystem(EditPlayer.DetailPlayer["Account"]["Tags"].AsBsonArray, () =>
+                {
+                    TextCountTags.Text = EditPlayer.DetailPlayer["Account"]["Tags"].AsBsonArray.Count.ToString();
+                    EditPlayer.Save();
+                });
+            };
+
+            //action btn Email Recovery
+            BTNSendEmailRecovery.MouseDown += async (s, e) =>
+            {
+                try
+                {
+                    new MailAddress(EditPlayer.DetailPlayer["Account"]["Email"].ToString());
+
+
+                    if (await DashboardGame.DialogYesNo($"Do you want to send the recovery email to \"{EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId}\"?") == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+
+                            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Recovery1(EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId, new System.Net.Mail.MailAddress(EditPlayer.DetailPlayer["Account"]["Email"].AsString),
+                                Code =>
+                                {
+                                    if (Code != 0)
+                                    {
+                                        DashboardGame.Dialog(Code.ToString(), "Recovery Code");
+                                        PanelChangePassword.Visibility = System.Windows.Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        DashboardGame.Notifaction("Faild Send", Notifaction.StatusMessage.Error);
+                                    }
+
+                                });
+                        }
+                        catch (Exception ex)
+                        {
+
+                            DashboardGame.Notifaction(ex.Message, Notifaction.StatusMessage.Error);
+                        }
+                    }
+                    else
+                    {
+
+                        DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    DashboardGame.Notifaction("The player does not have an email", Notifaction.StatusMessage.Error);
                 }
 
             };
@@ -102,15 +235,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 if (TextNewPassword.Text.Length >= 6)
                 {
-                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ChangePassword(PlayerDetail["Account"]["Token"].AsObjectId, TextNewPassword.Text, Result =>
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ChangePassword(EditPlayer.DetailPlayer["Account"]["Token"].AsObjectId, TextNewPassword.Text, Result =>
                     {
-
                         if (Result)
                         {
                             DashboardGame.Notifaction("Password Changed", Notifaction.StatusMessage.Ok);
 
                             TextNewPassword.Text = "";
-                            PanelChangePassword.Visibility = Visibility.Collapsed;
+                            PanelChangePassword.Visibility = System.Windows.Visibility.Collapsed;
                         }
                         else
                         {
@@ -128,42 +260,41 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             //copyToken
             TextToken.MouseDown += GlobalEvents.CopyText;
 
-            //action BTN control and change phone
-            Textboxphone.TextChanged += (s, e) =>
+            //action btn Delete
+            BTNDelete.MouseDown += (s, e) =>
             {
-                var Phone = s as TextBox;
+                EditPlayer.Delete(this);
 
-                if (long.TryParse(Phone.Text, out long Handle))
+            };
+
+            #endregion
+
+            #region PageLeaderboard
+            //btn action leaderboards
+            BTNAaddLeaderboardShow.MouseDown += (s, e) =>
+            {
+                ShowpanelAddLeaderboard();
+            };
+
+            //close panel leaderboard
+            PanelAddLeaderboard.MouseDown += (s, e) =>
+            {
+                if (e.Source.GetType() == typeof(Grid))
                 {
-                    PlayerDetail["Account"]["Phone"] = Handle;
-                }
-                else
-                {
-                    Phone.Text = "";
+                    ShowOffPanelLeaderboard();
                 }
             };
 
 
             #endregion
 
-            #region PageLeaderboard
-
-
-            //init pageLeaderboard
-            try
-            {
-                ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
-            }
-            catch (Exception)
-            {
-                PlayerDetail.Add("Leaderboards", new BsonDocument { { "List", new BsonDocument { } } });
-
-                ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
-            }
-
-            #endregion
-
             #region PageAchievements
+            //action BTN Achievements
+            BTNAchievements.Click += (s, e) =>
+            {
+                IniAchievements();
+            };
+
             //action show panel Add achievements
             BTNShowPanelAddAchievement.MouseDown += (s, e) =>
             {
@@ -182,6 +313,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             #endregion
 
             #region PageLogs
+         
+            //Init Logs
+            BTNLogs.Click += (s, e) =>
+            {
+                InitLogs();
+            };
 
 
             //action btn send log
@@ -189,13 +326,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 if (TextboxHeader.Text.Length >= 1 && TextboxDescription.Text.Length >= 1)
                 {
-                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.AddLogPlayer(PlayerDetail["Account"]["Token"].AsObjectId, TextboxHeader.Text, TextboxDescription.Text, result =>
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.AddLogPlayer(Editor.DetailPlayer["Account"]["Token"].AsObjectId, TextboxHeader.Text, TextboxDescription.Text, result =>
                     {
                         if (result)
                         {
                             DashboardGame.Notifaction("Log Added", Notifaction.StatusMessage.Ok);
-                            ShowoffPaneladdLogs();
-                            RecivePlayerLogs();
+                            InitLogs();
                         }
                         else
                         {
@@ -211,22 +347,29 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             };
 
             //action btn clear
-            BTNClearLogs.MouseDown += (s, e) =>
+            BTNClearLogs.MouseDown +=async (s, e) =>
             {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(PlayerDetail["Account"]["Token"].AsObjectId,
-                    result =>
+                if (await DashboardGame.DialogYesNo("All information will be lost.\nare you sure ? ")==MessageBoxResult.Yes)
+                {
+                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
+                {
+                    if (result)
                     {
-                        if (result)
-                        {
-                            PlaceContentLogs.Children.Clear();
-                            DashboardGame.Notifaction("All Logs Deleted", Notifaction.StatusMessage.Ok);
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("Clear faild", Notifaction.StatusMessage.Error);
-                        }
+                        DashboardGame.Notifaction("Logs Clear", Notifaction.StatusMessage.Ok);
+                        InitLogs();
+                    }
+                    else
+                    {
+                        DashboardGame.Notifaction("Faild Clear", Notifaction.StatusMessage.Error);
+                    }
 
-                    });
+                });
+
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                }
             };
 
             //action btn ClosePaneladdlog
@@ -243,17 +386,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             {
                 ShowPanelAddLogs();
             };
+
             //action btn see more
             BTNSeeMoreLog.MouseDown += (s, e) =>
             {
-                CountLog += 100;
-                TextSeeMoreNumber.Text = CountLog.ToString();
-                RecivePlayerLogs();
+                Count += 100;
+                TextSeeMoreNumber.Text = Count.ToString();
             };
 
             #endregion
 
+
+            InitLeaderboards();
         }
+
+        #region Global
 
         //global
         private void ChangePage(object sender, RoutedEventArgs e)
@@ -261,14 +408,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             if ((sender as Button).Content != BTNLogs.Content)
             {
                 ShowoffPaneladdLogs();
-
             }
 
 
             if ((sender as Button).Content != BTNAchievements.Content)
             {
                 ShowoffPaneladdAchievements();
-
             }
 
             CurentPage.Visibility = Visibility.Collapsed;
@@ -298,7 +443,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         PageLogs.Visibility = Visibility.Visible;
                         CurentBTNHeader = BTNLogs;
                         BTNLogs.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-                        RecivePlayerLogs();
                     }
                     break;
                 case "BTNAchievements":
@@ -307,8 +451,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                         PageAchievements.Visibility = Visibility.Visible;
                         CurentBTNHeader = BTNAchievements;
                         BTNAchievements.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-
-                        RecivePlayerAchievements();
                     }
                     break;
                 default:
@@ -318,348 +460,205 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
 
-        //page Setting
-        private void NicknameChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                PlayerDetail["Account"]["Name"] = Textbox.Text;
-            }
-
-        }
-
-        private void AvatarChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                try
-                {
-                    Uri link = new Uri(Textbox.Text);
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                    PlayerDetail["Account"]["Avatar"] = Textbox.Text;
-                }
-                catch (Exception)
-                {
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Red);
-                }
-            }
-
-        }
-
-        private void LanguageChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                PlayerDetail["Account"]["Language"] = Textbox.Text;
-            }
-        }
-
-        private void CountryChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                PlayerDetail["Account"]["Country"] = Textbox.Text;
-
-            }
-
-        }
-
-        private void UsernameChange(object sender, TextChangedEventArgs e)
-        {
-            var textbox = sender as TextBox;
-
-            if (IsLoaded && textbox.Text.Length >= 6)
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.SearchUsername(textbox.Text, result =>
-                {
-                    if (result)
-                    {
-                        textbox.BorderBrush = new SolidColorBrush(Colors.Tomato);
-                        textbox.Text += new Random().Next();
-                    }
-                    else
-                    {
-                        textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                        PlayerDetail["Account"]["Username"] = textbox.Text;
-                    }
-
-
-                });
-            }
-        }
-
-        private void EmailChange(object sender, TextChangedEventArgs e)
-        {
-            var Textbox = sender as TextBox;
-            if (IsLoaded)
-            {
-                try
-                {
-                    new System.Net.Mail.MailAddress(Textbox.Text);
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Orange);
-                    PlayerDetail["Account"]["Email"] = Textbox.Text;
-                }
-                catch (Exception)
-                {
-                    Textbox.BorderBrush = new SolidColorBrush(Colors.Red);
-                }
-
-            }
-        }
-
-
-        private void AvatarHelp(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dialog("Sample acceptable link\n\n https://example.com \n \n or\n \n http://example.com ", "Help Link");
-        }
-
-        private void LanguageHelp(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dialog("ISO is the language standard (ISO 639-1) \n for example:\n \n\n Persian : (fa) \n \n or\n \n English : (en) ", "Help Language");
-        }
-
-        private void CountryHelp(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dialog("ISO is the country  standard (ISO 3166 ALPHA3) \n for example:\n \n\n Iran : (IRN) \n \n or\n \n Belgien : (BEL) ", "Help Country");
-        }
-
-        private async void Delete(object sender, MouseButtonEventArgs e)
-        {
-            if (await DashboardGame.DialogYesNo("All user information is lost \n Are you sure") == MessageBoxResult.Yes)
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Delete(PlayerDetail["Account"]["Token"].ToString(), result =>
-                {
-                    if (result)
-                    {
-                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
-
-                        RefreshList();
-                        DashboardGame.Dashboard.Root.Children.Remove(this);
-
-                        //add log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Player", $"You have deleted player \" {PlayerDetail["Account"]["Username"]} \"", PlayerDetail, false, resul => { });
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Delete !", Notifaction.StatusMessage.Ok);
-                    }
-                });
-
-            }
-            else
-            {
-                DashboardGame.Notifaction("Delete Reject", Notifaction.StatusMessage.Ok);
-            }
-        }
-
-        private void SaveSetting(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save(PlayerDetail["Account"]["Token"].ToString(), PlayerDetail, result =>
-            {
-                if (result)
-                {
-                    RefreshList();
-
-                    TextboxNickname.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextboxAvatar.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextLanguage.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextCountry.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextboxUsername.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    TextboxEmail.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
-
-                    // add log
-                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Player", $"You have Edit player \" {PlayerDetail["Account"]["Username"]} \" ", PlayerDetail, false, resul => { });
-                }
-                else
-                {
-                    DashboardGame.Notifaction("Faild Save", Notifaction.StatusMessage.Error);
-                }
-
-            });
-
-        }
-
-
-
-        //page Leaderboards
-
-        /// <summary>
-        /// if Player have a leaderboard
-        /// </summary>
-        /// <param name="Leaderboards"></param>
-        public void ReciveLeaderboardPlayer(BsonDocument Leaderboards)
-        {
-
-            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(
-                Resul =>
-            {
-                TotalLeaderboard = Resul;
-
-                PlaceContentLeaderboard.Children.Clear();
-
-                try
-                {
-                    foreach (var item in Leaderboards)
-                    {
-                        PlaceContentLeaderboard.Children.Add(new ModelLeaderboardPlayerEdit(TotalLeaderboard, Leaderboards, item.Name, item.Value.AsInt64));
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
-
-            },
-            () =>
-            {
-
-            });
-
-        }
-
-
-        private void Add(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                PlaceContentLeaderboard.Children.Add(new ModelLeaderboardPlayer_New(TotalLeaderboard, PlayerDetail["Leaderboards"]["List"].AsBsonDocument));
-            }
-            catch (Exception)
-            {
-                PlayerDetail.Add("Leaderboards", new BsonDocument { { "List", new BsonDocument { } } });
-
-                PlaceContentLeaderboard.Children.Add(new ModelLeaderboardPlayer_New(TotalLeaderboard, PlayerDetail["Leaderboards"]["List"].AsBsonDocument));
-            }
-        }
-
-        private void Save(object sender, MouseButtonEventArgs e)
-        {
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.Save_LeaderboardPlayer(PlayerDetail["Account"]["Token"].AsObjectId.ToString(), PlayerDetail["Leaderboards"]["List"].AsBsonDocument,
-                () =>
-                {
-                    DashboardGame.Notifaction("Leaderboards Saved", Notifaction.StatusMessage.Ok);
-                    ReciveLeaderboardPlayer(PlayerDetail["Leaderboards"]["List"].AsBsonDocument);
-
-                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("modifie Player Leaderboard", $"You have modifie player \" {PlayerDetail["Account"]["Username"]} \" ", PlayerDetail["Leaderboards"]["List"].AsBsonDocument, false, resul => { });
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Not Change", Notifaction.StatusMessage.Warrning);
-                });
-        }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             DashboardGame.Dashboard.Root.Children.Remove(this);
         }
 
-        //page Log
-        int CountLog = 100;
+        #endregion
 
-        public void RecivePlayerLogs()
+
+
+        #region PageLeaderboards
+
+
+        public void AddLeaderbord(string NameLeaderboard, long Score)
         {
-            PlaceContentLogs.Children.Clear();
-            CountLog = 100;
-            TextSeeMoreNumber.Text = CountLog.ToString();
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecivePlayerlog(PlayerDetail["Account"]["Token"].AsObjectId, CountLog,
-                Result =>
+            var Serilise = new BsonDocument {
+                {"Leaderboard",NameLeaderboard },
+                {"Score",Score }
+            };
+
+            for (int i = 0; i < Editor.DetailPlayer["Leaderboards"].AsBsonArray.Count; i++)
+            {
+                if (Editor.DetailPlayer["Leaderboards"].AsBsonArray[i]["Leaderboard"] == NameLeaderboard)
                 {
-                    try
-                    {
-                        if (Result["Logs"].AsBsonArray.Count >= 1)
-                        {
-                            foreach (var item in Result["Logs"].AsBsonArray)
-                            {
-                                PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
-                            }
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        DashboardGame.Notifaction("No logs Content", Notifaction.StatusMessage.Warrning);
-                    }
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
-                });
+                    Editor.DetailPlayer["Leaderboards"].AsBsonArray.RemoveAt(i);
+                }
+            }
+
+
+            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.AddPlayer(NameLeaderboard, Editor.DetailPlayer["Account"]["Token"].AsObjectId, Score, result =>
+            {
+                Editor.DetailPlayer["Leaderboards"].AsBsonArray.Add(Serilise);
+                InitLeaderboards();
+                ShowOffPanelLeaderboard();
+            });
         }
 
-        private void ShowPanelAddLogs()
+        public void InitLeaderboards()
         {
-            PanelAddLog.Visibility = Visibility.Visible;
+            PlaceContentLeaderboard.Children.Clear();
+
+            //init Player leaderboards
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecievePlayerLeaderboard(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
+               {
+                   if (result.ElementCount >= 1)
+                   {
+                       foreach (var item in result["Leaderboards"].AsBsonArray)
+                       {
+                           PlaceContentLeaderboard.Children.Add(new ModelLeaderboard.LeaderaboardPlayer(item["Leaderboard"].ToString(), item["Score"].ToInt64()));
+                       }
+                   }
+                   else
+                   {
+                       DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                   }
+               });
+
+            //ini Studio Leaderboard
+            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards((Result) =>
+            {
+                PlaceLeaderboardStudio.Children.Clear();
+
+                if (Result.ElementCount >= 1)
+                {
+                    foreach (var item in Result["List"].AsBsonArray)
+                    {
+                        PlaceLeaderboardStudio.Children.Add(new ModelLeaderboard.ModelLeaderboards(item.AsBsonDocument, this));
+                    }
+                }
+                else
+                {
+
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                }
+
+            });
+        }
+
+        //action show panel leaderboards 
+        private void ShowpanelAddLeaderboard()
+        {
+            InitLeaderboards();
+
+            PanelAddLeaderboard.Visibility = Visibility.Visible;
+
             DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
-            Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(Anim);
-            storyboard.Begin(this);
+            Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
         }
 
-        private void ShowoffPaneladdLogs()
+        private void ShowOffPanelLeaderboard()
         {
-            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
-            Anim.Completed += (s, ee) =>
-            {
-                TextboxDescription.Text = "";
-                TextboxHeader.Text = "";
+            PanelAddLeaderboard.Visibility = Visibility.Visible;
 
-                PanelAddLog.Visibility = Visibility.Collapsed;
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelAddLeaderboard.Visibility = Visibility.Collapsed;
+
+                PlaceLeaderboardStudio.Children.Clear();
             };
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
-            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
-            Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(Anim);
-            storyboard.Begin(this);
+            Storyboard.SetTargetName(Anim, PanelAddLeaderboard.Name);
+            Storyboard Story = new Storyboard();
+            Story.Children.Add(Anim);
+            Story.Begin(this);
         }
 
+        #endregion
 
-        //page Achievements
-        public void RecivePlayerAchievements()
+
+        #region Page Achivements
+
+        public void IniAchievements()
         {
-            PlaceContentAchievements.Children.Clear();
 
-            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId,
-                result =>
+            //ini Studio achievements
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(result =>
+            {
+                ListStudioAchievement.Children.Clear();
+
+                if (result.ElementCount >= 1)
                 {
-                    if (result.ElementCount >= 1)
+
+                    foreach (var item in result["Achievements"].AsBsonArray)
                     {
-                        if (result["Achievements"].AsBsonArray.Count >= 1)
-                        {
-
-                            ShowoffPaneladdAchievements();
-
-                            foreach (var item in result["Achievements"].AsBsonArray)
-                            {
-                                PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument, PlayerDetail["Account"]["Token"].AsObjectId, RecivePlayerAchievements));
-                            }
-                        }
-                        else
-                        {
-                            DashboardGame.Notifaction("This player has no achievements", Notifaction.StatusMessage.Error);
-                            ShowPanelAddAchievements();
-                        }
-
+                        ListStudioAchievement.Children.Add(new ModelAchievementStudio(item.AsBsonDocument, this));
                     }
-                    else
+
+                }
+                else
+                {
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                    ShowPanelAddAchievements();
+                }
+            });
+
+            //init Player Achievements
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Result =>
+            {
+                PlaceContentAchievements.Children.Clear();
+
+
+                if (Result.ElementCount >= 1)
+                {
+                    foreach (var item in Result["Achievements"].AsBsonArray)
                     {
-                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
+                        PlaceContentAchievements.Children.Add(new ModelAchievements.ModelAchievements(item.AsBsonDocument, this));
                     }
-                });
+                }
+
+            });
+        }
+
+        public void AddAchievements(BsonDocument DetailNewachievements)
+        {
+            var Serilse = new BsonDocument
+            {
+                {"Token",DetailNewachievements["Token"] },
+                {"Name",DetailNewachievements["Name"] },
+            };
+
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Serilse, Result =>
+            {
+                if (Result)
+                {
+                    DashboardGame.Notifaction("Achievement Added", Notifaction.StatusMessage.Ok);
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Achievement already added", Notifaction.StatusMessage.Warrning);
+                }
+                IniAchievements();
+
+            });
 
         }
+
+        public void RemoveAchievements(BsonDocument DetailAchievements)
+        {
+
+            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(Editor.DetailPlayer["Account"]["Token"].AsObjectId, DetailAchievements, result =>
+            {
+                if (result)
+                {
+                    DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
+                    IniAchievements();
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
+                }
+
+            });
+        }
+
 
         private void ShowPanelAddAchievements()
         {
@@ -671,91 +670,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-
-
-            //recive achievement for fill list achievements
-            ListStudioAchievement.Children.Clear();
-            SDK.SDK_PageDashboards.DashboardGame.PageAchievements.ReciveAchievements(StudioAchievements =>
-            {
-                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.PlayerAchievements(PlayerDetail["Account"]["Token"].AsObjectId, AchievementPlayer =>
-                {
-                    if (StudioAchievements.ElementCount >= 1)
-                    {
-                        if (StudioAchievements["Achievements"].AsBsonArray.Count >= 1)
-                        {
-
-                            if (AchievementPlayer["Achievements"].AsBsonArray.Count >= 1)
-                            {
-
-                                var Mustdelte = new BsonArray();
-
-                                foreach (var STDAchievements in StudioAchievements["Achievements"].AsBsonArray)
-                                {
-                                    foreach (var PLYRAchievements in AchievementPlayer["Achievements"].AsBsonArray)
-                                    {
-                                        if (STDAchievements["Token"].AsObjectId == PLYRAchievements["Token"].AsObjectId)
-                                        {
-                                            AchievementPlayer["Achievements"].AsBsonArray.Remove(STDAchievements);
-                                            Mustdelte.Add(STDAchievements);
-                                        }
-                                    }
-                                }
-
-                                for (int i = 0; i < StudioAchievements["Achievements"].AsBsonArray.Count; i++)
-                                {
-                                    for (int a = 0; a < Mustdelte.Count; a++)
-                                    {
-                                        if (StudioAchievements["Achievements"].AsBsonArray[i]["Token"] == Mustdelte[a]["Token"])
-                                        {
-                                            StudioAchievements["Achievements"].AsBsonArray.RemoveAt(i);
-                                        }
-                                    }
-                                }
-
-
-                                //cheack player recive all achievements
-                                if (StudioAchievements["Achievements"].AsBsonArray.Count >= 1)
-                                {
-
-                                    foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
-                                    {
-                                        ListStudioAchievement.Children.Add(new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument, RecivePlayerAchievements, ListStudioAchievement));
-                                    }
-                                }
-                                else
-                                {
-                                    ListStudioAchievement.Children.Add(new TextBlock() { Margin = new Thickness(10), Text = "The player has collected all the achievements" });
-                                }
-                            }
-                            else
-                            {
-                                foreach (var item in StudioAchievements["Achievements"].AsBsonArray)
-                                {
-                                    ListStudioAchievement.Children.Add(new ModelFind(PlayerDetail["Account"]["Token"].AsObjectId, item.AsBsonDocument, RecivePlayerAchievements, ListStudioAchievement));
-                                }
-                            }
-
-                        }
-                        else
-                        {
-                            ListStudioAchievement.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(10), Text = "The studio has not achieved!\nTo add an achievement,go to the achievements section and create one" });
-
-                            DashboardGame.Notifaction(" Studio No achievement", Notifaction.StatusMessage.Warrning);
-                        }
-
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Warrning);
-                    }
-
-
-
-                }
-                );
-            });
-
-
         }
 
         private void ShowoffPaneladdAchievements()
@@ -776,10 +690,69 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
 
         }
 
+        #endregion
 
 
+        #region PageLog
 
-        Action RefreshList;
+        int Count = 100;
+
+        private void ShowPanelAddLogs()
+        {
+            PanelAddLog.Visibility = Visibility.Visible;
+            DoubleAnimation Anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        private void ShowoffPaneladdLogs()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, ee) =>
+            {
+                TextboxDescription.Text = "";
+                TextboxHeader.Text = "";
+
+                PanelAddLog.Visibility = Visibility.Collapsed;
+            };
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard.SetTargetName(Anim, PanelAddLog.Name);
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
+
+        public void InitLogs()
+        {
+            Count = 100;
+            TextSeeMoreNumber.Text = Count.ToString();
+
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecivePlayerlog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, Count, result =>
+            {
+
+                PlaceContentLogs.Children.Clear();
+
+                if (result.ElementCount >= 1)
+                {
+                    foreach (var item in result["Logs"].AsBsonArray)
+                    {
+                        PlaceContentLogs.Children.Add(new ModelLogPlayer(item.AsBsonDocument));
+                    }
+                }
+                else
+                {
+                    ShowPanelAddLogs();
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                }
+            });
+        }
+
+        #endregion
     }
 
     public class ModelFind : StackPanel
@@ -826,7 +799,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                 Detail.Remove("Created");
                 Detail.Remove("Value");
 
-                Debug.WriteLine(Detail);
 
                 SDK.SDK_PageDashboards.DashboardGame.PageAchievements.AddPlayerAchievements(TokenPlayer, Detail, result =>
                 {
@@ -857,4 +829,23 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
         }
 
     }
+
+    public interface IEditLeaderboard
+    {
+        void InitLeaderboards();
+        void AddLeaderbord(string NameLeaderboard, long Score);
+    }
+
+    public interface IEditAchievements
+    {
+        void IniAchievements();
+        void AddAchievements(BsonDocument DetailNewAchievement);
+        void RemoveAchievements(BsonDocument DetailAchievements);
+    }
+
+    public interface IEditLogs
+    {
+        void InitLogs();
+    }
 }
+

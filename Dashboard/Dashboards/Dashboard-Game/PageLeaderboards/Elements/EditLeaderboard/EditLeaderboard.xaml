@@ -49,7 +49,7 @@
                 <StackPanel Margin="10,0" Orientation="Horizontal" Grid.Column="1">
                     <Button Cursor="Hand" x:Name="BTNSetting"  Background="Transparent" BorderBrush="DarkOrange" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Setting" Click="ChangePage" />
                     <Button Cursor="Hand" x:Name="BTNLeaderboard"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Leaderboard" Click="ChangePage" />
-                    <Button Cursor="Hand" x:Name="BTNHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Backups" Click="ChangePage" />
+                    <Button Cursor="Hand" x:Name="BTNBackupHistory"   Background="Transparent" BorderBrush="Transparent" BorderThickness="0,0,0,5" Foreground="Black" Width="150" Content="Backups" Click="ChangePage" />
                 </StackPanel>
 
             </Grid>
@@ -128,16 +128,10 @@
                     </ComboBox>
                 </StackPanel>
 
-                <!--BTNSave-->
-                <Border ToolTip="Save setting" CornerRadius="5" VerticalAlignment="Center" HorizontalAlignment="Right" Name="BTNSaveSetting" Margin="0,10" Height="30" Width="80" Cursor="Hand" Background="Orange" >
-                    <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Save" Foreground="White"/>
-                </Border>
-
-
             </StackPanel>
 
             <!--Leaderboard-->
-            <Grid  x:Name="ContentLeaderboard" IsVisibleChanged="VisibilityChange" Visibility="Collapsed"  Grid.Row="2" >
+            <Grid  x:Name="ContentLeaderboard" Visibility="Collapsed"  Grid.Row="2" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
@@ -197,6 +191,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="40"/>
                                         <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="17"/>
@@ -205,15 +200,19 @@
                                     <Border BorderBrush="Gray" BorderThickness="0,0,2,2"  Background="Gainsboro" Grid.Column="1" />
                                     <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="2" />
                                     <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="3" />
-                                    <Border CornerRadius="0,4,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,0,2" Grid.Column="4" />
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="4" />
+                                    <Border CornerRadius="0,4,0,0" BorderBrush="Gray" Background="Gainsboro" BorderThickness="0,0,0,2" Grid.Column="5" />
 
                                     <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Rank" Grid.Column="1"/>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="2"/>
-                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="3"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Username" Grid.Column="2"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="3"/>
+                                    <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Value" Grid.Column="4"/>
                                 </Grid>
 
                                 <!--Content-->
-                                <ScrollViewer Margin="0,0,0,5" Grid.Row="1" Name="ContentPlaceLeaderboard"/>
+                                <ScrollViewer Margin="0,0,0,5" Grid.Row="1">
+                                    <StackPanel  Name="ContentPlaceLeaderboard" ></StackPanel>
+                                </ScrollViewer>
 
 
                             </Grid>
@@ -279,7 +278,7 @@
 
 
             <!--Backups-->
-            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" IsVisibleChanged="VisibilityChange">
+            <Grid Margin="10"  Grid.Row="2" Visibility="Collapsed" x:Name="ContentHistory" >
                 <Border  CornerRadius="5"  BorderBrush="Gray"  BorderThickness="2"   >
                     <Grid>
                         <Grid.RowDefinitions>
@@ -308,7 +307,7 @@
                                 <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Background="Gainsboro" Grid.Column="3" />
                                 <Border  CornerRadius="0,4,0,0" BorderBrush="Gray" BorderThickness="0,0,0,2" Background="Gainsboro" Grid.Column="4" />
 
-                                <TextBlock FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Version" Grid.Column="0"/>
+                                <TextBlock Cursor="Hand" FontWeight="Bold"  TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="0"/>
                                 <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="Start" Grid.Column="1"/>
                                 <TextBlock FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Text="End" Grid.Column="2"/>
 

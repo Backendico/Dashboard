@@ -1,19 +1,10 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.SubPages;
-using Dashboard.Dashboards.Dashboard_Game.SubPages.Elements;
-using Microsoft.Win32;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization.Conventions;
+﻿using MongoDB.Bson;
 using RestSharp;
-using RestSharp.Serialization.Json;
 using System;
 using System.Diagnostics;
 using System.Net.Mail;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web.Compilation;
 
 namespace Dashboard.GlobalElement
 {
@@ -400,6 +391,25 @@ namespace Dashboard.GlobalElement
 
                     }
 
+                    public static async void GenerateNewToken(Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.GenerateNewToken);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
                 }
 
                 public sealed class PagePlayers
@@ -530,7 +540,7 @@ namespace Dashboard.GlobalElement
                     {
                         try
                         {
-                            new System.Net.Mail.MailAddress(Email);
+                            new MailAddress(Email);
 
                             var client = new RestClient(Links.SearchEmail);
                             client.Timeout = -1;
@@ -660,8 +670,8 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-                   
-                    public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result, Action ERR)
+
+                    public static async void RecivePlayerlog(ObjectId TokenPlayer, int Count, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.RecivePlayerLogs);
                         client.Timeout = -1;
@@ -680,7 +690,6 @@ namespace Dashboard.GlobalElement
                         else
                         {
                             Result(new BsonDocument());
-                            ERR();
                         }
                     }
 
@@ -727,7 +736,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void Recovery1(ObjectId TokenPlayer,MailAddress Email,Action<int> CodeRecovery)
+                    public static async void Recovery1(ObjectId TokenPlayer, MailAddress Email, Action<int> CodeRecovery)
                     {
 
                         var client = new RestClient(Links.Recovery1);
@@ -736,11 +745,11 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("TokenPlayer",TokenPlayer.ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
                         request.AddParameter("Email", Email.Address);
-                        var response =await client.ExecuteAsync(request);
+                        var response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             CodeRecovery(int.Parse(response.Content));
                         }
@@ -751,7 +760,7 @@ namespace Dashboard.GlobalElement
 
                     }
 
-                    public static async void Recovery2(ObjectId TokenPlayer, MailAddress Email,int Code, Action<bool> CodeRecovery)
+                    public static async void Recovery2(ObjectId TokenPlayer, MailAddress Email, int Code, Action<bool> CodeRecovery)
                     {
                         var client = new RestClient(Links.Recovery2);
                         client.Timeout = -1;
@@ -774,8 +783,8 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-                   
-                    public static async void ChangePassword(ObjectId TokenPlayer, string Password,  Action<bool> CodeRecovery)
+
+                    public static async void ChangePassword(ObjectId TokenPlayer, string Password, Action<bool> CodeRecovery)
                     {
                         var client = new RestClient(Links.ChangePassword);
                         client.Timeout = -1;
@@ -797,7 +806,29 @@ namespace Dashboard.GlobalElement
                         }
 
                     }
-               
+
+                    public static async void RecievePlayerLeaderboard(ObjectId TokenPlayer, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.RecivePlayerLeaderboards);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"].ToString());
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
+
                 }
 
                 public sealed class PageLeaderboard
@@ -805,7 +836,7 @@ namespace Dashboard.GlobalElement
                     public static ModelLinks.DashboardGame.PageLeaderboard Links;
 
 
-                    public static async void Reciveleaderboards(Action<BsonDocument> Result, Action ERR)
+                    public static async void Reciveleaderboards(Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveLeaderboards);
                         client.Timeout = -1;
@@ -816,20 +847,18 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Token", SettingUser.Token);
                         var response = await client.ExecuteAsync(request);
 
-
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
                         }
                         else
                         {
-                            Result(BsonDocument.Parse(response.Content));
-                            ERR();
+                            Result(new BsonDocument());
                         }
 
                     }
 
-                    public static async void Creat(string NameLeaderboard, int reset,int Amount, int Sort, int Min, int Max, Action<bool> Result)
+                    public static async void Creat(string NameLeaderboard, Int64 reset, Int64 Amount, Int64 Sort, Int64 Min, Int64 Max, Action<bool> Result)
                     {
                         var SeriliseDetail = new BsonDocument
                         {
@@ -904,36 +933,27 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void AddPlayer(string NameLeaderboard, string TokenPlayer, int Value, Action Result, Action ERR)
+                    public static async void AddPlayer(string NameLeaderboard, ObjectId TokenPlayer, Int64 Value, Action<bool> Result)
                     {
-                        //cheack tokenplayer
-                        if (ObjectId.TryParse(TokenPlayer, out _))
+                        //send data
+                        var client = new RestClient(Links.Add);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenPlayer", TokenPlayer.ToString());
+                        request.AddParameter("NameLeaderboard", NameLeaderboard);
+                        request.AddParameter("Value", Value);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            //send data
-                            var client = new RestClient(Links.Add);
-                            client.Timeout = -1;
-                            var request = new RestRequest(Method.POST);
-                            request.AlwaysMultipartFormData = true;
-                            request.AddParameter("Token", SettingUser.Token);
-                            request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                            request.AddParameter("TokenPlayer", TokenPlayer);
-                            request.AddParameter("NameLeaderboard", NameLeaderboard);
-                            request.AddParameter("Value", Value);
-                            var response = await client.ExecuteAsync(request);
-
-                            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                            {
-                                Result();
-                            }
-                            else
-                            {
-                                ERR();
-                            }
-
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
                     }
 
@@ -969,7 +989,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void Reset(string NameLeaderboard, Action Result, Action ERR)
+                    public static async void Reset(string NameLeaderboard, Action<bool> Result)
                     {
                         //send data
                         var client = new RestClient(Links.Reset);
@@ -983,16 +1003,16 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
 
-                    public static async void Leaderboard(int Count, string NameLeaderboard, Action<BsonDocument> Result, Action ERR)
+                    public static async void Leaderboard(int Count, string NameLeaderboard, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.Leaderboard);
                         client.Timeout = -1;
@@ -1012,11 +1032,11 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            ERR();
+                            Result(new BsonDocument());
                         }
                     }
 
-                    public static async void Backup(string NameLeaderboard, Action Result, Action ERR)
+                    public static async void Backup(string NameLeaderboard, Action<bool> Result)
                     {
                         var client = new RestClient(Links.Backup);
                         client.Timeout = -1;
@@ -1031,16 +1051,16 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
 
-                    public static async void BackupRecive(string NameLeaderboard, Action<BsonDocument> Result, Action ERR)
+                    public static async void BackupRecive(string NameLeaderboard, int Count, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveBackup);
                         client.Timeout = -1;
@@ -1050,6 +1070,7 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         request.AddParameter("NameLeaderboard", NameLeaderboard);
+                        request.AddParameter("Count", Count.ToString());
                         var response = await client.ExecuteAsync(request);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -1058,12 +1079,12 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            ERR();
+                            Result(new BsonDocument());
                         }
 
                     }
 
-                    public static async void RemoveBackup(string NameLeaderboard, string Version, Action Result, Action ERR)
+                    public static async void RemoveBackup(ObjectId TokenBackup, Action<bool> Result)
                     {
                         var client = new RestClient(Links.RemoveBackup);
                         client.Timeout = -1;
@@ -1072,21 +1093,21 @@ namespace Dashboard.GlobalElement
                         request.AlwaysMultipartFormData = true;
                         request.AddParameter("Token", SettingUser.Token);
                         request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("NameLeaderboard", NameLeaderboard);
-                        request.AddParameter("Version", Version);
+                        request.AddParameter("TokenBackups", TokenBackup.ToString());
                         var response = await client.ExecuteAsync(request);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
 
+                    [Obsolete("New version deleted", true)]
                     public static async void DownloadBackup(string NameLeaderboard, string Version, Action<BsonDocument> Result, Action ERR)
                     {
                         var client = new RestClient(Links.DownloadBackup);
@@ -1282,7 +1303,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Detail", DetailAchievements.ToString());
                         var response = await client.ExecuteAsync(request);
 
-                        Debug.WriteLine(response.Content);
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
@@ -1395,17 +1415,17 @@ namespace Dashboard.GlobalElement
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Studio",SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
                         request.AddParameter("Token", SettingUser.Token);
-                        var response =await client.ExecuteAsync(request);
+                        var response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
                         }
                         else
                         {
-                            Result(false);  
+                            Result(false);
                         }
                     }
                 }
@@ -1607,6 +1627,196 @@ namespace Dashboard.GlobalElement
 
                 }
 
+                public sealed class PageStore
+                {
+                    public static ModelLinks.DashboardGame.PageStore Links;
+
+                    public static async void AddStore(BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddStore);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Detail", Detail.ToString());
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+
+                    public static async void ReciveStore(Action<BsonDocument> Result)
+                    {
+
+                        var client = new RestClient(Links.ReciveStore);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
+                    public static async void SaveStore(ObjectId TokenStore, BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.SaveStore);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenStore", TokenStore.ToString());
+                        request.AddParameter("DetailStore", Detail.ToString());
+
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void RemoveStore(BsonDocument DetailStore, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.RemoveStore);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Detail", DetailStore.ToString());
+
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                }
+
+                public sealed class PageContent
+                {
+                    public static ModelLinks.DashboardGame.PageContent Links;
+                    public static async void AddContent(string NameContent, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.AddContent);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("NameContent", NameContent);
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void RecieveContents(int Count, Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.RecieveContents);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Count", Count.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
+                    public static async void EditContent(ObjectId TokenContent, BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.EditContent);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenContent", TokenContent.ToString());
+                        request.AddParameter("Detail", Detail.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void DeleteContent(ObjectId TokenContent, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.DeleteContent);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenContent", TokenContent.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                }
 
             }
         }
@@ -1649,6 +1859,8 @@ namespace Dashboard.GlobalElement
                 public string CheackPay => "https://api.idpay.ir/v1.1/payment/inquiry";
 
                 public string VerifiePay => BaseLink + "Payments/VerifiePay";
+
+                public string GenerateNewToken => BaseLink + "ChoiceStudioGame/GenerateToken";
             }
 
             public struct PagePlayers
@@ -1669,6 +1881,8 @@ namespace Dashboard.GlobalElement
                 public string Recovery1 => BaseLink + "PagePlayer/RecoveryStep1";
                 public string Recovery2 => BaseLink + "PagePlayer/RecoveryStep2";
                 public string ChangePassword => BaseLink + "PagePlayer/ChangePassword";
+
+                public string RecivePlayerLeaderboards => BaseLink + "Leaderboard/RecivePlayerLeaderboards";
             }
 
             public struct PageLeaderboard
@@ -1733,6 +1947,31 @@ namespace Dashboard.GlobalElement
                 public string AddMessage => BaseLink + "PageSupport/AddMessage";
                 public string CloseSupport => BaseLink + "PageSupport/CloseSupport";
                 public string AddReportBug => BaseLink + "PageSupport/AddReportBug";
+            }
+
+            public struct PageStore
+            {
+                public string BaseLink => "http://193.141.64.203/";
+
+                public string AddStore => BaseLink + "PageStore/AddStore";
+                public string ReciveStore => BaseLink + "PageStore/ReciveStores";
+
+                public string ReciveProduct => BaseLink + "PageStore/ReciveProduct";
+
+                public string AddProduct => BaseLink + "PageStore/AddProduct";
+                public string SaveStore => BaseLink + "PageStore/SaveStore";
+                public string RemoveStore => BaseLink + "PageStore/RemoveStore";
+
+            }
+
+            public struct PageContent
+            {
+                public string BaseLink => "http://193.141.64.203/";
+                public string AddContent => BaseLink + "PageContent/AddContent";
+                public string RecieveContents => BaseLink + "PageContent/RecieveContents";
+                public string EditContent => BaseLink + "PageContent/EditContent";
+                public string DeleteContent => BaseLink + "PageContent/DeleteContent";
+
             }
         }
     }

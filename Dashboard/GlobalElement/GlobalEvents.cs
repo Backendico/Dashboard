@@ -32,5 +32,79 @@ namespace Dashboard.GlobalElement
             DashboardGame.Notifaction("Copyed !", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Ok);
         }
 
+        public static bool ControllNumberFilde(TextBox Sender)
+        {
+            if (Sender.Text.Length >= 1)
+            {
+
+                try
+                {
+                    int.Parse(Sender.Text);
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Sender.Text = "0";
+                    DashboardGame.Notifaction("Field is Number", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool ControllLinks(object Sender)
+        {
+            var Text = Sender as TextBox;
+            try
+            {
+                if (Text.Text.Length >= 1)
+                    new Uri(Text.Text);
+                return true;
+            }
+            catch (Exception)
+            {
+                Text.Text = "";
+                DashboardGame.Notifaction("Field is Link", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Error);
+                return false;
+            }
+
+        }
+
+        public static bool ControllLinkImages(object Sender)
+        {
+            var Text = Sender as TextBox;
+
+            try
+            {
+                if (Text.Text.Contains(".png") || Text.Text.Contains(".PNG") || Text.Text.Contains(".Gif") || Text.Text.Contains(".gif") || Text.Text.Contains("JPG") || Text.Text.Contains(".jpg"))
+                {
+                    return true;
+                }
+                else if (Text.Text.Length >= 1)
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                if (Text.Text.Length >= 1)
+                {
+                    DashboardGame.Notifaction("Enter a direct link to Image", Dashboards.Dashboard_Game.Notifaction.StatusMessage.Warrning);
+                }
+                Text.Text = "";
+                return false;
+            }
+        }
+
+
     }
 }

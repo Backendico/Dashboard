@@ -2986,6 +2986,524 @@
                     </TabControl>
                 </TabItem>
 
+                <!--Store-->
+                <TabItem Height="30" Background="LightGray"   Header="Store API">
+                    <TabControl TabStripPlacement="Left">
+                        <!--Store List -->
+                        <TabItem  Background="LightGray"  Height="30" Header="Stores List">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Store/RecieveStores"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <TextBlock Margin="10,0" Text="The Store list is sent in JSON format" VerticalAlignment="Center" />
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of Store along with its settings"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes tokens"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--Store List -->
+                        <TabItem  Background="LightGray"  Height="30" Header="Recieve Products">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Store/RecieveProducts"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+                                                        
+                                                        <!--TokenStore-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenStore"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <TextBlock Margin="10,0" Text="The Products list is sent in JSON format" VerticalAlignment="Center" />
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="The list of Store products is sent along with the settings"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The received list includes tokens"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--add  payments-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Add Payments">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Store/AddPayments"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--TokenStore-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenStore"/>
+                                                        </Border>
+                                                        
+                                                        <!--TokenPlayer-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenPlayer"/>
+                                                        </Border>
+
+                                                        <!--Detail-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Detail"/>
+                                                        </Border>
+                                                        
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <StackPanel>
+                                                    <TextBlock Margin="10,0" Text="Status 400 : Problem encountered" VerticalAlignment="Center" />
+                                                    <TextBlock Margin="10,0" Text="Status 200: Successful" VerticalAlignment="Center" />
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="To retrieve and collect player payments"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+                                                <Run Text="&#xE915;"  FontFamily="Segoe MDL2 Assets"/> <Run Text="The 'Detaile' section can be anything"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+                </TabItem>
+
+                <!--Content-->
+                <TabItem Height="30" Background="LightGray"   Header="Content API">
+                    <TabControl TabStripPlacement="Left">
+                        <!--Reieve Content-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Recieve Contents">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Content/ReceiveContents"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--Count-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Count"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <TextBlock Margin="10,0" Text="The Content list is sent in JSON format" VerticalAlignment="Center" />
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="Get a list of Content along with its settings"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                        <!--Reieve Content-->
+                        <TabItem  Background="LightGray"  Height="30" Header="Recieve Content">
+                            <Grid Margin="20">
+                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="2">
+                                    <StackPanel>
+                                        <!--link-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Link-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" CornerRadius="4,0,0,0" BorderThickness="0,0,2,0" >
+                                                    <TextBlock TextAlignment="Center" Margin="20,10" Text="URL"/>
+                                                </Border>
+
+                                                <!--Link-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Margin="10" Text="http://193.141.64.203/Content/ReceiveContent"/>
+                                                </Border>
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Method-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Method"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <TextBlock Foreground="Orange" Margin="10" Text="Post"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Body Params-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Body Params"/>
+                                                </Border>
+
+                                                <!--Method-->
+                                                <Border BorderBrush="Gray" >
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <!--Token-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Token"/>
+                                                        </Border>
+
+                                                        <!--Studio-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="Studio"/>
+                                                        </Border>
+
+                                                        <!--Count-->
+                                                        <Border BorderBrush="Gray" BorderThickness="0,0,2,0">
+                                                            <TextBlock Margin="10" TextAlignment="Center" VerticalAlignment="Center" Text="TokenContent"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Response-->
+                                        <Border BorderBrush="Gray" BorderThickness="0,0,0,2">
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--Method-->
+                                                <Border  Width="120" Background="LightGray"  BorderBrush="Gray" BorderThickness="0,0,2,0" >
+                                                    <TextBlock  TextAlignment="Center" Margin="20,10" Text="Response"/>
+                                                </Border>
+
+                                                <TextBlock Margin="10,0" Text="The Content is sent in JSON format" VerticalAlignment="Center" />
+
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!--Info Tips-->
+                                        <StackPanel Margin="10">
+                                            <TextBlock TextWrapping="Wrap"  Text="The defined content structure is returned"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="20">
+                                                <Run FontWeight="Bold" Text="Tips:"/>
+                                                <LineBreak />
+
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+
+                        </TabItem>
+
+                    </TabControl>
+                </TabItem>
+
                 <!--Admin -->
                 <TabItem Height="30" Background="LightGray"   Header="Admin API">
                     <TabControl TabStripPlacement="Left">

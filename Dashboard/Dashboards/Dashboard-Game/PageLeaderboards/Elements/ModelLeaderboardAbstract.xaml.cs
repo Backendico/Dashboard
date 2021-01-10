@@ -1,28 +1,40 @@
 ﻿using Dashboard.GlobalElement;
-using System;
-using System.Windows;
+using MongoDB.Bson;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
     /// <summary>
     /// Interaction logic for ModelLeaderboardAbstract.xaml
     /// </summary>
-    public partial class ModelLeaderboardAbstract : UserControl
+    public partial class ModelLeaderboardAbstract : UserControl, IEditorLeaderboard
     {
 
-        public ModelLeaderboardAbstract(MongoDB.Bson.BsonDocument Detail, Action Refreshlist)
+        public ModelLeaderboardAbstract(BsonDocument Detail)
         {
             InitializeComponent();
-            this.Refreshlist = Refreshlist;
+            DetailLeaderboard = Detail;
 
-            TextName.Text = Detail["Name"].AsString;
-            TextToken.Text = Detail["Token"].AsObjectId.ToString();
-            TextPlayers.Text = Detail["Count"].ToString();
+            Init();
 
-            switch (Detail["Reset"].AsInt32)
+            BTNEdit.MouseDown += (s, e) =>
+            {
+                DashboardGame.Dashboard.Root.Children.Add(new EditLeaderboard(this));
+            };
+
+            TextToken.MouseDown += GlobalEvents.CopyText;
+        }
+
+        public BsonDocument DetailLeaderboard { get; set; }
+
+
+        void Init()
+        {
+
+            TextName.Text = DetailLeaderboard["Settings"]["Name"].AsString;
+            TextToken.Text = DetailLeaderboard["Settings"]["Token"].AsObjectId.ToString();
+
+            switch (DetailLeaderboard["Settings"]["Reset"].ToInt32())
             {
                 case 0:
                     {
@@ -54,7 +66,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     break;
             }
 
-            switch (Detail["Sort"].AsInt32)
+            switch (DetailLeaderboard["Settings"]["Sort"].ToInt32())
             {
                 case 0:
                     {
@@ -82,14 +94,50 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
                     break;
             }
 
-            BTNEdit.MouseDown += (s, e) =>
-            {
-                DashboardGame.Dashboard.Root.Children.Add(new EditLeaderboard(Detail, Refreshlist));
-            };
 
-            TextToken.MouseDown += GlobalEvents.CopyText;
+            TextPlayers.Text = DetailLeaderboard["Settings"]["Count"].ToString();
         }
 
-        Action Refreshlist;
+        public void Delete()
+        {
+
+        }
+
+
+        public void Save()
+        {
+            TextPlayers.Text = DetailLeaderboard["Settings"]["Count"].ToString();
+
+            var Count = DetailLeaderboard["Settings"]["Count"].ToInt32();
+
+            DetailLeaderboard["Settings"].AsBsonDocument.Remove("Count");
+
+            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.EditLeaderboard(DetailLeaderboard["Settings"].AsBsonDocument, result =>
+            {
+                if (result)
+                {
+                    DashboardGame.Notifaction("Saved !", Notifaction.StatusMessage.Ok);
+                    Init();
+
+
+                    //log
+                    SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Edit Leaderboard", $"You have changed the \" {DetailLeaderboard["Settings"]["Name"]} \" leaderboard settings", DetailLeaderboard["Settings"].AsBsonDocument, false, resultlog => { });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Not Change !", Notifaction.StatusMessage.Error);
+                }
+
+            });
+            DetailLeaderboard["Settings"].AsBsonDocument.Add("Count", Count);
+
+        }
+    }
+
+    public interface IEditorLeaderboard
+    {
+        void Save();
+        void Delete();
+        BsonDocument DetailLeaderboard { get; set; }
     }
 }

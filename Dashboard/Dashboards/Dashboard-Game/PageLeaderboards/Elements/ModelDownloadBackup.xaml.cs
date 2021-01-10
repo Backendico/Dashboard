@@ -1,13 +1,10 @@
-﻿using Dashboard.GlobalElement;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Web.UI;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
@@ -16,69 +13,56 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     public partial class ModelDownloadBackup : System.Windows.Controls.UserControl
     {
         FolderBrowserDialog Path = new FolderBrowserDialog { Description = "Select Folder for Save" };
-        string NameLeaderboard;
-        string Version;
 
-        public ModelDownloadBackup(string NameLeaderboard, string Version)
+        public ModelDownloadBackup(BsonDocument Detail)
         {
             InitializeComponent();
-            this.NameLeaderboard = NameLeaderboard;
-            this.Version = Version;
 
+
+            //close
             Root.MouseDown += (s, e) =>
             {
                 if (e.Source.GetType() == typeof(Grid))
                 {
-                    Close(null, null);
+                    Close();
                 }
+            };
 
+            //btn select folder
+            BTNSelectFolder.MouseDown += (s, e) =>
+            {
+
+                Path.ShowDialog();
+
+                TextboxPath.Text = Path.SelectedPath;
+            };
+
+            BTNSave.MouseDown += (s, e) =>
+            {
+                DashboardGame.Notifaction("Download Started  . . .", Notifaction.StatusMessage.Ok);
+
+                if (Detail.ElementCount >= 1)
+                {
+                    try
+                    {
+                        File.WriteAllText(Path.SelectedPath + $"/{Detail["Settings"]["Token"].ToString()}.json", Detail.ToString());
+
+                        DashboardGame.Notifaction("Download Complited!\n Path: \n" + Path.SelectedPath, Notifaction.StatusMessage.Ok);
+                        Process.Start(Path.SelectedPath);
+                    }
+                    catch (Exception)
+                    {
+                        DashboardGame.Notifaction("Select Folder", Notifaction.StatusMessage.Warrning);
+                    }
+                }
+                else
+                {
+                    DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
+                }
             };
         }
 
-        private void SelectFolder(object sender, MouseButtonEventArgs e)
-        {
-            Path.ShowDialog();
-
-            TextboxPath.Text = Path.SelectedPath;
-
-
-        }
-
-        private void Download(object sender, MouseButtonEventArgs e)
-        {
-
-            DashboardGame.Notifaction("Download Started  . . .", Notifaction.StatusMessage.Ok);
-
-            SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.DownloadBackup(NameLeaderboard, Version,
-                result =>
-                {
-                    if (result.ElementCount >= 1)
-                    {
-                        try
-                        {
-                            File.WriteAllText(Path.SelectedPath + $"/{NameLeaderboard + "-" + Version}.json", result.ToString());
-                            DashboardGame.Notifaction("Donload Complited!\n Path: \n" + Path.SelectedPath, Notifaction.StatusMessage.Ok);
-                            Process.Start(Path.SelectedPath);
-                        }
-                        catch (Exception)
-                        {
-                            DashboardGame.Notifaction("Select Folder", Notifaction.StatusMessage.Warrning);
-                        }
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("No Content", Notifaction.StatusMessage.Warrning);
-                    }
-
-                },
-                () =>
-                {
-                });
-        }
-
-
-
-        private void Close(object sender, MouseButtonEventArgs e)
+        private void Close()
         {
             Storyboard storyboard = new Storyboard();
 
@@ -103,6 +87,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
             storyboard.Begin(this);
 
         }
-
     }
 }
+
+

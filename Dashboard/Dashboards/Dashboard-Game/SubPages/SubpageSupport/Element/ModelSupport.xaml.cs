@@ -1,12 +1,7 @@
 ﻿using MongoDB.Bson;
-using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubpageSupport.Element
 {

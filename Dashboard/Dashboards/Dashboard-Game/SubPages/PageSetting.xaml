@@ -85,13 +85,21 @@
                             </TextBlock>
 
 
-                            <!--Creator-->
+                            <!--Token Creator-->
+                            <StackPanel Orientation="Horizontal">
+                                <!--Token-->
                             <TextBlock Margin="0,5">
                         <Run  FontWeight="Bold" Text="TOKEN : "/>
                         <Run Cursor="Hand" x:Name="TextToken" Text="XXX"/>
                           <LineBreak/>
                          <Run Foreground="Gray"  Text="To authenticate your studio and your Apis key"/>
                             </TextBlock>
+
+                                <!--New Token-->
+                                <Border Margin="10,0"  ToolTip="Generate new TOKEN" x:Name="BTNGeneretNewToken" HorizontalAlignment="Left" Cursor="Hand"  Width="100" Height="30" CornerRadius="5" Background="Orange" >
+                                    <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="Generate new "/>
+                                </Border>
+                            </StackPanel>
 
                             <!--Created-->
                             <TextBlock Margin="0,5">

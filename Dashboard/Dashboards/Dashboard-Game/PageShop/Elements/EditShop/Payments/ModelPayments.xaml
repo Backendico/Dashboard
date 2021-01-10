@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.Payments.ModelPayments"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PageShop.Elements.EditShop.Payments"
+             mc:Ignorable="d" >
+
+    <Grid MinHeight="30" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="4,0,0,0" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1" />
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2" />
+        <Border BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="3" />
+        <Border  CornerRadius="0,4,0,0" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="4" />
+
+        <TextBlock Cursor="Hand" x:Name="TextToken"  TextAlignment="Center" VerticalAlignment="Center" Text="Token" Grid.Column="0"/>
+        <TextBlock Cursor="Hand" x:Name="TextPlayer" TextAlignment="Center" VerticalAlignment="Center" Text="Player" Grid.Column="1"/>
+        <TextBlock x:Name="TextDetail"  Margin="0,10" TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Top" Text="Detail" Grid.Column="2"/>
+        <TextBlock x:Name="TextCreated" TextAlignment="Center" VerticalAlignment="Center" Text="Created" Grid.Column="3"/>
+    </Grid>
+</UserControl>

@@ -1,19 +1,6 @@
 ﻿using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.Elements
 {
@@ -32,15 +19,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.Elements
                 TextCreated.Text = DetailPay["Created"].ToLocalTime().ToString();
                 TextCash.Text = DetailPay["Cash"].ToString();
                 TextCreator.Text = DetailPay["Creator"].ToString();
-                
+
             }
             catch (Exception)
             {
                 TextID.Text = DetailPay["Request"]["order_id"].ToString();
                 TextCreated.Text = DetailPay["Detail"]["Created"].ToLocalTime().ToString();
-                TextCash.Text=DetailPay["Request"]["amount"].ToString();
+                TextCash.Text = DetailPay["Request"]["amount"].ToString();
                 TextCreator.Text = DetailPay["Detail"]["Token"].ToString();
-                
+
             }
 
 
@@ -49,7 +36,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.Elements
                 var Message = "";
                 foreach (var item in DetailPay)
                 {
-                    Message += item.Name +" : "+ item.Value.ToString() + "\n";
+                    Message += item.Name + " : " + item.Value.ToString() + "\n";
                 }
                 Message += "\n" + "In this transaction, the above information has replaced the values";
 

@@ -1,11 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
-using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
 {
@@ -16,51 +12,52 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageLeaderboards.Elements
     {
         BsonDocument Detail;
 
-        public ModelBackupAbstract(BsonDocument Detail, Action RefreshList)
+        public ModelBackupAbstract(BsonDocument Detail)
         {
             InitializeComponent();
             this.Detail = Detail;
-            this.RefreshList = RefreshList;
 
-            TextVersion.Text = Detail["Name"].AsString;
-            TextStart.Text =DateTime.Parse( Detail["Start"].ToString()).ToString();
-            TextEnd.Text =DateTime.Parse( Detail["End"].ToString()).ToString();
+            TextVersion.Text = Detail["Settings"]["Token"].ToString();
+            TextStart.Text = Detail["Settings"]["Start"].ToLocalTime().ToString();
+            TextEnd.Text = Detail["Settings"]["End"].ToLocalTime().ToString();
 
+            TextVersion.MouseDown += GlobalEvents.CopyText;
 
-        }
-
-        private async void RemoveBackup(object sender,MouseButtonEventArgs e)
-        {
-            if (await DashboardGame.DialogYesNo("Information can not be undone") == MessageBoxResult.Yes)
+            BTNRemove.MouseDown += async (s, e) =>
             {
-                SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.RemoveBackup(Detail["NameLeaderboard"].AsString, Detail["Name"].AsString,
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
-                        RefreshList();
+                if (await DashboardGame.DialogYesNo("Information can not be undone") == MessageBoxResult.Yes)
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.RemoveBackup(Detail["Settings"]["Token"].AsObjectId,
+                        (Result) =>
+                        {
+                            (Parent as StackPanel).Children.Remove(this);
 
-                        //log
-                        SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["NameLeaderboard"]}\" deleted", new BsonDocument { }, false, resultLog => { });
-                    },
-                    () =>
-                    {
-                        DashboardGame.Notifaction("Fail Delete", Notifaction.StatusMessage.Error);
-                    });
-            }
-            else
+                            if (Result)
+                            {
+                                DashboardGame.Notifaction("Deleted !", Notifaction.StatusMessage.Ok);
+
+                                //log
+                                SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Delete Backup", $"Backup  \" {Detail["Settings"]["Token"].AsObjectId}\" deleted", new BsonDocument { }, false, resultLog => { });
+                            }
+                            else
+                            {
+                                DashboardGame.Notifaction("Cant Delete !", Notifaction.StatusMessage.Error);
+                            }
+                        });
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Reject Delete", Notifaction.StatusMessage.Error);
+                }
+            };
+
+            BTNDownload.MouseDown += (s, e) =>
             {
-                DashboardGame.Notifaction("Reject Delete", Notifaction.StatusMessage.Error);
-            }
+
+                DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail));
+
+            };
         }
-
-        private void Download(object sender, MouseButtonEventArgs e)
-        {
-            DashboardGame.Dashboard.Root.Children.Add(new ModelDownloadBackup(Detail["NameLeaderboard"].ToString(), Detail["Name"].ToString()));
-        }
-
-
-        Action RefreshList;
-
 
     }
 

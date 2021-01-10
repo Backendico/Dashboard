@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements"
         mc:Ignorable="d"
-             Background="#33000000" d:DesignWidth="1033.333"
+             Background="#33000000" d:DesignWidth="1033.333" d:DesignHeight="862.05"
     >
+
 
     <Border Margin="60,60" Background="White" CornerRadius="5" BorderBrush="Transparent" >
 
@@ -75,40 +76,39 @@
                         <!--NickName-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Nickname: "/>
-                            <TextBox TextChanged="NicknameChange" x:Name="TextboxNickname" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Nick_namehere"/>
+                            <TextBox  x:Name="TextboxNickname" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Nick_namehere"/>
                         </StackPanel>
 
                         <!--AvatarURL-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Cursor="Hand"  Margin="10,0"  Text="&#xE946;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" MouseDown="AvatarHelp" />
                             <TextBlock  Text="Avatar(URL): "/>
-                            <TextBox x:Name="TextboxAvatar" MinWidth="150" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" TextChanged="AvatarChange"/>
+                            <TextBox x:Name="TextboxAvatar" MinWidth="150" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" />
                         </StackPanel>
 
                         <!--Language-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Cursor="Hand"  Margin="10,0"  Text="&#xE946;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" MouseDown="LanguageHelp" />
                             <TextBlock  Text="Language: "/>
                             <TextBlock  FontSize="10" FontWeight="Normal" Text="( Iso 639-1 ) "/>
-                            <TextBox x:Name="TextLanguage" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" TextChanged="LanguageChange"/>
+                            <TextBox x:Name="TextLanguage" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="URLHERE" />
                         </StackPanel>
 
                         <!--Country-->
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Cursor="Hand"  Margin="10,0"  Text="&#xE946;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" MouseDown="CountryHelp" />
                             <TextBlock  Text="Country: " />
                             <TextBlock  FontSize="10" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" Text="( ISO 3166-ALPHA2 )" />
-                            <TextBox  Background="Transparent" BorderBrush="Transparent" x:Name="TextCountry" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" MinWidth="150" Text="" TextChanged="CountryChange"/>
+                            <TextBox  Background="Transparent" BorderBrush="Transparent" x:Name="TextCountry" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Normal" MinWidth="150" Text=""  />
                         </StackPanel>
 
+                        <!--Tag System-->
+                        <TextBlock x:Name="Tags" Cursor="Hand" Margin="10">
+                            <Run Text="Tags"/> <Run Text="("/> <Run Name="TextCountTags" Text="0"/> <Run Text=")"/>
+                        </TextBlock>
 
                         <!--CreatedTime-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Created: "/>
                             <TextBlock x:Name="TextCreated" MinWidth="200" FontWeight="Normal"  Text="URLHERE"/>
                         </StackPanel>
-
-
 
 
 
@@ -123,18 +123,18 @@
                         <!--Username-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Username: "/>
-                            <TextBox  x:Name="TextboxUsername" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="UsernameHere" TextChanged="UsernameChange" />
+                            <TextBox  x:Name="TextboxUsername" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="UsernameHere"   />
                         </StackPanel>
 
                         <!--Password-->
                         <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Password: "/>
-                            <Border ToolTip="Send Email Recovery" x:Name="BTNSendEmailRecovery" Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
-                                <TextBlock VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="Send Email Recovery"/>
-                            </Border>
-                        </StackPanel>
-                            
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="Password: "/>
+                                <Border ToolTip="Send Email Recovery" x:Name="BTNSendEmailRecovery" Cursor="Hand" Height="30"  CornerRadius="5" Background="Orange" >
+                                    <TextBlock VerticalAlignment="Center" Foreground="White" Margin="10,0" Text="Send Email Recovery"/>
+                                </Border>
+                            </StackPanel>
+
                             <StackPanel x:Name="PanelChangePassword" Orientation="Horizontal" Visibility="Collapsed" Margin="10">
                                 <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="New Password: "/>
                                 <TextBox  x:Name="TextNewPassword" Margin="10,0" MinWidth="200"/>
@@ -147,13 +147,13 @@
                         <!--Email-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Email: "/>
-                            <TextBox x:Name="TextboxEmail" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Email here" TextChanged="EmailChange"/>
+                            <TextBox x:Name="TextboxEmail" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="Email here" />
                         </StackPanel>
 
                         <!--Phone-->
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock  Text="Phone: "/>
-                            <TextBox x:Name="Textboxphone" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="N/A" TextChanged="EmailChange"/>
+                            <TextBox x:Name="Textboxphone" MinWidth="200" BorderBrush="Transparent" FontWeight="Normal"  Text="N/A"  />
                         </StackPanel>
 
 
@@ -168,12 +168,8 @@
                         <!--Delete-->
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
                             <!--BTN Delete-->
-                            <Border ToolTip="Delete" MouseDown="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
+                            <Border x:Name="BTNDelete" ToolTip="Delete" Cursor="Hand" Margin="10,0" Background="Tomato" CornerRadius="5" Width="80" Height="30" >
                                 <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Delete"/>
-                            </Border>
-                            <!--BTN Save-->
-                            <Border ToolTip="Save Setting" MouseDown="SaveSetting" Cursor="Hand" Background="Orange" CornerRadius="5" Width="80" Height="30" >
-                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" Text="Save"/>
                             </Border>
 
                         </StackPanel>
@@ -196,18 +192,10 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--Addleaderobard-->
-                                    <Border  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" MouseDown="Add">
+                                    <Border Name="BTNAaddLeaderboardShow" Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new leaderboard " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
-                                        </TextBlock>
-                                    </Border>
-
-                                    <!--Save-->
-                                    <Border   Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Save Leaderboards " Background="LightGray" MouseDown="Save">
-                                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                         <Run  Foreground="White"  Text="&#xE74E;   " FontFamily="Segoe MDL2 Assets"/>
-                                         <Run Foreground="White"  Text="Save"/>
                                         </TextBlock>
                                     </Border>
 
@@ -227,13 +215,11 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="17"/>
                                     </Grid.ColumnDefinitions>
                                     <Border CornerRadius="5,0,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="0"/>
                                     <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="1"/>
-                                    <Border Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,2,2" Grid.Column="2"/>
-                                    <Border CornerRadius="0,5,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="3"/>
+                                    <Border CornerRadius="0,5,0,0" Background="Gainsboro" BorderBrush="Gray" BorderThickness="0,0,0,2" Grid.Column="2"/>
 
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Name" Grid.Column="0"/>
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center"  Text="Value" Grid.Column="1"/>
@@ -243,10 +229,10 @@
                                 <!--Place Content-->
                                 <ScrollViewer  Margin="0,0,0,5" BorderBrush="Gray" BorderThickness="2" Grid.Row="1">
                                     <StackPanel x:Name="PlaceContentLeaderboard"/>
+
                                 </ScrollViewer>
                             </Grid>
                         </Border>
-
 
 
                     </Grid>
@@ -268,7 +254,7 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--AddLog-->
-                                    <Border  x:Name="BTNAddLog"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new log " Background="LightGray" MouseDown="Add">
+                                    <Border  x:Name="BTNAddLog"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new log " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
@@ -276,7 +262,7 @@
                                     </Border>
 
                                     <!--Clear all logs-->
-                                    <Border x:Name="BTNClearLogs"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Clear all log " Background="LightGray" MouseDown="Add">
+                                    <Border x:Name="BTNClearLogs"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Clear all log " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xEA99;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Clear"/>
@@ -352,7 +338,7 @@
                             <Grid>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="20,0">
                                     <!--AddLog-->
-                                    <Border  x:Name="BTNShowPanelAddAchievement"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new achievement " Background="LightGray" MouseDown="Add">
+                                    <Border  x:Name="BTNShowPanelAddAchievement"  Margin="10,0" Height="30" Width="80" CornerRadius="3"   Cursor="Hand"  ToolTip="Add new achievement " Background="LightGray" >
                                         <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                                          <Run  Foreground="White"  Text="&#xE710;   " FontFamily="Segoe MDL2 Assets"/>
                                          <Run Foreground="White"  Text="Add"/>
@@ -407,6 +393,36 @@
             </Grid>
 
             <!--SubPages-->
+            <!--SubPageAdd leaderboard-->
+            <Grid  x:Name="PanelAddLeaderboard" Grid.Row="2"  Visibility="Collapsed" Background="#33000000" Opacity="0" >
+
+                <Grid.Effect>
+                    <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
+                </Grid.Effect>
+                <!--Header-->
+                <Rectangle   Height="20" Width="20" Fill="White"  VerticalAlignment="Top" HorizontalAlignment="Left"   RadiusX="3" RadiusY="4" Margin="70,40,0,0"  >
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <!--Body-->
+                <Border  Margin="5,51,0,0"  CornerRadius="10" Width="300"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+
+                    <StackPanel>
+                        <TextBlock Margin="10,5" Text="The new value replaces the old value"/>
+                        <StackPanel Name="PlaceLeaderboardStudio" Margin="10" Grid.Row="1"/>
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
             <!--SubPageAdd Log-->
             <Grid  x:Name="PanelAddLog"  Visibility="Collapsed" Background="#33000000" Opacity="0" Grid.Row="2" >
 
@@ -436,7 +452,6 @@
                             <TextBox  x:Name="TextboxHeader"/>
                         </StackPanel>
 
-
                         <!--Description-->
                         <StackPanel Margin="0,5">
                             <TextBlock Text="Description :"/>
@@ -457,7 +472,7 @@
 
             </Grid>
 
-            <!--SubPageAchievements Log-->
+            <!--SubPageAchievements -->
             <Grid  x:Name="PanelAddAchievements"  Visibility="Collapsed" Background="#33000000" Opacity="0" Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="672*"/>
@@ -490,7 +505,7 @@
 
                         <ScrollViewer  MaxHeight="500" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
                             <StackPanel  x:Name="ListStudioAchievement" >
-
+                             
                             </StackPanel>
                         </ScrollViewer>
 

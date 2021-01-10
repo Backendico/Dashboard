@@ -1,11 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios.Element;
 using Dashboard.GlobalElement;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
@@ -67,6 +64,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
             SDK.SDK_PageDashboards.DashboardGame.PageStudios.ReciveStudios(
                 result =>
                 {
+                    SettingUser.ServerTime = new DateTime(result["ServerTime"].AsInt64);
+
                     PlaceContentStudios.Children.Clear();
                     if (result["Settings"].AsBsonArray.Count <= 0)
                     {

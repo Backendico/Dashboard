@@ -1,8 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard;
 using Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer;
 using Dashboard.Dashboards.Dashboard_Game.Notifaction;
-using Dashboard.Dashboards.Dashboard_Game.PageAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Login;
+using Dashboard.Dashboards.Dashboard_Game.PageContent;
 using Dashboard.Dashboards.Dashboard_Game.PageLeaderboards;
 using Dashboard.Dashboards.Dashboard_Game.SubPages;
 using Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageDocuments;
@@ -89,6 +89,7 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 Root.Children.Add(new SubPageStudios());
 
             };
+
 
             //actionBTnSetting
             BTNSetting.MouseDown += (s, e) =>
@@ -448,6 +449,16 @@ namespace Dashboard.Dashboards.Dashboard_Game
                 case "BTNAchievements":
                     CurentPage = new PageAchievements.PageAchievements();
                     CurentTab = BTNAchievements;
+                    break;
+                case "BTNShop":
+                    CurentPage = new PageShop.PageShop();
+                    CurentTab = BTNShop;
+                    break;
+                case "BTNContent":
+                    {
+                        CurentPage = new PageContent.PageContent();
+                        CurentTab = BTNContent;
+                    }
                     break;
                 default:
                     Debug.WriteLine("Not set");

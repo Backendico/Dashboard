@@ -35,8 +35,8 @@
     <SuiteName>Chilligame</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -211,6 +211,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dashboards\Dashboard-Game\Add-ons\JsonEditor\JsonEditor.xaml.cs">
+      <DependentUpon>JsonEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Add-ons\JsonView\JsonView.xaml.cs">
+      <DependentUpon>JsonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\Elements\ModelTag.xaml.cs">
+      <DependentUpon>ModelTag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\TagsSystem.xaml.cs">
+      <DependentUpon>TagsSystem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\DashboardGame.xaml.cs">
       <DependentUpon>DashboardGame.xaml</DependentUpon>
     </Compile>
@@ -244,14 +256,50 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageContent\Elements\EditContent\EditContent.xaml.cs">
+      <DependentUpon>EditContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageContent\Elements\ModelContent\ModelContent.xaml.cs">
+      <DependentUpon>ModelContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageContent\PageContent.xaml.cs">
+      <DependentUpon>PageContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderboard.xaml.cs">
       <DependentUpon>PageLeaderboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml.cs">
+      <DependentUpon>EditPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAchievements\ModelAchievements.xaml.cs">
       <DependentUpon>ModelAchievements.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAchievements\ModelAchievementStudio.xaml.cs">
+      <DependentUpon>ModelAchievementStudio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboard\LeaderaboardPlayer.xaml.cs">
+      <DependentUpon>LeaderaboardPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboard\ModelLeaderboards.xaml.cs">
+      <DependentUpon>ModelLeaderboards.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLog\ModelLogPlayer.xaml.cs">
       <DependentUpon>ModelLogPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\EditShop.xaml.cs">
+      <DependentUpon>EditShop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\ModelProduct\ModelProduct.xaml.cs">
+      <DependentUpon>ModelProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\Payments\ModelPayments.xaml.cs">
+      <DependentUpon>ModelPayments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageShop\Elements\ModelStore.xaml.cs">
+      <DependentUpon>ModelStore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageShop\PageShop.xaml.cs">
+      <DependentUpon>PageShop.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\SubPages\Elements\ModelPayment.xaml.cs">
       <DependentUpon>ModelPayment.xaml</DependentUpon>
@@ -298,6 +346,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Dashboards\Dashboard-Game\Add-ons\JsonEditor\JsonEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Add-ons\JsonView\JsonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\Elements\ModelTag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Add-ons\TagsSystem\TagsSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\DashboardGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -342,6 +406,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageContent\Elements\EditContent\EditContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageContent\Elements\ModelContent\ModelContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageContent\PageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\PageDashboard\PageDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -382,11 +458,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboardPlayerEdit.xaml">
+    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAchievements\ModelAchievementStudio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboardPlayer_New.xaml">
+    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboard\LeaderaboardPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboard\ModelLeaderboards.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -395,6 +475,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PagePlayer\PagePlayers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\EditShop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\ModelProduct\ModelProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageShop\Elements\EditShop\Payments\ModelPayments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageShop\Elements\ModelStore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageShop\PageShop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,17 +574,8 @@
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\Elements\ModelLeaderboardAbstract.xaml.cs">
       <DependentUpon>ModelLeaderboardAbstract.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\EditPlayer.xaml.cs">
-      <DependentUpon>EditPlayer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelAbstractUser.xaml.cs">
       <DependentUpon>ModelAbstractUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboardPlayerEdit.xaml.cs">
-      <DependentUpon>ModelLeaderboardPlayerEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\PagePlayer\Elements\ModelLeaderboardPlayer_New.xaml.cs">
-      <DependentUpon>ModelLeaderboardPlayer_New.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PagePlayer\PagePlayers.xaml.cs">
       <DependentUpon>PagePlayers.xaml</DependentUpon>
@@ -537,5 +628,6 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

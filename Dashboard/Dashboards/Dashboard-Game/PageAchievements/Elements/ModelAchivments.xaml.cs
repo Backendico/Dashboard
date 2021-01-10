@@ -1,22 +1,9 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Notifaction;
-using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
 {
@@ -30,12 +17,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements
             InitializeComponent();
             TextName.Text = DetailAchievement["Name"].AsString;
             TextToken.Text = DetailAchievement["Token"].ToString();
-            TextCreated.Text =DateTime.Parse( DetailAchievement["Created"].ToString()).ToString();
+            TextCreated.Text = DateTime.Parse(DetailAchievement["Created"].ToString()).ToString();
             TextValue.Text = DetailAchievement["Value"].ToString();
-          
+
             try
             {
-            TextPercent.Text = ((DetailAchievement["Players"]["Achievements"].ToInt32()*100)/ DetailAchievement["TotalPlayer"].ToInt32())+"%";
+                TextPercent.Text = ((DetailAchievement["Players"]["Achievements"].ToInt32() * 100) / DetailAchievement["TotalPlayer"].ToInt32()) + "%";
                 TextPlayers.Text = DetailAchievement["Players"]["Achievements"].ToString();
             }
             catch (Exception)

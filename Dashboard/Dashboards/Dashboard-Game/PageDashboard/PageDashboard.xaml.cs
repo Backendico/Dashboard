@@ -1,21 +1,5 @@
 ﻿using Dashboard.GlobalElement;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
 {
@@ -30,7 +14,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
 
             //recive Notifactions
             DashboardGame.Dashboard.ReciveNotifactions();
-            
+
             DashboardGame.ReciveManuallNotifaction();
 
             Loaded += (s, e) =>
@@ -69,6 +53,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PageDashboard
                         //achievements
                         TextTotalCount_Achievements.Text = result["Achievements"]["Totall"].ToString();
                         TextCount_Achievements.Text = result["Achievements"]["Count"].ToString();
+
+                        //Store
+                        TextTotalCount_Store.Text = result["Store"]["Count"].ToString();
+                        TextCount_Store.Text = result["Store"]["Totall"].ToString();
                     },
                     () =>
                     {

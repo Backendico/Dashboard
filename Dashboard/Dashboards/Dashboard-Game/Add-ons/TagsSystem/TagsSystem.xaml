@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem.TagsSystem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem"
+             
+             mc:Ignorable="d"
+             
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="Root"  Background="#33000000">
+        <Border x:Name="Content" CornerRadius="20" MaxWidth="500"  MinWidth="400" MaxHeight="500" VerticalAlignment="Center" Opacity="1" HorizontalAlignment="Center" Background="White">
+            
+            <!--Animation-->
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Loaded" >
+                    <BeginStoryboard  >
+                        <Storyboard Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root">
+                            <DoubleAnimation From="0" To="1" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            
+            <!--Shadow-->
+            <Border.Effect>
+                <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="20"/>
+            </Border.Effect>
+
+            <StackPanel Margin="10">
+                <TextBlock Margin="0,10" Text="Tags :" FontWeight="Bold"/>
+                <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    
+                <WrapPanel MaxHeight="300"  Orientation="Vertical" Name="PlaceTags" Margin="0,20"/>
+                    
+                </ScrollViewer>
+
+                
+
+                <!--Tag add-->
+                <StackPanel x:Name="PanelAddTag" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <!--Color-->
+                    <StackPanel Orientation="Horizontal">
+                        <Border x:Name="SelectedColor" CornerRadius="20" Background="Khaki" Width="20" Height="20"/>
+
+                        <!-- ColorsPallet-->
+                        <StackPanel x:Name="ColorPallet" Visibility="Collapsed" Orientation="Horizontal" >
+                            <Border  Margin="2,0" CornerRadius="20" Background="CornflowerBlue" Width="10" Height="10" MouseDown="ChangeColor"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand" Margin="2,0" CornerRadius="20" Background="Khaki" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand" Margin="2,0" CornerRadius="20" Background="Orange" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand" Margin="2,0" CornerRadius="20" Background="LightGreen" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand"  Margin="2,0" CornerRadius="20" Background="Tomato" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand" Margin="2,0" CornerRadius="20" Background="Orchid" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand" Margin="2,0" CornerRadius="20" Background="LightGray" Width="10" Height="10"/>
+                            <Border MouseDown="ChangeColor" Cursor="Hand" Margin="2,0" CornerRadius="20" Background="Yellow" Width="10" Height="10"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <TextBox MaxWidth="300" x:Name="TextNewTag" Margin="10,0" MinWidth="200"/>
+
+                    <!--BTNAdd-->
+                    <Border Cursor="Hand" x:Name="BTN_AddTag" CornerRadius="5" Background="Orange" Width="25" Height="25">
+                        <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="White"  Text="&#xE948;" FontFamily="Segoe MDL2 Assets"/>
+                    </Border>
+
+                </StackPanel>
+
+
+            </StackPanel>
+
+        </Border>
+    </Grid>
+</UserControl>

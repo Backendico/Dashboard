@@ -3,7 +3,6 @@ using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements;
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +16,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
     /// </summary>
     public partial class PagePlayers : UserControl
     {
-         int PlayerCount =0;
+        int PlayerCount = 0;
         int ReciveCount = 100;
 
         public PagePlayers()
@@ -125,7 +124,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     {
                         foreach (var item in result["ListPlayers"].AsBsonArray)
                         {
-                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, RecivePlayersList, Parent as Grid));
+                            PlaceContentUser.Children.Add(new ModelAbstractUser(item.AsBsonDocument, RecivePlayersList));
                         }
                     }
                     else
@@ -331,8 +330,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         private void OpenEditPlayer(object sender, MouseButtonEventArgs e)
         {
             ShowOffPanelSearch();
-
-            DashboardGame.Dashboard.Root.Children.Add(new EditPlayer(CurentSearchResult, RecivePlayersList));
         }
 
 

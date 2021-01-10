@@ -1,20 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements
 {
@@ -23,7 +10,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
     /// </summary>
     public partial class ModelAchievements : UserControl
     {
-        public ModelAchievements(BsonDocument DetailAchievement, ObjectId TokenPlayer, Action Refreshlist)
+        public ModelAchievements(BsonDocument DetailAchievement, IEditAchievements Editor)
         {
             InitializeComponent();
 
@@ -33,26 +20,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchieveme
             TextRecive.Text = DetailAchievement["Recive"].ToLocalTime().ToString();
 
             //action delete achievement
-            BTNRemove.MouseDown += (s, e) =>
-            {
-                DetailAchievement.Remove("Recive");
+            BTNRemove.MouseDown += async (s, e) =>
+             {
+                 if (await DashboardGame.DialogYesNo("All Value in this section will be lost.  are you sure? ") == System.Windows.MessageBoxResult.Yes)
+                 {
+                     DetailAchievement.Remove("Recive");
 
-                SDK.SDK_PageDashboards.DashboardGame.PageAchievements.RemoveAchievementsPlayer(TokenPlayer, DetailAchievement, result =>
-                {
-                    if (result)
-                    {
-                        DashboardGame.Notifaction("Removed", Notifaction.StatusMessage.Ok);
-                        Refreshlist();
+                     Editor.RemoveAchievements(DetailAchievement);
 
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Remove", Notifaction.StatusMessage.Error);
-                    }
+                 }
+                 else
+                 {
+                     DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                 }
+             };
 
-                });
-
-            };
 
             //copy TOken
             TextToken.MouseDown += GlobalEvents.CopyText;
