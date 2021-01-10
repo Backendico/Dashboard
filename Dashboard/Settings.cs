@@ -19,7 +19,5 @@
             // this.SettingsSaving += this.SettingsSavingEventHandler;
             //
         }
-
-       
     }
 }
