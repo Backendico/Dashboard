@@ -42,7 +42,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent
 
                         if (result)
                         {
+
                             InitPageContent();
+                            ShowOffPanelContent();
                         }
                         else
                         {
@@ -65,12 +67,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent
                     ShowOffPanelContent();
                 }
             };
+
+
+            BTNShowAddAchievment.MouseDown += (s, e) =>
+            {
+                ShowPanelAddContent();
+            };
         }
 
         void InitPageContent()
         {
             SDK.SDK_PageDashboards.DashboardGame.PageContent.RecieveContents(Count, result =>
             {
+                PlaceContent.Children.Clear();
                 if (result.ElementCount >= 1)
                 {
 

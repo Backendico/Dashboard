@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
 {
@@ -16,16 +17,35 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
         public JsonView(BsonDocument JsonData)
         {
             InitializeComponent();
+
             PlaceElement.Children.Add(new ElementObject(JsonData));
 
             BTNSave.Click += (s, e) =>
             {
-                Debug.WriteLine(JsonData);
+                ShowOffPanelAchievements();
+            };
+        }
+
+
+        void ShowOffPanelAchievements()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                Root.Visibility = Visibility.Collapsed;
+
+                Root.Visibility = Visibility.Collapsed;
+               
+                DashboardGame.Dashboard.Root.Children.Remove(this);
 
             };
 
+            Storyboard.SetTargetName(Anim, Root.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
         }
-
 
         public class Elements : StackPanel
         {

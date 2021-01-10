@@ -47,6 +47,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.ModelContent
             {
                 DashboardGame.Dashboard.Root.Children.Add(new EditContent.EditContent(this));
             };
+
+            BTNDelete.MouseDown += async (s, e) =>
+             {
+                 if (await DashboardGame.DialogYesNo("All information is deleted.\nAre you sure ? ") == MessageBoxResult.Yes)
+                 {
+
+                     Delete();
+                 }
+                 else
+                 {
+                     DashboardGame.Notifaction("Rejected", Notifaction.StatusMessage.Warrning);
+                 }
+             };
         }
 
         public void Init()
@@ -60,8 +73,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.ModelContent
 
         public void Save()
         {
-            SDK.SDK_PageDashboards.DashboardGame.PageContent.EditContent(DetailContent["Settings"]["Token"].AsObjectId,DetailContent,result=> {
-
+            SDK.SDK_PageDashboards.DashboardGame.PageContent.EditContent(DetailContent["Settings"]["Token"].AsObjectId, DetailContent, result =>
+            {
                 if (result)
                 {
                     Init();
@@ -76,6 +89,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.ModelContent
 
         public void Delete()
         {
+            SDK.SDK_PageDashboards.DashboardGame.PageContent.DeleteContent(DetailContent["Settings"]["Token"].AsObjectId, Result =>
+            {
+                if (Result)
+                {
+                    (Parent as WrapPanel).Children.Remove(this);
+                    DashboardGame.Notifaction("Deleted", Notifaction.StatusMessage.Ok);
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Faild Recieve", Notifaction.StatusMessage.Error);
+                }
+
+            });
 
         }
     }

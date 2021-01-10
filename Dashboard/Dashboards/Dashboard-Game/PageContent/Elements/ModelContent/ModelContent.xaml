@@ -8,12 +8,40 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <!--Content-->
     <Border  x:Name="Root" BorderBrush="Gray" Opacity="1" BorderThickness="2" Margin="10" CornerRadius="5" Background="WhiteSmoke" MinWidth="200" MinHeight="200">
+
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3"/>
+                    </Storyboard>
+
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Controller" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation From="0" To="1" Duration="0:0:0:0.3"/>
+                    </Storyboard>
+
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetName="Controller" Storyboard.TargetProperty="Opacity">
+                        <DoubleAnimation From="1" To="0" Duration="0:0:0:0.3"/>
+                    </Storyboard>
+
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+
         <StackPanel Margin="10">
 
             <!--NameContent-->
             <TextBlock x:Name="TextNameStore" FontWeight="Bold" FontSize="15" Text="Name Store"/>
             <!--Token-->
-            <TextBlock>
+            <TextBlock Cursor="Hand">
                                 <LineBreak/>
                                 <Run Text="Token: "  FontWeight="Bold"/><Run x:Name="TextToken" Text="XXX"/>
                                 <LineBreak/>
@@ -38,14 +66,14 @@
             </TextBlock>
 
             <!--Controller-->
-            <StackPanel x:Name="Controller" Opacity="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <StackPanel x:Name="Controller" Opacity="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
                 <!--Delete-->
                 <Border x:Name="BTNDelete" Cursor="Hand" Margin="1,0" CornerRadius="5,0,0,5" Background="Tomato" Width="30" Height="30">
                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets"/>
                 </Border>
 
-                <!--Delete-->
+                <!--View-->
                 <Border x:Name="BTNView" Cursor="Hand" Margin="1,0"  Background="Orange" Width="30" Height="30">
                     <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="&#xE7B3;" FontFamily="Segoe MDL2 Assets"/>
                 </Border>

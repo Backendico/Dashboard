@@ -37,13 +37,12 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.EditContent
             InitEditor();
 
             //init edit content
-            ContentElement.Children.Add(new JsonEditor(Editor.DetailContent["Content"].AsBsonDocument,()=> {
-                
+            ContentElement.Children.Add(new JsonEditor(Editor.DetailContent["Content"].AsBsonDocument, () =>
+            {
                 Editor.Save();
                 InitEditor();
-            
             }));
-           
+
 
             //Chaneg texname
             TextName.LostFocus += (s, e) =>
@@ -84,7 +83,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.EditContent
             TextIndex.Text = Editor.DetailContent["Settings"]["Index"].ToString();
             TextElement.Text = Editor.DetailContent["Content"].AsBsonDocument.ElementCount.ToString();
             TextCreated.Text = Editor.DetailContent["Settings"]["Created"].ToLocalTime().ToString();
-            
+
         }
 
 

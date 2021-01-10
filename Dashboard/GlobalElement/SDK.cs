@@ -540,7 +540,7 @@ namespace Dashboard.GlobalElement
                     {
                         try
                         {
-                            new  MailAddress(Email);
+                            new MailAddress(Email);
 
                             var client = new RestClient(Links.SearchEmail);
                             client.Timeout = -1;
@@ -828,7 +828,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-              
+
                 }
 
                 public sealed class PageLeaderboard
@@ -1727,7 +1727,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PageContent
                 {
                     public static ModelLinks.DashboardGame.PageContent Links;
-                    public static  async void AddContent(string NameContent,Action<bool> Result)
+                    public static async void AddContent(string NameContent, Action<bool> Result)
                     {
                         var client = new RestClient(Links.AddContent);
                         client.Timeout = -1;
@@ -1738,13 +1738,13 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("NameContent", NameContent);
                         IRestResponse response = await client.ExecuteAsync(request);
 
-                        if (response.StatusCode==System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(true);
                         }
                         else
                         {
-                            Result(false);  
+                            Result(false);
                         }
                     }
 
@@ -1760,7 +1760,7 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Count", Count.ToString());
                         IRestResponse response = await client.ExecuteAsync(request);
 
-                        
+
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
@@ -1771,7 +1771,7 @@ namespace Dashboard.GlobalElement
                         }
                     }
 
-                    public static async void EditContent(ObjectId TokenContent,BsonDocument Detail, Action<bool> Result)
+                    public static async void EditContent(ObjectId TokenContent, BsonDocument Detail, Action<bool> Result)
                     {
                         var client = new RestClient(Links.EditContent);
                         client.Timeout = -1;
@@ -1795,6 +1795,28 @@ namespace Dashboard.GlobalElement
                             Result(false);
                         }
                     }
+
+                    public static async void DeleteContent(ObjectId TokenContent, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.DeleteContent);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenContent", TokenContent.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
                 }
 
             }
@@ -1947,8 +1969,9 @@ namespace Dashboard.GlobalElement
             {
                 public string BaseLink => "http://193.141.64.203/";
                 public string AddContent => BaseLink + "PageContent/AddContent";
-                public string RecieveContents=> BaseLink + "PageContent/RecieveContents";
-                public string EditContent  => BaseLink + "PageContent/EditContent";
+                public string RecieveContents => BaseLink + "PageContent/RecieveContents";
+                public string EditContent => BaseLink + "PageContent/EditContent";
+                public string DeleteContent => BaseLink + "PageContent/DeleteContent";
 
             }
         }
