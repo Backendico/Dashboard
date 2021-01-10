@@ -5193,7 +5193,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             Add.MouseDown += (s, e) =>
             {
                 PlaceSubElements.Children.Clear();
-                MainData.Add(ObjectId.GenerateNewId().ToString(), " ");
+                Data.Value.AsBsonDocument.Add(ObjectId.GenerateNewId().ToString(),"");
 
                 foreach (var item in Data.Value.AsBsonDocument)
                 {
@@ -5301,7 +5301,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
 
                     }
                 }
-
             };
 
             Name.LostFocus += (s, e) =>

@@ -60,7 +60,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.ModelContent
 
         public void Save()
         {
+            SDK.SDK_PageDashboards.DashboardGame.PageContent.EditContent(DetailContent["Settings"]["Token"].AsObjectId,DetailContent,result=> {
 
+                if (result)
+                {
+                    Init();
+                    DashboardGame.Notifaction("Saved", Notifaction.StatusMessage.Ok);
+                }
+                else
+                {
+                    DashboardGame.Notifaction("Faild Save", Notifaction.StatusMessage.Error);
+                }
+            });
         }
 
         public void Delete()

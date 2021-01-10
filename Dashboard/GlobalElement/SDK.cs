@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
 using RestSharp;
 using System;
+using System.Diagnostics;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Web.Compilation;
 
 namespace Dashboard.GlobalElement
 {
@@ -1768,6 +1770,31 @@ namespace Dashboard.GlobalElement
                             Result(new BsonDocument());
                         }
                     }
+
+                    public static async void EditContent(ObjectId TokenContent,BsonDocument Detail, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.EditContent);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("TokenContent", TokenContent.ToString());
+                        request.AddParameter("Detail", Detail.ToString());
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        Debug.WriteLine(response.Content);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
                 }
 
             }
@@ -1921,6 +1948,7 @@ namespace Dashboard.GlobalElement
                 public string BaseLink => "http://193.141.64.203/";
                 public string AddContent => BaseLink + "PageContent/AddContent";
                 public string RecieveContents=> BaseLink + "PageContent/RecieveContents";
+                public string EditContent  => BaseLink + "PageContent/EditContent";
 
             }
         }

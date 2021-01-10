@@ -25,20 +25,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.EditContent
         Grid CurentPage;
         Button CurentTab;
 
+        IEditContent Editor;
+
         public EditContent(IEditContent Editor)
         {
             InitializeComponent();
             CurentPage = ContentSetting;
             CurentTab = BTNSetting;
+            this.Editor = Editor;
 
-            TextName.Text = Editor.DetailContent["Settings"]["Name"].ToString();
-            TextAccess.Text = Editor.DetailContent["Settings"]["Access"].ToString();
-            TextToken.Text = Editor.DetailContent["Settings"]["Token"].ToString();
-            TextIndex.Text = Editor.DetailContent["Settings"]["Index"].ToString();
-            TextElement.Text = Editor.DetailContent["Content"].AsBsonDocument.ElementCount.ToString();
-            TextCreated.Text = Editor.DetailContent["Settings"]["Created"].ToLocalTime().ToString();
+            InitEditor();
 
-            ContentElement.Children.Add(new JsonEditor(Editor.DetailContent["Settings"].AsBsonDocument,()=> { Editor.Save(); }));
+            //init edit content
+            ContentElement.Children.Add(new JsonEditor(Editor.DetailContent["Content"].AsBsonDocument,()=> {
+                
+                Editor.Save();
+                InitEditor();
+            
+            }));
            
 
             //Chaneg texname
@@ -70,6 +74,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.EditContent
 
             //Copy text
             TextToken.MouseDown += GlobalEvents.CopyText;
+        }
+
+        public void InitEditor()
+        {
+            TextName.Text = Editor.DetailContent["Settings"]["Name"].ToString();
+            TextAccess.Text = Editor.DetailContent["Settings"]["Access"].ToString();
+            TextToken.Text = Editor.DetailContent["Settings"]["Token"].ToString();
+            TextIndex.Text = Editor.DetailContent["Settings"]["Index"].ToString();
+            TextElement.Text = Editor.DetailContent["Content"].AsBsonDocument.ElementCount.ToString();
+            TextCreated.Text = Editor.DetailContent["Settings"]["Created"].ToLocalTime().ToString();
+            
         }
 
 
@@ -107,5 +122,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.EditContent
         {
             DashboardGame.Dashboard.Root.Children.Remove(this);
         }
+
+
+
     }
 }
