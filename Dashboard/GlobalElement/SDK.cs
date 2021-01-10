@@ -1784,7 +1784,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Detail", Detail.ToString());
                         IRestResponse response = await client.ExecuteAsync(request);
 
-                        Debug.WriteLine(response.Content);
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {

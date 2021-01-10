@@ -77,13 +77,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent.Elements.EditContent
 
         public void InitEditor()
         {
+            TextContent.Text = Editor.DetailContent["Settings"]["Name"].ToString();
             TextName.Text = Editor.DetailContent["Settings"]["Name"].ToString();
             TextAccess.Text = Editor.DetailContent["Settings"]["Access"].ToString();
             TextToken.Text = Editor.DetailContent["Settings"]["Token"].ToString();
             TextIndex.Text = Editor.DetailContent["Settings"]["Index"].ToString();
             TextElement.Text = Editor.DetailContent["Content"].AsBsonDocument.ElementCount.ToString();
             TextCreated.Text = Editor.DetailContent["Settings"]["Created"].ToLocalTime().ToString();
-
         }
 
 

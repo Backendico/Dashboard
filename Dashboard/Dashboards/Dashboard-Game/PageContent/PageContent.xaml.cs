@@ -73,6 +73,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageContent
             {
                 ShowPanelAddContent();
             };
+
+
+            BTNSeeMorePlayer.MouseDown += (s, e) => {
+
+                Count += 100;
+                TextSeeMoreNumber.Text = Count.ToString();
+            };
         }
 
         void InitPageContent()
