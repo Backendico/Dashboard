@@ -109,6 +109,7 @@
                         <TextBlock ToolTip="Achievements" x:Name="BTNAchievements" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xEB95;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                         <TextBlock ToolTip="Store" x:Name="BTNShop" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xE719;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                         <TextBlock Visibility="Visible" ToolTip="Content" x:Name="BTNContent" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xF571;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
+                        <TextBlock Visibility="Visible" ToolTip="KeyValue" x:Name="BTNKeyValue" MouseEnter="ChangeColor_Active" MouseLeave="ChangeColor_DeActive" Cursor="Hand" Margin="10,0,0,10" FontSize="18" Text="&#xEF90;"  Foreground="Gray" TextAlignment="Left" Height="30"  FontFamily="Segoe MDL2 Assets"  MouseDown="ChangePage"  />
                     </StackPanel>
 
                     <!--Texts-->
@@ -120,6 +121,7 @@
                         <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Achievements"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                         <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Store"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                         <TextBlock  Visibility="Visible" Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="Content"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
+                        <TextBlock  Cursor="Hand" Margin="10,0,0,10" FontSize="15" Text="KeyValue"  Foreground="Gray" TextAlignment="Left" Background="Transparent" Height="30"/>
                     </StackPanel>
 
                     <!--Content-->

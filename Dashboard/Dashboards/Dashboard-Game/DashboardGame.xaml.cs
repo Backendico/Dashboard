@@ -460,6 +460,12 @@ namespace Dashboard.Dashboards.Dashboard_Game
                         CurentTab = BTNContent;
                     }
                     break;
+                case "BTNKeyValue":
+                    {
+                        CurentPage = new PageKeyValue.PageKeyValue();
+                        CurentTab = BTNKeyValue;
+                    }
+                    break;
                 default:
                     Debug.WriteLine("Not set");
                     break;

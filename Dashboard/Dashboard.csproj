@@ -265,6 +265,12 @@
     <Compile Include="Dashboards\Dashboard-Game\PageContent\PageContent.xaml.cs">
       <DependentUpon>PageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageKeyValue\Elements\ModelKeyValue.xaml.cs">
+      <DependentUpon>ModelKeyValue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\PageKeyValue\PageKeyValue.xaml.cs">
+      <DependentUpon>PageKeyValue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageLeaderboards\PageLeaderboard.xaml.cs">
       <DependentUpon>PageLeaderboard.xaml</DependentUpon>
     </Compile>
@@ -419,6 +425,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\PageDashboard\PageDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageKeyValue\Elements\ModelKeyValue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\PageKeyValue\PageKeyValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
