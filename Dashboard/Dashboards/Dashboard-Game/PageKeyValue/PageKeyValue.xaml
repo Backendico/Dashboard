@@ -43,12 +43,8 @@
 
             </StackPanel>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="2">
-                <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Center"   Margin="30" >
-
-                    <StackPanel Name="PlaceContentValue">
-                        
-                    </StackPanel>
+            <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="2">
+                <WrapPanel Name="PlaceContentValue" VerticalAlignment="Top" HorizontalAlignment="Center" >
                 </WrapPanel>
             </ScrollViewer>
 
@@ -78,22 +74,33 @@
             </Rectangle>
 
             <!--Body-->
-            <Border  Margin="10,58,0,0"  CornerRadius="10" Width="300" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+            <Border  Margin="10,58,0,0"  CornerRadius="10" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
 
                 <Grid>
                     <!--Body-->
                     <StackPanel Grid.Row="0" Margin="10">
-                        <!--Username-->
+                        <TextBlock Text="| If the key is duplicated, a new value is replaced" Foreground="Tomato"/>
+                        <TextBlock Text="| For added performance, values are stored as strings" Foreground="Orange"/>
+                       
+                        <!--Key-->
                         <StackPanel  Margin="0,10" >
                             <TextBlock Text="Key :"/>
                             <TextBox  x:Name="TextBoxKey" Height="30" />
                         </StackPanel>
 
-                        <!--Password-->
+                        <!--Value-->
                         <StackPanel   Margin="0,10" >
                             <TextBlock Text="Value :"/>
                             <TextBox x:Name="TextBoxValue" Height="30"/>
                         </StackPanel>
+
+                        <ComboBox Name="ComboBoxType">
+                            <ComboBoxItem IsSelected="True" Content="string"/>
+                            <ComboBoxItem Content="int32"/>
+                            <ComboBoxItem Content="int64"/>
+                            <ComboBoxItem Content="Boolean" />
+                            <ComboBoxItem Content="Token"/>
+                        </ComboBox>
 
                         <!--Footer-->
                         <Border x:Name="BTNaddKeyValue" Margin="0,10"  Cursor="Hand"  HorizontalAlignment="Right" Height="30" Width="80" CornerRadius="5"  Background="Orange"  Grid.Row="2"  >

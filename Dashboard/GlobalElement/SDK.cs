@@ -1823,9 +1823,77 @@ namespace Dashboard.GlobalElement
                 {
                     public static ModelLinks.DashboardGame.PageKeyValue Links;
 
-                    public static async void AddKey(string Key, string Value,Action<bool> Result)
+                    public static async void AddKey(BsonElement Value, Action<bool> Result)
                     {
                         var client = new RestClient(Links.AddKey);
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Key", Value.Name);
+                        request.AddParameter("Value", Value.Value);
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+                    }
+
+                    public static async void ReciveKeys(Action<BsonDocument> Result)
+                    {
+                        var client = new RestClient(Links.ReceiveKey);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.POST);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Token", SettingUser.Token);
+
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(BsonDocument.Parse(response.Content));
+                        }
+                        else
+                        {
+                            Result(new BsonDocument());
+                        }
+                    }
+
+                    public static async void RemoveKeys(string Key, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.RemoveKey);
+                        client.Timeout = -1;
+                        client.ClearHandlers();
+                        var request = new RestRequest(Method.DELETE);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
+                        request.AddParameter("Token", SettingUser.Token);
+                        request.AddParameter("Key", Key);
+
+                        IRestResponse response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Result(true);
+                        }
+                        else
+                        {
+                            Result(false);
+                        }
+
+                    }
+
+                    public static async void UpdateKeys(string Key, string Value, Action<bool> Result)
+                    {
+                        var client = new RestClient(Links.UpdateKey);
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         request.AlwaysMultipartFormData = true;
@@ -1841,31 +1909,11 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            Result(false);  
+                            Result(false);
                         }
+
                     }
 
-                    public static async void ReciveKeys( Action<BsonDocument> Result)
-                    {
-                        var client = new RestClient(Links.ReceiveKey);
-                        client.Timeout = -1;
-                        client.ClearHandlers();
-                        var request = new RestRequest(Method.POST);
-                        request.AlwaysMultipartFormData = true;
-                        request.AddParameter("Studio", SettingUser.CurentDetailStudio["Database"]);
-                        request.AddParameter("Token", SettingUser.Token);
-                       
-                        IRestResponse response = await client.ExecuteAsync(request);
-
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            Result(BsonDocument.Parse(response.Content));
-                        }
-                        else
-                        {
-                            Result(new BsonDocument());
-                        }
-                    }
                 }
 
             }
@@ -2030,6 +2078,9 @@ namespace Dashboard.GlobalElement
 
                 public string AddKey => BaseLink + "PageKeyValue/AddKey";
                 public string ReceiveKey => BaseLink + "PageKeyValue/ReceiveKeys";
+
+                public string RemoveKey => BaseLink + "PageKeyValue/RemoveKey";
+                public string UpdateKey => BaseLink + "PageKeyValue/UpdateKey";
             }
         }
     }
