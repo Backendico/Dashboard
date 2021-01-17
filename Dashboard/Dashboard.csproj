@@ -259,6 +259,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\BTNs\SecondaryIcon.xaml.cs">
       <DependentUpon>SecondaryIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml.cs">
+      <DependentUpon>CheackBoxPrimary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPrimary.xaml.cs">
       <DependentUpon>TextInputPrimary.xaml</DependentUpon>
     </Compile>
@@ -449,6 +452,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\BTNs\SecondaryIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
