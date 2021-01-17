@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.PageAUT.Login"
+             xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+             xmlns:Inputs="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
              mc:Ignorable="d" 
              d:DesignHeight="539" d:DesignWidth="800"
              Background="#7F000000"
              >
 
-    <Border Margin="200,100" MaxHeight="500" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent">
+    <Border  Margin="200,100" MaxHeight="500" MaxWidth="700" Background="White" CornerRadius="5" BorderBrush="Transparent">
         <Border.Effect>
             <DropShadowEffect Direction="0" Opacity="0.33" RenderingBias="Performance" ShadowDepth="0" BlurRadius="100"/>
         </Border.Effect>
@@ -57,16 +59,18 @@
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
 
+
+
                     </StackPanel>
                 </Grid>
-                
-                
+
+
             </ScrollViewer>
 
             <!--Body Recovery -->
             <ScrollViewer Visibility="Collapsed" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  Grid.Row="1">
                 <Grid Margin="20,10">
-                 
+
                     <!--Step1-->
                     <StackPanel Visibility="Collapsed">
                         <TextBlock FontWeight="Bold" Text="Step 1:" Margin="0,10"/>
@@ -76,7 +80,7 @@
                             <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="Send Email"/>
                         </Border>
                     </StackPanel>
-                    
+
                     <!--Step2-->
                     <StackPanel Visibility="Collapsed">
                         <TextBlock FontWeight="Bold" Text="Step 2:" Margin="0,10"/>
@@ -90,19 +94,19 @@
                     <!--Step3-->
                     <StackPanel Visibility="Collapsed">
                         <TextBlock FontWeight="Bold" Text="Step 3:" Margin="0,10"/>
-                        
+
                         <!--Password1-->
                         <TextBlock Margin="0,10" Text="New passwrod :"/>
                         <TextBox Height="30"/>
-                        
+
                         <!--Password2-->
                         <TextBlock Margin="0,10" Text="repeat passwrod :"/>
                         <TextBox Height="30"/>
-                       
+
                         <Border  Margin="10"  Background="Orange" CornerRadius="5" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30" Width="80">
                             <TextBlock Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Text="Change"/>
                         </Border>
-                        
+
                     </StackPanel>
 
                 </Grid>
@@ -132,9 +136,10 @@
                 </Border>
 
 
+
             </StackPanel>
 
-         
+
 
         </Grid>
     </Border>
