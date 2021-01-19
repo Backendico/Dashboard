@@ -59,7 +59,7 @@
                             <TextBlock Text="Password : *"/>
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
-                        <Cheackbox:CheackBoxPrimary IsCheacked="False"/>
+
                     </StackPanel>
                 </Grid>
 
