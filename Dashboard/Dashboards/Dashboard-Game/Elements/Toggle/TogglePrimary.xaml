@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.Toggle.TogglePrimary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Toggle"
+             mc:Ignorable="d" 
+             Cursor="Hand"
+             Name="MainSetting"
+             IsEnabled="False"
+             >
+
+    <StackPanel   Orientation="Horizontal">
+        <Grid Height="50">
+
+            <!--Toggle-->
+            <Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Focusable="True" x:Name="Root" IsEnabled="{Binding IsEnabled, ElementName=MainSetting}"  BorderThickness="2" Width="48" Height="28" CornerRadius="13" >
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter Property="Background" Value="#8D8D8D"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#F4F4F4"/>
+                            </Trigger>
+
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#0f62fe"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Ellipse x:Name="TogglePointer" IsEnabled="{ Binding IsEnabled, ElementName=Root }" Width="18" Height="18"  HorizontalAlignment="Left" Margin="3,0,0,0">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse" >
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Fill" Value="White"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Fill" Value="#C6C6C6"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+
+            </Border>
+
+            <!--Lable on off-->
+            <TextBlock x:Name="TextOnOff" Margin="50,20,2,0" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Off"/>
+
+            <!--Lable on off-->
+            <TextBlock x:Name="TextLable"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Lable" Margin="0,-21,21,34"/>
+
+
+        </Grid>
+    </StackPanel>
+
+</UserControl>
