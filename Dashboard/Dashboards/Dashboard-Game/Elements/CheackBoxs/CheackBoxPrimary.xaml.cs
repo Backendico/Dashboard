@@ -57,7 +57,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.CheackBoxs
                 {
                     IsCheacked = true;
                 }
-                Debug.WriteLine(Cheack);
             };
         }
     }

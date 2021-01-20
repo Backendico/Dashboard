@@ -7,6 +7,46 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Border Focusable="True" IsEnabled="True"  x:Name="Cheacker"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="16" Height="16" CornerRadius="10">
+            <Border.Style>
+                <Style TargetType="Border" >
+                    <Style.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#0F62FE" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="BorderBrush" Value="#c6c6c6" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#c6c6c6" />
+                        </Trigger>
+
+
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <TextBlock  x:Name="TextCheack" Foreground="Black"  FontFamily="Segoe MDL2 Assets" />
+        </Border>
+
+        <TextBlock Margin="25,0,0,0" TextAlignment="Center" IsEnabled="{ Binding IsEnabled, ElementName=Cheacker}" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Radio Button">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#c6c6c6"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </Grid>
+
 </UserControl>
