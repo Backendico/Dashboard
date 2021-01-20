@@ -35,11 +35,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Toggle
                     {
                         Root.Background = (Brush)new BrushConverter().ConvertFromString("#42be65");
                         TextOnOff.Text = "On";
+                        AnimationON();
                     }
                     else
                     {
                         Root.Background = (Brush)new BrushConverter().ConvertFromString("#8D8D8D");
                         TextOnOff.Text = "Off";
+                        AnimationOff();
                     }
 
                     _IsOn = value;
@@ -75,27 +77,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Toggle
 
                     if (!_IsOn)
                     {
-                        ThicknessAnimation Anim = new ThicknessAnimation(new Thickness(3, 0, 0, 0), new Thickness(23, 0, 0, 0), TimeSpan.FromSeconds(0.3));
-                        Storyboard.SetTargetName(Anim, TogglePointer.Name);
-                        Storyboard.SetTargetProperty(Anim, new PropertyPath("Margin"));
-
-                        Storyboard storyboard = new Storyboard();
-                        storyboard.Children.Add(Anim);
-                        storyboard.Begin(this);
-
-
                         IsOn = true;
                     }
                     else
                     {
-                        ThicknessAnimation Anim = new ThicknessAnimation(new Thickness(22, 0, 0, 0), new Thickness(3, 0, 0, 0), TimeSpan.FromSeconds(0.3));
-                        Storyboard.SetTargetName(Anim, TogglePointer.Name);
-                        Storyboard.SetTargetProperty(Anim, new PropertyPath("Margin"));
-
-                        Storyboard storyboard = new Storyboard();
-                        storyboard.Children.Add(Anim);
-                        storyboard.Begin(this);
-
                         IsOn = false;
                     }
 
@@ -124,5 +109,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Toggle
                 }
             };
         }
+
+
+        void AnimationON()
+        {
+            ThicknessAnimation Anim = new ThicknessAnimation(new Thickness(3, 0, 0, 0), new Thickness(23, 0, 0, 0), TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, TogglePointer.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Margin"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+
+        }
+
+        void AnimationOff()
+        {
+            ThicknessAnimation Anim = new ThicknessAnimation(new Thickness(22, 0, 0, 0), new Thickness(3, 0, 0, 0), TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, TogglePointer.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Margin"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+        }
+
     }
 }

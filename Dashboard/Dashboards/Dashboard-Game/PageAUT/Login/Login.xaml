@@ -62,7 +62,7 @@
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
 
-                        <Toggle:TogglePrimary IsOn="False"  />
+                        <Toggle:TogglePrimary IsOn="True"  />
                     </StackPanel>
                 </Grid>
 
