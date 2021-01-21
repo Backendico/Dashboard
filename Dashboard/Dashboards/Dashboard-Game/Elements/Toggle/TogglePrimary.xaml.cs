@@ -74,7 +74,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Toggle
             {
                 if (IsEnabled)
                 {
-
                     if (!_IsOn)
                     {
                         IsOn = true;
@@ -83,7 +82,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Toggle
                     {
                         IsOn = false;
                     }
-
                 }
             };
 

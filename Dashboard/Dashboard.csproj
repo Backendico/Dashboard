@@ -262,6 +262,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml.cs">
       <DependentUpon>CheackBoxPrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml.cs">
+      <DependentUpon>LinksPrimary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\RadioButton\RadioButttonPrimary.xaml.cs">
       <DependentUpon>RadioButttonPrimary.xaml</DependentUpon>
     </Compile>
@@ -462,6 +465,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
