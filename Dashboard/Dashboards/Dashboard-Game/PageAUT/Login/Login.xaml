@@ -63,7 +63,6 @@
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
 
-                        <TextBoxPrimary:LinksPrimary/>
                     </StackPanel>
                 </Grid>
 

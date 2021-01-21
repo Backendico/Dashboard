@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
              mc:Ignorable="d" Cursor="Hand" >
-    <Border IsEnabled="True" MinWidth="68" MaxWidth="68"   Height="20"  Focusable="True">
+    <Border HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="True"   Height="20"  Focusable="True">
         <Border.Style>
             <Style TargetType="Border">
                 <Style.Triggers>
@@ -23,7 +23,7 @@
             </Style>
         </Border.Style>
 
-        <TextBlock x:Name="TextLable"  TextAlignment="Center" Text="Text links">
+        <TextBlock x:Name="TextLable"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="Text links">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
