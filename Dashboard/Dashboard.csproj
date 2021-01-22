@@ -283,6 +283,15 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\Toggle\TogglePrimary.xaml.cs">
       <DependentUpon>TogglePrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Tooltips\TollTipPrimaryIcon.xaml.cs">
+      <DependentUpon>TollTipPrimaryIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Tooltips\ToolTipPrimary.xaml.cs">
+      <DependentUpon>ToolTipPrimary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Tooltips\TooltipPrimaryText.xaml.cs">
+      <DependentUpon>TooltipPrimaryText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Notifaction\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
@@ -502,6 +511,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\Toggle\TogglePrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Tooltips\TollTipPrimaryIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Tooltips\ToolTipPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Tooltips\TooltipPrimaryText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
