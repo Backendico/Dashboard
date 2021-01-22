@@ -271,6 +271,12 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\Tabs\TabsPrimary.xaml.cs">
       <DependentUpon>TabsPrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Tags\TagPrimaryEdit.xaml.cs">
+      <DependentUpon>TagPrimaryEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Tags\TagsPrimary.xaml.cs">
+      <DependentUpon>TagsPrimary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPrimary.xaml.cs">
       <DependentUpon>TextInputPrimary.xaml</DependentUpon>
     </Compile>
@@ -480,6 +486,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\Tabs\TabsPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Tags\TagPrimaryEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Tags\TagsPrimary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

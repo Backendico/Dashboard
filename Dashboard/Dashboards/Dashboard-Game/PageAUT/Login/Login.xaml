@@ -11,6 +11,8 @@
              xmlns:Toggle="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Toggle"
              xmlns:TextBoxPrimary="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
              xmlns:Tabs="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tabs"
+             xmlns:Tag="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tags"
+             xmlns:Tageditor="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tags"
              mc:Ignorable="d" 
              d:DesignHeight="539" d:DesignWidth="800"
              Background="#7F000000"
@@ -63,8 +65,6 @@
                             <TextBlock Text="Password : *"/>
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
-
-                     
 
                     </StackPanel>
                 </Grid>
