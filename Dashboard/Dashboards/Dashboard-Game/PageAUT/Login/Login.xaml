@@ -68,7 +68,6 @@
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
 
-                        <RBox:TextRichPrimary TextLabelHeader="Handel"   IsError="False" TextLength="100"  />
                     </StackPanel>
                     
                 </Grid>
