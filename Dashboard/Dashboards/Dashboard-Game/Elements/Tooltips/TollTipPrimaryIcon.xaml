@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips.TollTipPrimaryIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
+             mc:Ignorable="d" >
+
+
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+
+        <TextBlock Cursor="Hand" Text="&#xE946;" Margin="0,3,0,0"  TextAlignment="Center" HorizontalAlignment="Left"   VerticalAlignment="Top"  FontFamily="Segoe MDL2 Assets"/>
+        <Grid  x:Name="PanelTooltip" Visibility="Collapsed">
+            <Border CornerRadius="2"  Background="Black" MinHeight="28" MinWidth="66" MaxWidth="156"  HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="-27,24,-26,0">
+                <TextBlock Margin="5" TextWrapping="Wrap"  TextAlignment="Center" Text="Share" Foreground="White"/>
+            </Border>
+            <Rectangle Fill="Black" Width="8" Height="8" Margin="2,20,2,66" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </Grid>
+    </Grid>
+</UserControl>

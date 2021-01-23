@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.BTNs.DangerButtonIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+             mc:Ignorable="d" 
+             Cursor="Hand"
+             >
+    <Border Margin="5" Focusable="True" IsEnabled="True" x:Name="Root" Height="48" Width="147">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#c6c6c6"/>
+                    </Trigger >
+
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="Background" Value="#da1e28"/>
+                    </Trigger >
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#ba1b23"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+        </Border.Style>
+
+        <Border x:Name="BorderFocuse"  Margin="3" BorderBrush="White" >
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <Trigger  Property="IsFocused" Value="True">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+
+                <!--Texts-->
+                <TextBlock Text="Primary Button"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" >
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground"  Value="#8d8d8d"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Foreground"  Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <!--Icon-->
+                <TextBlock   Margin="5" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" >
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground"  Value="#8d8d8d"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Foreground"  Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+            </StackPanel>
+        </Border>
+
+
+    </Border>
+</UserControl>

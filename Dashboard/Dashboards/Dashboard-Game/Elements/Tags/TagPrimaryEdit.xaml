@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.Tags.TagPrimaryEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tags"
+             mc:Ignorable="d" >
+    <Border x:Name="Root" IsEnabled="True" Focusable="True" HorizontalAlignment="Left"   CornerRadius="12" MinWidth="77" MinHeight="24">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="#0F62FE"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Trigger>
+
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#F4F4F4"/>
+                    </Trigger>
+                    
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                    </Trigger>
+
+
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border   Cursor="Hand" x:Name="BTNDeleteTag" CornerRadius="10"   Margin="2,0" Grid.Column="1" Width="20" Height="20">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            
+                            <DataTrigger Binding="{ Binding  ElementName=Root, Path=IsMouseOver}" Value="true">
+                                <Setter Property="Background" Value="#CACACA"/>
+                            </DataTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                            
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            
+                <TextBlock Text="&#xF78A;" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" >
+                    <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#C6C6C6"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                </TextBlock>
+            </Border>
+            <TextBlock IsEnabled="{ Binding  IsEnabled, ElementName=Root}" Text="Component" TextAlignment="Center" Margin="6,0" VerticalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#C6C6C6"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </Border>
+
+</UserControl>
