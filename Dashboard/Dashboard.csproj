@@ -280,6 +280,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPrimary.xaml.cs">
       <DependentUpon>TextInputPrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\TextRichPrimary\TextRichPrimary.xaml.cs">
+      <DependentUpon>TextRichPrimary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\Toggle\TogglePrimary.xaml.cs">
       <DependentUpon>TogglePrimary.xaml</DependentUpon>
     </Compile>
@@ -507,6 +510,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\TextRichPrimary\TextRichPrimary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,6 +14,7 @@
              xmlns:Tag="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tags"
              xmlns:Tageditor="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tags"
              xmlns:ToolTips="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
+             xmlns:RBox="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextRichPrimary"
              mc:Ignorable="d" 
              d:DesignHeight="539" d:DesignWidth="800"
              Background="#7F000000"
@@ -67,7 +68,7 @@
                             <PasswordBox Password="85245685hHH!" MinHeight="30" x:Name="TextPassword" />
                         </StackPanel>
 
-                        <ToolTips:TooltipPrimaryText/>
+                        <RBox:TextRichPrimary TextLabelHeader="Handel"   IsError="False" TextLength="100"  />
                     </StackPanel>
                     
                 </Grid>
