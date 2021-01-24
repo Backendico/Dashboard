@@ -277,6 +277,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\Tags\TagsPrimary.xaml.cs">
       <DependentUpon>TagsPrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPassword.xaml.cs">
+      <DependentUpon>TextInputPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPrimary.xaml.cs">
       <DependentUpon>TextInputPrimary.xaml</DependentUpon>
     </Compile>
@@ -509,6 +512,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\Tags\TagsPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

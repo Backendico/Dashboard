@@ -1,49 +1,38 @@
-﻿using Dashboard.GlobalElement;
-using System.Globalization;
-using System.Net.Mail;
-using System.Security.AccessControl;
-using System.Web.UI.WebControls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 {
-    public partial class TextInputPrimary : UserControl
+    /// <summary>
+    /// Interaction logic for TextInputPassword.xaml
+    /// </summary>
+    public partial class TextInputPassword : UserControl
     {
 
-        public InputType InputMode
-        {
-
-            get
-            {
-                try
-                {
-                    return Type;
-
-                }
-                catch (System.Exception)
-                {
-                    return InputType.All;
-                }
-            }
-            set
-            {
-                Type = value;
-            }
-        }
         public string Text
         {
             get
             {
-                return MainTextBox.Text;
+                return MainTextBox.Password;
             }
             set
             {
                 if (value.Length >= 1)
                 {
 
-                    MainTextBox.Text = value;
+                    MainTextBox.Password = value;
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
                 }
             }
@@ -63,7 +52,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 
                 if (Text != value || Text.Length <= 0)
                 {
-                    MainTextBox.Text = value;
+                    MainTextBox.Password = value;
                 }
 
             }
@@ -123,8 +112,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
         string _PlaceHolder;
         InputType Type;
 
-
-        public TextInputPrimary()
+        public TextInputPassword()
         {
             InitializeComponent();
 
@@ -133,7 +121,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 if (Text == PlaceHolder)
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                    MainTextBox.Text = "";
+                    MainTextBox.Password = "";
                 }
                 else
                 {
@@ -146,7 +134,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 if (Text.Length <= 0)
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                    MainTextBox.Text = PlaceHolder;
+                    MainTextBox.Password = PlaceHolder;
                 }
                 else
                 {
@@ -156,56 +144,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             };
 
 
-            MainTextBox.TextChanged += (s, e) =>
+            MainTextBox.PasswordChanged += (s, e) =>
             {
-                if (MainTextBox.Text.Length >= 1 && MainTextBox.Text != PlaceHolder)
+                if (MainTextBox.Password.Length >= 1 && MainTextBox.Password != PlaceHolder)
                 {
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
                 }
 
-
-                switch (InputMode)
-                {
-                    case InputType.Email:
-                        {
-                            try
-                            {
-                                if (Text.Length >= 1 && Text != PlaceHolder)
-                                {
-                                    new MailAddress(MainTextBox.Text);
-                                    IsError = false;
-                                }
-                                else
-                                {
-                                    IsError = false;
-                                }
-
-                            }
-                            catch (System.Exception)
-                            {
-
-                                IsError = true;
-                            }
-                        }
-                        break;
-                    case InputType.All:
-                        {
-                            IsError = false;
-                        }
-                        break;
-                    case InputType.Number:
-                        break;
-                    default:
-                        break;
-                }
             };
-
-        }
-
-
-        public enum InputType
-        {
-            Email, All, Number
         }
     }
 }
