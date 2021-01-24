@@ -15,11 +15,20 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.Links
 {
-    /// <summary>
-    /// Interaction logic for LinksPrimary.xaml
-    /// </summary>
+  
     public partial class LinksPrimary : UserControl
     {
+        public string TextLinks
+        {
+            get { return _TextLink; }
+            set
+            {
+                TextLink.Text = value;
+                _TextLink = value;
+            }
+        }
+
+        string _TextLink;
         public LinksPrimary()
         {
             InitializeComponent();

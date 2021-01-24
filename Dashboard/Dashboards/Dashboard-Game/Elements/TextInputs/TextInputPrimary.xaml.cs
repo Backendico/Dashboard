@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,46 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 {
     public partial class TextInputPrimary : UserControl
     {
+
+        public string Text
+        {
+            get
+            {
+                return MainTextBox.Text;
+            }
+            set
+            {
+                if (value.Length >= 1)
+                {
+
+                    MainTextBox.Text = value;
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                }
+            }
+        }
+
+
+        public string PlaceHolder
+        {
+            get
+            {
+                return _PlaceHolder;
+            }
+            set
+            {
+                _PlaceHolder = value;
+                MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+
+                if (Text != value || Text.Length <= 0)
+                {
+                    MainTextBox.Text = value;
+                }
+
+            }
+
+        }
+
+
         public bool IsError
         {
             get
@@ -32,15 +73,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                     TextblockError.Visibility = Visibility.Visible;
                     IconErr.Visibility = Visibility.Visible;
 
-                    Textbox.BorderBrush = TextblockError.Foreground;
-                    Textbox.BorderThickness = new Thickness(2, 2, 2, 2);
+                    MainTextBox.BorderBrush = TextblockError.Foreground;
+                    MainTextBox.BorderThickness = new Thickness(2, 2, 2, 2);
                 }
                 else
                 {
                     TextblockError.Visibility = Visibility.Collapsed;
                     IconErr.Visibility = Visibility.Collapsed;
-                    Textbox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                    Textbox.BorderThickness = new Thickness(0, 0, 0, 2);
+                    MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    MainTextBox.BorderThickness = new Thickness(0, 0, 0, 2);
                 }
             }
         }
@@ -66,10 +107,50 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
         }
 
         bool err;
+        string _PlaceHolder;
 
         public TextInputPrimary()
         {
             InitializeComponent();
+
+            GotFocus += (s, e) =>
+            {
+                if (Text == PlaceHolder)
+                {
+                    MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    MainTextBox.Text = "";
+                }
+                else
+                {
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                }
+            };
+
+            LostFocus += (s, e) =>
+            {
+                if (Text.Length <= 0)
+                {
+                    MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    MainTextBox.Text = PlaceHolder;
+                }
+                else
+                {
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+
+                }
+            };
+
+
+            MainTextBox.TextChanged += (s, e) =>
+            {
+
+                if (MainTextBox.Text.Length >= 1&&MainTextBox.Text!=PlaceHolder)
+                {
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+
+                }
+            };
+
         }
     }
 }

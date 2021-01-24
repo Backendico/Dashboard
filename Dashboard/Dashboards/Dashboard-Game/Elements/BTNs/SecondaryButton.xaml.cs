@@ -20,6 +20,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
     /// </summary>
     public partial class SecondaryButton : UserControl
     {
+        public string TextButton
+        {
+            get { return _Textbutton; }
+            set
+            {
+                NameButton.Text = value;
+                _Textbutton = value;
+            }
+        }
+
+        string _Textbutton;
         public SecondaryButton()
         {
             InitializeComponent();

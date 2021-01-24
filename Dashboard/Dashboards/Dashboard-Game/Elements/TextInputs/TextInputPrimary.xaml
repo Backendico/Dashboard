@@ -9,7 +9,7 @@
 
     <Grid   MinWidth="288"  Height="68" >
 
-        <TextBox x:Name="Textbox" VerticalAlignment="Top"  Background="#F4F4F4" Height="48" MinWidth="288" IsEnabled="True">
+        <TextBox x:Name="MainTextBox" Padding="15"   Foreground="#8d8d8d" UseLayoutRounding="False"  VerticalAlignment="Top"  Background="#F4F4F4" Height="48" MinWidth="288" IsEnabled="True">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Style.Triggers>
@@ -32,9 +32,7 @@
             </TextBox.Style>
         </TextBox>
 
-
-
-
+        <!--ERRORS-->
         <TextBlock x:Name="IconErr" Height="14" Width="14 "  Visibility="Collapsed"  TextAlignment="Center" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="0,-20,10,0"  Text="&#xF167;" Foreground="#DA1E28" FontFamily="Segoe MDL2 Assets" />
 
         <TextBlock  x:Name="TextblockError" Visibility="Collapsed"  VerticalAlignment="Bottom" Foreground="#da1e28" Text="Error message here"/>

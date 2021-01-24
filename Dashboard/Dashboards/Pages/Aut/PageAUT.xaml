@@ -5,33 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.Aut"
         xmlns:Buttons="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
-      xmlns:Input="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+       xmlns:Link="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
+        xmlns:Input="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
         mc:Ignorable="d"
         Title="PageAUT" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
 
-        <StackPanel VerticalAlignment="Center" Grid.Column="1">
 
-            <Input:TextInputPrimary Margin="0,10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Input:TextInputPrimary Margin="0,10" HorizontalAlignment="Center"/>
-            <Buttons:GhostButton VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Buttons:SecondaryButton />
-                <Buttons:SecondaryButton/>
-                <Buttons:BTNPrimary />
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+
+            <Input:TextInputPrimary  PlaceHolder="Handel"   Margin="0,10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Input:TextInputPrimary PlaceHolder="Pass" Text="Handel" Margin="0,10" HorizontalAlignment="Center"/>
+            <Link:LinksPrimary TextLinks="Forget Password?" HorizontalAlignment="Right"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Buttons:SecondaryButton TextButton="Register"/>
+                <Buttons:BTNPrimary  Margin="0,20" TextButton="Login" />
             </StackPanel>
         </StackPanel>
 
-        <Grid Background="#78a9ff" Grid.Column="0">
-            <TextBlock   FontFamily="Berlow" Margin="10,10,66,355" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Run FontSize="20" Text="Welcome to " Foreground="White" />
-              <LineBreak/>
-                <Run  Text="           Backendi !" FontSize="25"/>
-            </TextBlock>
-        </Grid>
     </Grid>
 </Window>
