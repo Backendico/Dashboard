@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
 {
-    /// <summary>
-    /// Interaction logic for BTNPrimary.xaml
-    /// </summary>
+
     public partial class BTNPrimary : UserControl
     {
         public string TextButton
@@ -37,6 +23,19 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
         {
             InitializeComponent();
 
+            MouseDown += (s, e) =>
+            {
+                try
+                {
+                    Worker();
+
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine("no worker");
+                }
+            };
+
 
             GotFocus += (s, e) =>
             {
@@ -50,5 +49,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
             };
 
         }
+
+        public event Action Worker;
     }
 }

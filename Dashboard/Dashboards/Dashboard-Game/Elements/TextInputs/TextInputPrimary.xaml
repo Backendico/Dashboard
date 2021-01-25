@@ -9,12 +9,12 @@
 
     <Grid   MinWidth="288"  Height="68" >
 
-        <TextBox x:Name="MainTextBox" Padding="15"   Foreground="#8d8d8d" UseLayoutRounding="False"  VerticalAlignment="Top"  Background="#F4F4F4" Height="48" MinWidth="288" IsEnabled="True">
+        <TextBox x:Name="MainTextBox" Padding="15"  Focusable="True"  Foreground="#8d8d8d" UseLayoutRounding="False"  VerticalAlignment="Top"  Background="#F4F4F4" Height="48" MinWidth="288" IsEnabled="True">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Style.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderThickness" Value="2"/>
+                            <Setter Property="BorderThickness" Value="2,2,2,2"/>
                             <Setter Property="BorderBrush" Value="#0f62fe"/>
                         </Trigger>
 

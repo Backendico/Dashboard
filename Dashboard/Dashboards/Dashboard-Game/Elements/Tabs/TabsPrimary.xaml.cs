@@ -1,20 +1,6 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tabs
 {
@@ -80,7 +66,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tabs
             //action mouseover
             MouseEnter += (s, e) =>
             {
-                if (!IsSelected&&!Bordedayimamad.IsFocused )
+                if (!IsSelected && !Bordedayimamad.IsFocused)
                 {
                     Bordedayimamad.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#a8a8a8");
                 }
@@ -89,7 +75,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tabs
             //action mouse leave
             MouseLeave += (s, e) =>
             {
-                if (!IsSelected&&!Bordedayimamad.IsFocused)
+                if (!IsSelected && !Bordedayimamad.IsFocused)
                 {
                     Bordedayimamad.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e0e0e0");
                 }

@@ -1,8 +1,4 @@
-﻿using Dashboard.GlobalElement;
-using System.Globalization;
-using System.Net.Mail;
-using System.Security.AccessControl;
-using System.Web.UI.WebControls;
+﻿using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -32,6 +28,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 Type = value;
             }
         }
+
         public string Text
         {
             get
@@ -91,10 +88,22 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 }
                 else
                 {
-                    TextblockError.Visibility = Visibility.Collapsed;
-                    IconErr.Visibility = Visibility.Collapsed;
-                    MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                    MainTextBox.BorderThickness = new Thickness(0, 0, 0, 2);
+                    if (MainTextBox.IsFocused)
+                    {
+
+                        TextblockError.Visibility = Visibility.Collapsed;
+                        IconErr.Visibility = Visibility.Collapsed;
+                        MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                        MainTextBox.BorderThickness = new Thickness(2);
+
+                    }
+                    else
+                    {
+                        TextblockError.Visibility = Visibility.Collapsed;
+                        IconErr.Visibility = Visibility.Collapsed;
+                        MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                        MainTextBox.BorderThickness = new Thickness(0, 0, 0, 2);
+                    }
                 }
             }
         }
@@ -138,6 +147,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 else
                 {
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                    MainTextBox.BorderThickness = new Thickness(2);
                 }
             };
 
@@ -150,8 +161,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 }
                 else
                 {
-                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
 
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8D8D8D");
+                    MainTextBox.BorderThickness = new Thickness(0, 0, 0, 2);
                 }
             };
 

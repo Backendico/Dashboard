@@ -328,6 +328,15 @@
     <Compile Include="Dashboards\Dashboard-Game\PageAUT\Login\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\Aut\PageAccountRecovery.xaml.cs">
+      <DependentUpon>PageAccountRecovery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\Aut\PageLogin.xaml.cs">
+      <DependentUpon>PageLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\Aut\PageRegister.xaml.cs">
+      <DependentUpon>PageRegister.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\PageContent\Elements\EditContent\EditContent.xaml.cs">
       <DependentUpon>EditContent.xaml</DependentUpon>
     </Compile>
@@ -420,6 +429,9 @@
     </Compile>
     <Compile Include="Dashboards\Pages\Aut\PageAUT.xaml.cs">
       <DependentUpon>PageAUT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalElement\GlobalEvents.cs" />
     <Compile Include="Settings.cs" />
@@ -583,6 +595,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Pages\Aut\PageAccountRecovery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\Aut\PageLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\Aut\PageRegister.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\PageContent\Elements\EditContent\EditContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -740,6 +764,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\Aut\PageAUT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\Main\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,22 +2,10 @@
 using Dashboard.GlobalElement;
 using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.PageKeyValue
 {
@@ -180,7 +168,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageKeyValue
                 {
                     if (result["KeyValue"].AsBsonDocument.ElementCount >= 1)
                     {
-                        
+
                         TextTotallValue.Text = result["KeyValue"].AsBsonDocument.ElementCount.ToString();
 
                         foreach (var item in result["KeyValue"].AsBsonDocument)
@@ -239,9 +227,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageKeyValue
             TextBoxKey.BorderBrush = new SolidColorBrush(Colors.Gainsboro);
         }
 
-        
+
     }
 
 
-  
+
 }
