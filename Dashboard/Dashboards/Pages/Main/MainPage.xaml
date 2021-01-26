@@ -5,16 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.Main"
              xmlns:IconOpen="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
+             xmlns:NavigationTab="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400" Background="WhiteSmoke">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="225"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <!--Navigation-->
-        <Grid Background="#0f62fe">
+        <Grid x:Name="PaneNavigation" HorizontalAlignment="Left" Width="225" Background="#054ada">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
                 <RowDefinition/>
@@ -29,35 +30,35 @@
                 </Grid.ColumnDefinitions>
 
                 <!--BTNNavigation-->
-                <TextBlock Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+                <TextBlock Name="BTNNavigationClose" Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
 
                 <!--Logo-->
                 <!--Text-->
                 <TextBlock Grid.Column="1" Text="Backendi" FontSize="15" FontWeight="Bold" TextAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
 
                 <!--Icon-->
-                <Image Width="25" Height="25" Source="/Dashboard;component/Icon.ico" />
+                <Image  Width="25" Height="25" Source="/Dashboard;component/Icon.ico" />
 
 
             </Grid>
 
             <!--Menu-->
-            <StackPanel Margin="22,0" Grid.Row="1">
-                <TextBlock Margin="0,32,0,20" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD"/>
+            <StackPanel HorizontalAlignment="Left" Margin="10,0" Grid.Row="1">
+                <!--BTNNavigation-->
+                <TextBlock Name="BTNNavigationOpen" Text="&#xE700;" Cursor="Hand" Visibility="Collapsed" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+               
+                <TextBlock x:Name="TextDashboard" FontWeight="Bold" Margin="0,32,0,12" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD"/>
 
-                <Grid Height="30">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
 
-                    <Border CornerRadius="5" Background="White">
 
-                    </Border>
 
-                    <TextBlock Text="Home" VerticalAlignment="Center" Foreground="#d0e2ff"  Margin="10,0" TextAlignment="Left" Grid.Column="1"/>
-
-                </Grid>
+                <NavigationTab:NavigationTab IconType="Home" NameTab="Home"  IsSelected="True"/>
+                <NavigationTab:NavigationTab IconType="Players" NameTab="Players"/>
+                <NavigationTab:NavigationTab IconType="Leaderboards" NameTab="Leaderboards"/>
+                <NavigationTab:NavigationTab IconType="Achievements" NameTab="Achievements"/>
+                <NavigationTab:NavigationTab IconType="Content" NameTab="Content"/>
+                <NavigationTab:NavigationTab IconType="Store" NameTab="Your Store"/>
+                <NavigationTab:NavigationTab IconType="KeyValue" NameTab="Key Value"/>
 
             </StackPanel>
 

@@ -7,9 +7,11 @@
         xmlns:Buttons="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
        xmlns:Link="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
         xmlns:Input="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+      xmlns:Main="clr-namespace:Dashboard.Dashboards.Pages.Main"
         mc:Ignorable="d"
         Title="PageAUT" Height="550" Width="800">
     <Grid x:Name="Root">
-        <local:PageLogin />
+        <local:PageLogin Visibility="Collapsed" />
+        <Main:MainPage/>
     </Grid>
 </Window>

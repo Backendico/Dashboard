@@ -262,8 +262,12 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml.cs">
       <DependentUpon>CheackBoxPrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Icons\Icons.cs" />
     <Compile Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml.cs">
       <DependentUpon>LinksPrimary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\Navigation\NavigationTab\NavigationTab.xaml.cs">
+      <DependentUpon>NavigationTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\RadioButton\RadioButttonPrimary.xaml.cs">
       <DependentUpon>RadioButttonPrimary.xaml</DependentUpon>
@@ -508,6 +512,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\Navigation\NavigationTab\NavigationTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

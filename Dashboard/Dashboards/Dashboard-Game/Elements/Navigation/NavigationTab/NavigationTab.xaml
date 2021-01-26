@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab.NavigationTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
+             mc:Ignorable="d" Background="Transparent" Cursor="Hand" 
+             Margin="0,8" HorizontalAlignment="Left"
+             >
+
+    <Grid Background="Transparent" x:Name="Root" Height="30" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Border x:Name="BackgroudnBorder" Opacity="0"  CornerRadius="5"   Background="#002d9c"/>
+
+            <TextBlock Foreground="#d0e2ff" x:Name="Icon" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"  Text="&#xEA8A;" FontFamily="Segoe MDL2 Assets" />
+        </Grid>
+
+        <TextBlock  x:Name="TabName" FontSize="11" FontWeight="{Binding FontWeight, ElementName=Icon}"  Text="Patients" VerticalAlignment="Center" Foreground="{Binding Foreground, ElementName=Icon}"  Margin="13,0" TextAlignment="Left" Grid.Column="1"/>
+
+    </Grid>
+</UserControl>
