@@ -1,21 +1,9 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Icons;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
 {
@@ -63,18 +51,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
                 if (value)
                 {
 
-
-                    foreach (var item in (Parent as StackPanel).Children)
+                    foreach (var item in ((Parent as StackPanel).Parent as Grid).Children)
                     {
-                        if (item.GetType() == typeof(NavigationTab))
+
+                    foreach (var Nav in (item as StackPanel).Children)
+                    {
+                        if (Nav.GetType() == typeof(NavigationTab))
                         {
-                            if ((item as NavigationTab).IsSelected && (item as NavigationTab) != this)
+                            if ((Nav as NavigationTab).IsSelected && (item as NavigationTab) != this)
                             {
-                                (item as NavigationTab).IsSelected = false;
+                                (Nav as NavigationTab).IsSelected = false;
 
                             }
                         }
 
+                    }
+
+
+                      
                     }
 
 
@@ -122,18 +116,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
             TabName.FontWeight = FontWeights.Bold;
 
 
-            DoubleAnimation Anim3 = new DoubleAnimation(11, 13, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim3 = new DoubleAnimation(11, 13, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim3, TabName.Name);
             Storyboard.SetTargetProperty(Anim3, new PropertyPath("FontSize"));
 
 
-            DoubleAnimation Anim2 = new DoubleAnimation(16, 19, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim2 = new DoubleAnimation(16, 19, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim2, Icon.Name);
             Storyboard.SetTargetProperty(Anim2, new PropertyPath("FontSize"));
 
 
 
-            DoubleAnimation Anim1 = new DoubleAnimation(0, 0.3, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim1 = new DoubleAnimation(0, 0.3, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim1, BackgroudnBorder.Name);
             Storyboard.SetTargetProperty(Anim1, new PropertyPath("Opacity"));
 
@@ -150,16 +144,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
             TabName.FontWeight = FontWeights.Normal;
 
 
-            DoubleAnimation Anim3 = new DoubleAnimation(13, 11, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim3 = new DoubleAnimation(13, 11, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim3, TabName.Name);
             Storyboard.SetTargetProperty(Anim3, new PropertyPath("FontSize"));
 
 
-            DoubleAnimation Anim2 = new DoubleAnimation(19, 16, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim2 = new DoubleAnimation(19, 16, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim2, Icon.Name);
             Storyboard.SetTargetProperty(Anim2, new PropertyPath("FontSize"));
 
-            DoubleAnimation Anim1 = new DoubleAnimation(0.3, 0, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim1 = new DoubleAnimation(0.3, 0, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim1, BackgroudnBorder.Name);
             Storyboard.SetTargetProperty(Anim1, new PropertyPath("Opacity"));
             Storyboard storyboard = new Storyboard();
@@ -174,7 +168,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
         {
             if (!IsSelected)
             {
-                DoubleAnimation Anim1 = new DoubleAnimation(0, 0.3, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim1 = new DoubleAnimation(0, 0.3, TimeSpan.FromSeconds(0.2));
                 Storyboard.SetTargetName(Anim1, BackgroudnBorder.Name);
                 Storyboard.SetTargetProperty(Anim1, new PropertyPath("Opacity"));
                 Storyboard storyboard = new Storyboard();
@@ -189,7 +183,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
         {
             if (!IsSelected)
             {
-                DoubleAnimation Anim1 = new DoubleAnimation(0.3, 0, TimeSpan.FromSeconds(0.3));
+                DoubleAnimation Anim1 = new DoubleAnimation(0.3, 0, TimeSpan.FromSeconds(0.2));
                 Storyboard.SetTargetName(Anim1, BackgroudnBorder.Name);
                 Storyboard.SetTargetProperty(Anim1, new PropertyPath("Opacity"));
                 Storyboard storyboard = new Storyboard();

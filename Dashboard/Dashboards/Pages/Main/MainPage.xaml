@@ -7,7 +7,7 @@
              xmlns:IconOpen="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
              xmlns:NavigationTab="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
              mc:Ignorable="d" 
-             Background="WhiteSmoke" d:DesignWidth="1090.333"
+             Background="WhiteSmoke" d:DesignWidth="1090.333" d:DesignHeight="817"
          
              >
     <Grid>
@@ -31,9 +31,7 @@
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
 
-                <!--BTNNavigation-->
-                <TextBlock Name="BTNNavigationClose" Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
-
+                
                 <!--Logo-->
                 <!--Text-->
                 <TextBlock Grid.Column="1" Text="Backendi" FontSize="15" FontWeight="Bold" TextAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
@@ -44,22 +42,37 @@
 
             </Grid>
 
-            <!--Menu-->
-            <StackPanel HorizontalAlignment="Left" Margin="10,0" Grid.Row="1">
-                <!--BTNNavigation-->
-                <TextBlock Name="BTNNavigationOpen" Text="&#xE700;" Cursor="Hand" Visibility="Collapsed" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+            <Grid x:Name="Handel" Grid.Row="1"  Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                <TextBlock x:Name="TextDashboard" FontWeight="Bold" Margin="0,32,0,12" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD"/>
+                <!--Pages-->
+                <StackPanel x:Name="PanelPages" HorizontalAlignment="Left" Grid.Row="0" >
+                   
+                    <TextBlock x:Name="TextDashboard" FontWeight="Bold" Margin="0,32,0,12" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD"/>
 
-                <NavigationTab:NavigationTab IconType="Home" NameTab="Home"  IsSelected="True"/>
-                <NavigationTab:NavigationTab IconType="Players" NameTab="Players"/>
-                <NavigationTab:NavigationTab IconType="Leaderboards" NameTab="Leaderboards"/>
-                <NavigationTab:NavigationTab IconType="Achievements" NameTab="Achievements"/>
-                <NavigationTab:NavigationTab IconType="Content" NameTab="Content"/>
-                <NavigationTab:NavigationTab IconType="Store" NameTab="Your Store"/>
-                <NavigationTab:NavigationTab IconType="KeyValue" NameTab="Key Value"/>
+                    <NavigationTab:NavigationTab IconType="Home" NameTab="Home"  IsSelected="True"/>
+                    <NavigationTab:NavigationTab IconType="Players" NameTab="Players"/>
+                    <NavigationTab:NavigationTab IconType="Leaderboards" NameTab="Leaderboards"/>
+                    <NavigationTab:NavigationTab IconType="Achievements" NameTab="Achievements"/>
+                    <NavigationTab:NavigationTab IconType="Content" NameTab="Content"/>
+                    <NavigationTab:NavigationTab IconType="Store" NameTab="Your Store"/>
+                    <NavigationTab:NavigationTab IconType="KeyValue" NameTab="Key Value"/>
+                </StackPanel>
 
-            </StackPanel>
+                
+                <!--Settings-->
+                <StackPanel x:FieldModifier="public" x:Name="PanelSettings" Grid.Row="1" VerticalAlignment="Bottom">
+                    <NavigationTab:NavigationTab IconType="Setting" NameTab="Setting" />
+                    
+                    <!--BTNNavigation-->
+                    <TextBlock Margin="0,30,0,10" HorizontalAlignment="Center" Name="BTNNavigationClose" Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+
+                </StackPanel>
+                
+            </Grid>
 
         </Grid>
 
@@ -94,7 +107,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--BTNOption-->
-                        <TextBlock Foreground="#a8a8a8"   Margin="10,0" Grid.Column="2" Text="&#xE70D;" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" />
+                        <TextBlock Foreground="#a8a8a8"   Margin="10,0" Grid.Column="2" Text="&#xE96E;" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" />
 
                         <!--Username-->
                         <TextBlock   TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">

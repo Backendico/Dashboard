@@ -42,6 +42,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Icons
                         {
                             return "\xF003";
                         }
+                    case IconType.Setting:
+                        {
+                            return "\xE713";
+                        }
+                       
                     default:
                         {
                             return "\xE82F";
@@ -61,7 +66,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Icons
         Achievements,
         Store,
         Content,
-        KeyValue
+        KeyValue,
+        Setting
 
     }
 }
