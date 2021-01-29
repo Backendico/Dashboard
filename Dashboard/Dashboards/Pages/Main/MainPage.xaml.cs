@@ -12,15 +12,15 @@ namespace Dashboard.Dashboards.Pages.Main
     public partial class MainPage : UserControl
     {
 
-       
-        bool IsPanOpen = true;
 
+        bool IsPanOpen = true;
+        bool IsSettingUserOpen = false;
         public MainPage()
         {
             InitializeComponent();
 
-            
 
+            //ControlPan
             BTNNavigationClose.MouseDown += (s, e) =>
             {
 
@@ -33,6 +33,21 @@ namespace Dashboard.Dashboards.Pages.Main
                     OpenPane();
                 }
             };
+
+            //openPanelSettings
+            BTNOpenUserSetting.MouseDown += (s, e) =>
+            {
+                if (IsSettingUserOpen)
+                {
+                    ClosePanelUserSetting();
+                }
+                else
+                {
+                    OpenPanelUserSetting();
+
+                }
+            };
+
 
         }
 
@@ -74,12 +89,12 @@ namespace Dashboard.Dashboards.Pages.Main
             //anim change size pane
             DoubleAnimation Anim = new DoubleAnimation(225, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetName(Anim, PaneNavigation.Name);
-            Storyboard.SetTargetProperty(Anim, new System.Windows.PropertyPath("Width"));
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
 
             //anim change size font dashboard
             DoubleAnimation Anim1 = new DoubleAnimation(11, TimeSpan.FromSeconds(0.3));
             Storyboard.SetTargetName(Anim1, TextDashboard.Name);
-            Storyboard.SetTargetProperty(Anim1, new System.Windows.PropertyPath("FontSize"));
+            Storyboard.SetTargetProperty(Anim1, new PropertyPath("FontSize"));
 
             TextDashboard.Foreground = (Brush)new BrushConverter().ConvertFromString("#d0e2ff");
 
@@ -92,5 +107,44 @@ namespace Dashboard.Dashboards.Pages.Main
 
             storyboard.Begin(this);
         }
+
+        void OpenPanelUserSetting()
+        {
+            PanelSettingUser.Visibility = Visibility.Visible;
+            IsSettingUserOpen = true;
+            ArrowUsername.Text = "\xE96D";
+
+
+
+            DoubleAnimation Anim = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
+            Storyboard.SetTargetName(Anim, PanelSettingUser.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+
+            storyboard.Begin(this);
+
+        }
+        void ClosePanelUserSetting()
+        {
+            IsSettingUserOpen = false;
+            ArrowUsername.Text = "\xE96E";
+
+            DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) =>
+            {
+                PanelSettingUser.Visibility = Visibility.Visible;
+            };
+            Storyboard.SetTargetName(Anim, PanelSettingUser.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+
+            storyboard.Begin(this);
+
+        }
+
     }
 }

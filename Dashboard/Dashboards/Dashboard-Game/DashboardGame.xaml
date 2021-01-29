@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game"
         mc:Ignorable="d"
-        Title="Dashboard" Height="760" Width="1200">
+        Title="Dashboard" Height="360" Width="600">
 
     <Grid>
         <Grid  x:Name="Root">

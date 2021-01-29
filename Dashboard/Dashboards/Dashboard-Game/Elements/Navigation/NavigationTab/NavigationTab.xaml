@@ -20,7 +20,7 @@
             <TextBlock Foreground="#d0e2ff" x:Name="Icon" FontSize="16" TextAlignment="Center" VerticalAlignment="Center"  Text="&#xEA8A;" FontFamily="Segoe MDL2 Assets" />
         </Grid>
 
-        <TextBlock  x:Name="TabName" FontSize="11" FontWeight="{Binding FontWeight, ElementName=Icon}"  Text="Patients" VerticalAlignment="Center" Foreground="{Binding Foreground, ElementName=Icon}"  Margin="13,0" TextAlignment="Left" Grid.Column="1"/>
+        <TextBlock  x:Name="TabName" FontSize="11" FontWeight="{Binding FontWeight, ElementName=Icon}"  Text="Patients" VerticalAlignment="Center" Foreground="{Binding Foreground, ElementName=Icon}"  Margin="13,0" TextAlignment="Left" Grid.Column="1" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
 
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
         xmlns:Input="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
       xmlns:Main="clr-namespace:Dashboard.Dashboards.Pages.Main"
         mc:Ignorable="d"
-        Title="PageAUT" Height="970" Width="1380">
+        Title="PageAUT" Height="800" Width="1200">
     <Grid x:Name="Root">
         <local:PageLogin Visibility="Collapsed" />
         <Main:MainPage/>

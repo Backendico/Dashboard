@@ -6,10 +6,17 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.Main"
              xmlns:IconOpen="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
              xmlns:NavigationTab="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
+             xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+             xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
+             xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
              mc:Ignorable="d" 
-             Background="WhiteSmoke" d:DesignWidth="1090.333" d:DesignHeight="817"
+             Background="WhiteSmoke" d:DesignHeight="560" d:DesignWidth="1437"
          
              >
+
+
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -31,10 +38,10 @@
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
 
-                
+
                 <!--Logo-->
                 <!--Text-->
-                <TextBlock Grid.Column="1" Text="Backendi" FontSize="15" FontWeight="Bold" TextAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                <TextBlock Grid.Column="1" Text="Backendi" FontSize="15" FontWeight="Bold" TextAlignment="Left" VerticalAlignment="Center" Foreground="White" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold" />
 
                 <!--Icon-->
                 <Image  Width="25" Height="25" Source="/Dashboard;component/Icon.ico" />
@@ -44,14 +51,14 @@
 
             <Grid x:Name="Handel" Grid.Row="1"  Margin="10,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <!--Pages-->
                 <StackPanel x:Name="PanelPages" HorizontalAlignment="Left" Grid.Row="0" >
-                   
-                    <TextBlock x:Name="TextDashboard" FontWeight="Bold" Margin="0,32,0,12" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD"/>
+
+                    <TextBlock x:Name="TextDashboard" FontWeight="Bold" Margin="0,32,0,12" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
 
                     <NavigationTab:NavigationTab IconType="Home" NameTab="Home"  IsSelected="True"/>
                     <NavigationTab:NavigationTab IconType="Players" NameTab="Players"/>
@@ -62,16 +69,16 @@
                     <NavigationTab:NavigationTab IconType="KeyValue" NameTab="Key Value"/>
                 </StackPanel>
 
-                
+
                 <!--Settings-->
                 <StackPanel x:FieldModifier="public" x:Name="PanelSettings" Grid.Row="1" VerticalAlignment="Bottom">
                     <NavigationTab:NavigationTab IconType="Setting" NameTab="Setting" />
-                    
+
                     <!--BTNNavigation-->
                     <TextBlock Margin="0,30,0,10" HorizontalAlignment="Center" Name="BTNNavigationClose" Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
 
                 </StackPanel>
-                
+
             </Grid>
 
         </Grid>
@@ -99,7 +106,7 @@
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Background="Transparent" Cursor="Hand" Grid.Column="1">
+                    <Grid x:Name="BTNOpenUserSetting" Background="Transparent" Cursor="Hand" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
@@ -107,12 +114,12 @@
                         </Grid.ColumnDefinitions>
 
                         <!--BTNOption-->
-                        <TextBlock Foreground="#a8a8a8"   Margin="10,0" Grid.Column="2" Text="&#xE96E;" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" />
+                        <TextBlock x:Name="ArrowUsername" Foreground="#a8a8a8"   Margin="10,0" Grid.Column="2" Text="&#xE96E;" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Segoe MDL2 Assets" />
 
                         <!--Username-->
-                        <TextBlock   TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
-                        <Run Foreground="#a8a8a8" Text="Hello,"/>
-                        <Run FontWeight="SemiBold" Text="Username"/>
+                        <TextBlock   TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" >
+                        <Run FontFamily="/Dashboard;component/Fonts/#Barlow" Foreground="#a8a8a8" Text="Hello,"/>
+                        <Run  FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold" Text="Username"/>
                         </TextBlock>
 
                         <!--Image-->
@@ -128,6 +135,25 @@
                         <Ellipse Margin="9,-9,0,0" Fill="Tomato" Width="7" Height="7"/>
                     </Grid>
 
+
+                    <!--PanelUserControllser-->
+                    <Grid x:Name="PanelSettingUser" Visibility="Collapsed" Opacity="0"  Grid.ColumnSpan="2" Margin="-23,60,10,-139">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="11" ShadowDepth="0" Opacity="0.2"/>
+                        </Grid.Effect>
+                        <Rectangle Height="20"   Fill="White" Margin="180,-10,54,124" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="45"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Border CornerRadius="5" Background="White" />
+                    </Grid>
+
                 </Grid>
 
 
@@ -135,7 +161,43 @@
             </Grid>
 
             <!--Content-->
-            <Grid Grid.Row="1">
+            <Grid Margin="20" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--Tabel-->
+                <Border BorderBrush="#e0e0e0" BorderThickness="1"  CornerRadius="5" Background="White" Grid.Row="1">
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto "/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!--TabController-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                           
+                            <!--Left-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="ListView"/>
+                                <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="GridView"/>
+                                <Search:InputSearch Margin="20,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Border>
+
+
+                <!--PageControl-->
+                <Player:SubPagePlayers/>
+
 
             </Grid>
 

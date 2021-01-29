@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs.InputSearch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+             mc:Ignorable="d"
+             
+             >
+
+
+
+    <Border x:Name="Root" CornerRadius="5" BorderThickness="1" Background="#F4F4F4" Width="288" Height="48" >
+
+        
+    </Border>
+
+</UserControl>

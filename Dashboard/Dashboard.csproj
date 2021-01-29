@@ -250,6 +250,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\BTNs\PrimaryButtonIcon.xaml.cs">
       <DependentUpon>PrimaryButtonIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\BTNs\PrimaryButtonIcon2.xaml.cs">
+      <DependentUpon>PrimaryButtonIcon2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\BTNs\SecondaryButton.xaml.cs">
       <DependentUpon>SecondaryButton.xaml</DependentUpon>
     </Compile>
@@ -269,6 +272,9 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\Navigation\NavigationTab\NavigationTab.xaml.cs">
       <DependentUpon>NavigationTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\PageControl\Pagecontrol.xaml.cs">
+      <DependentUpon>Pagecontrol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\RadioButton\RadioButttonPrimary.xaml.cs">
       <DependentUpon>RadioButttonPrimary.xaml</DependentUpon>
     </Compile>
@@ -280,6 +286,15 @@
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\Tags\TagsPrimary.xaml.cs">
       <DependentUpon>TagsPrimary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\InputSearch.xaml.cs">
+      <DependentUpon>InputSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\TextInputs\TextInputPassword.xaml.cs">
       <DependentUpon>TextInputPassword.xaml</DependentUpon>
@@ -437,6 +452,9 @@
     <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PagePlayers\SubPagePlayers.xaml.cs">
+      <DependentUpon>SubPagePlayers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GlobalElement\GlobalEvents.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="App.xaml.cs">
@@ -495,6 +513,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\BTNs\PrimaryButtonIcon2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\BTNs\SecondaryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -519,6 +541,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\PageControl\Pagecontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\RadioButton\RadioButttonPrimary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -532,6 +558,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\Tags\TagsPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\TextInputs\InputSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -779,6 +809,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Pages\SubPages\PagePlayers\SubPagePlayers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dashboards\Dashboard-Game\PageDashboard\PageDashboard.xaml.cs">
@@ -823,11 +857,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Dashboards\Dashboard-Game\Elements\TextInputs\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Dashboard_TemporaryKey.pfx" />
+    <Resource Include="Fonts\Barlow-Black.ttf" />
+    <Resource Include="Fonts\Barlow-BlackItalic.ttf" />
+    <Resource Include="Fonts\Barlow-Bold.ttf" />
+    <Resource Include="Fonts\Barlow-BoldItalic.ttf" />
+    <Resource Include="Fonts\Barlow-ExtraBold.ttf" />
+    <Resource Include="Fonts\Barlow-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Barlow-ExtraLight.ttf" />
+    <Resource Include="Fonts\Barlow-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Barlow-Italic.ttf" />
+    <Resource Include="Fonts\Barlow-Light.ttf" />
+    <Resource Include="Fonts\Barlow-LightItalic.ttf" />
+    <Resource Include="Fonts\Barlow-Medium.ttf" />
+    <Resource Include="Fonts\Barlow-MediumItalic.ttf" />
+    <Resource Include="Fonts\Barlow-Regular.ttf" />
+    <Resource Include="Fonts\Barlow-SemiBold.ttf" />
+    <Resource Include="Fonts\Barlow-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Barlow-Thin.ttf" />
+    <Resource Include="Fonts\Barlow-ThinItalic.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Manifest.manifest" />
     <None Include="Properties\Settings.settings">
@@ -853,8 +908,6 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fonts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
