@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="PageAUT" Height="800" Width="1200">
     <Grid x:Name="Root">
-        <local:PageLogin Visibility="Collapsed" />
-        <Main:MainPage/>
+        <local:PageLogin Visibility="Visible" />
+        <Main:MainPage Visibility="Collapsed"/>
     </Grid>
 </Window>

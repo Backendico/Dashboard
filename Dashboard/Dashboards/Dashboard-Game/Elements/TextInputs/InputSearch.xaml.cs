@@ -21,36 +21,54 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
     /// </summary>
     public partial class InputSearch : UserControl
     {
+
+        bool IsFocues = false;
         public InputSearch()
         {
             InitializeComponent();
 
             MouseEnter += (s, e) =>
             {
-                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
+                if (!IsFocues)
+                {
+
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
+                }
             };
 
             MouseLeave += (s, e) =>
             {
+                if (!IsFocues)
+                {
+                    Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                }
+            };
+
+
+
+            TextValue.GotFocus += (s, e) =>
+            {
+                IsFocues = true;
+                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+            };
+
+            TextValue.LostFocus += (s, e) =>
+            {
+                Debug.WriteLine("hi");
+                IsFocues = false;
                 Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
             };
 
-            MouseDown += (s, e) => {
 
-                Debug.WriteLine("hi");
-                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-            };
-            TextArea.MouseDown+= (s, e) =>
+            TextValue.TextChanged += (S, e) =>
             {
-                Debug.WriteLine("hi");
+                IsFocues = true;
                 Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-
             };
-        }
 
-        private void UserControl_DpiChanged(object sender, DpiChangedEventArgs e)
-        {
 
         }
+
+
     }
 }

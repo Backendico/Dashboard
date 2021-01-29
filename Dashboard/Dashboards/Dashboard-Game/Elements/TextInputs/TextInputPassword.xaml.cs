@@ -114,8 +114,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             }
         }
 
-        bool err;
-        string _PlaceHolder;
+        bool err=false;
+        string _PlaceHolder="Password";
 
         public TextInputPassword()
         {
@@ -126,11 +126,14 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 if (Text == PlaceHolder)
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
                     MainTextBox.Password = "";
                 }
                 else
                 {
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                    Root.BorderThickness = new Thickness(2);
                 }
             };
 
@@ -140,13 +143,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
                     MainTextBox.Password = PlaceHolder;
+                    Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
                 else
                 {
-                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
 
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
             };
+
 
 
             MainTextBox.PasswordChanged += (s, e) =>

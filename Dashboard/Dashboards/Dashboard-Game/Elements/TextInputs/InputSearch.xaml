@@ -7,12 +7,8 @@
              mc:Ignorable="d"
              
              >
-
-
-
-    <Border x:Name="Root" CornerRadius="5" BorderThickness="1" Background="#F4F4F4" Width="288" Height="48" >
-
-        
+    <Border x:Name="Root" CornerRadius="5" BorderThickness="2" Background="#F4F4F4" Width="288" Height="40" >
+        <TextBox    Padding="10" x:Name="TextValue" Text="hi" Background="Transparent"  BorderThickness="0" BorderBrush="Transparent"/>
     </Border>
 
 </UserControl>

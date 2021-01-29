@@ -82,27 +82,24 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 {
                     TextblockError.Visibility = Visibility.Visible;
                     IconErr.Visibility = Visibility.Visible;
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#DA1E28");
 
-                    MainTextBox.BorderBrush = TextblockError.Foreground;
-                    MainTextBox.BorderThickness = new Thickness(2, 2, 2, 2);
                 }
                 else
                 {
+                    TextblockError.Visibility = Visibility.Collapsed;
+                    IconErr.Visibility = Visibility.Collapsed;
+
                     if (MainTextBox.IsFocused)
                     {
-
-                        TextblockError.Visibility = Visibility.Collapsed;
-                        IconErr.Visibility = Visibility.Collapsed;
-                        MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-                        MainTextBox.BorderThickness = new Thickness(2);
+                        Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                        Root.BorderThickness = new Thickness(2);
 
                     }
                     else
                     {
-                        TextblockError.Visibility = Visibility.Collapsed;
-                        IconErr.Visibility = Visibility.Collapsed;
-                        MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                        MainTextBox.BorderThickness = new Thickness(0, 0, 0, 2);
+                        Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                        Root.BorderThickness = new Thickness(2);
                     }
                 }
             }
@@ -128,9 +125,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             }
         }
 
-        bool err;
-        string _PlaceHolder;
-        InputType Type;
+        bool err = false;
+        string _PlaceHolder="Place Holder";
+        InputType Type=InputType.All;
 
 
         public TextInputPrimary()
@@ -147,8 +144,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 else
                 {
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
-                    MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-                    MainTextBox.BorderThickness = new Thickness(2);
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                    Root.BorderThickness = new Thickness(2);
                 }
             };
 
@@ -163,8 +160,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 {
 
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
-                    MainTextBox.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8D8D8D");
-                    MainTextBox.BorderThickness = new Thickness(0, 0, 0, 2);
+                    Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
             };
 
