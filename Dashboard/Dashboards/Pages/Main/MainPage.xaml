@@ -187,7 +187,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="ListView"/>
                                 <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="GridView"/>
-                                <Search:InputSearch Margin="20,0"/>
+                                <Search:InputSearch Margin="20,0" PlaceHolder="Find player"/>
                             </StackPanel>
                         </Grid>
                     </Grid>

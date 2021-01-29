@@ -16,56 +16,144 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 {
-    /// <summary>
-    /// Interaction logic for InputSearch.xaml
-    /// </summary>
+
     public partial class InputSearch : UserControl
     {
+        public string Text
+        {
+            get
+            {
+                return MainTextBox.Text;
+            }
+            set
+            {
+                if (value.Length >= 1)
+                {
 
-        bool IsFocues = false;
+                    MainTextBox.Text = value;
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                }
+            }
+        }
+
+
+        public string PlaceHolder
+        {
+            get
+            {
+                return _PlaceHolder;
+            }
+            set
+            {
+                _PlaceHolder = value;
+                MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+
+                if (Text != value || Text.Length <= 0)
+                {
+                    MainTextBox.Text = value;
+                }
+
+            }
+
+        }
+
+
+        public bool IsError
+        {
+            get
+            {
+                return err;
+            }
+            set
+            {
+
+                err = value;
+                if (err)
+                {
+                    TextblockError.Visibility = Visibility.Visible;
+                    IconErr.Visibility = Visibility.Visible;
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#DA1E28");
+
+                }
+                else
+                {
+                    TextblockError.Visibility = Visibility.Collapsed;
+                    IconErr.Visibility = Visibility.Collapsed;
+
+                    if (MainTextBox.IsFocused)
+                    {
+                        Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                        Root.BorderThickness = new Thickness(2);
+
+                    }
+                    else
+                    {
+                        Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                        Root.BorderThickness = new Thickness(2);
+                    }
+                }
+            }
+        }
+
+        public string TextError
+        {
+            get
+            {
+                return TextblockError.Text;
+            }
+            set
+            {
+                if (TextblockError.Text.Length >= 1)
+                {
+
+                    TextblockError.Text = value;
+                }
+                else
+                {
+                    TextblockError.Text = "Error";
+                }
+            }
+        }
+
+        bool err = false;
+        string _PlaceHolder = "Place Holder";
+
+
         public InputSearch()
         {
             InitializeComponent();
 
-            MouseEnter += (s, e) =>
+            GotFocus += (s, e) =>
             {
-                if (!IsFocues)
+                if (Text == PlaceHolder)
                 {
-
-                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
+                    MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                    MainTextBox.Text = "";
+                }
+                else
+                {
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
+                    Root.BorderThickness = new Thickness(2);
                 }
             };
 
-            MouseLeave += (s, e) =>
+            LostFocus += (s, e) =>
             {
-                if (!IsFocues)
+                if (Text.Length <= 0)
                 {
+                    MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    MainTextBox.Text = PlaceHolder;
+                }
+                else
+                {
+
+                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
                     Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
             };
-
-
-
-            TextValue.GotFocus += (s, e) =>
-            {
-                IsFocues = true;
-                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-            };
-
-            TextValue.LostFocus += (s, e) =>
-            {
-                Debug.WriteLine("hi");
-                IsFocues = false;
-                Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            };
-
-
-            TextValue.TextChanged += (S, e) =>
-            {
-                IsFocues = true;
-                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-            };
-
 
         }
 

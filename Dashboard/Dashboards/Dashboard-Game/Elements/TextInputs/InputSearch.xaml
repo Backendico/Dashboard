@@ -7,8 +7,19 @@
              mc:Ignorable="d"
              
              >
-    <Border x:Name="Root" CornerRadius="5" BorderThickness="2" Background="#F4F4F4" Width="288" Height="40" >
-        <TextBox    Padding="10" x:Name="TextValue" Text="hi" Background="Transparent"  BorderThickness="0" BorderBrush="Transparent"/>
-    </Border>
+    <Grid >
+        <Border x:Name="Root" CornerRadius="5" BorderThickness="2" Background="#F4F4F4" Width="288" Height="40" >
+            <TextBox  Margin="25,0,0,0" Padding="10" x:Name="MainTextBox"  Background="Transparent"  BorderThickness="0" BorderBrush="Transparent"/>
+        </Border>
+
+        <TextBlock Margin="10,0" Text="&#xE721;"  Foreground="#8d8d8d"  TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+        <TextBlock Visibility="Collapsed"  x:Name="IconErr" Margin="10,0" Foreground="#DA1E28" VerticalAlignment="Center" TextAlignment="Right" Text="&#xE783;" FontFamily="Segoe MDL2 Assets" />
+
+        <TextBlock x:Name="TextblockError" Visibility="Collapsed" Margin="0,40,0,-15" Text="Error " Foreground="#DA1E28"/>
+
+        <Border CornerRadius="0,0,5,5" BorderThickness="0,1,0,0" Background="#F4F4F4" Margin="0,40,0,-180">
+            
+        </Border>
+    </Grid>
 
 </UserControl>
