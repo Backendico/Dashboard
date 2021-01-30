@@ -8,6 +8,7 @@
              xmlns:NavigationTab="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
              xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
+             xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="560" d:DesignWidth="1437"
@@ -182,12 +183,24 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                           
+
                             <!--Left-->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="ListView"/>
                                 <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="GridView"/>
-                                <Search:InputSearch Margin="20,0" PlaceHolder="Find player"/>
+                                <Search:InputSearch Margin="20,0"  PlaceHolder="Find player" IsOpenSuggests="False" />
+                                <DropDown:DropDownPrimary >
+                                    <DropDown:DropDownPrimary.Items>
+                                        <StackPanel>
+                                            <DropDown:DropDownItem/>
+                                            <DropDown:DropDownItem/>
+                                            <DropDown:DropDownItem/>
+                                            <DropDown:DropDownItem/>
+                                            <DropDown:DropDownItem/>
+                                        </StackPanel>
+                                    </DropDown:DropDownPrimary.Items>
+
+                                </DropDown:DropDownPrimary>
                             </StackPanel>
                         </Grid>
                     </Grid>

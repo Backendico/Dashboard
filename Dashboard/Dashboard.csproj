@@ -265,6 +265,12 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml.cs">
       <DependentUpon>CheackBoxPrimary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\DropDown\DropDownItem.xaml.cs">
+      <DependentUpon>DropDownItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Dashboard-Game\Elements\DropDown\DropDownPrimary.xaml.cs">
+      <DependentUpon>DropDownPrimary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\Icons\Icons.cs" />
     <Compile Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml.cs">
       <DependentUpon>LinksPrimary.xaml</DependentUpon>
@@ -524,6 +530,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\CheackBoxs\CheackBoxPrimary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\DropDown\DropDownItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Dashboard-Game\Elements\DropDown\DropDownPrimary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

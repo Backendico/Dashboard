@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -19,6 +20,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 
     public partial class InputSearch : UserControl
     {
+        public bool IsOpenSuggests
+        {
+            get
+            {
+                return _IsOpenSuggest;
+            }
+            set
+            {
+                _IsOpenSuggest = value;
+
+                if (value)
+                {
+                    OpenSuggests();
+                }
+                else
+                {
+                    CloseSuggests();
+                }
+
+            }
+        }
+
         public string Text
         {
             get
@@ -27,15 +50,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             }
             set
             {
+                MainTextBox.Text = value;
                 if (value.Length >= 1)
                 {
 
-                    MainTextBox.Text = value;
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                }
+                else
+                {
+                    CloseSuggests();
                 }
             }
         }
-
 
         public string PlaceHolder
         {
@@ -117,7 +143,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 
         bool err = false;
         string _PlaceHolder = "Place Holder";
-
+        bool _IsOpenSuggest = false;
 
         public InputSearch()
         {
@@ -153,8 +179,51 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                     MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
                     Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
+
+                CloseSuggests();
             };
 
+            //Action change Text
+            MainTextBox.TextChanged += (s, e) =>
+            {
+                if (Text.Length >= 1)
+                {
+                    OpenSuggests();
+                }
+                else
+                {
+                    CloseSuggests();
+                }
+            };
+
+            //action btnClearText
+            BTNClear.MouseDown += (s, e) =>
+            {
+
+                Text = "";
+            };
+        }
+
+        void OpenSuggests()
+        {
+
+            DoubleAnimation Anim = new DoubleAnimation(150, TimeSpan.FromSeconds(0.2));
+            Storyboard.SetTargetName(Anim, PanelSuggest.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
+
+        }
+
+        void CloseSuggests()
+        {
+            DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.2));
+            Storyboard.SetTargetName(Anim, PanelSuggest.Name);
+            Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(Anim);
+            storyboard.Begin(this);
         }
 
 

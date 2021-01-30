@@ -7,18 +7,27 @@
              mc:Ignorable="d"
              
              >
-    <Grid >
-        <Border x:Name="Root" CornerRadius="5" BorderThickness="2" Background="#F4F4F4" Width="288" Height="40" >
-            <TextBox  Margin="25,0,0,0" Padding="10" x:Name="MainTextBox"  Background="Transparent"  BorderThickness="0" BorderBrush="Transparent"/>
-        </Border>
+    <Grid  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,-150">
+        <Grid VerticalAlignment="Top">
 
-        <TextBlock Margin="10,0" Text="&#xE721;"  Foreground="#8d8d8d"  TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
-        <TextBlock Visibility="Collapsed"  x:Name="IconErr" Margin="10,0" Foreground="#DA1E28" VerticalAlignment="Center" TextAlignment="Right" Text="&#xE783;" FontFamily="Segoe MDL2 Assets" />
+            <Border x:Name="Root" CornerRadius="5" BorderThickness="2" Background="#F4F4F4" Width="288" Height="40" >
+                <TextBox   Margin="25,0,25,0" Padding="10" x:Name="MainTextBox"  Background="Transparent"  BorderThickness="0" BorderBrush="Transparent"/>
+            </Border>
 
-        <TextBlock x:Name="TextblockError" Visibility="Collapsed" Margin="0,40,0,-15" Text="Error " Foreground="#DA1E28"/>
+            <!--IconSearch-->
+            <TextBlock Margin="10,0" Text="&#xE721;"  Foreground="#8d8d8d"  TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+        
+            <!--BTNclear-->
+            <TextBlock Cursor="Hand" Margin="10,0" Text="&#xE894;" x:Name="BTNClear" Foreground="#8d8d8d"  TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+         
 
-        <Border CornerRadius="0,0,5,5" BorderThickness="0,1,0,0" Background="#F4F4F4" Margin="0,40,0,-180">
-            
+            <!--Errors-->
+            <TextBlock Visibility="Collapsed"  x:Name="IconErr" Margin="10,0" Foreground="#DA1E28" VerticalAlignment="Center" TextAlignment="Right" Text="&#xE783;" FontFamily="Segoe MDL2 Assets" />
+            <TextBlock x:Name="TextblockError" Visibility="Collapsed" Margin="0,40,0,-15" Text="Error " Foreground="#DA1E28"/>
+        </Grid>
+
+        <Border x:Name="PanelSuggest" CornerRadius="0,0,5,5" BorderThickness="2,0,2,2" BorderBrush="#0F62FE" VerticalAlignment="Top"  Background="#F4F4F4" Height="0" Margin="0,34,0,0">
+
         </Border>
     </Grid>
 
