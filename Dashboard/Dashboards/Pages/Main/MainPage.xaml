@@ -61,7 +61,7 @@
 
                     <TextBlock x:Name="TextDashboard" FontWeight="Bold" Margin="0,32,0,12" FontSize="11" Foreground="#d0e2ff"  Text="DASHBOARD" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
 
-                    <NavigationTab:NavigationTab IconType="Home" NameTab="Home"  IsSelected="True"/>
+                    <NavigationTab:NavigationTab IconType="Home" NameTab="Home" />
                     <NavigationTab:NavigationTab IconType="Players" NameTab="Players"/>
                     <NavigationTab:NavigationTab IconType="Leaderboards" NameTab="Leaderboards"/>
                     <NavigationTab:NavigationTab IconType="Achievements" NameTab="Achievements"/>
@@ -189,14 +189,13 @@
                                 <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="ListView"/>
                                 <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="GridView"/>
                                 <Search:InputSearch Margin="20,0"  PlaceHolder="Find player" IsOpenSuggests="False" />
-                                <DropDown:DropDownPrimary >
+                                <DropDown:DropDownPrimary  PlaceHolder="Sort by:" DefualtItem="0"  >
                                     <DropDown:DropDownPrimary.Items>
                                         <StackPanel>
-                                            <DropDown:DropDownItem/>
-                                            <DropDown:DropDownItem/>
-                                            <DropDown:DropDownItem/>
-                                            <DropDown:DropDownItem/>
-                                            <DropDown:DropDownItem/>
+                                            <DropDown:DropDownItem Text="Created"/>
+                                            <DropDown:DropDownItem Text="Currency"/>
+                                            <DropDown:DropDownItem Text="Register"/>
+                                            <DropDown:DropDownItem Text="Active"/>
                                         </StackPanel>
                                     </DropDown:DropDownPrimary.Items>
 

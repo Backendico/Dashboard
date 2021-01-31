@@ -22,6 +22,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
     /// </summary>
     public partial class DropDownItem : UserControl
     {
+        internal string Text
+        {
+            set
+            {
+                NameItem.Text = value;
+            }
+            get
+            {
+                return NameItem.Text;
+            }
+        }
 
         public DropDownItem()
         {
@@ -38,10 +49,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
             MouseDown += (s, e) =>
             {
-                GlobalEvents.FindParent<DropDownPrimary>(this);
+                GlobalEvents.FindParent<DropDownPrimary>(this).SelectItem(this);
             };
-
-
         }
 
 

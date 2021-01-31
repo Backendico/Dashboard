@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dashboard.GlobalElement;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -18,11 +20,17 @@ using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 {
-    /// <summary>
-    /// Interaction logic for DropDownPrimary.xaml
-    /// </summary>
+
     public partial class DropDownPrimary : UserControl
     {
+
+        internal int DefualtItem
+        {
+            set
+            {
+                _SelectionIndex = value;
+            }
+        }
         public StackPanel Items
         {
             get
@@ -57,26 +65,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             }
         }
 
-        public string Text
-        {
-            get
-            {
-                return MainTextBox.Text;
-            }
-            set
-            {
-                MainTextBox.Text = value;
-                if (value.Length >= 1)
-                {
-
-                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
-                }
-                else
-                {
-                    CloseLists();
-                }
-            }
-        }
 
         public string PlaceHolder
         {
@@ -87,13 +75,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             set
             {
                 _PlaceHolder = value;
-                MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-
-                if (Text != value || Text.Length <= 0)
-                {
-                    MainTextBox.Text = value;
-                }
-
+                TextPlaceHolder.Text = value;
             }
 
         }
@@ -101,13 +83,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
         string _PlaceHolder = "Place Holder";
         bool _IsOpenSuggest = false;
-
+        int _SelectionIndex = 0;
 
 
         public DropDownPrimary()
         {
             InitializeComponent();
 
+
+            Loaded += (S, e) =>
+            {
+                SelectItem(Items.Children[_SelectionIndex] as DropDownItem);
+            };
             GotFocus += (s, e) =>
             {
 
@@ -164,7 +151,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             storyboard.Begin(this);
         }
 
+        internal void SelectItem(DropDownItem Item)
+        {
+            _SelectionIndex = Items.Children.IndexOf(Item);
+            TextSelected.Text = (Items.Children[Items.Children.IndexOf(Item)] as DropDownItem).Text;
+        }
 
-        
     }
 }

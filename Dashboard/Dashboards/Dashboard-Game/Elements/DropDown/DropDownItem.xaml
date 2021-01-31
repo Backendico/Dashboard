@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              mc:Ignorable="d" >
     
-    <TextBlock x:Name="NameItem" Margin="10" Text="HI">
+    <TextBlock x:Name="NameItem" Margin="10" Text="Item">
 
     </TextBlock>
 

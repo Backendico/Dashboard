@@ -14,8 +14,8 @@
 
             <Border x:Name="Root" CornerRadius="5" BorderThickness="2" BorderBrush="#8d8d8d" Background="White"  Height="40" >
                 <TextBlock   Margin="0,0,25,0" Padding="10" x:Name="MainTextBox"  Background="Transparent"  >
-                    <Run Name="TextSelected" Foreground="#8d8d8d" Text="Place Holder:" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
-                    <Run Text="ItemSelect" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                    <Run Name="TextPlaceHolder" Foreground="#8d8d8d" Text="Place Holder:" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+                    <Run Name="TextSelected" Text="ItemSelect" Foreground="Black" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
                 </TextBlock>
             </Border>
 
@@ -29,7 +29,7 @@
 
         <Border x:Name="PanelSuggest" CornerRadius="0,0,5,5" BorderThickness="2" BorderBrush="#0F62FE" VerticalAlignment="Top"  Background="White" Height="0" Margin="0,35,0,0">
 
-            <ScrollViewer>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 
             <ContentPresenter  x:Name="Content1" Content="{Binding Items, ElementName=MainRoot}"/>
             </ScrollViewer>
