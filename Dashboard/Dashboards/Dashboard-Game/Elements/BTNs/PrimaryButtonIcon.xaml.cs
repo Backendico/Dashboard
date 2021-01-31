@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Icons;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
@@ -8,6 +9,28 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
     /// </summary>
     public partial class PrimaryButtonIcon : UserControl
     {
+        internal IconType Icon
+        {
+            set
+            {
+                TextIcon.Text = new Icons.Icons()[value];
+            }
+        }
+        internal string Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                TextButton.Text = value;
+                _Text = value;
+            }
+        }
+
+        string _Text = "";
+
         public PrimaryButtonIcon()
         {
             InitializeComponent();

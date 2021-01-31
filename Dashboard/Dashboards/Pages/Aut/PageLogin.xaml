@@ -19,7 +19,7 @@
         <Link:LinksPrimary x:Name="BTNRecovery"   TextLinks="Forget Password?" HorizontalAlignment="Right"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Buttons:SecondaryButton x:Name="BTNRegister" TextButton="Register"/>
-            <Buttons:BTNPrimary x:Name="BTNLogin"   Margin="0,20" TextButton="Login" />
+            <Buttons:BTNPrimary x:Name="BTNLogin"   Margin="0,20" Text="Login" />
         </StackPanel>
     </StackPanel>
 </UserControl>

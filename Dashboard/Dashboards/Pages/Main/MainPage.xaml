@@ -206,7 +206,7 @@
                           
                             <!--Right-->
                             <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                                <BTNS:PrimaryButtonIcon HorizontalAlignment="Right"/>
+                                <BTNS:PrimaryButtonIcon  Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Grid>
 

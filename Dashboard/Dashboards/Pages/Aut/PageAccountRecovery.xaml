@@ -14,7 +14,7 @@
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Buttons:SecondaryButton x:Name="BTNLogin" TextButton="Login"/>
-            <Buttons:BTNPrimary  x:Name="BTNRecovery"  Margin="0,20" TextButton="Recovery" />
+            <Buttons:BTNPrimary  x:Name="BTNRecovery"  Margin="0,20" Text="Recovery" />
         </StackPanel>
     </StackPanel>
 

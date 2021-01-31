@@ -8,7 +8,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
 
     public partial class BTNPrimary : UserControl
     {
-        public string TextButton
+        public string Text
         {
             get { return _Textbutton; }
             set
@@ -25,14 +25,9 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
 
             MouseDown += (s, e) =>
             {
-                try
+                if (Worker != null)
                 {
                     Worker();
-
-                }
-                catch (Exception)
-                {
-                    Debug.WriteLine("no worker");
                 }
             };
 

@@ -45,7 +45,7 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
 
                 <!--Texts-->
-                <TextBlock Text="Primary Button"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Primary Button"  Name="TextButton" TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" >
                             <Style.Triggers>
@@ -62,7 +62,7 @@
                 </TextBlock>
 
                 <!--Icon-->
-                <TextBlock   Margin="5" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock  x:Name="TextIcon"  Margin="5" Text="&#xE710;" FontFamily="Segoe MDL2 Assets"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" >
                             <Style.Triggers>
