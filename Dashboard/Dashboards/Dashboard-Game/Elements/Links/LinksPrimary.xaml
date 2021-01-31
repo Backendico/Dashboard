@@ -23,7 +23,7 @@
             </Style>
         </Border.Style>
 
-        <TextBlock x:Name="TextLable"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="Text links">
+        <TextBlock x:Name="TextLink"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Text="Text links">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>

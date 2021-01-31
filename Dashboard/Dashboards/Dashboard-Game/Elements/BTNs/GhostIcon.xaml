@@ -4,13 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" ClipToBounds="True"
              Cursor="Hand"
              >
-    <Grid Focusable="True"  Height="100" Width="70" >
-        <Grid Margin="5" VerticalAlignment="Top" Focusable="True" IsEnabled="True" x:Name="Root" Height="48" Width="48" >
-            <Grid.Style>
-                <Style TargetType="Grid">
+    <Grid ClipToBounds="True" Focusable="True" VerticalAlignment="Top" HorizontalAlignment="Center" Height="70" Width="70" >
+
+        <!--Body-->
+        <Border VerticalAlignment="Top" CornerRadius="5" Width="30" Height="30" x:Name="Root" Focusable="True" Margin="5" >
+
+            <Border.Style>
+                <Style TargetType="Border">
                     <Style.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="Transparent"/>
@@ -25,9 +28,9 @@
                     </Style.Triggers>
                 </Style>
 
-            </Grid.Style>
+            </Border.Style>
 
-            <Border x:Name="BorderFocuse"  Margin="3" BorderBrush="#0f62fe" >
+            <Border  x:Name="BorderFocuse"  Margin="3" BorderBrush="White" >
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
@@ -39,7 +42,7 @@
                 </Border.Style>
 
                 <!--Icon-->
-                <TextBlock TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE710;" FontFamily="Segoe MDL2 Assets">
+                <TextBlock x:Name="TextIcon" TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="&#xE710;" FontFamily="Segoe MDL2 Assets">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" >
                             <Style.Triggers>
@@ -48,7 +51,7 @@
                                 </Trigger>
 
                                 <Trigger Property="IsEnabled" Value="True">
-                                    <Setter Property="Foreground"  Value="#0f62fe"/>
+                                    <Setter Property="Foreground"  Value="#054ada"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -58,10 +61,10 @@
 
             </Border>
 
+        </Border>
 
-
-        </Grid>
-        <Grid x:Name="Tooltip" Visibility="Collapsed" Margin="0,50,0,0">
+        <!--Tooltips-->
+        <Grid ClipToBounds="True" x:Name="Tooltip" Visibility="Visible" Margin="0,30,0,0" >
             <Rectangle  Fill="Black"  HorizontalAlignment="Center" Height="24"  Stroke="Black" VerticalAlignment="Center"  RadiusY="2" RadiusX="2" Width="66"/>
             <Rectangle  Fill="Black" Margin="0,-24,0,0"  HorizontalAlignment="Center" Height="8"  Stroke="Black" VerticalAlignment="Center" Width="8" RenderTransformOrigin="0.5,0.5" >
                 <Rectangle.RenderTransform>

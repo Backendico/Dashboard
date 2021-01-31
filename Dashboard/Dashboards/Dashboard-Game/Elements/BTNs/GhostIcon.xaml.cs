@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Icons;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
 {
@@ -20,6 +9,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
     /// </summary>
     public partial class GhostIcon : UserControl
     {
+        public IconType Icon
+        {
+            set
+            {
+                TextIcon.Text = new Icons.Icons()[value];
+                TextTooltip.Text = value.ToString();
+            }
+        }
+
         public GhostIcon()
         {
             InitializeComponent();

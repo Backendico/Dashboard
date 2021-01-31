@@ -33,7 +33,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             };
         }
 
-        public JsonEditor(BsonDocument JsonData,Action Save)
+        public JsonEditor(BsonDocument JsonData, Action Save)
         {
             InitializeComponent();
 
@@ -5193,7 +5193,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonEditor
             Add.MouseDown += (s, e) =>
             {
                 PlaceSubElements.Children.Clear();
-                Data.Value.AsBsonDocument.Add(ObjectId.GenerateNewId().ToString(),"");
+                Data.Value.AsBsonDocument.Add(ObjectId.GenerateNewId().ToString(), "");
 
                 foreach (var item in Data.Value.AsBsonDocument)
                 {

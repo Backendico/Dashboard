@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Dashboard.GlobalElement
 {
@@ -105,6 +106,29 @@ namespace Dashboard.GlobalElement
             }
         }
 
+        public static T FindParent<T>(DependencyObject child)
+              where T : DependencyObject
+        {
+            if (child == null) return null;
+
+            T foundParent = null;
+            var currentParent = VisualTreeHelper.GetParent(child);
+
+            do
+            {
+                var frameworkElement = currentParent as FrameworkElement;
+                if (frameworkElement is T)
+                {
+                    foundParent = (T)currentParent;
+                    break;
+                }
+
+                currentParent = VisualTreeHelper.GetParent(currentParent);
+
+            } while (currentParent != null);
+
+            return foundParent;
+        }
 
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Add_ons.TagsSystem;
-using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements;
-using Dashboard.Dashboards.Dashboard_Game.PageAchievements.Elements.EditAchievements.Elements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelAchievements;
 using Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements.ModelLog;
 using Dashboard.GlobalElement;
@@ -313,7 +311,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             #endregion
 
             #region PageLogs
-         
+
             //Init Logs
             BTNLogs.Click += (s, e) =>
             {
@@ -347,30 +345,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
             };
 
             //action btn clear
-            BTNClearLogs.MouseDown +=async (s, e) =>
-            {
-                if (await DashboardGame.DialogYesNo("All information will be lost.\nare you sure ? ")==MessageBoxResult.Yes)
-                {
-                SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
-                {
-                    if (result)
+            BTNClearLogs.MouseDown += async (s, e) =>
+             {
+                 if (await DashboardGame.DialogYesNo("All information will be lost.\nare you sure ? ") == MessageBoxResult.Yes)
+                 {
+                     SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
                     {
-                        DashboardGame.Notifaction("Logs Clear", Notifaction.StatusMessage.Ok);
-                        InitLogs();
-                    }
-                    else
-                    {
-                        DashboardGame.Notifaction("Faild Clear", Notifaction.StatusMessage.Error);
-                    }
+                     if (result)
+                     {
+                         DashboardGame.Notifaction("Logs Clear", Notifaction.StatusMessage.Ok);
+                         InitLogs();
+                     }
+                     else
+                     {
+                         DashboardGame.Notifaction("Faild Clear", Notifaction.StatusMessage.Error);
+                     }
 
-                });
+                 });
 
-                }
-                else
-                {
-                    DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
-                }
-            };
+                 }
+                 else
+                 {
+                     DashboardGame.Notifaction("Canceled", Notifaction.StatusMessage.Warrning);
+                 }
+             };
 
             //action btn ClosePaneladdlog
             PanelAddLog.MouseDown += (s, e) =>

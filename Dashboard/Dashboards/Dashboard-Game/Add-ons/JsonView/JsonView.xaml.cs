@@ -35,7 +35,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Add_ons.JsonView
                 Root.Visibility = Visibility.Collapsed;
 
                 Root.Visibility = Visibility.Collapsed;
-               
+
                 DashboardGame.Dashboard.Root.Children.Remove(this);
 
             };

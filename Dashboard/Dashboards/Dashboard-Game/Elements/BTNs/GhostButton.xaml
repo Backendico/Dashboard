@@ -39,7 +39,7 @@
                 </Style>
             </Border.Style>
 
-            <TextBlock x:Name="X"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Ghost Button">
+            <TextBlock x:Name="NameButton"  TextAlignment="Center" IsEnabled="{Binding IsEnabled, ElementName=Root}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Ghost Button">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock" >
                         <Style.Triggers>
