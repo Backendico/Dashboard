@@ -195,12 +195,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                     CloseSuggests();
                 }
             };
-
+           
             //action btnClearText
             BTNClear.MouseDown += (s, e) =>
             {
-
-                Text = "";
+                if (Text != PlaceHolder)
+                {
+                    Text = "";
+                    PlaceHolder = _PlaceHolder;
+                    CloseSuggests();
+                }
             };
         }
 

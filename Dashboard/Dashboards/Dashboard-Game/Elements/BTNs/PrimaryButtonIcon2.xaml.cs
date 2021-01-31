@@ -35,14 +35,16 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
         {
             InitializeComponent();
 
-            GotFocus += (s, e) =>
+            Root.GotFocus += (s, e) =>
             {
                 BorderFocuse.BorderThickness = new Thickness(2);
+                BorderFocuse.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0f62fe");
             };
 
-            LostFocus += (s, e) =>
+            Root.LostFocus += (s, e) =>
             {
                 BorderFocuse.BorderThickness = new Thickness(0);
+                BorderFocuse.BorderBrush = new SolidColorBrush(Colors.Transparent);
             };
             MouseEnter += (s, e) =>
             {

@@ -7,7 +7,7 @@
              Cursor="Hand"
              mc:Ignorable="d" Margin="5">
 
-    <Border Focusable="True" IsEnabled="True" x:Name="Root" Height="48" Width="123">
+    <Border Focusable="True" CornerRadius="5" IsEnabled="True" x:Name="Root" Height="40" Width="123">
         <Border.Style>
             <Style TargetType="Border">
                 <Style.Triggers>

@@ -12,7 +12,7 @@
     <Grid Focusable="True" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,-150">
         <Grid VerticalAlignment="Top">
 
-            <Border x:Name="Root" CornerRadius="5" BorderThickness="2" BorderBrush="#8d8d8d" Background="White"  Height="40" >
+            <Border x:Name="Root" CornerRadius="5" BorderThickness="2" BorderBrush="#8d8d8d" Background="White" MinWidth="170"  Height="40" >
                 <TextBlock   Margin="0,0,25,0" Padding="10" x:Name="MainTextBox"  Background="Transparent"  >
                     <Run Name="TextPlaceHolder" Foreground="#8d8d8d" Text="Place Holder:" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
                     <Run Name="TextSelected" Text="ItemSelect" Foreground="Black" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
@@ -21,8 +21,8 @@
 
 
             <!--BTNClose-->
-            <Border  Width="28" BorderBrush="{Binding BorderBrush,  ElementName=Root}" BorderThickness="2,0,0,0"  HorizontalAlignment="Right"  >
-                <TextBlock  Text="&#xE96E;" x:Name="IconArrow" Foreground="#8d8d8d"  HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"  FontFamily="Segoe MDL2 Assets"/>
+            <Border  Width="20" BorderBrush="{Binding BorderBrush,  ElementName=Root}" BorderThickness="2,0,0,0"  HorizontalAlignment="Right"  >
+                <TextBlock  FontSize="10" Text="&#xE96E;" x:Name="IconArrow" Foreground="#8d8d8d"  HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"  FontFamily="Segoe MDL2 Assets"/>
             </Border>
 
         </Grid>
