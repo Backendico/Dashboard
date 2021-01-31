@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
-             Cursor="Hand"
+             Cursor="Hand" 
              mc:Ignorable="d" Margin="5">
 
     <Border Focusable="True" CornerRadius="5" IsEnabled="True" x:Name="Root" Height="40" Width="123">
