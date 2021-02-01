@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Module.ModuleSize1;
+using Dashboard.Dashboards.Pages.Aut;
+using Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer;
+using System;
 using System.Diagnostics;
 using System.Security.Permissions;
 using System.Windows;
@@ -48,6 +51,11 @@ namespace Dashboard.Dashboards.Pages.Main
                 }
             };
 
+            //Action btn add
+            BTNaddPlayer.Work += () =>
+            {
+                PageAUT.Placeholder.Children.Add(new ModulsAddPlayer());
+            };
 
         }
 

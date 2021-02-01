@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer.ModulsAddPlayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer"
+             xmlns:BTN="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+             xmlns:Inputs="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+             xmlns:Tooltips="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
+    xmlns:Modul="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Module.ModuleSize1"
+             mc:Ignorable="d" >
+
+    <Modul:ModulSize1 TabName="Add Player">
+        <Modul:ModulSize1.PageContent>
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Inputs:TextInputPrimary PlaceHolder="Username"/>
+                    <Inputs:TextInputPassword PlaceHolder="Password" />
+                    <Tooltips:TooltipPrimaryText Text="If the username and password are empty, the user will be created without a username and password. " PlaceHolder="Help"/>
+                    <BTN:BTNPrimary/>
+
+                </StackPanel>
+            </Grid>
+
+        </Modul:ModulSize1.PageContent>
+
+    </Modul:ModulSize1>
+
+</UserControl>

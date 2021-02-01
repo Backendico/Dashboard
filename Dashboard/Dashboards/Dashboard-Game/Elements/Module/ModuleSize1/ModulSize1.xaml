@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Dashboard_Game.Elements.Module.ModuleSize1.ModulSize1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Module.ModuleSize1"
+             mc:Ignorable="d" 
+             Name="Root"
+             Background="#3333">
+
+    <Border  CornerRadius="20" 
+             Width="640" 
+             Height="520" 
+             Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="46"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="BTNClose"
+                    HorizontalAlignment="Right"
+                    Margin="10" 
+                    Width="25"
+                    Height="25"
+                    BorderThickness="2" 
+                    CornerRadius="5"  
+                    Cursor="Hand"
+                    Background="Transparent">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <Trigger 
+                                Property="IsMouseOver"
+                                Value="True">
+                                <Setter
+                                    Property="BorderBrush" 
+                                    Value="#a8a8a8"/>
+                            </Trigger>
+                            <Trigger 
+                                Property="IsMouseOver"
+                                Value="False">
+                                <Setter Property="BorderBrush" 
+                                        Value="#e0e0e0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{Binding BorderBrush,ElementName=BTNClose}"
+                    Text="&#xEF2C;" 
+                    TextAlignment="Center"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe MDL2 Assets" />
+            </Border>
+
+            <TextBlock 
+                Name="NameTab"
+                FontSize="20" 
+                Text="TabName"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left" 
+                Margin="20,0" 
+                FontFamily="/Dashboard;component/Fonts/#Barlow Medium"/>
+
+            <ContentPresenter
+                x:Name="PlaceHolder"
+                Margin="20" 
+                Grid.Row="1">
+
+            </ContentPresenter>
+
+        </Grid>
+    </Border>
+
+</UserControl>

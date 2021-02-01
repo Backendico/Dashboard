@@ -10,6 +10,7 @@
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
              xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+           
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="560" d:DesignWidth="1437"
          
@@ -206,7 +207,7 @@
                           
                             <!--Right-->
                             <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                                <BTNS:PrimaryButtonIcon  Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
+                                <BTNS:PrimaryButtonIcon x:Name="BTNaddPlayer" Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Grid>
 

@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Drawing;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips
 {
@@ -8,18 +11,38 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips
     /// </summary>
     public partial class ToolTipPrimary : UserControl
     {
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                _text = value;
+                ToolTip = value;
+            }
+        }
+
+
+        public string Placeholder
+        {
+            get
+            {
+                return TextTooltip.Text;
+            }
+            set
+            {
+                TextTooltip.Text = value;
+            }
+        }
+
+        string _text;
+
         public ToolTipPrimary()
         {
             InitializeComponent();
 
-            BTNShowTooltip.MouseEnter += (s, e) =>
-            {
-                PanelTooltip.Visibility = Visibility.Visible;
-            };
-            BTNShowTooltip.MouseLeave += (s, e) =>
-            {
-                PanelTooltip.Visibility = Visibility.Collapsed;
-            };
         }
     }
 }
