@@ -10,7 +10,7 @@
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
              xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
-           
+           xmlns:GridShow="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="560" d:DesignWidth="1437"
          
@@ -210,6 +210,14 @@
                                 <BTNS:PrimaryButtonIcon x:Name="BTNaddPlayer" Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Grid>
+
+                        <!--Grid View-->
+                        <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                                <GridShow:Player_GridShow/>
+                            </WrapPanel>
+                        </ScrollViewer>
 
                     </Grid>
 

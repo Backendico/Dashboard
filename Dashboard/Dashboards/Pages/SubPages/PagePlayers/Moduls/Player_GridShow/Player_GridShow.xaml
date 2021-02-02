@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow.Player_GridShow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
+             mc:Ignorable="d" 
+             Width="200"
+             Height="176"
+             >
+    <Grid>
+
+        <Border BorderBrush="LightGray" BorderThickness="1" Background="White" CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
+            </Border.Effect>
+
+            <StackPanel  Margin="10,36,5,5">
+                <TextBlock TextAlignment="Center" >
+                    <Run FontSize="15"  Text="hossyn.koala" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                    <LineBreak/>
+                    <Run FontSize="11"  Foreground="#a8a8a8" Text="hossynassghary@gmail.com" />
+                </TextBlock>
+
+
+              
+                <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="0,10,0,0">
+                    <Run Text="&#xECC5;   " FontFamily="Segoe MDL2 Assets"/>
+                    <Run Text="X X X X"/>
+                    
+                    <LineBreak/>
+                     <LineBreak/>
+                    
+                     <Run Text="&#xEC92;   " FontFamily="Segoe MDL2 Assets"/>
+                    <Run Text="X X X X"/>
+                    
+                    <LineBreak/>
+                     <LineBreak/>
+                    
+                     <Run Text="&#xE730;   " FontFamily="Segoe MDL2 Assets"/>
+                    <Run Text="X X X X"/>
+                </TextBlock>
+
+            </StackPanel>
+
+        </Border>
+
+        <Border BorderBrush="LightGray" BorderThickness="1"  Margin="0,-35,0,0" Width="70" VerticalAlignment="Top" HorizontalAlignment="Center" Height="70" Background="White" CornerRadius="40">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
+            </Border.Effect>
+
+        </Border>
+
+    </Grid>
+</UserControl>

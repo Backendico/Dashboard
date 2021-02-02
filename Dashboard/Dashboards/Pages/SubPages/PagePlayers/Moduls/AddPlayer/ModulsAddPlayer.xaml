@@ -17,7 +17,7 @@
                     <Inputs:TextInputPrimary PlaceHolder="Username"/>
                     <Inputs:TextInputPassword PlaceHolder="Password" />
                     <Tooltips:TooltipPrimaryText Text="If the username and password are empty, the user will be created without a username and password. " PlaceHolder="Help"/>
-                    <BTN:BTNPrimary/>
+                    <BTN:BTNPrimary Text="Add player"/>
 
                 </StackPanel>
             </Grid>

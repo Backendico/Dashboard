@@ -97,7 +97,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
                 if (IsOpenSuggests)
                 {
                     IsOpenSuggests = false;
-                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
                     CloseLists();
                 }
                 else
