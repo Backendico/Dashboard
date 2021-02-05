@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
+             xmlns:GridOption="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow.SeeMoreOption"
              mc:Ignorable="d" 
              Margin="20,50"
              Width="170"
              Height="220"
+             AllowDrop="True"
              >
     <Grid>
 
@@ -26,7 +28,8 @@
                 <TextBlock x:Name="BTNMore" Cursor="Hand" FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="&#xE712;" FontFamily="Segoe MDL2 Assets"/>
 
 
-                <Border CornerRadius="0,0,5,5"  Background="#fa4d56" Margin="16,0,142,5"/>
+                <!--Block Status-->
+                <Border Visibility="Collapsed" CornerRadius="0,0,5,5"  Background="#fa4d56" Margin="16,0,142,5"/>
 
                 <!--DetailValue-->
                 <StackPanel Grid.Row="1"  Margin="10,5,5,5">
@@ -88,13 +91,13 @@
 
 
         <!--PanelMore-->
-        <Border x:Name="PanelMore" Opacity="0" CornerRadius="5" Width="100" Height="100" Background="White" Margin="69,27,1,93">
+        <Border x:Name="PanelMore" Opacity="0" Visibility="Collapsed" CornerRadius="5" Width="100"  VerticalAlignment="Top" HorizontalAlignment="Right" Background="White" Margin="0,30,0,0">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
             </Border.Effect>
-            
+
             <Grid>
-                <Rectangle Width="10" Height="10" Fill="White" Margin="74,-5,16,95" RenderTransformOrigin="0.5,0.5">
+                <Rectangle Width="10" Height="10" Fill="White" Margin="0,-5,16,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -104,6 +107,12 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
+
+                <StackPanel Name="s">
+                    <GridOption:SeeMoreOption Text="Edit" />
+                    <GridOption:SeeMoreOption Text="Delete"/>
+                </StackPanel>
+
             </Grid>
 
         </Border>

@@ -461,6 +461,9 @@
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\Player_GridShow.xaml.cs">
       <DependentUpon>Player_GridShow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\SeeMoreOption\SeeMoreOption.xaml.cs">
+      <DependentUpon>SeeMoreOption.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\SubPagePlayers.xaml.cs">
       <DependentUpon>SubPagePlayers.xaml</DependentUpon>
     </Compile>
@@ -835,6 +838,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\Player_GridShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\SeeMoreOption\SeeMoreOption.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

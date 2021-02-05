@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +28,30 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
 
             BTNMore.MouseDown += (s, e) =>
             {
-                OpenMore();
+                if (PanelMore.Visibility == Visibility.Visible)
+                {
+
+                    CloseMore();
+                }
+                else
+                {
+
+                    OpenMore();
+                }
             };
 
-            MouseLeave += (s, e) => {
+            MouseLeave += (s, e) =>
+            {
                 CloseMore();
             };
+
+         
+          
         }
 
         void OpenMore()
         {
+            PanelMore.Visibility = Visibility.Visible;
             DoubleAnimation Anim = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3f));
             Storyboard.SetTargetName(Anim, PanelMore.Name);
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
@@ -47,8 +62,11 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
 
         void CloseMore()
         {
-
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.3f));
+            Anim.Completed += (s, e) =>
+            {
+                PanelMore.Visibility = Visibility.Collapsed;
+            };
             Storyboard.SetTargetName(Anim, PanelMore.Name);
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Opacity"));
             Storyboard storyboard = new Storyboard();
