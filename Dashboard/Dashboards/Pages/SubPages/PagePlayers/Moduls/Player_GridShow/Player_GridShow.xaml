@@ -15,7 +15,7 @@
 
         <Border  BorderThickness="1" Background="White" CornerRadius="10">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="30" ShadowDepth="0" Opacity="0.2"/>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="0" Opacity="0.1"/>
             </Border.Effect>
 
             <Grid>
@@ -83,7 +83,7 @@
         <!--Image-->
         <Border BorderThickness="1"  Margin="0,-35,0,0" Width="70" VerticalAlignment="Top" HorizontalAlignment="Center" Height="70" Background="White" CornerRadius="40">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.1"/>
             </Border.Effect>
 
         </Border>

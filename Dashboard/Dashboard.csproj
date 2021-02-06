@@ -275,9 +275,6 @@
     <Compile Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml.cs">
       <DependentUpon>LinksPrimary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Dashboard-Game\Elements\Module\ModuleSize1\ModulSize1.xaml.cs">
-      <DependentUpon>ModulSize1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dashboards\Dashboard-Game\Elements\Navigation\NavigationTab\NavigationTab.xaml.cs">
       <DependentUpon>NavigationTab.xaml</DependentUpon>
     </Compile>
@@ -455,8 +452,8 @@
     <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\AddPlayer\ModulsAddPlayer.xaml.cs">
-      <DependentUpon>ModulsAddPlayer.xaml</DependentUpon>
+    <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\AddPlayer\SubPageAddPlayer.xaml.cs">
+      <DependentUpon>SubPageAddPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\Player_GridShow.xaml.cs">
       <DependentUpon>Player_GridShow.xaml</DependentUpon>
@@ -554,10 +551,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Dashboard-Game\Elements\Links\LinksPrimary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dashboards\Dashboard-Game\Elements\Module\ModuleSize1\ModulSize1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -833,7 +826,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\AddPlayer\ModulsAddPlayer.xaml">
+    <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\AddPlayer\SubPageAddPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

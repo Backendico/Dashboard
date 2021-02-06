@@ -7,7 +7,6 @@
         xmlns:Buttons="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
        xmlns:Link="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
         xmlns:Input="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
-       xmlns:Module="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Module.ModuleSize1"
         xmlns:Main="clr-namespace:Dashboard.Dashboards.Pages.Main"
         mc:Ignorable="d"
         Title="PageAUT" Height="800" Width="1200">

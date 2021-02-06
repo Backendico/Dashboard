@@ -1,6 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Icons;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -54,21 +53,21 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab
                     foreach (var item in ((Parent as StackPanel).Parent as Grid).Children)
                     {
 
-                    foreach (var Nav in (item as StackPanel).Children)
-                    {
-                        if (Nav.GetType() == typeof(NavigationTab))
+                        foreach (var Nav in (item as StackPanel).Children)
                         {
-                            if ((Nav as NavigationTab).IsSelected && (item as NavigationTab) != this)
+                            if (Nav.GetType() == typeof(NavigationTab))
                             {
-                                (Nav as NavigationTab).IsSelected = false;
+                                if ((Nav as NavigationTab).IsSelected && (item as NavigationTab) != this)
+                                {
+                                    (Nav as NavigationTab).IsSelected = false;
 
+                                }
                             }
+
                         }
 
-                    }
 
 
-                      
                     }
 
 

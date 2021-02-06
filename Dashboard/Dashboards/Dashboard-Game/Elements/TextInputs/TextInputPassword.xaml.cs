@@ -114,8 +114,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             }
         }
 
-        bool err=false;
-        string _PlaceHolder="Password";
+        bool err = false;
+        string _PlaceHolder = "Password";
 
         public TextInputPassword()
         {

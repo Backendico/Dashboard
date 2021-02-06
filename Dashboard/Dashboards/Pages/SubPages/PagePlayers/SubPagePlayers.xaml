@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
-             xmlns:BTNs="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+             xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
              xmlns:Links="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
+             xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+             xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              xmlns:PageControl="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.PageControl"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:GridShow="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
+             mc:Ignorable="d"  d:DesignHeight="681" d:DesignWidth="1180">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,6 +34,67 @@
 
         </Grid>
 
+        <!--Row-->
+        <Border BorderBrush="#e0e0e0" BorderThickness="1"   CornerRadius="5" Background="White" Grid.Row="1">
+
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto "/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
+
+                <!--TabController-->
+                <Grid Margin="15,0" Panel.ZIndex="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Left-->
+                    <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <BTNS:PrimaryButtonIcon2 x:Name="BTNListView" Margin="10,20,0,20" Icon="ListView"/>
+                        <BTNS:PrimaryButtonIcon2 x:Name="BTNGridView" Margin="20,20,0,20" Icon="GridView"/>
+                        <Search:InputSearch Margin="20,0,15,0"  IsOpenSuggests="False" PlaceHolder="Find player"  />
+                        <DropDown:DropDownPrimary   PlaceHolder="Sort by:" DefualtItem="0"  >
+                            <DropDown:DropDownPrimary.Items>
+                                <StackPanel>
+                                    <DropDown:DropDownItem Text="Created"/>
+                                    <DropDown:DropDownItem Text="Currency"/>
+                                    <DropDown:DropDownItem Text="Register"/>
+                                    <DropDown:DropDownItem Text="Active"/>
+                                </StackPanel>
+                            </DropDown:DropDownPrimary.Items>
+
+                        </DropDown:DropDownPrimary>
+                    </StackPanel>
+
+                    <!--Right-->
+                    <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
+                        <BTNS:PrimaryButtonIcon x:Name="BTNaddPlayer" Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </Grid>
+
+                <!--Grid View-->
+                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Visible"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <WrapPanel Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
+
+                        <GridShow:Player_GridShow/>
+                        <GridShow:Player_GridShow/>
+                        <GridShow:Player_GridShow/>
+                    </WrapPanel>
+                </ScrollViewer>
+
+                <Grid x:Name="PanelListView">
+                    
+                </Grid>
+                
+            </Grid>
+
+        </Border>
+
+        
     </Grid>
 
 

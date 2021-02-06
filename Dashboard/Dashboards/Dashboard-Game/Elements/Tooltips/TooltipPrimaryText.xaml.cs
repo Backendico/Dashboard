@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips
 {
@@ -10,7 +9,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips
         {
             set
             {
-                TextHelp.Text=value;
+                TextHelp.Text = value;
             }
 
             get
@@ -36,7 +35,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips
         {
             InitializeComponent();
 
-            
+
 
         }
     }

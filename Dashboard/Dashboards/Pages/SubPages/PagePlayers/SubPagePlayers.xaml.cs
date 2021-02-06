@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Dashboard.Dashboards.Pages.Aut;
+using Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
 {
@@ -23,6 +12,32 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
         public SubPagePlayers()
         {
             InitializeComponent();
+
+
+            //action btn add player
+            BTNaddPlayer.Work += () =>
+            {
+                PageAUT.Placeholder.Children.Add(new SubPageAddPlayer());
+            };
+
+            //action switch to grid view 
+            BTNGridView.Worker += () =>
+            {
+                PanelGridView.Visibility = System.Windows.Visibility.Visible;
+                PanelListView.Visibility = System.Windows.Visibility.Collapsed;
+            };
+
+            //action switch to list view
+            BTNListView.Worker += () =>
+            {
+                PanelGridView.Visibility = System.Windows.Visibility.Collapsed;
+                PanelListView.Visibility = System.Windows.Visibility.Visible;
+            };
+
         }
+
+
     }
+
+
 }

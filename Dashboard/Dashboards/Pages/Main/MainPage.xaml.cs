@@ -1,9 +1,7 @@
-﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Module.ModuleSize1;
-using Dashboard.Dashboards.Pages.Aut;
+﻿using Dashboard.Dashboards.Pages.Aut;
 using Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer;
 using System;
 using System.Diagnostics;
-using System.Security.Permissions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,14 +12,13 @@ namespace Dashboard.Dashboards.Pages.Main
 
     public partial class MainPage : UserControl
     {
-
-
         bool IsPanOpen = true;
         bool IsSettingUserOpen = false;
+
+
         public MainPage()
         {
             InitializeComponent();
-
 
             //ControlPan
             BTNNavigationClose.MouseDown += (s, e) =>
@@ -49,12 +46,6 @@ namespace Dashboard.Dashboards.Pages.Main
                     OpenPanelUserSetting();
 
                 }
-            };
-
-            //Action btn add
-            BTNaddPlayer.Work += () =>
-            {
-                PageAUT.Placeholder.Children.Add(new ModulsAddPlayer());
             };
 
         }
@@ -153,6 +144,7 @@ namespace Dashboard.Dashboards.Pages.Main
             storyboard.Begin(this);
 
         }
-
+       
     }
+
 }

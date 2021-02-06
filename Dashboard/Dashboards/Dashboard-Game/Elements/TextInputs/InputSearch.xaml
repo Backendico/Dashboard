@@ -26,7 +26,7 @@
             <TextBlock x:Name="TextblockError" Visibility="Collapsed" Margin="0,40,0,-15" Text="Error " Foreground="#DA1E28"/>
         </Grid>
 
-        <Border x:Name="PanelSuggest" CornerRadius="0,0,5,5" BorderThickness="2,0,2,2" BorderBrush="#0F62FE" VerticalAlignment="Top"  Background="#F4F4F4" Height="0" Margin="0,34,0,0">
+        <Border Visibility="Collapsed" x:Name="PanelSuggest" CornerRadius="0,0,5,5" BorderThickness="2,0,2,2" BorderBrush="#0F62FE" VerticalAlignment="Top"  Background="#F4F4F4" Height="0" Margin="0,34,0,0">
 
         </Border>
     </Grid>

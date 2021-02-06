@@ -126,8 +126,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
         }
 
         bool err = false;
-        string _PlaceHolder="Place Holder";
-        InputType Type=InputType.All;
+        string _PlaceHolder = "Place Holder";
+        InputType Type = InputType.All;
 
 
         public TextInputPrimary()

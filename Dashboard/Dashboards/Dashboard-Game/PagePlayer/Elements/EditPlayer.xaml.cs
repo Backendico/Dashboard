@@ -351,17 +351,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.PagePlayer.Elements
                  {
                      SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ClearLog(Editor.DetailPlayer["Account"]["Token"].AsObjectId, result =>
                     {
-                     if (result)
-                     {
-                         DashboardGame.Notifaction("Logs Clear", Notifaction.StatusMessage.Ok);
-                         InitLogs();
-                     }
-                     else
-                     {
-                         DashboardGame.Notifaction("Faild Clear", Notifaction.StatusMessage.Error);
-                     }
+                        if (result)
+                        {
+                            DashboardGame.Notifaction("Logs Clear", Notifaction.StatusMessage.Ok);
+                            InitLogs();
+                        }
+                        else
+                        {
+                            DashboardGame.Notifaction("Faild Clear", Notifaction.StatusMessage.Error);
+                        }
 
-                 });
+                    });
 
                  }
                  else
