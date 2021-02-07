@@ -452,6 +452,9 @@
     <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageAchievements\SubpageAchievements.xaml.cs">
+      <DependentUpon>SubpageAchievements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml.cs">
       <DependentUpon>SubpageAddLeaderboards.xaml</DependentUpon>
     </Compile>
@@ -838,6 +841,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageAchievements\SubpageAchievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
