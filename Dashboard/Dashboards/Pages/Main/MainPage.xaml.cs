@@ -57,6 +57,11 @@ namespace Dashboard.Dashboards.Pages.Main
 
             //anim change size pane
             DoubleAnimation Anim = new DoubleAnimation(50, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) => {
+
+                BTNNavigationClose.Text = "\xE700";
+            };
+
             Storyboard.SetTargetName(Anim, PaneNavigation.Name);
             Storyboard.SetTargetProperty(Anim, new System.Windows.PropertyPath("Width"));
 
@@ -87,6 +92,9 @@ namespace Dashboard.Dashboards.Pages.Main
 
             //anim change size pane
             DoubleAnimation Anim = new DoubleAnimation(225, TimeSpan.FromSeconds(0.3));
+            Anim.Completed += (s, e) => {
+                BTNNavigationClose.Text = "\xE711";
+            };
             Storyboard.SetTargetName(Anim, PaneNavigation.Name);
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Width"));
 

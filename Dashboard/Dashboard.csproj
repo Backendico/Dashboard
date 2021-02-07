@@ -452,8 +452,14 @@
     <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml.cs">
+      <DependentUpon>SubpageAddLeaderboards.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\Leaderboard_GridView\LeaderboardGridView.xaml.cs">
       <DependentUpon>LeaderboardGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\Leaderboard_ListView\LeaderboardListView.xaml.cs">
+      <DependentUpon>LeaderboardListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\SubpageLeaderboards.xaml.cs">
       <DependentUpon>SubpageLeaderboards.xaml</DependentUpon>
@@ -835,7 +841,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\Leaderboard_GridView\LeaderboardGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\Leaderboard_ListView\LeaderboardListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

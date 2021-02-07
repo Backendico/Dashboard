@@ -10,7 +10,8 @@
           xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
     xmlns:GridView="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_GridView"       
     xmlns:d1="http://schemas.microsoft.com/expression/blend/2008" x:Class="Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.SubpageLeaderboards"
-             mc:Ignorable="d d1" 
+    xmlns:Listview="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_ListView"     
+    mc:Ignorable="d d1" 
              d:DesignHeight="450" d:DesignWidth="800" d1:DesignWidth="906">
     <Grid>
         <Grid.RowDefinitions>
@@ -76,7 +77,7 @@
                 </Grid>
 
                 <!--Grid View-->
-                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Visible"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Collapsed"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                     <WrapPanel x:Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
 
                         <GridView:LeaderboardGridView/>
@@ -84,7 +85,7 @@
                 </ScrollViewer>
 
                 <!--List viwe-->
-                <Grid x:Name="PanelListView" Visibility="Collapsed" Grid.Row="1">
+                <Grid x:Name="PanelListView" Visibility="Visible" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
@@ -97,26 +98,23 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Username" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="1"  Text="Email" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="2"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="3"  Text="Last login" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="4"  Text="Currency" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="5"  Text="Location" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="6"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="1"  Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="2"  Text="Players" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="3"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
 
                     </Grid>
                     <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
 
                     <ScrollViewer  Grid.Row="1">
                         <StackPanel  >
-                         
+                            <Listview:LeaderboardListView/>
+                            <Listview:LeaderboardListView/>
+                            <Listview:LeaderboardListView/>
+                            <Listview:LeaderboardListView/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

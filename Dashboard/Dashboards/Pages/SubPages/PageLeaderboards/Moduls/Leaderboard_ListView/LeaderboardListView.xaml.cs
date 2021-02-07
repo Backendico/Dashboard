@@ -1,41 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_GridView
+namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_ListView
 {
-    public partial class LeaderboardGridView : UserControl
+    /// <summary>
+    /// Interaction logic for LeaderboardListView.xaml
+    /// </summary>
+    public partial class LeaderboardListView : UserControl
     {
-        public LeaderboardGridView()
+
+        bool IsSeemoreOpen = false;
+        public LeaderboardListView()
         {
             InitializeComponent();
 
-            BTNMore.MouseDown += (s, e) =>
+            BTNSeemore.MouseDown += (s, e) =>
             {
-                if (PanelMore.Visibility == Visibility.Visible)
+                if (IsSeemoreOpen)
                 {
-
                     CloseMore();
                 }
                 else
                 {
-
                     OpenMore();
                 }
+
             };
-
-            MouseLeave += (s, e) =>
-            {
-                CloseMore();
-            };
-
-
-
         }
-
         void OpenMore()
         {
+            IsSeemoreOpen = true;
             PanelMore.Visibility = Visibility.Visible;
             DoubleAnimation Anim = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3f));
             Storyboard.SetTargetName(Anim, PanelMore.Name);
@@ -47,6 +54,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboar
 
         void CloseMore()
         {
+            IsSeemoreOpen = false;
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.3f));
             Anim.Completed += (s, e) =>
             {
@@ -58,6 +66,5 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboar
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
-
     }
 }

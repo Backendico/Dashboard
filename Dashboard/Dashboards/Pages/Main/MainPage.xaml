@@ -76,7 +76,7 @@
                     <NavigationTab:NavigationTab IconType="Setting" NameTab="Setting" />
 
                     <!--BTNNavigation-->
-                    <TextBlock Margin="0,30,0,10" HorizontalAlignment="Center" Name="BTNNavigationClose" Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock Margin="0,30,0,10" HorizontalAlignment="Center" Name="BTNNavigationClose" Text="&#xE711;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
 
                 </StackPanel>
 
@@ -92,7 +92,7 @@
             </Grid.RowDefinitions>
 
             <!--Header-->
-            <Grid Background="White">
+            <Grid Panel.ZIndex="1" Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>

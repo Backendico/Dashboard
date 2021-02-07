@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dashboard.Dashboards.Pages.Aut;
+using Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderboard;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,22 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
         public SubpageLeaderboards()
         {
             InitializeComponent();
+
+            BTNaddLeaderboard.Work += () =>
+            {
+                PageAUT.Placeholder.Children.Add(new SubpageAddLeaderboards());
+            };
+
+            BTNListView.Worker += () => {
+                PanelGridView.Visibility = Visibility.Collapsed;
+                PanelListView.Visibility = Visibility.Visible;
+            
+            };
+            BTNGridView.Worker += () => {
+                PanelGridView.Visibility = Visibility.Visible;
+                PanelListView.Visibility = Visibility.Collapsed;
+            };
+
         }
     }
 }
