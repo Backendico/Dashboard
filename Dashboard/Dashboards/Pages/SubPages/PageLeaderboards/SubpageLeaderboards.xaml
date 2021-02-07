@@ -1,18 +1,17 @@
-﻿<UserControl x:Class="Dashboard.Dashboards.Pages.SubPages.PagePlayers.SubPagePlayers"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
-             xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
-             xmlns:Links="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
-             xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
-             xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
-             xmlns:PageControl="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.PageControl"
-             xmlns:GridShow="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
-            xmlns:ListView="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_ListView"
-             mc:Ignorable="d"  d:DesignHeight="681" d:DesignWidth="1180">
-
+             xmlns:d="http://schemas.microsoaft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards"
+           xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+           xmlns:PageControl="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.PageControl"
+            xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+          xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
+    xmlns:GridView="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_GridView"       
+    xmlns:d1="http://schemas.microsoft.com/expression/blend/2008" x:Class="Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.SubpageLeaderboards"
+             mc:Ignorable="d d1" 
+             d:DesignHeight="450" d:DesignWidth="800" d1:DesignWidth="906">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -25,8 +24,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-          
-                <TextBlock   FontSize="20" FontWeight="Bold" Text="Players" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="/Dashboard;component/Fonts/#Barlow Medium" />
+
+            <TextBlock   FontSize="20" FontWeight="Bold" Text="Leaderboards" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="/Dashboard;component/Fonts/#Barlow Medium" />
 
 
             <PageControl:Pagecontrol Panel.ZIndex="20" Grid.Column="1"/>
@@ -56,8 +55,7 @@
                     <!--Left-->
                     <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <BTNS:PrimaryButtonIcon2 x:Name="BTNListView" Margin="10,20,0,20" Icon="ListView"/>
-                        <BTNS:PrimaryButtonIcon2 x:Name="BTNGridView" Margin="20,20,0,20" Icon="GridView"/>
-                        <Search:InputSearch Margin="20,0,15,0"  IsOpenSuggests="False"  PlaceHolder="Find player"  />
+                        <BTNS:PrimaryButtonIcon2 x:Name="BTNGridView" Margin="20" Icon="GridView"/>
                         <DropDown:DropDownPrimary   PlaceHolder="Sort by:" DefualtItem="0"  >
                             <DropDown:DropDownPrimary.Items>
                                 <StackPanel>
@@ -73,26 +71,25 @@
 
                     <!--Right-->
                     <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                        <BTNS:PrimaryButtonIcon x:Name="BTNaddPlayer" Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
+                        <BTNS:PrimaryButtonIcon x:Name="BTNaddLeaderboard" Icon="Add" Text="Add Leaderboard" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Grid>
 
                 <!--Grid View-->
-                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Collapsed"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                    <WrapPanel Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Visible"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <WrapPanel x:Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
 
-                        <GridShow:Player_GridShow/>
-                        <GridShow:Player_GridShow/>
-                        <GridShow:Player_GridShow/>
+                        <GridView:LeaderboardGridView/>
                     </WrapPanel>
                 </ScrollViewer>
 
-                <Grid x:Name="PanelListView" Grid.Row="1">
+                <!--List viwe-->
+                <Grid x:Name="PanelListView" Visibility="Collapsed" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                  
+
                     <!--Header-->
                     <Grid Margin="0,0,17,0" >
                         <Grid.ColumnDefinitions>
@@ -118,26 +115,16 @@
                     <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
 
                     <ScrollViewer  Grid.Row="1">
-                        <StackPanel  x:Name="s">
-                            <ListView:PlayerListView Panel.ZIndex="2" />
-                            <ListView:PlayerListView  Panel.ZIndex="1"/>
-                            <ListView:PlayerListView/>
-
-                            <ListView:PlayerListView/>
-                            <ListView:PlayerListView/>
-                            <ListView:PlayerListView/>
-                            <ListView:PlayerListView/>
-
+                        <StackPanel  >
+                         
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-                
+
             </Grid>
 
         </Border>
 
-        
+
     </Grid>
-
-
 </UserControl>

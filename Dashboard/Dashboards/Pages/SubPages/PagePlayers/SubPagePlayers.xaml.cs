@@ -4,9 +4,7 @@ using System.Windows.Controls;
 
 namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
 {
-    /// <summary>
-    /// Interaction logic for SubPagePlayers.xaml
-    /// </summary>
+    
     public partial class SubPagePlayers : UserControl
     {
         public SubPagePlayers()

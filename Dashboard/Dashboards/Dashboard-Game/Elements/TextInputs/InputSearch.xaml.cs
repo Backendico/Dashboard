@@ -175,13 +175,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             //Action change Text
             MainTextBox.TextChanged += (s, e) =>
             {
-                if (Text.Length >= 1)
+                if (IsLoaded)
                 {
-                    OpenSuggests();
-                }
-                else
-                {
-                    CloseSuggests();
+
+                    if (Text.Length >= 1)
+                    {
+                        OpenSuggests();
+                    }
+                    else
+                    {
+                        CloseSuggests();
+                    }
                 }
             };
 
@@ -213,7 +217,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
         void CloseSuggests()
         {
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.2));
-            Anim.Completed += (s, e) => {
+            Anim.Completed += (s, e) =>
+            {
                 PanelSuggest.Visibility = Visibility.Collapsed;
             };
             Storyboard.SetTargetName(Anim, PanelSuggest.Name);

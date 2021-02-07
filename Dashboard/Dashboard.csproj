@@ -452,6 +452,12 @@
     <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\Leaderboard_GridView\LeaderboardGridView.xaml.cs">
+      <DependentUpon>LeaderboardGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\SubpageLeaderboards.xaml.cs">
+      <DependentUpon>SubpageLeaderboards.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\AddPlayer\SubPageAddPlayer.xaml.cs">
       <DependentUpon>SubPageAddPlayer.xaml</DependentUpon>
     </Compile>
@@ -460,6 +466,9 @@
     </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\SeeMoreOption\SeeMoreOption.xaml.cs">
       <DependentUpon>SeeMoreOption.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_ListView\PlayerListView.xaml.cs">
+      <DependentUpon>PlayerListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\SubPagePlayers.xaml.cs">
       <DependentUpon>SubPagePlayers.xaml</DependentUpon>
@@ -826,6 +835,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\Leaderboard_GridView\LeaderboardGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\SubpageLeaderboards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\AddPlayer\SubPageAddPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -835,6 +852,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_GridShow\SeeMoreOption\SeeMoreOption.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PagePlayers\Moduls\Player_ListView\PlayerListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
