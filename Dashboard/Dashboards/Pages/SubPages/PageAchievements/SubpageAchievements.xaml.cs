@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Pages.Aut;
+using Dashboard.Dashboards.Pages.SubPages.PageAchievements.Moduls.AddAchievement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageAchievements
         {
             InitializeComponent();
 
-            BTNaddLeaderboard.Work += () =>
+            BTNaddAchievement.Work += () =>
             {
-                //PageAUT.Placeholder.Children.Add();
+                PageAUT.Placeholder.Children.Add(new SubpageAddAchievement());
             };
 
             BTNListView.Worker += () => {

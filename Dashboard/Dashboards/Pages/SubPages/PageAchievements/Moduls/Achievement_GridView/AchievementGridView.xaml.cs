@@ -1,16 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
+namespace Dashboard.Dashboards.Pages.SubPages.PageAchievements.Moduls.Achievement_GridView
 {
-    
-    public partial class Player_GridShow : UserControl
+    /// <summary>
+    /// Interaction logic for AchievementGridView.xaml
+    /// </summary>
+    public partial class AchievementGridView : UserControl
     {
-        public Player_GridShow()
+        public AchievementGridView()
         {
             InitializeComponent();
+
 
             BTNMore.MouseDown += (s, e) =>
             {
@@ -30,6 +44,8 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             {
                 CloseMore();
             };
+
+
 
         }
 

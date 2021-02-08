@@ -7,6 +7,8 @@
              xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
              xmlns:PageControl="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.PageControl"
              xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
+            xmlns:Gridview="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageAchievements.Moduls.Achievement_GridView"
+           xmlns:ListView="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageAchievements.Moduls.Achievement_ListView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -22,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <TextBlock   FontSize="20" FontWeight="Bold" Text="Leaderboards" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="/Dashboard;component/Fonts/#Barlow Medium" />
+            <TextBlock   FontSize="20" FontWeight="Bold" Text="Achievements" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="/Dashboard;component/Fonts/#Barlow Medium" />
 
 
             <PageControl:Pagecontrol Panel.ZIndex="20" Grid.Column="1"/>
@@ -69,7 +71,7 @@
 
                     <!--Right-->
                     <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                        <BTNS:PrimaryButtonIcon x:Name="BTNaddLeaderboard" Icon="Add" Text="Add Leaderboard" HorizontalAlignment="Right"/>
+                        <BTNS:PrimaryButtonIcon x:Name="BTNaddAchievement" Icon="Add" Text="Add Achievement" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Grid>
 
@@ -77,6 +79,7 @@
                 <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Collapsed"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                     <WrapPanel x:Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
 
+                        <Gridview:AchievementGridView/>
                     </WrapPanel>
                 </ScrollViewer>
 
@@ -94,20 +97,24 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="1"  Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="2"  Text="Players" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="3"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="1" Text="Value" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="2"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="3"  Text="Percent" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="4"  Text="Player" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="5"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
 
                     </Grid>
                     <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
 
                     <ScrollViewer  Grid.Row="1">
                         <StackPanel  >
-
+                            <ListView:AchievementListView/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
