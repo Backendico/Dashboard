@@ -458,6 +458,9 @@
     <Compile Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_GridView\ContentGridView.xaml.cs">
       <DependentUpon>ContentGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_ListView\ContentListView.xaml.cs">
+      <DependentUpon>ContentListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml.cs">
       <DependentUpon>SubPageContent.xaml</DependentUpon>
     </Compile>
@@ -858,6 +861,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_ListView\ContentListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -990,6 +997,8 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dashboards\Pages\SubPages\PageContent\Moduls\AddContent\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

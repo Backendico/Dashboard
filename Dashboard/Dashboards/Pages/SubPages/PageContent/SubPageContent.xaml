@@ -7,6 +7,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent"
+             xmlns:Gridviwe="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent.Moduls.Content_GridView"
+             xmlns:ListView="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent.Moduls.Content_ListView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -22,11 +24,10 @@
             </Grid.ColumnDefinitions>
 
 
-            <TextBlock   FontSize="20" FontWeight="Bold" Text="Achievements" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="/Dashboard;component/Fonts/#Barlow Medium" />
+            <TextBlock   FontSize="20" FontWeight="Bold" Text="Contents" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="/Dashboard;component/Fonts/#Barlow Medium" />
 
 
             <PageControl:Pagecontrol Panel.ZIndex="20" Grid.Column="1"/>
-
 
 
         </Grid>
@@ -68,19 +69,19 @@
 
                     <!--Right-->
                     <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                        <BTNS:PrimaryButtonIcon x:Name="BTNAddAchievement" Icon="Add" Text="Add Achievement" HorizontalAlignment="Right"/>
+                        <BTNS:PrimaryButtonIcon x:Name="BTNAddAchievement" Icon="Add" Text="Add Content" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Grid>
 
                 <!--Grid View-->
-                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Visible"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Collapsed"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                     <WrapPanel x:Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
-
+                        <Gridviwe:ContentGridView/>
                     </WrapPanel>
                 </ScrollViewer>
 
                 <!--List viwe-->
-                <Grid x:Name="PanelListView" Visibility="Collapsed" Grid.Row="1">
+                <Grid x:Name="PanelListView" Visibility="Visible" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
@@ -93,13 +94,15 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="1"  Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="2"  Text="Players" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="3"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="1"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="2"  Text="Indexs" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="3"  Text="Elements" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="4"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
 
                     </Grid>
                     <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
@@ -107,6 +110,7 @@
                     <ScrollViewer  Grid.Row="1">
                         <StackPanel  >
 
+                            <ListView:ContentListView/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

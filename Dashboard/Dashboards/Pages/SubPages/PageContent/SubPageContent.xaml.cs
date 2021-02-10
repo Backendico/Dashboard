@@ -25,9 +25,10 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageContent
         {
             InitializeComponent();
 
+
             BTNAddAchievement.Work += () =>
             {
-                //PageAUT.Placeholder.Children.Add(new SubpageAddLeaderboards());
+               
             };
 
             BTNListView.Worker += () => {
