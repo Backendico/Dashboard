@@ -455,6 +455,12 @@
     <Compile Include="Dashboards\Pages\SubPages\PageAchievements\SubpageAchievements.xaml.cs">
       <DependentUpon>SubpageAchievements.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_GridView\ContentGridView.xaml.cs">
+      <DependentUpon>ContentGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml.cs">
+      <DependentUpon>SubPageContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml.cs">
       <DependentUpon>SubpageAddLeaderboards.xaml</DependentUpon>
     </Compile>
@@ -847,6 +853,14 @@
     <Page Include="Dashboards\Pages\SubPages\PageAchievements\SubpageAchievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_GridView\ContentGridView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml">
       <SubType>Designer</SubType>
