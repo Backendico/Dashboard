@@ -491,6 +491,12 @@
     <Compile Include="Dashboards\Pages\SubPages\PagePlayers\SubPagePlayers.xaml.cs">
       <DependentUpon>SubPagePlayers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageStore\Moduls\Stores_Gridview\StoresGridView.xaml.cs">
+      <DependentUpon>StoresGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageStore\SubpageStore.xaml.cs">
+      <DependentUpon>SubpageStore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GlobalElement\GlobalEvents.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="App.xaml.cs">
@@ -902,6 +908,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PagePlayers\SubPagePlayers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageStore\Moduls\Stores_Gridview\StoresGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageStore\SubpageStore.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
