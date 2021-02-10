@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_GridView
+namespace Dashboard.Dashboards.Pages.SubPages.PageContent.Moduls.Content_GridView
 {
-    public partial class LeaderboardGridView : UserControl
+    public partial class ContentGridView : UserControl
     {
-        public LeaderboardGridView()
+        public ContentGridView()
         {
             InitializeComponent();
 
