@@ -5,7 +5,9 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
 {
-    
+    /// <summary>
+    /// Interaction logic for Player_GridShow.xaml
+    /// </summary>
     public partial class Player_GridShow : UserControl
     {
         public Player_GridShow()
@@ -30,6 +32,8 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             {
                 CloseMore();
             };
+
+
 
         }
 

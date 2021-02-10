@@ -72,7 +72,7 @@
 
                     <!--Right-->
                     <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                        <BTNS:PrimaryButtonIcon x:Name="BTNaddLeaderboard" Icon="Add" Text="Add leaderboard" HorizontalAlignment="Right"/>
+                        <BTNS:PrimaryButtonIcon x:Name="BTNaddAchievements" Icon="Add" Text="Add Achievements" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Grid>
 
