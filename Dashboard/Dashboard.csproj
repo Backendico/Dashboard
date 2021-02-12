@@ -464,6 +464,15 @@
     <Compile Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml.cs">
       <DependentUpon>SubPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\KeyValue_GridView\KeyValueGridView.xaml.cs">
+      <DependentUpon>KeyValueGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\KeyValue_ListView\KeyValueListView.xaml.cs">
+      <DependentUpon>KeyValueListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageKeyvalue\SubPageKeyvalue.xaml.cs">
+      <DependentUpon>SubPageKeyvalue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml.cs">
       <DependentUpon>SubpageAddLeaderboards.xaml</DependentUpon>
     </Compile>
@@ -877,6 +886,18 @@
     <Page Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\KeyValue_GridView\KeyValueGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\KeyValue_ListView\KeyValueListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageKeyvalue\SubPageKeyvalue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PageLeaderboards\Moduls\AddLeaderboard\SubpageAddLeaderboards.xaml">
       <SubType>Designer</SubType>
