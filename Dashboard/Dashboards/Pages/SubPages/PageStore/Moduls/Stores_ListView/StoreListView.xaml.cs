@@ -14,38 +14,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Dashboard.Dashboards.Pages.SubPages.PageStore.Moduls.Stores_Gridview
+namespace Dashboard.Dashboards.Pages.SubPages.PageStore.Moduls.Stores_ListView
 {
-   
-    public partial class StoresGridView : UserControl
+
+    public partial class StoreListView : UserControl
     {
-        public StoresGridView()
+
+        bool IsSeemoreOpen = false;
+        public StoreListView()
         {
             InitializeComponent();
 
-
-            BTNMore.MouseDown += (s, e) =>
+            BTNSeemore.MouseDown += (s, e) =>
             {
-                if (PanelMore.Visibility == Visibility.Visible)
+                if (IsSeemoreOpen)
                 {
-
                     CloseMore();
                 }
                 else
                 {
-
                     OpenMore();
                 }
-            };
 
-            MouseLeave += (s, e) =>
-            {
-                CloseMore();
             };
         }
-
         void OpenMore()
         {
+            IsSeemoreOpen = true;
             PanelMore.Visibility = Visibility.Visible;
             DoubleAnimation Anim = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3f));
             Storyboard.SetTargetName(Anim, PanelMore.Name);
@@ -57,6 +52,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageStore.Moduls.Stores_Gridview
 
         void CloseMore()
         {
+            IsSeemoreOpen = false;
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.3f));
             Anim.Completed += (s, e) =>
             {

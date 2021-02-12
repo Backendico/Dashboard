@@ -494,6 +494,9 @@
     <Compile Include="Dashboards\Pages\SubPages\PageStore\Moduls\Stores_Gridview\StoresGridView.xaml.cs">
       <DependentUpon>StoresGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageStore\Moduls\Stores_ListView\StoreListView.xaml.cs">
+      <DependentUpon>StoreListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageStore\SubpageStore.xaml.cs">
       <DependentUpon>SubpageStore.xaml</DependentUpon>
     </Compile>
@@ -912,6 +915,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PageStore\Moduls\Stores_Gridview\StoresGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageStore\Moduls\Stores_ListView\StoreListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,8 +7,9 @@
                 xmlns:PageControl="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.PageControl"
                   xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
                 xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+             xmlns:Gridview="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageStore.Moduls.Stores_Gridview"
              xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
-             
+             xmlns:ListView="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageStore.Moduls.Stores_ListView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -76,14 +77,14 @@
                 </Grid>
 
                 <!--Grid View-->
-                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Visible"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Collapsed"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                     <WrapPanel Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
-
+                        <Gridview:StoresGridView/>
                     </WrapPanel>
                 </ScrollViewer>
 
                 <!--List View-->
-                <Grid x:Name="PanelListView" Visibility="Collapsed" Grid.Row="1">
+                <Grid x:Name="PanelListView" Visibility="Visible" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
@@ -102,12 +103,12 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="Username" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="1"  Text="Email" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="2"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="3"  Text="Last login" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="4"  Text="Currency" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="5"  Text="Location" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="0" Text="Avatar" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="1"  Text="name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="2"  Text="Description" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="3"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="4"  Text="Products" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="5"  Text="Tags" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
                         <TextBlock Grid.Column="6"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
 
                     </Grid>
@@ -115,7 +116,7 @@
 
                     <ScrollViewer  Grid.Row="1">
                         <StackPanel  x:Name="s">
-
+                            <ListView:StoreListView/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

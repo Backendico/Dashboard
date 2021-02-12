@@ -36,7 +36,7 @@
                     <TextBlock TextAlignment="Center" >
                     <Run FontSize="15"  Text="Name" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
                     <LineBreak/>
-                    <Run FontSize="11"  Foreground="#8d8d8d" Text="Dsicriptions" FontFamily="/Dashboard;component/Fonts/#Barlow ExtraLight" />
+                    <Run FontSize="11"  Foreground="#8d8d8d" Text="Description" FontFamily="/Dashboard;component/Fonts/#Barlow ExtraLight" />
                     </TextBlock>
 
                     <!--Detail value-->

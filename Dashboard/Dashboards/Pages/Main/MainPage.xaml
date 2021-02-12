@@ -10,6 +10,7 @@
              xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
            xmlns:GridShow="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
             xmlns:Content="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent"
+             xmlns:Store="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageStore"
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="776" d:DesignWidth="1437"
          
@@ -171,8 +172,8 @@
 
 
                 <!--PageControl-->
-                <Content:SubPageContent/>
-                
+                <Store:SubpageStore/>
+
             </Grid>
 
         </Grid>
