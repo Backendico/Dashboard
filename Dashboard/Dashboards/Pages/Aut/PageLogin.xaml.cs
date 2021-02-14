@@ -1,6 +1,7 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.PageAUT.Recovery;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Register;
 using Dashboard.GlobalElement;
+using MongoDB.Bson;
 using System.Diagnostics;
 using System.Windows.Controls;
 
@@ -21,7 +22,7 @@ namespace Dashboard.Dashboards.Pages.Aut
                 {
                     if (Result)
                     {
-                        (Parent as Grid).Children.Add(new PageStudios());
+                        (Parent as Grid).Children.Add(new PageStudios(ObjectId.Parse(Token)));
                         (Parent as Grid).Children.Remove(this);
                     }
                     else

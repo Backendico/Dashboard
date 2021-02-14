@@ -148,7 +148,7 @@ namespace Dashboard.GlobalElement
                 {
                     public static ModelLinks.DashboardGame.PageStudios Links;
 
-                    public static async void ReciveStudios(Action<BsonDocument> Result, Action Err)
+                    public static async void ReciveStudios(Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveStudio);
                         client.Timeout = -1;
@@ -166,7 +166,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            Err();
+                            Result(new BsonDocument());
                         }
                     }
 
