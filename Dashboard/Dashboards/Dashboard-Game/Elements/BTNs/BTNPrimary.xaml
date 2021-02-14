@@ -26,7 +26,7 @@
 
         </Border.Style>
 
-        <Border x:Name="BorderFocuse"  Margin="3" BorderBrush="White" >
+        <Border x:Name="BorderFocuse" CornerRadius="5"  Margin="3" BorderBrush="White" >
             <Border.Style>
                 <Style TargetType="Border">
                     <Style.Triggers>

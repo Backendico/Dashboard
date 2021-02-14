@@ -1,6 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.PageAUT.Recovery;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Register;
-using Dashboard.Dashboards.Pages.Main;
 using Dashboard.GlobalElement;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -22,8 +21,7 @@ namespace Dashboard.Dashboards.Pages.Aut
                 {
                     if (Result)
                     {
-
-                        (Parent as Grid).Children.Add(new MainPage());
+                        (Parent as Grid).Children.Add(new PageStudios());
                         (Parent as Grid).Children.Remove(this);
                     }
                     else
