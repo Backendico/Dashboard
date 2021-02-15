@@ -22,7 +22,7 @@ namespace Dashboard.Dashboards.Pages.Aut
                 {
                     if (Result)
                     {
-                        (Parent as Grid).Children.Add(new PageStudios(ObjectId.Parse(Token)));
+                        (Parent as Grid).Children.Add(new PageStudios());
                         (Parent as Grid).Children.Remove(this);
                     }
                     else

@@ -452,6 +452,9 @@
     <Compile Include="Dashboards\Pages\PageStudios\Moduls\Studios_GridView\StudioGridView.xaml.cs">
       <DependentUpon>StudioGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\PageStudios\Moduls\SubPageAddNewStudio\SubPageAddNewStudio.xaml.cs">
+      <DependentUpon>SubPageAddNewStudio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\PageStudios\PageStudios.xaml.cs">
       <DependentUpon>PageStudios.xaml</DependentUpon>
     </Compile>
@@ -874,6 +877,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\PageStudios\Moduls\Studios_GridView\StudioGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\PageStudios\Moduls\SubPageAddNewStudio\SubPageAddNewStudio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

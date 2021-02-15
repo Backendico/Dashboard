@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using MongoDB.Bson;
+using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Pages.PageStudios.Moduls.Studios_GridView
 {
@@ -20,9 +9,16 @@ namespace Dashboard.Dashboards.Pages.PageStudios.Moduls.Studios_GridView
     /// </summary>
     public partial class StudioGridView : UserControl
     {
-        public StudioGridView()
+        public StudioGridView(BsonDocument Detail)
         {
             InitializeComponent();
+            TextCreatedTime.Text = Detail["Created"].ToLocalTime().ToString();
+            TextStudio.Text = Detail["Name"].ToString();
+            TextType.Text = Detail["Type"].ToString();
+            TextUniqeID.Text = Detail["Token"].ToString();
+            TextTokenCreator.Text = Detail["Creator"].ToString();
+            TextDatabase.Text = Detail["Database"].ToString();
+            Debug.WriteLine(Detail);
         }
     }
 }

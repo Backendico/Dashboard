@@ -7,10 +7,9 @@
               xmlns:GridOption="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow.SeeMoreOption"
              mc:Ignorable="d" 
              Cursor="Hand"
-             
               Margin="20,50"
-             Width="170"
-             Height="200"
+             Width="250"
+             Height="180"
              >
     <Grid>
         <Border  BorderThickness="1" Background="White" CornerRadius="10">
@@ -25,45 +24,42 @@
 
                 <!--DetailValue-->
                 <StackPanel Grid.Row="1"  Margin="10,5,5,5">
-                    <TextBlock TextAlignment="Center" >
-                    <Run FontSize="15"  Text="Name" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                    <TextBlock Text="Name" FontSize="15" Name="TextStudio" TextAlignment="Center"  FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold" >
                     </TextBlock>
 
                     <!--Detail value-->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="6*"/>
                         </Grid.ColumnDefinitions>
 
                         <!--Col1 Icons-->
                         <StackPanel Margin="0,10">
-                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xE902;" FontFamily="Segoe MDL2 Assets" />
+                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xEC92;" FontFamily="Segoe MDL2 Assets" />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xECA7;" FontFamily="Segoe MDL2 Assets" />
+                            <TextBlock ToolTip="Uniqe ID" FontSize="15" Margin="0,5"  Text="&#xE8D7;" FontFamily="Segoe MDL2 Assets" />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xEB95;" FontFamily="Segoe MDL2 Assets" />
+                            <TextBlock ToolTip="Token creator"  FontSize="15" Margin="0,5"  Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xF571;" FontFamily="Segoe MDL2 Assets" />
+                            <TextBlock ToolTip="Type" FontSize="15" Margin="0,5"  Text="&#xE97C;" FontFamily="Segoe MDL2 Assets" />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xE719;" FontFamily="Segoe MDL2 Assets" />
+                            <TextBlock ToolTip="Database" FontSize="15" Margin="0,5"  Text="&#xE968;" FontFamily="Segoe MDL2 Assets" />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock FontSize="15" Margin="0,5"  Text="&#xF003;" FontFamily="Segoe MDL2 Assets" />
 
                         </StackPanel>
                         <!--Col2 Value-->
                         <StackPanel Grid.Column="1" Margin="0,10">
-                            <TextBlock  Margin="0,5.3" Text="X X X X" FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  x:Name="TextCreatedTime" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock x:Name="TextUniqeID"  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock x:Name="TextTokenCreator"  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  x:Name="TextType" Margin="0,5.3" Text="X X X X" FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  x:Name="TextDatabase" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
 
 
 
