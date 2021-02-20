@@ -32,7 +32,6 @@ namespace Dashboard.GlobalElement
                 {
                     Result(false, "");
                 }
-
             }
 
             public async static void Register(string Username, string Password, string Email, string Phone, Action<string> Result, Action ERR)

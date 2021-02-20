@@ -23,6 +23,26 @@ namespace Dashboard.Dashboards.Pages.Aut
             InitStudios();
         }
 
+
+        /// <summary>
+        /// show and hide page select studio
+        /// </summary>
+        /// <param name="Isvisibil"></param>
+        public void ChangeVisibility(bool Isvisibil)
+        {
+            if (Isvisibil)
+            {
+                Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
+        /// <summary>
+        /// Frist init
+        /// </summary>
         public void InitStudios()
         {
             ContentPlaceholderStudio.Children.Clear();
@@ -35,8 +55,9 @@ namespace Dashboard.Dashboards.Pages.Aut
                     {
                         foreach (var item in Result["Studios"].AsBsonArray)
                         {
-                            ContentPlaceholderStudio.Children.Add(new StudioGridView(item["Setting"].AsBsonDocument));
+                            ContentPlaceholderStudio.Children.Add(new StudioGridView(item["Setting"].AsBsonDocument,this));
                         }
+
                     }
                     else
                     {
@@ -45,6 +66,7 @@ namespace Dashboard.Dashboards.Pages.Aut
                         Debug.WriteLine("No Studio");
                     }
 
+                    SettingUser.ServerTime = Result["ServerTime"].ToUniversalTime();
                 }
                 else
                 {
@@ -59,5 +81,6 @@ namespace Dashboard.Dashboards.Pages.Aut
     {
 
         void InitStudios();
+        void ChangeVisibility(bool Isvisibil);
     }
 }
