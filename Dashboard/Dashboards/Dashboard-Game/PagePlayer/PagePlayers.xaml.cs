@@ -64,7 +64,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     if (PlayerCount + 1 <= result["Players"])
                     {
                         SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(TextBoxUsername.Text, TextBoxPassword.Password,
-                         () =>
+                         (resultCreated) =>
                          {
                              RecivePlayersList();
 
@@ -81,12 +81,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                              };
 
                              SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Add Player", $"You have added  \" {TextBoxUsername.Text} \" player", Detail, false, resultlog => { });
-                         },
-                         () =>
-                         {
-                             DashboardGame.Notifaction("Player add faild", StatusMessage.Error);
-
-                         });
+                         }
+                        );
                     }
                     else
                     {
@@ -117,7 +113,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
         {
             PlaceContentUser.Children.Clear();
 
-            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.ReciveListPlayer(ReciveCount,
+            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecieveListPlayer(ReciveCount,
                 result =>
                 {
                     if (result["ListPlayers"].AsBsonArray.Count >= 1)
@@ -137,10 +133,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.PagePlayer
                     TextTotalPlayer.Text = $"( {result["Players"]} )   total players";
 
                     PlayerCount = result["Players"].ToInt32();
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Faild Recive", StatusMessage.Error);
                 });
 
         }

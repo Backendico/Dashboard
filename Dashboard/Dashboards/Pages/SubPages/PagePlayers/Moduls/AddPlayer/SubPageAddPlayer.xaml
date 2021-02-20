@@ -75,8 +75,8 @@
                 VerticalAlignment="Center"
                 Grid.Row="1">
 
-                <Input:TextInputPrimary x:Name="Handel" PlaceHolder="Username"/>
-                <Input:TextInputPassword PlaceHolder="Password"/>
+                <Input:TextInputPrimary x:Name="InputUsername" PlaceHolder="Username"/>
+                <Input:TextInputPassword x:Name="InputPassword" PlaceHolder="Password"/>
                 <BTNS:BTNPrimary x:Name="BTNAddPlayer" Text="Add player"/>
 
 

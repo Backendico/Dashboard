@@ -173,7 +173,7 @@
 
 
                 <!--PageControl-->
-                <Keyvalue:SubPageKeyvalue/>
+                <Player:SubPagePlayers/>
 
             </Grid>
 

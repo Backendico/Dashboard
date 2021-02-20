@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Pages.Main;
+using Dashboard.GlobalElement;
 using System;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -6,7 +7,7 @@ using System.Windows.Media.Animation;
 
 namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer
 {
-  
+
     public partial class SubPageAddPlayer : UserControl
     {
         public SubPageAddPlayer()
@@ -24,10 +25,22 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer
                 });
             };
 
-            BTNAddPlayer.Worker += () => {
-
-
-            };
+            //action send request for creat player
+            BTNAddPlayer.Worker += () =>
+                        {
+                            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(InputUsername.Text, InputPassword.Text,
+                            result =>
+                            {
+                                if (result)
+                                {
+                                    Debug.WriteLine("Created");
+                                }
+                                else
+                                {
+                                    Debug.WriteLine("Err Created");
+                                }
+                            });
+                        };
 
         }
 

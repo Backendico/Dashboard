@@ -22,11 +22,12 @@ namespace Dashboard.Dashboards.Pages.PageStudios.Moduls.Studios_GridView
             TextTokenCreator.Text = Detail["Creator"].ToString();
             TextDatabase.Text = Detail["Database"].ToString();
 
+            //open main page
             MouseDown += (s, e) =>
             {
+                SettingUser.CurentDetailStudio = Detail;
                 PageAUT.Placeholder.Children.Add(new MainPage());
                 PageStudio.ChangeVisibility(false);
-                SettingUser.CurentDetailStudio = Detail;
                 
             };
 

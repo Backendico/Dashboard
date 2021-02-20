@@ -412,7 +412,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PagePlayers
                 {
                     public static ModelLinks.DashboardGame.PagePlayers Links;
-                    public static async void ReciveListPlayer(int Count, Action<BsonDocument> Result, Action ERR)
+                    public static async void RecieveListPlayer(int Count, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveListPlayer);
                         client.Timeout = -1;
@@ -431,12 +431,12 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            ERR();
+                            Result(new BsonDocument());
                         }
 
                     }
 
-                    public static async void CreatPlayer(string Username, string Password, Action Result, Action ERR)
+                    public static async void CreatPlayer(string Username, string Password, Action<bool> Result)
                     {
                         var client = new RestClient(Links.CreatPlayer);
                         client.Timeout = -1;
@@ -451,11 +451,11 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
