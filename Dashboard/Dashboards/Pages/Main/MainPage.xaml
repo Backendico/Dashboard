@@ -6,12 +6,7 @@
              xmlns:NavigationTab="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
              xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
-             xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
-             xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
-           xmlns:GridShow="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow"
-            xmlns:Content="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent"
-             xmlns:Store="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageStore"
-             xmlns:Keyvalue="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageKeyvalue"
+             
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="776" d:DesignWidth="1437"
          

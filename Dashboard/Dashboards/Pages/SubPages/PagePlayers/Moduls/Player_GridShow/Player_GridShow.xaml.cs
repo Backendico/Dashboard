@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -8,11 +10,18 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
     /// <summary>
     /// Interaction logic for Player_GridShow.xaml
     /// </summary>
-    public partial class Player_GridShow : UserControl
+    public partial class Player_GridShow : UserControl, IPlayerGrid
     {
-        public Player_GridShow()
+
+        BsonDocument Detail;
+
+        public Player_GridShow(BsonDocument Detail, IPagePlayer Editor)
         {
             InitializeComponent();
+            this.Detail = Detail;
+
+
+            Init();
 
             BTNMore.MouseDown += (s, e) =>
             {
@@ -32,9 +41,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             {
                 CloseMore();
             };
-
-
-
+          
         }
 
         void OpenMore()
@@ -61,5 +68,83 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
+
+        public void Init()
+        {
+
+            // Username
+            if (Detail.GetElement("Username").Value.ToString().Length >= 1)
+            {
+                TextUsername.Text = Detail.GetElement("Username").Value.ToString();
+            }
+            else
+            {
+                TextUsername.Text = "N/A";
+            }
+
+            // Email
+            if (Detail["Email"].ToString().Length >= 1)
+            {
+                TextEmail.Text = Detail["Email"].ToString();
+            }
+            else
+            {
+                TextEmail.Text = "N/A";
+            }
+
+            // last login
+            if (Detail["LastLogin"].ToString().Length>=1)
+            {
+                TextLastLogin.Text = Detail["LastLogin"].ToLocalTime().ToString();
+            }
+            else
+            {
+                TextLastLogin.Text = "N/A";
+            }
+
+            //Created
+            if (Detail["Created"].ToString().Length>=1)
+            {
+                TextCreated.Text = Detail["Created"].ToLocalTime().ToString();
+            }
+            else
+            {
+                TextCreated.Text = "N/A";
+            }
+
+
+            //Currencey
+            if (Detail["Currencey"].ToString().Length>=1)
+            {
+                TextCurrencey.Text = Detail["Currencey"].ToString();
+            }
+            else
+            {
+                TextCurrencey.Text = "N/A";
+            }
+
+            //Language
+            if (Detail["Country"].ToString().Length>=1)
+            {
+                TextLanguage.Text = Detail["Country"].ToString();
+            }
+            else
+            {
+                TextLanguage.Text = "N/A";
+            }
+
+            //Token
+            TextToken.Text = Detail["Token"].ToString();
+            
+        }
+
     }
+    public interface IPlayerGrid
+    {
+        void Init();
+
+    }
+
+
+
 }

@@ -81,9 +81,6 @@
                 <ScrollViewer x:Name="PanelGridView" MaxHeight="600"  Visibility="Collapsed"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                     <WrapPanel Name="ContentPlaceHolderGridviewe" VerticalAlignment="Top" HorizontalAlignment="Left">
 
-                        <GridShow:Player_GridShow/>
-                        <GridShow:Player_GridShow/>
-                        <GridShow:Player_GridShow/>
                     </WrapPanel>
                 </ScrollViewer>
 
@@ -118,15 +115,8 @@
                     <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
 
                     <ScrollViewer  Grid.Row="1">
-                        <StackPanel  x:Name="s">
-                            <ListView:PlayerListView Panel.ZIndex="2" />
-                            <ListView:PlayerListView  Panel.ZIndex="1"/>
-                            <ListView:PlayerListView/>
-
-                            <ListView:PlayerListView/>
-                            <ListView:PlayerListView/>
-                            <ListView:PlayerListView/>
-                            <ListView:PlayerListView/>
+                        <StackPanel  x:Name="ContentPlaceHolderListView">
+                          
 
                         </StackPanel>
                     </ScrollViewer>

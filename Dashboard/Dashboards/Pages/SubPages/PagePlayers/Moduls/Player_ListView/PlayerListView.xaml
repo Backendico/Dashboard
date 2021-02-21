@@ -23,13 +23,13 @@
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Username" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="1"  Text="Email" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="2"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="3"  Text="Last login" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="4"  Text="Currency" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="5"  Text="Location" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="6"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+            <TextBlock x:Name="TextUsername" Grid.Column="0" Text="Username" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextEmail" Grid.Column="1"  Text="Email" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextCreated" Grid.Column="2"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextLastLogin" Grid.Column="3"  Text="Last login" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextCurrencey" Grid.Column="4"  Text="Currencey" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextLanguage" Grid.Column="5"  Text="Location" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextToken" Grid.Column="6"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
             <TextBlock x:Name="BTNSeemore" Grid.Column="7" Cursor="Hand"  Text="&#xE712;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="HoloLens MDL2 Assets"/>
 
         </Grid>
