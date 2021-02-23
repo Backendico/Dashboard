@@ -1,5 +1,6 @@
 ﻿using Dashboard.Dashboards.Pages.Aut;
 using Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderboard;
+using Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_GridView;
 using Dashboard.GlobalElement;
 using System;
 using System.Collections.Generic;
@@ -46,17 +47,29 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
                 PanelGridView.Visibility = Visibility.Visible;
                 PanelListView.Visibility = Visibility.Collapsed;
             };
-
-
         }
 
         public void Init()
         {
+
+            ContentPlaceHolderGridviewe.Children.Clear();
+
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(Result =>
             {
                 if (Result.ElementCount >= 1)
                 {
-                    Debug.WriteLine("find Leaderboard");
+                    if (Result["List"].AsBsonArray.Count>=1)
+                    {
+                        foreach (var item in Result["List"].AsBsonArray)
+                        {
+                            ContentPlaceHolderGridviewe.Children.Add(new LeaderboardGridView());
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("No leaderboard");
+                        PageAUT.Placeholder.Children.Add(new SubpageAddLeaderboards());
+                    }
                 }
                 else
                 {
