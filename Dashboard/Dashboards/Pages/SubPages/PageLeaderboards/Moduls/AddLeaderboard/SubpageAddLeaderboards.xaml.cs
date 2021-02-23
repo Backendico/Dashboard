@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dashboard.GlobalElement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,11 +33,28 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderb
             {
                 ShowPage(0, () =>
                 {
-                    Visibility = System.Windows.Visibility.Collapsed;
+                    Visibility = Visibility.Collapsed;
                 });
             };
 
-            
+            //action btn add leaderboard
+            BTNAddLeaderboard.Worker += () =>
+            {
+                long Reset = 0;
+                long Amount = 0;
+
+                switch (ComboReset.TextSelected.Text)
+                {
+                    default:
+                        break;
+                }
+
+
+                //SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextName.Text,Reset,);
+
+            };
+
+
 
         }
 

@@ -9,6 +9,7 @@
              mc:Ignorable="d" 
              Background="#3333"
               Name="Root" 
+             
         >
 
     <Border  
@@ -17,7 +18,7 @@
         Width="640" 
         Height="520" 
         Background="White">
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition
                     Height="46"/>
@@ -52,7 +53,7 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                <TextBlock
+                <TextBlock 
                     FontSize="11"
                     Foreground="{Binding BorderBrush,ElementName=BTNClose}"
                     Text="&#xEF2C;" 

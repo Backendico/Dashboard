@@ -139,7 +139,15 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 if (Text == PlaceHolder)
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                    MainTextBox.Text = "";
+
+                    if (Type == InputType.Number)
+                    {
+                        MainTextBox.Text = "0";
+                    }
+                    else
+                    {
+                        MainTextBox.Text = "";
+                    }
                 }
                 else
                 {
@@ -154,13 +162,30 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 if (Text.Length <= 0)
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+
+                    if (Type==InputType.Number)
+                    {
+                        MainTextBox.Text = "0";
+                    }
+                    else
+                    {
                     MainTextBox.Text = PlaceHolder;
+
+                    }
+
                 }
                 else
                 {
+                    if (MainTextBox.Text == PlaceHolder)
+                    {
+                        MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
+                    }
+                    else
+                    {
+                        MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                        Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    }
 
-                    MainTextBox.Foreground = new SolidColorBrush(Colors.Black);
-                    Root.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
             };
 
@@ -173,39 +198,53 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 }
 
 
-                switch (InputMode)
+                if (IsLoaded)
                 {
-                    case InputType.Email:
-                        {
-                            try
+                    switch (InputMode)
+                    {
+                        case InputType.Email:
                             {
-                                if (Text.Length >= 1 && Text != PlaceHolder)
+                                try
                                 {
-                                    new MailAddress(MainTextBox.Text);
+                                    if (Text.Length >= 1 && Text != PlaceHolder)
+                                    {
+                                        new MailAddress(MainTextBox.Text);
+                                        IsError = false;
+                                    }
+                                    else
+                                    {
+                                        IsError = false;
+                                    }
+
+                                }
+                                catch (System.Exception)
+                                {
+
+                                    IsError = true;
+                                }
+                            }
+                            break;
+                        case InputType.All:
+                            {
+                                IsError = false;
+                            }
+                            break;
+                        case InputType.Number:
+                            {
+                                try
+                                {
+                                    long.Parse(MainTextBox.Text);
+                                }
+                                catch (System.Exception)
+                                {
+                                    MainTextBox.Text = "0";
                                     IsError = false;
                                 }
-                                else
-                                {
-                                    IsError = false;
-                                }
-
                             }
-                            catch (System.Exception)
-                            {
-
-                                IsError = true;
-                            }
-                        }
-                        break;
-                    case InputType.All:
-                        {
-                            IsError = false;
-                        }
-                        break;
-                    case InputType.Number:
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             };
 

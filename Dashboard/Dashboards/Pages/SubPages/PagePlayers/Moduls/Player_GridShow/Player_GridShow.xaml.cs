@@ -20,7 +20,6 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             InitializeComponent();
             this.Detail = Detail;
 
-
             Init();
 
             BTNMore.MouseDown += (s, e) =>

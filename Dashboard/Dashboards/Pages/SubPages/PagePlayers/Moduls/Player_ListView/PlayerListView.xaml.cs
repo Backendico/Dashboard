@@ -29,6 +29,8 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_ListView
         {
             InitializeComponent();
             this.Detail = Detail;
+
+            Panel.SetZIndex(this, Detail["ZIndex"].AsInt32);
             Init();
 
             BTNSeemore.MouseDown += (s, e) =>

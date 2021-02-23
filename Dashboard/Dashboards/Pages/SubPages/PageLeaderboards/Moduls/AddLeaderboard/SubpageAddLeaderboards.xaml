@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderboard"
+             xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
+             xmlns:Inputs="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+             xmlns:Dropdown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              mc:Ignorable="d" 
              Background="#3333"
               Name="Root" >
@@ -72,6 +75,46 @@
                 Grid.Row="1">
 
 
+                <!--Name-->
+                <Inputs:TextInputPrimary x:Name="TextName" PlaceHolder="Name *"/>
+
+                <!--Reset-->
+                <Dropdown:DropDownPrimary x:Name="ComboReset" Panel.ZIndex="2" Margin="0,0,0,20" PlaceHolder="Reset time:" Width="290">
+                    <Dropdown:DropDownPrimary.Items>
+                        <StackPanel>
+                            <Dropdown:DropDownItem Text="Manually" />
+                            <Dropdown:DropDownItem Text="Hourly" />
+                            <Dropdown:DropDownItem Text="Daily" />
+                            <Dropdown:DropDownItem Text="Weekly" />
+                            <Dropdown:DropDownItem Text="Monthly" />
+                        </StackPanel>
+                    </Dropdown:DropDownPrimary.Items>
+                </Dropdown:DropDownPrimary>
+
+                <!--Sort-->
+                <Dropdown:DropDownPrimary Panel.ZIndex="1" PlaceHolder="Sort :" Margin="0,0,0,20" Width="290">
+                    <Dropdown:DropDownPrimary.Items>
+                        <StackPanel>
+                            <Dropdown:DropDownItem Text="Last (always update with th new value)" />
+                            <Dropdown:DropDownItem Text="Minimum (always use the lowest value)" />
+                            <Dropdown:DropDownItem Text="Maximum (always use the highest value)" />
+                            <Dropdown:DropDownItem Text="Sum (add this value to the existing value)" />
+                        </StackPanel>
+                    </Dropdown:DropDownPrimary.Items>
+                </Dropdown:DropDownPrimary>
+
+                <!--Amount-->
+                <Inputs:TextInputPrimary ToolTip="Amount" InputMode="Number"  PlaceHolder="Amount"/>
+                
+                
+                <!--Min-->
+                <Inputs:TextInputPrimary ToolTip="Minimum" InputMode="Number"  PlaceHolder="Minimum"/>
+                
+                
+                <!--Max-->
+                <Inputs:TextInputPrimary ToolTip="Maximum" InputMode="Number" PlaceHolder="Maximum" Text="1000"/>
+
+                <BTNS:BTNPrimary x:Name="BTNAddLeaderboard" Text="Add leaderboard"/>
 
             </StackPanel>
 

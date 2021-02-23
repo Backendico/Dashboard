@@ -18,10 +18,11 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
             InitializeComponent();
 
             Init();
+
             //action btn add player
             BTNaddPlayer.Work += () =>
             {
-                PageAUT.Placeholder.Children.Add(new SubPageAddPlayer());
+                PageAUT.Placeholder.Children.Add(new SubPageAddPlayer(this));
             };
 
             //action switch to grid view 
@@ -38,6 +39,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
                 PanelListView.Visibility = System.Windows.Visibility.Visible;
             };
 
+
         }
 
 
@@ -48,24 +50,28 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
         {
             ContentPlaceHolderGridviewe.Children.Clear();
             ContentPlaceHolderListView.Children.Clear();
-            
+
             SDK.SDK_PageDashboards.DashboardGame.PagePlayers.RecieveListPlayer(CountRecieve, result =>
             {
                 if (result.ElementCount >= 1)
                 {
                     if (result["ListPlayers"].AsBsonDocument["Players"].AsBsonArray.Count >= 1)
                     {
-                        
+                        int Zindex = result["ListPlayers"].AsBsonDocument["Players"].AsBsonArray.Count;
+
                         foreach (var item in result["ListPlayers"].AsBsonDocument["Players"].AsBsonArray)
                         {
-                            ContentPlaceHolderGridviewe.Children.Add(new Player_GridShow(item.AsBsonDocument,this));
-                            ContentPlaceHolderListView.Children.Add(new PlayerListView(item.AsBsonDocument,this));
+                            ContentPlaceHolderGridviewe.Children.Add(new Player_GridShow(item.AsBsonDocument, this));
+                           
+                            item.AsBsonDocument.Add("ZIndex", Zindex);
 
+                            ContentPlaceHolderListView.Children.Add(new PlayerListView(item.AsBsonDocument, this));
+                            Zindex--;
                         }
                     }
                     else
                     {
-                        PageAUT.Placeholder.Children.Add(new SubPageAddPlayer());
+                        PageAUT.Placeholder.Children.Add(new SubPageAddPlayer(this));
                     }
                 }
                 else
@@ -80,7 +86,6 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
 
     public interface IPagePlayer
     {
-
         void Init();
     }
 

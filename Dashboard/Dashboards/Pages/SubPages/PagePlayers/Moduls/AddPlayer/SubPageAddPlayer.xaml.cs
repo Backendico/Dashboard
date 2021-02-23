@@ -10,11 +10,12 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer
 
     public partial class SubPageAddPlayer : UserControl
     {
-        public SubPageAddPlayer()
+        public SubPageAddPlayer(IPagePlayer PageEditor)
         {
             InitializeComponent();
 
             ShowPage(1);
+            
 
             //action btn close
             BTNClose.MouseDown += (s, e) =>
@@ -26,21 +27,26 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer
             };
 
             //action send request for creat player
-            BTNAddPlayer.Worker += () =>
+            BTNAddPlayer.Worker +=
+                () =>
+                {
+                    SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(InputUsername.Text, InputPassword.Text,
+                        result =>
                         {
-                            SDK.SDK_PageDashboards.DashboardGame.PagePlayers.CreatPlayer(InputUsername.Text, InputPassword.Text,
-                            result =>
+                            if (result)
                             {
-                                if (result)
-                                {
-                                    Debug.WriteLine("Created");
-                                }
-                                else
-                                {
-                                    Debug.WriteLine("Err Created");
-                                }
-                            });
-                        };
+                                ShowPage(0, () =>
+                                    {
+                                        Visibility = System.Windows.Visibility.Collapsed;
+                                    });
+                                PageEditor.Init();
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Err Created");
+                            }
+                        });
+                };
 
         }
 

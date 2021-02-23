@@ -80,16 +80,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             {
                 SelectItem(Items.Children[_SelectionIndex] as DropDownItem);
             };
+
             GotFocus += (s, e) =>
             {
-
                 Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
             };
 
             LostFocus += (s, e) =>
             {
-                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
-                CloseLists();
+                IsOpenSuggests = false;
+            };
+
+            MouseLeave += (s, e) =>
+            {
+                IsOpenSuggests = false;
             };
 
             MouseDown += (s, e) =>
@@ -97,14 +101,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
                 if (IsOpenSuggests)
                 {
                     IsOpenSuggests = false;
-                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
-                    CloseLists();
                 }
                 else
                 {
                     IsOpenSuggests = true;
-                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-                    OpenLists();
                 }
             };
         }
@@ -112,6 +112,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
         void OpenLists()
         {
+            Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
             IconArrow.Text = "\xE96D";
 
             DoubleAnimation Anim = new DoubleAnimation(150, TimeSpan.FromSeconds(0.2));
@@ -125,7 +126,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
         void CloseLists()
         {
-
+            Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
             IconArrow.Text = "\xE96E";
 
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.2));
