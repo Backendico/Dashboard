@@ -9,6 +9,7 @@
              xmlns:Dropdown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
              mc:Ignorable="d" 
              Background="#3333"
+             
               Name="Root" >
     <Border  
        
@@ -108,7 +109,7 @@
                 
                 
                 <!--Min-->
-                <Inputs:TextInputPrimary ToolTip="Minimum" InputMode="Number"  PlaceHolder="Minimum"/>
+                <Inputs:TextInputPrimary  ToolTip="Minimum" InputMode="Number"  PlaceHolder="Minimum"/>
                 
                 
                 <!--Max-->

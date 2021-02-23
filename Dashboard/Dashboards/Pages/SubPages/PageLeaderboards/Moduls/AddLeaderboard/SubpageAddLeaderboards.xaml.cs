@@ -1,6 +1,7 @@
 ﻿using Dashboard.GlobalElement;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,12 +50,9 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderb
                         break;
                 }
 
-
                 //SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextName.Text,Reset,);
 
             };
-
-
 
         }
 

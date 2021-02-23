@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,6 +18,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
                 _SelectionIndex = value;
             }
         }
+   
         public StackPanel Items
         {
             get
@@ -121,7 +123,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-
         }
 
         void CloseLists()

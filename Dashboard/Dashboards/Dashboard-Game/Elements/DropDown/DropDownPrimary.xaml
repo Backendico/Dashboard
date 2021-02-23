@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              Cursor="Hand"
              Name="MainRoot"
+             
              >
 
     <Grid Focusable="True" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" >
