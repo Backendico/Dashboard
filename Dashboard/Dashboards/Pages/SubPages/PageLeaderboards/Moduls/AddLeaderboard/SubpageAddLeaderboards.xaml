@@ -93,27 +93,27 @@
                 </Dropdown:DropDownPrimary>
 
                 <!--Sort-->
-                <Dropdown:DropDownPrimary Panel.ZIndex="1" PlaceHolder="Sort :" Margin="0,0,0,20" Width="290">
+                <Dropdown:DropDownPrimary x:Name="ComboboxSort" Panel.ZIndex="1" PlaceHolder="Sort :" Margin="0,0,0,20" Width="290">
                     <Dropdown:DropDownPrimary.Items>
                         <StackPanel>
-                            <Dropdown:DropDownItem Text="Last (always update with th new value)" />
-                            <Dropdown:DropDownItem Text="Minimum (always use the lowest value)" />
-                            <Dropdown:DropDownItem Text="Maximum (always use the highest value)" />
-                            <Dropdown:DropDownItem Text="Sum (add this value to the existing value)" />
+                            <Dropdown:DropDownItem Text="Last" />
+                            <Dropdown:DropDownItem Text="Minimum" />
+                            <Dropdown:DropDownItem Text="Maximum" />
+                            <Dropdown:DropDownItem Text="Sum" />
                         </StackPanel>
                     </Dropdown:DropDownPrimary.Items>
                 </Dropdown:DropDownPrimary>
 
                 <!--Amount-->
-                <Inputs:TextInputPrimary ToolTip="Amount" InputMode="Number"  PlaceHolder="Amount"/>
+                <Inputs:TextInputPrimary ToolTip="Amount" x:Name="TextAmount" InputMode="Number"  PlaceHolder="Amount"/>
                 
                 
                 <!--Min-->
-                <Inputs:TextInputPrimary  ToolTip="Minimum" InputMode="Number"  PlaceHolder="Minimum"/>
+                <Inputs:TextInputPrimary  ToolTip="Minimum" x:Name="TextMinimum" InputMode="Number"  PlaceHolder="Minimum"/>
                 
                 
                 <!--Max-->
-                <Inputs:TextInputPrimary ToolTip="Maximum" InputMode="Number" PlaceHolder="Maximum" Text="1000"/>
+                <Inputs:TextInputPrimary ToolTip="Maximum" x:Name="TextMaximum" InputMode="Number" PlaceHolder="Maximum" Text="1000"/>
 
                 <BTNS:BTNPrimary x:Name="BTNAddLeaderboard" Text="Add leaderboard"/>
 

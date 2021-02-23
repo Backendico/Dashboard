@@ -42,15 +42,113 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderb
             BTNAddLeaderboard.Worker += () =>
             {
                 long Reset = 0;
+                long Sort = 0;
                 long Amount = 0;
+                long Min = 0;
+                long Max = 0;
 
+                //Reset
                 switch (ComboReset.TextSelected.Text)
                 {
+                    case "Manually":
+                        {
+                            Reset = 0;
+                        }
+                        break;
+                    case "Hourly":
+                        {
+                            Reset = 1;
+                        }
+                        break;
+                    case "Daily":
+                        {
+                            Reset = 2;
+                        }
+                        break;
+                    case "Weekly":
+                        {
+                            Reset = 3;
+                        }
+                        break;
+                    case "Monthly":
+                        {
+                            Reset = 4;
+                        }
+                        break;
                     default:
+                        Reset = 0;
                         break;
                 }
 
-                //SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextName.Text,Reset,);
+
+                //sort
+                switch (ComboboxSort.TextSelected.Text)
+                {
+                    case "Last":
+                        Sort = 0;
+                        break;
+                    case "Minimum":
+                        Sort = 1;
+                        break;
+                    case "Maximum":
+                        Sort = 2;
+                        break;
+                    case "Sum":
+                        Sort = 3;
+                        break;
+                    default:
+                        Sort = 0;
+                        break;
+                }
+
+
+                //amount
+                try
+                {
+                    Amount = long.Parse(TextAmount.Text);
+                    Min = long.Parse(TextMinimum.Text);
+                    Max = long.Parse(TextMaximum.Text);
+
+
+                    if (TextName.Text != TextName.PlaceHolder)
+                    {
+                        SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Creat(TextName.Text, Reset, Amount, Sort, Min, Max, Result =>
+                        {
+                            if (Result)
+                            {
+                                ShowPage(0);
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Faild add");
+                            }
+
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    Debug.WriteLine("Error to created");
+                }
+
+
+
+                //name control
+                if (true)
+                {
+
+                }
+                else
+                {
+                    TextName.IsError = true;
+                }
+
+
 
             };
 

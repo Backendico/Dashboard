@@ -71,6 +71,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
         string _PlaceHolder = "Place Holder";
         bool _IsOpenSuggest = false;
+
         int _SelectionIndex = 0;
 
 
