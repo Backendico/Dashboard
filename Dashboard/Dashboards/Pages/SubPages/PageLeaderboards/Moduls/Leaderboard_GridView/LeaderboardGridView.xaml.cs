@@ -68,7 +68,6 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboar
             //name
             TextName.Text = Detail["Name"].ToString();
 
-
             //sort
             switch ((SortLeaderboard)Detail["Sort"].ToInt32())
             {

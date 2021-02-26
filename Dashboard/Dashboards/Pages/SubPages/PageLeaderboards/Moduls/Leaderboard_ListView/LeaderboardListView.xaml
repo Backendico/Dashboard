@@ -6,23 +6,36 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_ListView"
            xmlns:GridOption="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow.SeeMoreOption"
              mc:Ignorable="d" 
-              Height="30" 
+              Height="30" d:DesignWidth="703" 
             >
     <Grid >
         <Grid   >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="1"  Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="2"  Text="Player" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock Grid.Column="3"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
-            <TextBlock x:Name="BTNSeemore" Grid.Column="7" Cursor="Hand"  Text="&#xE712;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="HoloLens MDL2 Assets"/>
+            <TextBlock x:Name="TextName" Grid.Column="0" Text="Name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+            <TextBlock Name="TextSort" Grid.Column="1" Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+            <TextBlock Name="TextReset" Grid.Column="2" Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+            <TextBlock Name="TextAmount" Grid.Column="3" Text="Amount" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock Name="TextMinimum" Grid.Column="4" Text="Minimum" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock Name="TextMaximum" Grid.Column="5" Text="Maximum" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock Name="TextPlayerCount" Grid.Column="6" Text="Players" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock Name="TextStart" Grid.Column="7" Text="Start at" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+            <TextBlock Name="TextToken" Grid.Column="8" Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+
+
+
+            <TextBlock x:Name="BTNSeemore" Grid.Column="9" Cursor="Hand"  Text="&#xE712;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="HoloLens MDL2 Assets"/>
 
         </Grid>
 

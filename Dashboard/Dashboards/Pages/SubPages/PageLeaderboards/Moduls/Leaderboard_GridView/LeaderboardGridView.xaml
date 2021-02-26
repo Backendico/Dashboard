@@ -63,21 +63,21 @@
                         </StackPanel>
                         <!--Col2 Value-->
                         <StackPanel Grid.Column="1" Margin="0,10">
-                            <TextBlock x:Name="TextSort" Margin="0,5.3" Text="Sort" FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock x:Name="TextSort" Margin="0,5.3" Text="Sort_Value" FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  x:Name="TextReset" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  x:Name="TextReset" Margin="0,5.3"  Text="Reset_Value"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Name="TextAmount" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  Name="TextAmount" Margin="0,5.3"  Text="Amount_Value"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  x:Name="TextMinimum" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  x:Name="TextMinimum" Margin="0,5.3"  Text="Min_Value"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Name="TextMaximum" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  Name="TextMaximum" Margin="0,5.3"  Text="Max_Value&#x9;"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Name="TextPlayerCount" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  Name="TextPlayerCount" Margin="0,5.3"  Text="Player_Value"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Name="TextStart" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  Name="TextStart" Margin="0,5.3"  Text="Startat_Value"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                             <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
-                            <TextBlock  Name="TextToken" Margin="0,5.3"  Text="X X X X"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <TextBlock  Name="TextToken" Margin="0,5.3"  Text="Token_Value"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
                         </StackPanel>
 
                     </Grid>

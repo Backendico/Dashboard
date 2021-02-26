@@ -1,6 +1,7 @@
 ﻿using Dashboard.Dashboards.Pages.Aut;
 using Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderboard;
 using Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_GridView;
+using Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_ListView;
 using Dashboard.GlobalElement;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
         public void Init()
         {
             ContentPlaceHolderGridviewe.Children.Clear();
+            ContentPlaceHolderListView.Children.Clear();
 
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(Result =>
             {
@@ -59,9 +61,17 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
                 {
                     if (Result["List"].AsBsonArray.Count >= 1)
                     {
+                        int Zindex = Result["List"].AsBsonArray.Count;
+
+
+
                         foreach (var item in Result["List"].AsBsonArray)
                         {
+                            item["Settings"].AsBsonDocument.Add("Zindex", Zindex);
+
                             ContentPlaceHolderGridviewe.Children.Add(new LeaderboardGridView(item["Settings"].AsBsonDocument));
+                            ContentPlaceHolderListView.Children.Add(new LeaderboardListView(item["Settings"].AsBsonDocument));
+                            Zindex--;
                         }
                     }
                     else

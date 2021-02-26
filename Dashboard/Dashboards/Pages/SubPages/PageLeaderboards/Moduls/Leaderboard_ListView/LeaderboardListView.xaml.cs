@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboard_ListView
 {
     /// <summary>
     /// Interaction logic for LeaderboardListView.xaml
     /// </summary>
-    public partial class LeaderboardListView : UserControl
+    public partial class LeaderboardListView : UserControl, IListViewLeaderboard
     {
-
+        BsonDocument Detail;
         bool IsSeemoreOpen = false;
-        public LeaderboardListView()
+        public LeaderboardListView(BsonDocument Detail)
         {
             InitializeComponent();
+            this.Detail = Detail;
+            Panel.SetZIndex(this, this.Detail["Zindex"].ToInt32());
+
+            Init();
+
 
             BTNSeemore.MouseDown += (s, e) =>
             {
@@ -39,6 +34,8 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboar
                 }
 
             };
+
+
         }
         void OpenMore()
         {
@@ -66,5 +63,79 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.Leaderboar
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
         }
+
+        public void Init()
+        {
+            //name
+            TextName.Text = Detail["Name"].ToString();
+
+            //sort
+            switch ((SortLeaderboard)Detail["Sort"].ToInt32())
+            {
+                case SortLeaderboard.Last:
+                    TextSort.Text = SortLeaderboard.Last.ToString();
+                    break;
+                case SortLeaderboard.Minimum:
+                    TextSort.Text = SortLeaderboard.Minimum.ToString();
+                    break;
+                case SortLeaderboard.Maxmimum:
+                    TextSort.Text = SortLeaderboard.Maxmimum.ToString();
+                    break;
+                case SortLeaderboard.Sum:
+                    TextSort.Text = SortLeaderboard.Sum.ToString();
+                    break;
+                default:
+                    TextSort.Text = "N/A";
+                    break;
+            }
+
+            //Reset
+            switch ((ResetLeaderboard)Detail["Reset"].ToInt32())
+            {
+                case ResetLeaderboard.Manually:
+                    TextReset.Text = ResetLeaderboard.Manually.ToString();
+                    break;
+                case ResetLeaderboard.Hourly:
+                    TextReset.Text = ResetLeaderboard.Hourly.ToString();
+                    break;
+                case ResetLeaderboard.Daily:
+                    TextReset.Text = ResetLeaderboard.Daily.ToString();
+                    break;
+                case ResetLeaderboard.Weekly:
+                    TextReset.Text = ResetLeaderboard.Weekly.ToString();
+                    break;
+                case ResetLeaderboard.Monthly:
+                    TextReset.Text = ResetLeaderboard.Monthly.ToString();
+                    break;
+                default:
+                    TextReset.Text = "N/A";
+                    break;
+            }
+
+
+            //text minimum 
+            TextMinimum.Text = Detail["Min"].ToString();
+
+            //Max 
+            TextMaximum.Text = Detail["Max"].ToString();
+
+            //Amount 
+            TextAmount.Text = Detail["Amount"].ToString();
+
+            //Count
+            TextPlayerCount.Text = Detail["Count"].ToString();
+
+            //Created
+            TextStart.Text = Detail["Start"].ToLocalTime().ToString();
+
+            //Token
+            TextToken.Text = Detail["Token"].ToString();
+        }
+    }
+
+    internal interface IListViewLeaderboard
+    {
+        void Init();
+
     }
 }

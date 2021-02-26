@@ -84,7 +84,7 @@
                 </ScrollViewer>
 
                 <!--List viwe-->
-                <Grid x:Name="PanelListView" Visibility="Collapsed" Grid.Row="1">
+                <Grid x:Name="PanelListView" Visibility="Visible" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
@@ -93,28 +93,34 @@
                     <!--Header-->
                     <Grid Margin="0,0,17,0" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Name" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="1"  Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="2"  Text="Players" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-                        <TextBlock Grid.Column="3"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
-
+                        <TextBlock Grid.Column="1" Text="Sort" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="2" Text="Reset" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="3" Text="Amount" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="4" Text="Minimum" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="5" Text="Maximum" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="6" Text="Players" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="7" Text="Start at" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                        <TextBlock Grid.Column="8" Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                 
+                    
                     </Grid>
                     <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
 
                     <ScrollViewer  Grid.Row="1">
-                        <StackPanel  >
-                            <Listview:LeaderboardListView/>
-                            <Listview:LeaderboardListView/>
-                            <Listview:LeaderboardListView/>
-                            <Listview:LeaderboardListView/>
-                        </StackPanel>
+                        <StackPanel x:Name="ContentPlaceHolderListView" />
                     </ScrollViewer>
                 </Grid>
 
