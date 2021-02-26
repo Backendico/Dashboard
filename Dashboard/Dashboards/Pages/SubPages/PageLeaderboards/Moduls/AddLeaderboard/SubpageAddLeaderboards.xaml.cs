@@ -136,20 +136,6 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards.Moduls.AddLeaderb
                     Debug.WriteLine("Error to created");
                 }
 
-
-
-                //name control
-                if (true)
-                {
-
-                }
-                else
-                {
-                    TextName.IsError = true;
-                }
-
-
-
             };
 
         }

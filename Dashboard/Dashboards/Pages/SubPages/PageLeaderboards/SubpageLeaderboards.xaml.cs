@@ -28,7 +28,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
         public SubpageLeaderboards()
         {
             InitializeComponent();
-            
+
             Init();
 
             BTNaddLeaderboard.Work += () =>
@@ -51,18 +51,17 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
 
         public void Init()
         {
-
             ContentPlaceHolderGridviewe.Children.Clear();
 
             SDK.SDK_PageDashboards.DashboardGame.PageLeaderboard.Reciveleaderboards(Result =>
             {
                 if (Result.ElementCount >= 1)
                 {
-                    if (Result["List"].AsBsonArray.Count>=1)
+                    if (Result["List"].AsBsonArray.Count >= 1)
                     {
                         foreach (var item in Result["List"].AsBsonArray)
                         {
-                            ContentPlaceHolderGridviewe.Children.Add(new LeaderboardGridView());
+                            ContentPlaceHolderGridviewe.Children.Add(new LeaderboardGridView(item["Settings"].AsBsonDocument));
                         }
                     }
                     else
@@ -84,5 +83,23 @@ namespace Dashboard.Dashboards.Pages.SubPages.PageLeaderboards
     public interface IPageLeaderboard
     {
         void Init();
+    }
+
+    public enum SortLeaderboard
+    {
+        Last,
+        Minimum,
+        Maxmimum,
+        Sum,
+    }
+
+
+    public enum ResetLeaderboard
+    {
+        Manually,
+        Hourly,
+        Daily,
+        Weekly,
+        Monthly
     }
 }
