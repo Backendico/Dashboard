@@ -45,6 +45,8 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_ListView
                 }
 
             };
+
+
         }
         void OpenMore()
         {

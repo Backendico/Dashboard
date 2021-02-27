@@ -7,6 +7,7 @@
              xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
              xmlns:Leaderboards="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards"
+             xmlns:Achievements="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageAchievements"
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="776" d:DesignWidth="1437"
          
@@ -165,10 +166,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-
-
                 <!--PageControl-->
-                <Leaderboards:SubpageLeaderboards/>
+                <Achievements:SubpageAchievements/>
 
 
             </Grid>

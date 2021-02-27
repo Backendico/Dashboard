@@ -461,6 +461,15 @@
     <Compile Include="Dashboards\Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageAchievements\Components\Achievements_GridView\AchievementsGridView.xaml.cs">
+      <DependentUpon>AchievementsGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageAchievements\Components\Achievements_ListView\AchievementListView.xaml.cs">
+      <DependentUpon>AchievementListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageAchievements\Moduls\AddAchievements\SubpageAddAchievements.xaml.cs">
+      <DependentUpon>SubpageAddAchievements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageAchievements\SubpageAchievements.xaml.cs">
       <DependentUpon>SubpageAchievements.xaml</DependentUpon>
     </Compile>
@@ -889,6 +898,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageAchievements\Components\Achievements_GridView\AchievementsGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageAchievements\Components\Achievements_ListView\AchievementListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageAchievements\Moduls\AddAchievements\SubpageAddAchievements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

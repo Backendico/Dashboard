@@ -46,9 +46,6 @@ namespace Dashboard.Dashboards.Dashboard_Game.PageAchievements
                                 //add log
                                 SDK.SDK_PageDashboards.DashboardGame.PageLog.AddLog("Creat achievement", $"\" {TextBoxName.Text} \" achievement was created", new BsonDocument(), false, resultlog => { });
 
-                            }, () =>
-                            {
-                                DashboardGame.Notifaction("Faild Recive List", Notifaction.StatusMessage.Error);
                             });
                         }
                         else

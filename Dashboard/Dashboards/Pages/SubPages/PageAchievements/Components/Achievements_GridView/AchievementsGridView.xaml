@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Pages.SubPages.PageAchievements.Components.Achievements_GridView.AchievementsGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageAchievements.Components.Achievements_GridView"
+              xmlns:GridOption="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow.SeeMoreOption"
+             mc:Ignorable="d" 
+               Margin="20,50"
+             Width="200"
+             Height="220"
+             >
+    <Grid>
+
+        <Border  BorderThickness="1" Background="White" CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="0" Opacity="0.1"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <!--Controllers-->
+                <TextBlock x:Name="BTNMore" Cursor="Hand" FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="&#xE712;" FontFamily="Segoe MDL2 Assets"/>
+
+
+                <!--Block Status-->
+                <Border Visibility="Collapsed" CornerRadius="0,0,5,5"  Background="#fa4d56" Margin="16,0,142,5"/>
+
+                <!--DetailValue-->
+                <StackPanel Grid.Row="1"  Margin="10,5,5,5">
+                    <TextBlock TextAlignment="Center" >
+                    <Run FontSize="15"  x:Name="TextName" Text="Name_Achievements" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+                    </TextBlock>
+
+                    <!--Detail value-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Col1 Icons-->
+                        <StackPanel Margin="0,10">
+                            <TextBlock ToolTip="Created" FontSize="15" Margin="0,5"  Text="&#xEC92;" FontFamily="Segoe MDL2 Assets" />
+                            <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
+                            <TextBlock  FontSize="15" Margin="0,5"  Text="&#xE902;" FontFamily="Segoe MDL2 Assets" />
+                            <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
+                            <TextBlock ToolTip="Token" FontSize="15" Margin="0,5"  Text="&#xE8D7;" FontFamily="Segoe MDL2 Assets" />
+
+                        </StackPanel>
+                        <!--Col2 Value-->
+                        <StackPanel Grid.Column="1" Margin="0,10">
+                            <TextBlock x:Name="TextCreated" Margin="0,5.3"  Text="Created_Time"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
+                            <TextBlock x:Name="TextPlayers" Margin="0,5.3"  Text="Players_Count"  FontFamily="/Dashboard;component/Fonts/#Barlow Light"  />
+                            <Border BorderBrush="#f4f4f4" BorderThickness="0,0,0,1" />
+                            <TextBlock x:Name="TextToken"  Margin="0,5.3"  Text="Token Achievement"  FontFamily="/Dashboard;component/Fonts/#Barlow Light" />
+
+                        </StackPanel>
+
+                    </Grid>
+                </StackPanel>
+
+
+            </Grid>
+        </Border>
+
+        <!--Image-->
+        <Border BorderThickness="1"  Margin="0,-35,0,0" Width="70" VerticalAlignment="Top" HorizontalAlignment="Center" Height="70" Background="White" CornerRadius="40">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.1"/>
+            </Border.Effect>
+            <TextBlock Name="TextValue" Text="9999" VerticalAlignment="Center" TextAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow SemiBold"/>
+        </Border>
+
+
+
+        <!--PanelMore-->
+        <Border x:Name="PanelMore" Opacity="0" Visibility="Collapsed" CornerRadius="5" Width="100"  VerticalAlignment="Top" HorizontalAlignment="Right" Background="White" Margin="0,30,0,0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
+            </Border.Effect>
+
+            <Grid>
+                <Rectangle Width="10" Height="10" Fill="White" Margin="0,-5,16,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <StackPanel Name="s">
+                    <GridOption:SeeMoreOption Text="Edit" />
+                    <GridOption:SeeMoreOption Text="Delete"/>
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+    </Grid>
+</UserControl>

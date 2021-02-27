@@ -1135,7 +1135,7 @@ namespace Dashboard.GlobalElement
                 {
                     public static ModelLinks.DashboardGame.PageAchievements Links = new ModelLinks.DashboardGame.PageAchievements();
 
-                    public static async void AddAchievements(string Name, long Value, Action<bool> Result, Action ERR)
+                    public static async void AddAchievements(string Name, long Value, Action<bool> Result)
                     {
                         var serilese = new BsonDocument { { "Name", Name }, { "Value", Value } };
 
@@ -1154,7 +1154,6 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            ERR();
                             Result(false);
                         }
 
