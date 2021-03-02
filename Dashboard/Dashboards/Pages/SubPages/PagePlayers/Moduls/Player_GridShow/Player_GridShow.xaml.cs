@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -40,7 +39,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             {
                 CloseMore();
             };
-          
+
         }
 
         void OpenMore()
@@ -92,7 +91,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             }
 
             // last login
-            if (Detail["LastLogin"].ToString().Length>=1)
+            if (Detail["LastLogin"].ToString().Length >= 1)
             {
                 TextLastLogin.Text = Detail["LastLogin"].ToLocalTime().ToString();
             }
@@ -102,7 +101,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             }
 
             //Created
-            if (Detail["Created"].ToString().Length>=1)
+            if (Detail["Created"].ToString().Length >= 1)
             {
                 TextCreated.Text = Detail["Created"].ToLocalTime().ToString();
             }
@@ -113,7 +112,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
 
 
             //Currencey
-            if (Detail["Currencey"].ToString().Length>=1)
+            if (Detail["Currencey"].ToString().Length >= 1)
             {
                 TextCurrencey.Text = Detail["Currencey"].ToString();
             }
@@ -123,7 +122,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
             }
 
             //Language
-            if (Detail["Country"].ToString().Length>=1)
+            if (Detail["Country"].ToString().Length >= 1)
             {
                 TextLanguage.Text = Detail["Country"].ToString();
             }
@@ -134,7 +133,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow
 
             //Token
             TextToken.Text = Detail["Token"].ToString();
-            
+
         }
 
     }

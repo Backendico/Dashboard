@@ -163,13 +163,13 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
                 {
                     MainTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
 
-                    if (Type==InputType.Number)
+                    if (Type == InputType.Number)
                     {
                         MainTextBox.Text = "0";
                     }
                     else
                     {
-                    MainTextBox.Text = PlaceHolder;
+                        MainTextBox.Text = PlaceHolder;
 
                     }
 

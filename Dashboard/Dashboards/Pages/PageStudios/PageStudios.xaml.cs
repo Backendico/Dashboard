@@ -55,7 +55,7 @@ namespace Dashboard.Dashboards.Pages.Aut
                     {
                         foreach (var item in Result["Studios"].AsBsonArray)
                         {
-                            ContentPlaceholderStudio.Children.Add(new StudioGridView(item["Setting"].AsBsonDocument,this));
+                            ContentPlaceholderStudio.Children.Add(new StudioGridView(item["Setting"].AsBsonDocument, this));
                         }
 
                     }

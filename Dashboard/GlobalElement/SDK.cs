@@ -424,7 +424,6 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Count", Count.ToString());
                         var response = await client.ExecuteAsync(request);
 
-
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));

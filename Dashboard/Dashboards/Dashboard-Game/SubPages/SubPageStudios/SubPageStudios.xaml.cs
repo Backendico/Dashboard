@@ -79,7 +79,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
                         }
                     }
                 }
-            
+
                 );
 
         }

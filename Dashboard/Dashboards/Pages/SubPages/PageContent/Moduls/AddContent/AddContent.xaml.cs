@@ -1,21 +1,23 @@
-﻿using Dashboard.Dashboards.Pages.Aut;
-using Dashboard.GlobalElement;
+﻿using Dashboard.GlobalElement;
 using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace Dashboard.Dashboards.Pages.PageStudios.Moduls.SubPageAddNewStudio
+namespace Dashboard.Dashboards.Pages.SubPages.PageContent.Moduls.AddContent
 {
     /// <summary>
-    /// Interaction logic for SubPageAddNewStudio.xaml
+    /// Interaction logic for AddContent.xaml
     /// </summary>
-    public partial class SubPageAddNewStudio : UserControl
+    public partial class AddContent : UserControl
     {
-        public SubPageAddNewStudio(IPageStudio PageStudio)
+        public AddContent(IPageContent editor)
         {
             InitializeComponent();
+            ShowPage(1);
+
+
             //action btn close
             BTNClose.MouseDown += (s, e) =>
             {
@@ -26,41 +28,35 @@ namespace Dashboard.Dashboards.Pages.PageStudios.Moduls.SubPageAddNewStudio
             };
 
 
-            //Actin btn add new Studio
-            BTNAdd.Worker += () =>
+            //action btn add contents
+            BTNAddContent.Worker += () =>
             {
-                if (InputNameStudio.Text.Length >= 5)
+                if (TextName.Text.Length >= 1)
                 {
-                    SDK.SDK_PageDashboards.DashboardGame.PageStudios.CreatStudio(InputNameStudio.Text, Result =>
+                    SDK.SDK_PageDashboards.DashboardGame.PageContent.AddContent(TextName.Text, result =>
                     {
-                        if (Result)
+                        if (result)
                         {
-                            Debug.WriteLine("Created");
-                            Visibility = Visibility.Collapsed;
-
-                            PageStudio.InitStudios();
+                            editor.Init();
                         }
                         else
                         {
-                            Debug.WriteLine("NotCreated");
+                            Debug.WriteLine("Faild Add");
                         }
+                        Debug.WriteLine(result);
 
                     });
 
-                }
-                else
-                {
-                    Debug.WriteLine("Input Name Studio Short");
                 }
             };
 
         }
 
-        void ShowPage(int To, Action Act = null)
+        void ShowPage(int TO, Action Act = null)
         {
             var Current = 0;
 
-            if (To != 0)
+            if (TO != 0)
             {
                 Current = 0;
             }
@@ -69,7 +65,7 @@ namespace Dashboard.Dashboards.Pages.PageStudios.Moduls.SubPageAddNewStudio
                 Current = 1;
             }
 
-            DoubleAnimation Anim = new DoubleAnimation(Current, To, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation Anim = new DoubleAnimation(Current, TO, TimeSpan.FromSeconds(0.3));
             Anim.Completed += (s, e) =>
             {
                 if (Act != null)

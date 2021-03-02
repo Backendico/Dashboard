@@ -62,7 +62,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers
                         foreach (var item in result["ListPlayers"].AsBsonDocument["Players"].AsBsonArray)
                         {
                             ContentPlaceHolderGridviewe.Children.Add(new Player_GridShow(item.AsBsonDocument, this));
-                           
+
                             item.AsBsonDocument.Add("ZIndex", Zindex);
 
                             ContentPlaceHolderListView.Children.Add(new PlayerListView(item.AsBsonDocument, this));

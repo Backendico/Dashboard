@@ -1,7 +1,4 @@
-﻿using Dashboard.Dashboards.Pages.Aut;
-using Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -57,7 +54,8 @@ namespace Dashboard.Dashboards.Pages.Main
 
             //anim change size pane
             DoubleAnimation Anim = new DoubleAnimation(50, TimeSpan.FromSeconds(0.3));
-            Anim.Completed += (s, e) => {
+            Anim.Completed += (s, e) =>
+            {
 
                 BTNNavigationClose.Text = "\xE700";
             };
@@ -92,7 +90,8 @@ namespace Dashboard.Dashboards.Pages.Main
 
             //anim change size pane
             DoubleAnimation Anim = new DoubleAnimation(225, TimeSpan.FromSeconds(0.3));
-            Anim.Completed += (s, e) => {
+            Anim.Completed += (s, e) =>
+            {
                 BTNNavigationClose.Text = "\xE711";
             };
             Storyboard.SetTargetName(Anim, PaneNavigation.Name);
@@ -152,7 +151,7 @@ namespace Dashboard.Dashboards.Pages.Main
             storyboard.Begin(this);
 
         }
-       
+
     }
 
 }

@@ -8,6 +8,8 @@
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
              xmlns:Leaderboards="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards"
              xmlns:Achievements="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageAchievements"
+             xmlns:Keyvalue="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageKeyvalue"
+             xmlns:Content="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent"
              mc:Ignorable="d" 
              Background="WhiteSmoke" d:DesignHeight="776" d:DesignWidth="1437"
          
@@ -167,7 +169,7 @@
                 </Grid.RowDefinitions>
 
                 <!--PageControl-->
-                <Achievements:SubpageAchievements/>
+                <Content:SubPageContent/>
 
 
             </Grid>

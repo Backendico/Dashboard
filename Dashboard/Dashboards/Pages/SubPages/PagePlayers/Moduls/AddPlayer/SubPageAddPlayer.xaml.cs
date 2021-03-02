@@ -1,5 +1,4 @@
-﻿using Dashboard.Dashboards.Pages.Main;
-using Dashboard.GlobalElement;
+﻿using Dashboard.GlobalElement;
 using System;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -15,7 +14,7 @@ namespace Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.AddPlayer
             InitializeComponent();
 
             ShowPage(1);
-            
+
 
             //action btn close
             BTNClose.MouseDown += (s, e) =>

@@ -473,14 +473,20 @@
     <Compile Include="Dashboards\Pages\SubPages\PageAchievements\SubpageAchievements.xaml.cs">
       <DependentUpon>SubpageAchievements.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_GridView\ContentGridView.xaml.cs">
+    <Compile Include="Dashboards\Pages\SubPages\PageContent\Moduls\AddContent\AddContent.xaml.cs">
+      <DependentUpon>AddContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageContent\Componnents\Content_GridView\ContentGridView.xaml.cs">
       <DependentUpon>ContentGridView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_ListView\ContentListView.xaml.cs">
+    <Compile Include="Dashboards\Pages\SubPages\PageContent\Componnents\Content_ListView\ContentListView.xaml.cs">
       <DependentUpon>ContentListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml.cs">
       <DependentUpon>SubPageContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\AddKeyvalue\SubpageAddKeyvalue.xaml.cs">
+      <DependentUpon>SubpageAddKeyvalue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\KeyValue_GridView\KeyValueGridView.xaml.cs">
       <DependentUpon>KeyValueGridView.xaml</DependentUpon>
@@ -917,17 +923,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_GridView\ContentGridView.xaml">
+    <Page Include="Dashboards\Pages\SubPages\PageContent\Moduls\AddContent\AddContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageContent\Componnents\Content_GridView\ContentGridView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dashboards\Pages\SubPages\PageContent\Moduls\Content_ListView\ContentListView.xaml">
+    <Page Include="Dashboards\Pages\SubPages\PageContent\Componnents\Content_ListView\ContentListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PageContent\SubPageContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\AddKeyvalue\SubpageAddKeyvalue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dashboards\Pages\SubPages\PageKeyvalue\Moduls\KeyValue_GridView\KeyValueGridView.xaml">
       <SubType>Designer</SubType>
@@ -1081,8 +1095,6 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dashboards\Pages\SubPages\PageContent\Moduls\AddContent\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

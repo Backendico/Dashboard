@@ -1,7 +1,6 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.PageAUT.Recovery;
 using Dashboard.Dashboards.Dashboard_Game.PageAUT.Register;
 using Dashboard.GlobalElement;
-using MongoDB.Bson;
 using System.Diagnostics;
 using System.Windows.Controls;
 
