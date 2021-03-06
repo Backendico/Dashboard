@@ -6,9 +6,19 @@
              xmlns:local="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
              mc:Ignorable="d" Cursor="Hand">
 
+    <UserControl.Resources>
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="MinWidth" Value="150"/>
+        </Style>
+    </UserControl.Resources>
+
+
+
     <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
 
-        <TextBlock  TextAlignment="Left" VerticalAlignment="Top" Margin="6,0" Text="Definition Tooltip" >
+        <TextBlock x:Name="TextHelp"  TextAlignment="Left" VerticalAlignment="Top" Margin="6,0" Text="Definition Tooltip" >
             <TextBlock.TextDecorations  >
                 <TextDecoration Location="Underline">
                     <TextDecoration.Pen>
@@ -22,22 +32,6 @@
                 </TextDecoration>
             </TextBlock.TextDecorations>
         </TextBlock>
-
-        <Grid  x:Name="PanelTooltip" Visibility="Collapsed">
-            <Border CornerRadius="2"  Background="Black" Width="156"  VerticalAlignment="Top"  Margin="0,24,-66,-4">
-                <TextBlock Margin="5" TextWrapping="Wrap"  Text="Handls" Foreground="White"/>
-            </Border>
-            <Rectangle Fill="Black" Width="8" Height="8" Margin="15,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="45"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-        </Grid>
 
     </Grid>
 </UserControl>

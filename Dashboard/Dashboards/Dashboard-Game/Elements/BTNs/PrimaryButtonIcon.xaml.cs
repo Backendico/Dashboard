@@ -1,4 +1,5 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Icons;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -46,6 +47,17 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
                 BorderFocuse.BorderThickness = new Thickness(0);
             };
 
+
+            //action work
+            MouseDown += (s, e) =>
+            {
+                if (Work != null)
+                {
+                    Work();
+                }
+            };
         }
+
+        internal event Action Work;
     }
 }

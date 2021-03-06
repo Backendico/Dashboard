@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 {
@@ -186,16 +175,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
             //Action change Text
             MainTextBox.TextChanged += (s, e) =>
             {
-                if (Text.Length >= 1)
+                if (IsLoaded)
                 {
-                    OpenSuggests();
-                }
-                else
-                {
-                    CloseSuggests();
+
+                    if (Text.Length >= 1)
+                    {
+                        OpenSuggests();
+                    }
+                    else
+                    {
+                        CloseSuggests();
+                    }
                 }
             };
-           
+
             //action btnClearText
             BTNClear.MouseDown += (s, e) =>
             {
@@ -210,6 +203,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
 
         void OpenSuggests()
         {
+            PanelSuggest.Visibility = Visibility.Visible;
 
             DoubleAnimation Anim = new DoubleAnimation(150, TimeSpan.FromSeconds(0.2));
             Storyboard.SetTargetName(Anim, PanelSuggest.Name);
@@ -223,6 +217,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs
         void CloseSuggests()
         {
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.2));
+            Anim.Completed += (s, e) =>
+            {
+                PanelSuggest.Visibility = Visibility.Collapsed;
+            };
             Storyboard.SetTargetName(Anim, PanelSuggest.Name);
             Storyboard.SetTargetProperty(Anim, new PropertyPath("Height"));
             Storyboard storyboard = new Storyboard();

@@ -1,18 +1,8 @@
 ﻿using Dashboard.Dashboards.Dashboard_Game.Elements.Icons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
 {
@@ -23,13 +13,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
     {
         public IconType Icon
         {
+            get
+            {
+                return _icon;
+            }
             set
             {
                 TextIcon.Text = new Icons.Icons()[value];
                 TextTooltip.Text = value.ToString();
+                _icon = value;
             }
         }
-
+        IconType _icon = IconType.Add;
 
         public PrimaryButtonIcon2()
         {
@@ -51,6 +46,18 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.BTNs
                 Tooltip.Visibility = Visibility.Visible;
             };
             MouseLeave += (s, e) => { Tooltip.Visibility = Visibility.Collapsed; };
+
+            MouseDown += (s, e) =>
+            {
+                if (Worker != null)
+                {
+                    Worker();
+                }
+            };
         }
+
+
+        internal event Action Worker;
+
     }
 }

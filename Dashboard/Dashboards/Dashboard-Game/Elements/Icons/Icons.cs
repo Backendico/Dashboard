@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dashboard.Dashboards.Dashboard_Game.Elements.Icons
+﻿namespace Dashboard.Dashboards.Dashboard_Game.Elements.Icons
 {
     public class Icons
     {

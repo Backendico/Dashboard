@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.Main"
-             xmlns:IconOpen="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Tooltips"
              xmlns:NavigationTab="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Navigation.NavigationTab"
              xmlns:BTNS="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
              xmlns:Player="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers"
-             xmlns:DropDown="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.DropDown"
-             xmlns:Search="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
+             xmlns:Leaderboards="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageLeaderboards"
+             xmlns:Achievements="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageAchievements"
+             xmlns:Keyvalue="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageKeyvalue"
+             xmlns:Content="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PageContent"
              mc:Ignorable="d" 
-             Background="WhiteSmoke" d:DesignHeight="560" d:DesignWidth="1437"
+             Background="WhiteSmoke" d:DesignHeight="776" d:DesignWidth="1437"
          
              >
 
@@ -76,7 +76,7 @@
                     <NavigationTab:NavigationTab IconType="Setting" NameTab="Setting" />
 
                     <!--BTNNavigation-->
-                    <TextBlock Margin="0,30,0,10" HorizontalAlignment="Center" Name="BTNNavigationClose" Text="&#xE700;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock Margin="0,30,0,10" HorizontalAlignment="Center" Name="BTNNavigationClose" Text="&#xE711;" Cursor="Hand" FontSize="20" Foreground="White" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"/>
 
                 </StackPanel>
 
@@ -92,7 +92,7 @@
             </Grid.RowDefinitions>
 
             <!--Header-->
-            <Grid Background="White">
+            <Grid Panel.ZIndex="1" Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -168,55 +168,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <!--Tabel-->
-                <Border BorderBrush="#e0e0e0" BorderThickness="1"  CornerRadius="5" Background="White" Grid.Row="1">
-
-                    <Grid >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto "/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        
-                        <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
-                        
-                        <!--TabController-->
-                        <Grid Margin="15,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
-                            <!--Left-->
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <BTNS:PrimaryButtonIcon2 Margin="10,20,0,20" Icon="ListView"/>
-                                <BTNS:PrimaryButtonIcon2 Margin="20,20,0,20" Icon="GridView"/>
-                                <Search:InputSearch Margin="20,0,15,0"  PlaceHolder="Find player" IsOpenSuggests="False" />
-                                <DropDown:DropDownPrimary  PlaceHolder="Sort by:" DefualtItem="0"  >
-                                    <DropDown:DropDownPrimary.Items>
-                                        <StackPanel>
-                                            <DropDown:DropDownItem Text="Created"/>
-                                            <DropDown:DropDownItem Text="Currency"/>
-                                            <DropDown:DropDownItem Text="Register"/>
-                                            <DropDown:DropDownItem Text="Active"/>
-                                        </StackPanel>
-                                    </DropDown:DropDownPrimary.Items>
-
-                                </DropDown:DropDownPrimary>
-                            </StackPanel>
-                          
-                            <!--Right-->
-                            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
-                                <BTNS:PrimaryButtonIcon  Icon="Add" Text="Add Player" HorizontalAlignment="Right"/>
-                            </StackPanel>
-                        </Grid>
-
-                    </Grid>
-
-                </Border>
-
-
                 <!--PageControl-->
-                <Player:SubPagePlayers/>
+                <Content:SubPageContent/>
 
 
             </Grid>

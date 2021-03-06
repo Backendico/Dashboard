@@ -17,6 +17,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
                 _SelectionIndex = value;
             }
         }
+
         public StackPanel Items
         {
             get
@@ -69,6 +70,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
         string _PlaceHolder = "Place Holder";
         bool _IsOpenSuggest = false;
+
         int _SelectionIndex = 0;
 
 
@@ -80,16 +82,20 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             {
                 SelectItem(Items.Children[_SelectionIndex] as DropDownItem);
             };
+
             GotFocus += (s, e) =>
             {
-
                 Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
             };
 
             LostFocus += (s, e) =>
             {
-                Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                CloseLists();
+                IsOpenSuggests = false;
+            };
+
+            MouseLeave += (s, e) =>
+            {
+                IsOpenSuggests = false;
             };
 
             MouseDown += (s, e) =>
@@ -97,14 +103,10 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
                 if (IsOpenSuggests)
                 {
                     IsOpenSuggests = false;
-                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#8d8d8d");
-                    CloseLists();
                 }
                 else
                 {
                     IsOpenSuggests = true;
-                    Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
-                    OpenLists();
                 }
             };
         }
@@ -112,6 +114,7 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
 
         void OpenLists()
         {
+            Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#0F62FE");
             IconArrow.Text = "\xE96D";
 
             DoubleAnimation Anim = new DoubleAnimation(150, TimeSpan.FromSeconds(0.2));
@@ -120,12 +123,11 @@ namespace Dashboard.Dashboards.Dashboard_Game.Elements.DropDown
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(Anim);
             storyboard.Begin(this);
-
         }
 
         void CloseLists()
         {
-
+            Root.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#e5e5e5");
             IconArrow.Text = "\xE96E";
 
             DoubleAnimation Anim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.2));

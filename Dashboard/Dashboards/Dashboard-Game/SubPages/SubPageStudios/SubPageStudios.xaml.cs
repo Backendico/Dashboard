@@ -78,11 +78,8 @@ namespace Dashboard.Dashboards.Dashboard_Game.SubPages.SubPageStudios
                             PlaceContentStudios.Children.Add(new ModelStudio(item["Setting"].AsBsonDocument, this));
                         }
                     }
-                },
-                () =>
-                {
-                    DashboardGame.Notifaction("Faild Recive", Notifaction.StatusMessage.Error);
                 }
+
                 );
 
         }

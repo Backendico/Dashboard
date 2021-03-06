@@ -7,11 +7,10 @@
         xmlns:Buttons="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.BTNs"
        xmlns:Link="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.Links"
         xmlns:Input="clr-namespace:Dashboard.Dashboards.Dashboard_Game.Elements.TextInputs"
-      xmlns:Main="clr-namespace:Dashboard.Dashboards.Pages.Main"
+        xmlns:Main="clr-namespace:Dashboard.Dashboards.Pages.Main"
         mc:Ignorable="d"
         Title="PageAUT" Height="800" Width="1200">
     <Grid x:Name="Root">
-        <local:PageLogin Visibility="Collapsed" />
-        <Main:MainPage Visibility="Visible"/>
+        <local:PageLogin Visibility="Visible" />
     </Grid>
 </Window>

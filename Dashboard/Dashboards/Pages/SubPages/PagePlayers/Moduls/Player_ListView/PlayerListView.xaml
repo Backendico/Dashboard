@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_ListView.PlayerListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_ListView"
+         xmlns:GridOption="clr-namespace:Dashboard.Dashboards.Pages.SubPages.PagePlayers.Moduls.Player_GridShow.SeeMoreOption"
+             Height="30" 
+            
+             mc:Ignorable="d" d:DesignWidth="696.667" >
+
+
+    <Grid >
+        <Grid   >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="TextUsername" Grid.Column="0" Text="Username" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextEmail" Grid.Column="1"  Text="Email" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextCreated" Grid.Column="2"  Text="Created" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextLastLogin" Grid.Column="3"  Text="Last login" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextCurrencey" Grid.Column="4"  Text="Currencey" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextLanguage" Grid.Column="5"  Text="Location" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow "/>
+            <TextBlock x:Name="TextToken" Grid.Column="6"  Text="Token" TextAlignment="Center" VerticalAlignment="Center" FontFamily="/Dashboard;component/Fonts/#Barlow"/>
+            <TextBlock x:Name="BTNSeemore" Grid.Column="7" Cursor="Hand"  Text="&#xE712;" TextAlignment="Center" VerticalAlignment="Center" FontFamily="HoloLens MDL2 Assets"/>
+
+        </Grid>
+
+        <Border  BorderBrush="#e0e0e0" BorderThickness="0,0,0,1"/>
+
+
+
+        <!--PanelMore-->
+        <Border Panel.ZIndex="10000"  x:Name="PanelMore" Opacity="0" Visibility="Collapsed" CornerRadius="5" Width="100"  VerticalAlignment="Center" HorizontalAlignment="Right" Background="White" Margin="0,0,0,-90" Padding="0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
+            </Border.Effect>
+
+            <Grid>
+                <Rectangle Width="10" Height="10" Fill="White" Margin="0,-5,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <StackPanel Name="s">
+                    <GridOption:SeeMoreOption Text="Edit" />
+                    <GridOption:SeeMoreOption Text="Delete"/>
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+   
+    </Grid>
+</UserControl>

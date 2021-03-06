@@ -32,7 +32,6 @@ namespace Dashboard.GlobalElement
                 {
                     Result(false, "");
                 }
-
             }
 
             public async static void Register(string Username, string Password, string Email, string Phone, Action<string> Result, Action ERR)
@@ -148,7 +147,7 @@ namespace Dashboard.GlobalElement
                 {
                     public static ModelLinks.DashboardGame.PageStudios Links;
 
-                    public static async void ReciveStudios(Action<BsonDocument> Result, Action Err)
+                    public static async void ReciveStudios(Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveStudio);
                         client.Timeout = -1;
@@ -166,7 +165,7 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            Err();
+                            Result(new BsonDocument());
                         }
                     }
 
@@ -413,7 +412,7 @@ namespace Dashboard.GlobalElement
                 public sealed class PagePlayers
                 {
                     public static ModelLinks.DashboardGame.PagePlayers Links;
-                    public static async void ReciveListPlayer(int Count, Action<BsonDocument> Result, Action ERR)
+                    public static async void RecieveListPlayer(int Count, Action<BsonDocument> Result)
                     {
                         var client = new RestClient(Links.ReciveListPlayer);
                         client.Timeout = -1;
@@ -425,19 +424,18 @@ namespace Dashboard.GlobalElement
                         request.AddParameter("Count", Count.ToString());
                         var response = await client.ExecuteAsync(request);
 
-
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             Result(BsonDocument.Parse(response.Content));
                         }
                         else
                         {
-                            ERR();
+                            Result(new BsonDocument());
                         }
 
                     }
 
-                    public static async void CreatPlayer(string Username, string Password, Action Result, Action ERR)
+                    public static async void CreatPlayer(string Username, string Password, Action<bool> Result)
                     {
                         var client = new RestClient(Links.CreatPlayer);
                         client.Timeout = -1;
@@ -452,11 +450,11 @@ namespace Dashboard.GlobalElement
 
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            Result();
+                            Result(true);
                         }
                         else
                         {
-                            ERR();
+                            Result(false);
                         }
 
                     }
@@ -1136,7 +1134,7 @@ namespace Dashboard.GlobalElement
                 {
                     public static ModelLinks.DashboardGame.PageAchievements Links = new ModelLinks.DashboardGame.PageAchievements();
 
-                    public static async void AddAchievements(string Name, long Value, Action<bool> Result, Action ERR)
+                    public static async void AddAchievements(string Name, long Value, Action<bool> Result)
                     {
                         var serilese = new BsonDocument { { "Name", Name }, { "Value", Value } };
 
@@ -1155,7 +1153,6 @@ namespace Dashboard.GlobalElement
                         }
                         else
                         {
-                            ERR();
                             Result(false);
                         }
 
